@@ -1,0 +1,130 @@
+import React, { useEffect, useState } from "react";
+import * as Constants from "../constants";
+import ProductCardLg from "../modules/ProductCardLg";
+import ProductCardSm from "../modules/ProductCardSm";
+import ProductList from "../modules/ProductList";
+import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
+import { FaThList } from "react-icons/fa";
+import axios from "axios";
+import { useStickyState } from "../hooks";
+
+function Products() {
+  const [products, setProducts] = useState([]);
+  const [productLayout, setProductLayout] = useStickyState(
+    "grid-lg",
+    "product-layout"
+  );
+  const [stockFilter, setStockFilter] = useStickyState("all", "stockFilter");
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    // Get products
+    axios
+      .get(Constants.API_URL + "get.php")
+      .then(function (response) {
+        // handle success
+        setProducts(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  }, []);
+
+  let filteredProducts = products;
+
+  /* Filter by search */
+  filteredProducts = filteredProducts.filter((eachItem) => {
+    return (
+      eachItem["name"].toLowerCase().includes(searchText.toLowerCase()) ||
+      eachItem["season"].toLowerCase().includes(searchText.toLowerCase())
+    );
+  });
+
+  /* TODO: Filter by Size */
+
+  /* Filter by available stock */
+  if (stockFilter !== "all") {
+    filteredProducts = filteredProducts.filter((eachItem) => {
+      return stockFilter === "1"
+        ? Number(eachItem["totalstock"]) > 0
+        : Number(eachItem["totalstock"]) < 1;
+    });
+  }
+
+  return (
+    <div id="main" className="pure-u-1">
+      <div className="email-content">
+        <div className="email-content-header pure-g">
+          <div className="pure-u-1-2">
+            <h1 className="email-content-title">Productos - component</h1>
+            <p className="email-content-subtitle">
+              From at <span>3:56pm, April 3, 2012</span>
+            </p>
+          </div>
+
+          <div className="email-content-controls pure-u-1-2">
+            <select
+              value={stockFilter}
+              onChange={(e) => setStockFilter(e.target.value)}
+            >
+              <option value="all">Todos</option>
+              <option value="1">Disponible</option>
+              <option value="0">Agotado</option>
+            </select>
+            {stockFilter}
+            <input
+              className="pure-input-1"
+              type="text"
+              placeholder="Buscar"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <button
+              className={
+                "secondary-button pure-button" +
+                (productLayout === "grid-lg" ? " active" : "")
+              }
+              onClick={() => setProductLayout("grid-lg")}
+            >
+              <BsFillGridFill />
+            </button>
+            <button
+              className={
+                "secondary-button pure-button" +
+                (productLayout === "grid-sm" ? " active" : "")
+              }
+              onClick={() => setProductLayout("grid-sm")}
+            >
+              <BsGrid3X3GapFill />
+            </button>
+            <button
+              className={
+                "secondary-button pure-button" +
+                (productLayout === "list" ? " active" : "")
+              }
+              onClick={() => setProductLayout("list")}
+            >
+              <FaThList />
+            </button>
+          </div>
+        </div>
+
+        <div className="email-content-body product-cards-container">
+          {filteredProducts.map((product, index) => {
+            switch (productLayout) {
+              case "grid-lg":
+                return <ProductCardLg key={index} product={product} />;
+              case "grid-sm":
+                return <ProductCardSm key={index} product={product} />;
+              default:
+                return <ProductList key={index} product={product} />;
+            }
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Products;

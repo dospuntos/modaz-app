@@ -1,0 +1,115 @@
+import React from "react";
+import "./productcardlg.css";
+import * as Constants from "../constants";
+import ChangeStock from "./ChangeStock";
+import { RiShoppingCartLine } from "react-icons/ri";
+
+function ProductCardLg({ product }) {
+  const bgimg =
+    product.images !== "0"
+      ? Constants.PROD_IMG_URL + product.images
+      : Constants.DEFAULT_IMG_URL;
+
+  return (
+    <div className="wrapper">
+      <div className="container">
+        <div
+          className="top"
+          style={{
+            background:
+              "#fff url(" + bgimg + ") center center /cover no-repeat",
+          }}
+        ></div>
+        <div className="bottom">
+          <div className="left">
+            <div className="details">
+              <h1>{product.name}</h1>
+              <p>Bs. {product.price}</p>
+            </div>
+            <div className="buy">
+              <RiShoppingCartLine />
+            </div>
+          </div>
+          <div className="right">
+            <div className="done">
+              <i className="material-icons">done</i>
+            </div>
+            <div className="details">
+              <h1>{product.name}</h1>
+              <p>Agregado al carrito</p>
+            </div>
+            <div className="remove">
+              <i className="material-icons">clear</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="inside">
+        <div className="icon">
+          {/* <RiInformationLine /> */}
+          {product.totalstock}
+        </div>
+        <div className="contents">
+          <table>
+            <tbody>
+              {product.variants.map((variant, index) => {
+                return (
+                  <tr>
+                    <td
+                      colSpan="2"
+                      key={index}
+                      style={{ borderBottom: "1px solid grey" }}
+                    >
+                      {variant.size} - {variant.color} ({variant.stock}){" "}
+                      <ChangeStock variantId={variant.vid} />
+                    </td>
+                  </tr>
+                );
+              })}
+              <tr>
+                <th>Precio ZWear</th>
+                <th>Precio c/imp.</th>
+              </tr>
+              <tr>
+                <td>
+                  ${product.wholesaleprice} (Bs.
+                  {Math.round(+product.wholesaleprice * 6.96)})
+                </td>
+                <td>
+                  ${Math.round(product.wholesaleprice * 1.5)} (Bs.
+                  {Math.round(+product.wholesaleprice * 6.96 * 1.5)})
+                </td>
+              </tr>
+              <tr>
+                <th>Precio</th>
+                <th>Precio ZIN</th>
+              </tr>
+              <tr>
+                <td>Bs. {product.price}</td>
+                <td>Bs. {product.zinprice}</td>
+              </tr>
+              <tr>
+                <th>Order Date</th>
+                <th>Release Date</th>
+              </tr>
+              <tr>
+                <td>{product.order_date}</td>
+                <td>{product.release_date}</td>
+              </tr>
+              <tr>
+                <th>Something</th>
+                <th>Something</th>
+              </tr>
+              <tr>
+                <td>200mm</td>
+                <td>200mm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ProductCardLg;
