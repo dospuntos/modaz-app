@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getOrders } from "../api/orderApi";
 
 function Orders() {
   const [searchText, setSearchText] = useState("");
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    // Get orders
+    getOrders().then((orders) => {
+      setOrders(orders);
+    });
+  }, []);
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">

@@ -1,10 +1,12 @@
 import { handleResponse, handleError } from "./apiUtils";
-const baseUrl = process.env.REACT_APP_API_URL + "/authors/";
+import * as Constants from "../constants";
 
-export function getAuthors() {
-  return fetch(baseUrl).then(handleResponse).catch(handleError);
+export function getOrders() {
+  return fetch(Constants.API_URL + "getorders.php")
+    .then(handleResponse)
+    .catch(handleError);
 }
-
+/* 
 export function getAuthorById(id) {
   return fetch(baseUrl + id)
     .then(handleResponse)
@@ -25,4 +27,4 @@ export function deleteAuthor(authorId) {
   return fetch(baseUrl + authorId, { method: "DELETE" })
     .then(handleResponse)
     .catch(handleError);
-}
+} */
