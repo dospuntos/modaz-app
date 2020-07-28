@@ -16,7 +16,6 @@ function Products() {
   );
   const [stockFilter, setStockFilter] = useStickyState("all", "stockFilter");
   const [searchText, setSearchText] = useState("");
-  const [, forceUpdate] = React.useState(0);
 
   useEffect(() => {
     // Get products
@@ -26,7 +25,7 @@ function Products() {
   }, []);
 
   // Function to update stock in state object
-  // ToDo: remove forceUpdate!!
+  // ToDo: might need some cleanup!!
   function updateStockInState(id, dir, productId) {
     let tempProducts = products;
     let prevTotalstock = _.find(tempProducts, { id: productId })["totalstock"];
@@ -49,9 +48,7 @@ function Products() {
       "stock",
       newVariantStock
     );
-    setProducts(tempProducts);
-    // Force state update
-    forceUpdate((n) => !n);
+    setProducts([...tempProducts]);
   }
 
   let filteredProducts = products;
