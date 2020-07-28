@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./productcardlg.css";
 import * as Constants from "../constants";
 import ChangeStock from "./ChangeStock";
-import { RiShoppingCartLine } from "react-icons/ri";
+import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 
 function ProductCardLg({ product, updateStockInState }) {
+  const [clicked, setClicked] = useState(false);
   const bgimg =
     product.images !== "0"
       ? Constants.PROD_IMG_URL + product.images
@@ -20,19 +21,19 @@ function ProductCardLg({ product, updateStockInState }) {
               "#fff url(" + bgimg + ") center center /cover no-repeat",
           }}
         ></div>
-        <div className="bottom">
+        <div className={clicked ? "bottom clicked" : "bottom"}>
           <div className="left">
             <div className="details">
               <h1>{product.name}</h1>
               <p>Bs. {product.price}</p>
             </div>
-            <div className="buy">
+            <div className="buy" onClick={() => setClicked(true)}>
               <RiShoppingCartLine />
             </div>
           </div>
-          <div className="right">
+          <div className="right" onClick={() => setClicked(false)}>
             <div className="done">
-              <i className="material-icons">done</i>
+              <RiCloseLine />
             </div>
             <div className="details">
               <h1>{product.name}</h1>
