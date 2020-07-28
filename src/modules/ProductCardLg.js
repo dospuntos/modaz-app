@@ -4,7 +4,7 @@ import * as Constants from "../constants";
 import ChangeStock from "./ChangeStock";
 import { RiShoppingCartLine } from "react-icons/ri";
 
-function ProductCardLg({ product }) {
+function ProductCardLg({ product, updateStockInState }) {
   const bgimg =
     product.images !== "0"
       ? Constants.PROD_IMG_URL + product.images
@@ -54,14 +54,18 @@ function ProductCardLg({ product }) {
             <tbody>
               {product.variants.map((variant, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <td
                       colSpan="2"
                       key={index}
                       style={{ borderBottom: "1px solid grey" }}
                     >
                       {variant.size} - {variant.color} ({variant.stock}){" "}
-                      <ChangeStock variantId={variant.vid} />
+                      <ChangeStock
+                        variantId={variant.vid}
+                        productId={variant.product_id}
+                        updateStockInState={updateStockInState}
+                      />
                     </td>
                   </tr>
                 );

@@ -6,6 +6,7 @@ import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "../hooks";
 import { getProducts } from "../api/productApi";
+import { RiContactsBookLine } from "react-icons/ri";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -22,6 +23,11 @@ function Products() {
       setProducts(products);
     });
   }, []);
+
+  // Function to update stock in state object
+  function updateStockInState(id, dir, productId) {
+    console.log(products);
+  }
 
   let filteredProducts = products;
 
@@ -64,7 +70,6 @@ function Products() {
               <option value="1">Disponible</option>
               <option value="0">Agotado</option>
             </select>
-            {stockFilter}
             <input
               className="pure-input-1"
               type="text"
@@ -106,11 +111,29 @@ function Products() {
           {filteredProducts.map((product, index) => {
             switch (productLayout) {
               case "grid-lg":
-                return <ProductCardLg key={index} product={product} />;
+                return (
+                  <ProductCardLg
+                    key={index}
+                    product={product}
+                    updateStockInState={updateStockInState}
+                  />
+                );
               case "grid-sm":
-                return <ProductCardSm key={index} product={product} />;
+                return (
+                  <ProductCardSm
+                    key={index}
+                    product={product}
+                    updateStockInState={updateStockInState}
+                  />
+                );
               default:
-                return <ProductList key={index} product={product} />;
+                return (
+                  <ProductList
+                    key={index}
+                    product={product}
+                    updateStockInState={updateStockInState}
+                  />
+                );
             }
           })}
         </div>
