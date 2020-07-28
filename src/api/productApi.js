@@ -2,17 +2,19 @@ import { handleResponse, handleError } from "./apiUtils";
 import * as Constants from "../constants";
 
 export function getProducts() {
-  /* axios
-      .get(Constants.API_URL + "get.php")
-      .then(function (response) {
-        // handle success
-        setProducts(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      }); */
   return fetch(Constants.API_URL + "get.php")
+    .then(handleResponse)
+    .catch(handleError);
+}
+
+export function changeStock(id, dir = 1) {
+  return fetch(Constants.API_URL + "changeStock.php", {
+    method: "post",
+    body: JSON.stringify({
+      id: id,
+      dir: dir,
+    }),
+  })
     .then(handleResponse)
     .catch(handleError);
 }
