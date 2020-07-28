@@ -27,7 +27,15 @@ function ProductCardLg({ product, updateStockInState }) {
               <h1>{product.name}</h1>
               <p>Bs. {product.price}</p>
             </div>
-            <div className="buy" onClick={() => setClicked(true)}>
+            <div
+              className="buy"
+              onClick={() => {
+                setClicked(true);
+                setTimeout(function () {
+                  setClicked(false);
+                }, 2000);
+              }}
+            >
               <RiShoppingCartLine />
             </div>
           </div>
@@ -40,7 +48,7 @@ function ProductCardLg({ product, updateStockInState }) {
               <p>Agregado al carrito</p>
             </div>
             <div className="remove">
-              <i className="material-icons">clear</i>
+              <RiCloseLine />
             </div>
           </div>
         </div>

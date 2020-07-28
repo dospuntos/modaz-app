@@ -11,7 +11,6 @@ function ChangeStock(props) {
 
   return (
     <span className="change-stock pull-right">
-      ({props.productId})
       <span className="less">
         <FaMinusCircle
           onClick={() => handleChangeStock(props.variantId, 0, props.productId)}
