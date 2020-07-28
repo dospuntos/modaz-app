@@ -1,6 +1,5 @@
 import { handleResponse, handleError } from "./apiUtils";
 import * as Constants from "../constants";
-import axios from "axios";
 
 export function getProducts() {
   /* axios

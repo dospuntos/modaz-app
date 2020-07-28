@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import * as Constants from "../constants";
 import ProductCardLg from "../modules/ProductCardLg";
 import ProductCardSm from "../modules/ProductCardSm";
 import ProductList from "../modules/ProductList";
