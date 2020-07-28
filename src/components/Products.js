@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import _ from "lodash";
 import ProductCardLg from "../modules/ProductCardLg";
 import ProductCardSm from "../modules/ProductCardSm";
 import ProductList from "../modules/ProductList";
@@ -6,7 +7,6 @@ import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "../hooks";
 import { getProducts } from "../api/productApi";
-import { RiContactsBookLine } from "react-icons/ri";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -16,6 +16,7 @@ function Products() {
   );
   const [stockFilter, setStockFilter] = useStickyState("all", "stockFilter");
   const [searchText, setSearchText] = useState("");
+  const [, forceUpdate] = React.useState(0);
 
   useEffect(() => {
     // Get products
@@ -25,8 +26,32 @@ function Products() {
   }, []);
 
   // Function to update stock in state object
+  // ToDo: remove forceUpdate!!
   function updateStockInState(id, dir, productId) {
-    console.log(products);
+    let tempProducts = products;
+    let prevTotalstock = _.find(tempProducts, { id: productId })["totalstock"];
+    let prevVariantstock = _.find(_.flatten(_.map(tempProducts, "variants")), {
+      vid: id,
+    })["stock"];
+    let newTotalStock = dir ? prevTotalstock + 1 : prevTotalstock - 1;
+    let newVariantStock = dir
+      ? Number(prevVariantstock) + 1
+      : Number(prevVariantstock) - 1;
+
+    // Update totalstock (products->productId->totalstock)
+    _.set(_.find(tempProducts, { id: productId }), "totalstock", newTotalStock);
+
+    // Update variant (products->productId->variants->vId->totalstock)
+    _.set(
+      _.find(_.flatten(_.map(tempProducts, "variants")), {
+        vid: id,
+      }),
+      "stock",
+      newVariantStock
+    );
+    setProducts(tempProducts);
+    // Force state update
+    forceUpdate((n) => !n);
   }
 
   let filteredProducts = products;
