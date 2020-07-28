@@ -1,8 +1,19 @@
 import { handleResponse, handleError } from "./apiUtils";
 import * as Constants from "../constants";
+import axios from "axios";
 
 export function getProducts() {
-  return fetch(Constants.API_URL + "products.php")
+  /* axios
+      .get(Constants.API_URL + "get.php")
+      .then(function (response) {
+        // handle success
+        setProducts(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      }); */
+  return fetch(Constants.API_URL + "get.php")
     .then(handleResponse)
     .catch(handleError);
 }

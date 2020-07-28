@@ -5,8 +5,8 @@ import ProductCardSm from "../modules/ProductCardSm";
 import ProductList from "../modules/ProductList";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
-import axios from "axios";
 import { useStickyState } from "../hooks";
+import { getProducts } from "../api/productApi";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -19,16 +19,9 @@ function Products() {
 
   useEffect(() => {
     // Get products
-    axios
-      .get(Constants.API_URL + "get.php")
-      .then(function (response) {
-        // handle success
-        setProducts(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+    getProducts().then((products) => {
+      setProducts(products);
+    });
   }, []);
 
   let filteredProducts = products;
