@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
-import * as Constants from "../constants";
 import {
   RiDashboardLine,
   RiBarcodeBoxLine,
   RiShoppingCartLine,
 } from "react-icons/ri";
 import { FaBoxOpen } from "react-icons/fa";
+import Cart from "../modules/Cart";
+import { getStatistics } from "../api/statisticsApi";
 
 function SidebarMenu() {
-  const [productCount, setProductCount] = useState(0);
+  const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
-    // Get product count
-    axios
-      .get(Constants.API_URL + "count.php")
-      .then(function (response) {
-        // handle success
-        setProductCount(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+    // Get statistics
+    getStatistics().then((statistics) => {
+      setStatistics(statistics);
+    });
   }, []);
 
   return (
@@ -45,12 +38,13 @@ function SidebarMenu() {
             <li className="pure-menu-item">
               <NavLink to="/products" className="pure-menu-link">
                 <RiBarcodeBoxLine /> Productos{" "}
-                <span className="email-count">({productCount})</span>
+                <span className="email-count">({statistics.products})</span>
               </NavLink>
             </li>
             <li className="pure-menu-item">
               <NavLink to="/orders" className="pure-menu-link">
                 <RiShoppingCartLine /> Pedidos
+                <span className="email-count">({statistics.orders})</span>
               </NavLink>
             </li>
             <li className="pure-menu-item">
@@ -82,6 +76,7 @@ function SidebarMenu() {
           </ul>
         </div>
       </div>
+      <Cart />
     </div>
   );
 }
