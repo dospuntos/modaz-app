@@ -4,7 +4,7 @@ import * as Constants from "../constants";
 import ChangeStock from "./ChangeStock";
 import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 
-function ProductCardLg({ product, updateStockInState }) {
+function ProductCardLg({ product, updateStockInState, handleAddItem }) {
   const [clicked, setClicked] = useState(false);
   const bgimg =
     product.images !== "0"
@@ -34,6 +34,7 @@ function ProductCardLg({ product, updateStockInState }) {
                 setTimeout(function () {
                   setClicked(false);
                 }, 2000);
+                handleAddItem(product.name);
               }}
             >
               <RiShoppingCartLine />

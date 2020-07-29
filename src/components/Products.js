@@ -8,7 +8,7 @@ import { FaThList } from "react-icons/fa";
 import { useStickyState } from "../hooks";
 import { getProducts } from "../api/productApi";
 
-function Products() {
+function Products(props) {
   const [products, setProducts] = useState([]);
   const [productLayout, setProductLayout] = useStickyState(
     "grid-lg",
@@ -138,6 +138,7 @@ function Products() {
                     key={index}
                     product={product}
                     updateStockInState={updateStockInState}
+                    handleAddItem={props.handleAddItem}
                   />
                 );
               case "grid-sm":
@@ -146,6 +147,7 @@ function Products() {
                     key={index}
                     product={product}
                     updateStockInState={updateStockInState}
+                    handleAddItem={props.handleAddItem}
                   />
                 );
               default:
@@ -154,6 +156,7 @@ function Products() {
                     key={index}
                     product={product}
                     updateStockInState={updateStockInState}
+                    handleAddItem={props.handleAddItem}
                   />
                 );
             }

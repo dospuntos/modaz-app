@@ -9,7 +9,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import Cart from "../modules/Cart";
 import { getStatistics } from "../api/statisticsApi";
 
-function SidebarMenu() {
+function SidebarMenu({ cart }) {
   const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
@@ -50,6 +50,9 @@ function SidebarMenu() {
             <li className="pure-menu-item">
               <NavLink to="/stock" className="pure-menu-link">
                 <FaBoxOpen /> Stock
+                <span className="email-count">
+                  ({statistics.products}/{statistics.variants})
+                </span>
               </NavLink>
             </li>
             <li className="pure-menu-item">
@@ -76,7 +79,7 @@ function SidebarMenu() {
           </ul>
         </div>
       </div>
-      <Cart />
+      <Cart cart={cart} />
     </div>
   );
 }

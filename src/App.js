@@ -1,4 +1,5 @@
 import React from "react";
+import { useStickyState } from "./hooks";
 import "purecss/build/pure-min.css";
 import "purecss/build/grids-responsive.css";
 import "./App.css";
@@ -11,14 +12,25 @@ import Stock from "./components/Stock";
 import SidebarMenu from "./components/SidebarMenu";
 
 function App() {
+  const [cart, setCart] = useStickyState([], "cart");
+
+  function handleAddItem(id) {
+    setCart([...cart, id]);
+  }
+
   return (
     <Router>
       <ScrollToTop />
       <div id="layout" className="content pure-g">
-        <SidebarMenu />
+        <SidebarMenu cart={cart} />
         <Switch>
           <Route exact path="/" component={Dashboard} />
-          <Route path="/products" component={Products} />
+          <Route
+            path="/products"
+            render={(props) => (
+              <Products {...props} handleAddItem={handleAddItem} />
+            )}
+          />
           <Route path="/orders" component={Orders} />
           <Route path="/stock" component={Stock} />
         </Switch>
