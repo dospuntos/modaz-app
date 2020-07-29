@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   RiShoppingCartLine,
   RiFileList2Line,
@@ -6,9 +6,19 @@ import {
   RiFileList3Line,
 } from "react-icons/ri";
 import { GiCardboardBox } from "react-icons/gi";
+import { getStatistics } from "../api/statisticsApi";
 import "../modules/card.css";
 
 function Dashboard() {
+  const [statistics, setStatistics] = useState([]);
+
+  useEffect(() => {
+    // Get statistics
+    getStatistics().then((statistics) => {
+      setStatistics(statistics);
+    });
+  }, []);
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -30,8 +40,8 @@ function Dashboard() {
                   <h2>Pedidos</h2>
                 </div>
                 <div className="card-content">
-                  <h3>0/23</h3>
-                  <p>Pendientes / Confirmados</p>
+                  <h3>{statistics.orders}</h3>
+                  <p>Total</p>
                 </div>
               </div>
             </div>
@@ -58,7 +68,10 @@ function Dashboard() {
                   <h2>Productos</h2>
                 </div>
                 <div className="card-content">
-                  <h3>159/256</h3>
+                  <h3>
+                    {statistics.products}/{statistics.variants}
+                  </h3>
+                  <p className="text-center">Productos/variantes</p>
                 </div>
               </div>
             </div>
