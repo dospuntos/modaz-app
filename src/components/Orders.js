@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getOrders } from "../api/orderApi";
+import OrderListItem from "../modules/OrderListItem";
 
 function Orders() {
   const [searchText, setSearchText] = useState("");
@@ -34,7 +35,12 @@ function Orders() {
           </div>
         </div>
 
-        <div className="email-content-body product-cards-container">&nbsp;</div>
+        <div className="email-content-body product-cards-container">
+          <h4>Número de pedidos: {orders.length}</h4>
+          {orders.map((order) => {
+            return <OrderListItem order={order} />;
+          })}
+        </div>
       </div>
     </div>
   );
