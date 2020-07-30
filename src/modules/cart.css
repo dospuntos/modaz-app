@@ -1,0 +1,32 @@
+.shopping-cart {
+  position: relative;
+}
+.shopping-cart .icon {
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 1px 1px 1px #fff;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  color: #fff;
+}
+
+.shopping-cart .icon:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.cart-dropdown {
+  display: none;
+}
+
+.shopping-cart .icon:hover .cart-dropdown {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  background: #333;
+  color: #fff;
+  z-index: 100;
+}

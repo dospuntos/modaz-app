@@ -84,7 +84,8 @@ function Dashboard() {
                   <h2>Ingresos</h2>
                 </div>
                 <div className="card-content">
-                  <h3>$1235,-</h3>
+                  <h3>Bs. {statistics.sold_total},-</h3>
+                  <h4>({statistics.sold_items} items)</h4>
                   <p></p>
                 </div>
               </div>
