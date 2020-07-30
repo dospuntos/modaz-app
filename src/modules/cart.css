@@ -1,8 +1,13 @@
 .shopping-cart {
   position: relative;
+  width: 100%;
+  height: 50px;
 }
 .shopping-cart .icon {
-  display: inline-block;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   border: 1px solid white;
   border-radius: 5px;
   padding: 5px;
@@ -10,23 +15,22 @@
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   color: #fff;
+  z-index: 10;
 }
 
 .shopping-cart .icon:hover {
-  background-color: #fff;
-  color: #333;
+  background-color: #252a3a;
+  width: 90%;
 }
 
 .cart-dropdown {
   display: none;
+  transition: all 0.4s ease-in-out;
 }
 
 .shopping-cart .icon:hover .cart-dropdown {
   display: block;
-  position: absolute;
-  bottom: 0;
-  left: 100%;
-  background: #333;
+  background: #252a3a;
   color: #fff;
-  z-index: 100;
+  text-align: left;
 }

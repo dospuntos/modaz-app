@@ -18,11 +18,17 @@ function App() {
     setCart([...cart, id]);
   }
 
+  function handleEmptyCart() {
+    if (window.confirm("Quieres vaciar el carrito de compras?")) {
+      setCart([]);
+    }
+  }
+
   return (
     <Router>
       <ScrollToTop />
       <div id="layout" className="content pure-g">
-        <SidebarMenu cart={cart} />
+        <SidebarMenu cart={cart} handleEmptyCart={handleEmptyCart} />
         <Switch>
           <Route exact path="/" component={Dashboard} />
           <Route

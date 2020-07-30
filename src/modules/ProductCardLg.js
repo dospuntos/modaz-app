@@ -31,10 +31,11 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
               className="buy"
               onClick={() => {
                 setClicked(true);
-                setTimeout(function () {
+                /* setTimeout(function () {
                   setClicked(false);
-                }, 2000);
+                }, 2000); */
                 handleAddItem(product.name);
+                console.log(product.variants);
               }}
             >
               <RiShoppingCartLine />

@@ -9,7 +9,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import Cart from "../modules/Cart";
 import { getStatistics } from "../api/statisticsApi";
 
-function SidebarMenu({ cart }) {
+function SidebarMenu({ cart, handleEmptyCart }) {
   const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ function SidebarMenu({ cart }) {
       </a>
 
       <div className="nav-inner">
+        <Cart cart={cart} handleEmptyCart={handleEmptyCart} />
         <button className="primary-button pure-button">Moda Z Admin</button>
 
         <div className="pure-menu">
@@ -79,7 +80,6 @@ function SidebarMenu({ cart }) {
           </ul>
         </div>
       </div>
-      <Cart cart={cart} />
     </div>
   );
 }

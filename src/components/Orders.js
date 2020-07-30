@@ -38,7 +38,7 @@ function Orders() {
         <div className="email-content-body product-cards-container">
           <h4>Número de pedidos: {orders.length}</h4>
           {orders.map((order) => {
-            return <OrderListItem order={order} />;
+            return <OrderListItem key={order.id} order={order} />;
           })}
         </div>
       </div>
