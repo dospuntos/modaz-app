@@ -7,6 +7,7 @@ import {
 } from "react-icons/ri";
 import { FaBoxOpen } from "react-icons/fa";
 import Cart from "../modules/Cart";
+import pkg from "../../package.json";
 import { getStatistics } from "../api/statisticsApi";
 
 function SidebarMenu({ cart, handleEmptyCart }) {
@@ -79,6 +80,9 @@ function SidebarMenu({ cart, handleEmptyCart }) {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="version">
+        <small>Version: {pkg.version}</small>
       </div>
     </div>
   );
