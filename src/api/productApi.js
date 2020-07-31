@@ -19,6 +19,19 @@ export function changeStock(id, dir = 1) {
     .catch(handleError);
 }
 
+export function createOrder(cart, user, type) {
+  return fetch(Constants.API_URL + "createorder.php", {
+    method: "post",
+    body: JSON.stringify({
+      cart: JSON.stringify(cart),
+      user: user,
+      type: type,
+    }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 
 export function getCourseBySlug(slug) {

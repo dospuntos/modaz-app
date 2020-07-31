@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { createOrder } from "../api/productApi";
+import { useHistory } from "react-router-dom";
 import { RiShoppingCartLine, RiDeleteBin5Line } from "react-icons/ri";
 import "./cart.css";
 
 function Cart({ cart, handleEmptyCart }) {
   const [cartUser, setCartUser] = useState("0");
+  let history = useHistory();
 
   function saveCart(cart, user, type) {
-    alert("Saving cart...");
+    createOrder(cart, user, type);
+    handleEmptyCart(false); // Empty cart without confirmation
+    history.push("/orders"); // Redirect to orders
   }
 
   return (

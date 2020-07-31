@@ -18,8 +18,8 @@ function App() {
     setCart([...cart, id]);
   }
 
-  function handleEmptyCart() {
-    if (window.confirm("Quieres vaciar el carrito de compras?")) {
+  function handleEmptyCart(confirm = true) {
+    if (!confirm || window.confirm("Quieres vaciar el carrito de compras?")) {
       setCart([]);
     }
   }

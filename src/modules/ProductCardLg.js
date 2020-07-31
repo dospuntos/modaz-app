@@ -31,11 +31,6 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
               className="buy"
               onClick={() => {
                 setClicked(true);
-                /* setTimeout(function () {
-                  setClicked(false);
-                }, 2000); */
-                handleAddItem(product.name);
-                console.log(product.variants);
               }}
             >
               <RiShoppingCartLine />
@@ -47,7 +42,7 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
             </div>
             <div className="details">
               <h1>{product.name}</h1>
-              <p>Agregado al carrito</p>
+              <p></p>
             </div>
             <div className="remove">
               <RiCloseLine />
