@@ -7,6 +7,7 @@ function Cart({ cart, handleEmptyCart }) {
     <div className="shopping-cart">
       <div className="icon">
         <RiShoppingCartLine size={32} />
+        {cart.length}
         <div className="cart-dropdown">
           <span className="empty-cart" onClick={handleEmptyCart}>
             <RiDeleteBin5Line
@@ -17,9 +18,11 @@ function Cart({ cart, handleEmptyCart }) {
           {!cart.length ? (
             <em>No hay productos en el carrito</em>
           ) : (
-            cart.map((item, index) => {
-              return <h5 key={index}>{item}</h5>;
-            })
+            <ul>
+              {cart.map((item, index) => {
+                return <li key={index}>{item.name}</li>;
+              })}
+            </ul>
           )}
         </div>
       </div>

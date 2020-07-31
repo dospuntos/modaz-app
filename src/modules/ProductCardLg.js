@@ -72,6 +72,21 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
                       style={{ borderBottom: "1px solid grey" }}
                     >
                       {variant.size} - {variant.color} ({variant.stock}){" "}
+                      {variant.stock < 1 ? (
+                        ""
+                      ) : (
+                        <span
+                          className="pure-button pure-button-cart-sm"
+                          onClick={() => {
+                            // Add product name to variant object (for cart display)
+                            variant["name"] = product.name;
+                            // Add to cart
+                            handleAddItem(variant);
+                          }}
+                        >
+                          <RiShoppingCartLine />
+                        </span>
+                      )}
                       <ChangeStock
                         variantId={variant.vid}
                         productId={variant.product_id}
