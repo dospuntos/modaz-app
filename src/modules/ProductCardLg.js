@@ -75,7 +75,6 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
                           onClick={() => {
                             // Add product name to variant object (for cart display)
                             variant["name"] = product.name;
-                            variant["image"] = bgimg;
                             variant["price"] = product.price;
                             variant["order_item_quantity"] = "1";
                             // Add to cart

@@ -20,6 +20,13 @@ export function changeStock(id, dir = 1) {
 }
 
 export function createOrder(cart, user, type) {
+  /*   console.log(
+    JSON.stringify({
+      cart: JSON.stringify(cart),
+      user: user,
+      type: type,
+    })
+  ); */
   return fetch(Constants.API_URL + "createorder.php", {
     method: "post",
     body: JSON.stringify({
