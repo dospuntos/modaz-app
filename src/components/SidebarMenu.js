@@ -10,7 +10,12 @@ import Cart from "../modules/Cart";
 import pkg from "../../package.json";
 import { getStatistics } from "../api/statisticsApi";
 
-function SidebarMenu({ cart, handleEmptyCart }) {
+function SidebarMenu({
+  cart,
+  handleEmptyCart,
+  handleVariantCountChange,
+  handleDeleteCartItem,
+}) {
   const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
@@ -27,7 +32,12 @@ function SidebarMenu({ cart, handleEmptyCart }) {
       </a>
 
       <div className="nav-inner">
-        <Cart cart={cart} handleEmptyCart={handleEmptyCart} />
+        <Cart
+          cart={cart}
+          handleEmptyCart={handleEmptyCart}
+          handleVariantCountChange={handleVariantCountChange}
+          handleDeleteCartItem={handleDeleteCartItem}
+        />
         <button className="primary-button pure-button">Moda Z Admin</button>
 
         <div className="pure-menu">

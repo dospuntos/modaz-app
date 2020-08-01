@@ -34,3 +34,21 @@
   color: #fff;
   text-align: left;
 }
+
+ul.cart-items {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+ul.cart-items li {
+  font-size: 11px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid grey;
+  color: #fff;
+  transition: color 0.3s ease-in-out;
+}
+
+ul.cart-items li:hover {
+  color: #9c9c9c;
+}

@@ -14,8 +14,25 @@ import SidebarMenu from "./components/SidebarMenu";
 function App() {
   const [cart, setCart] = useStickyState([], "cart");
 
-  function handleAddItem(id) {
-    setCart([...cart, id]);
+  function handleAddItem(variant) {
+    setCart([...cart, variant]);
+  }
+
+  // Update item count
+  function handleVariantCountChange(e, vid) {
+    let newCart = cart.map((item) => {
+      if (item.vid === vid) {
+        item.order_item_quantity = e.target.value;
+      }
+      return item;
+    });
+    setCart(newCart);
+  }
+
+  // Remove selected item from cart
+  function handleDeleteCartItem(vid) {
+    let newCart = cart.filter((item) => item.vid !== vid);
+    setCart(newCart);
   }
 
   function handleEmptyCart(confirm = true) {
@@ -28,7 +45,12 @@ function App() {
     <Router>
       <ScrollToTop />
       <div id="layout" className="content pure-g">
-        <SidebarMenu cart={cart} handleEmptyCart={handleEmptyCart} />
+        <SidebarMenu
+          cart={cart}
+          handleVariantCountChange={handleVariantCountChange}
+          handleEmptyCart={handleEmptyCart}
+          handleDeleteCartItem={handleDeleteCartItem}
+        />
         <Switch>
           <Route exact path="/" component={Dashboard} />
           <Route
