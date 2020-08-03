@@ -22,6 +22,10 @@ a {
 * -- HELPER STYLES --
 * Over-riding some of the .pure-button styles to make my buttons look unique
 */
+.pure-button {
+  transition: all .4s ease-in-out;
+}
+
 .primary-button,
 .secondary-button,
 input[type="text"] {
@@ -47,6 +51,15 @@ input[type="text"] {
 
 .secondary-button.active {
   background: lightblue;
+}
+
+.pure-button-danger {
+  background: #802424;
+  color     : #fff;
+}
+
+.pure-button-danger:hover {
+  background: #551818;
 }
 
 input[type="text"],
