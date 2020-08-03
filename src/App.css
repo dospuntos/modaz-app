@@ -67,6 +67,75 @@ ul.unstyled-list {
   float: right;
 }
 
+.thumbnail {
+  display              : block;
+  padding              : 4px;
+  line-height          : 18px;
+  border               : 1px solid #ddd;
+  -webkit-border-radius: 3px;
+  -moz-border-radius   : 3px;
+  border-radius        : 3px;
+  -webkit-box-shadow   : 0 1px 3px rgba(0, 0, 0, 0.055);
+  -moz-box-shadow      : 0 1px 3px rgba(0, 0, 0, 0.055);
+  box-shadow           : 0 1px 3px rgba(0, 0, 0, 0.055);
+  -webkit-transition   : all .2s ease-in-out;
+  -moz-transition      : all .2s ease-in-out;
+  -o-transition        : all .2s ease-in-out;
+  transition           : all .2s ease-in-out;
+}
+
+a.thumbnail:hover,
+a.thumbnail:focus {
+  border-color      : #3071a9;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow   : 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow        : 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+.thumbnail>img {
+  display     : block;
+  max-width   : 100%;
+  margin-left : auto;
+  margin-right: auto;
+}
+
+img.thumbnail {
+  max-width : 85px;
+  background: white;
+}
+
+.zoom {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition   : all 0.25s ease-in-out;
+  transition        : all 0.25s ease-in-out;
+  cursor            : -webkit-zoom-in;
+  cursor            : -moz-zoom-in;
+  cursor            : zoom-in;
+}
+
+.zoom:hover,
+.zoom:active,
+.zoom:focus {
+  /**adjust scale to desired size,
+add browser prefixes**/
+  -ms-transform    : scale(3);
+  -moz-transform   : scale(3);
+  -webkit-transform: scale(3);
+  -o-transform     : scale(3);
+  transform        : scale(3) translateX(25%);
+  position         : relative;
+  z-index          : 100;
+}
+
+/**To keep upscaled images visible on mobile,
+increase left & right margins a bit**/
+@media only screen and (max-width: 768px) {
+  ul.gallery {
+    margin-left : 15vw;
+    margin-right: 15vw;
+  }
+}
+
 /*
 * -- LAYOUT STYLES --
 * This layout consists of three main elements, `#nav` (navigation bar), `#list` (email list), and `#main` (email content). All 3 elements are within `#layout`
@@ -247,6 +316,10 @@ ul.unstyled-list {
   bottom   : 15px;
   left     : 50%;
   transform: translateX(-50%);
+}
+
+.version img {
+  max-width: 50%;
 }
 
 /*

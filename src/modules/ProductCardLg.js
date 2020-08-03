@@ -51,10 +51,7 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
         </div>
       </div>
       <div className="inside">
-        <div className="icon">
-          {/* <RiInformationLine /> */}
-          {product.totalstock}
-        </div>
+        <div className="icon">{product.totalstock}</div>
         <div className="contents">
           <table>
             <tbody>

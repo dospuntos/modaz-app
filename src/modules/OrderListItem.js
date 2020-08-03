@@ -26,14 +26,3 @@ function OrderListItem({ order }) {
 }
 
 export default OrderListItem;
-
-/*
-<li>
-                {order.id} (Bs. {order.totalprice}) - {order.orderdetails}
-                <ul>
-                  {order.items.map((item) => {
-                    return <li>{item.product_id}</li>;
-                  })}
-                </ul>
-              </li>
-              */

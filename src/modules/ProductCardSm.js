@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./productcardsm.css";
 import * as Constants from "../constants";
-import { RiShoppingCartLine, RiInformationLine } from "react-icons/ri";
+import ChangeStock from "./ChangeStock";
+import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 
-function ProductCardSm({ product }) {
+function ProductCardSm({ product, updateStockInState, handleAddItem }) {
+  const [clicked, setClicked] = useState(false);
+
   const bgimg =
     product.images !== "0"
       ? Constants.PROD_IMG_URL + product.images
@@ -19,23 +22,27 @@ function ProductCardSm({ product }) {
               "#fff url(" + bgimg + ") center center /cover no-repeat",
           }}
         ></div>
-        <div className="bottom">
+        <div className={clicked ? "bottom clicked" : "bottom"}>
           <div className="left">
             <div className="details">
-              <h4>SML: {product.name}</h4>
+              <h4>{product.name}</h4>
               <p>{product.price}</p>
             </div>
-            <div className="buy">
+            <div
+              className="buy"
+              onClick={() => {
+                setClicked(true);
+              }}
+            >
               <RiShoppingCartLine />
             </div>
           </div>
-          <div className="right">
+          <div className="right" onClick={() => setClicked(false)}>
             <div className="done">
-              <i className="material-icons">done</i>
+              <RiCloseLine />
             </div>
             <div className="details">
-              <h1>{product.name}</h1>
-              <p>Agregado al carrito</p>
+              <h4>{product.name}</h4>
             </div>
             <div className="remove">
               <i className="material-icons">clear</i>
@@ -44,34 +51,40 @@ function ProductCardSm({ product }) {
         </div>
       </div>
       <div className="inside">
-        <div className="icon">
-          <RiInformationLine />
-        </div>
+        <div className="icon">{product.totalstock}</div>
         <div className="contents">
           <table>
             <tbody>
-              <tr>
-                <th>Precio ZWear</th>
-                <th>Precio c/imp.</th>
-              </tr>
-              <tr>
-                <td>
-                  ${product.wholesaleprice} (Bs.
-                  {Math.round(+product.wholesaleprice * 6.96)})
-                </td>
-                <td>
-                  ${Math.round(product.wholesaleprice * 1.5)} (Bs.
-                  {Math.round(+product.wholesaleprice * 6.96 * 1.5)})
-                </td>
-              </tr>
-              <tr>
-                <th>Precio</th>
-                <th>Precio ZIN</th>
-              </tr>
-              <tr>
-                <td>Bs. {product.price}</td>
-                <td>Bs. {product.zinprice}</td>
-              </tr>
+              {product.variants.map((variant, index) => {
+                return (
+                  <tr key={index}>
+                    <td
+                      colSpan="2"
+                      key={index}
+                      style={{ borderBottom: "1px solid grey" }}
+                    >
+                      {variant.size} - {variant.color} ({variant.stock}){" "}
+                      {variant.stock < 1 ? (
+                        ""
+                      ) : (
+                        <span
+                          className="pure-button pure-button-cart-sm"
+                          onClick={() => {
+                            // Add product name to variant object (for cart display)
+                            variant["name"] = product.name;
+                            variant["price"] = product.price;
+                            variant["order_item_quantity"] = "1";
+                            // Add to cart
+                            handleAddItem(variant);
+                          }}
+                        >
+                          <RiShoppingCartLine />
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
