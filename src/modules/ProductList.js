@@ -24,7 +24,6 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
       </div>
 
       <div className="pure-u-6-24">
-        Variants:
         <ul className="unstyled-list">
           {product.variants.map((variant) => {
             return (
@@ -65,6 +64,7 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
           })}
         </ul>
       </div>
+      <div className="pure-u-10-24">{product.id}</div>
     </div>
   );
 }
