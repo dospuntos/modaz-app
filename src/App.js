@@ -8,6 +8,7 @@ import ScrollToTop from "./modules/ScrollToTop";
 import Dashboard from "./components/Dashboard";
 import Products from "./components/Products";
 import Orders from "./components/Orders";
+import OrderDetails from "./components/OrderDetails";
 import Stock from "./components/Stock";
 import SidebarMenu from "./components/SidebarMenu";
 
@@ -59,6 +60,7 @@ function App() {
               <Products {...props} handleAddItem={handleAddItem} />
             )}
           />
+          <Route path="/orders/:orderid" component={OrderDetails} />
           <Route path="/orders" component={Orders} />
           <Route path="/stock" component={Stock} />
         </Switch>

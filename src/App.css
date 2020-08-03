@@ -9,9 +9,9 @@ body {
   color: #333;
 }
 
-/* * {
+.pure-g>div {
   box-sizing: border-box;
-} */
+}
 
 a {
   text-decoration: none;

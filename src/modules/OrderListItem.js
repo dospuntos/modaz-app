@@ -1,5 +1,6 @@
 import React from "react";
 import "./orderlistitem.css";
+import { Link } from "react-router-dom";
 import { TiClipboard } from "react-icons/ti";
 
 function OrderListItem({ order }) {
@@ -10,7 +11,7 @@ function OrderListItem({ order }) {
         {order.id}
       </div>
       <div className="pure-u-4-24">
-        <a href="!">Usuario: {order.client}</a>
+        <Link to={"orders/" + order.id}>Usuario: {order.client}</Link>
         <br />
         {order.create_date}
       </div>

@@ -92,7 +92,7 @@ function SidebarMenu({
         </div>
       </div>
       <div className="version">
-        <img src="img/admin-logo.png" alt="Moda Z App" />
+        <img src="/img/admin-logo.png" alt="Moda Z App" />
         <br />
         <small>Version: {pkg.version}</small>
       </div>

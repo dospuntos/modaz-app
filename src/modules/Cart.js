@@ -45,9 +45,9 @@ function Cart({
           ) : (
             <>
               <ul className="cart-items">
-                {cart.map((item) => {
+                {cart.map((item, index) => {
                   return (
-                    <li key={item.vid}>
+                    <li key={index}>
                       {item.name}
                       <br />
                       <small>
