@@ -20,13 +20,6 @@ export function changeStock(id, dir = 1) {
 }
 
 export function createOrder(cart, user, type) {
-  /*   console.log(
-    JSON.stringify({
-      cart: JSON.stringify(cart),
-      user: user,
-      type: type,
-    })
-  ); */
   return fetch(Constants.API_URL + "createorder.php", {
     method: "post",
     body: JSON.stringify({
@@ -39,20 +32,19 @@ export function createOrder(cart, user, type) {
     .catch(handleError);
 }
 
-/* Additional functions to be updated 
-
-export function getCourseBySlug(slug) {
-  return fetch(baseUrl + "?slug=" + slug)
+export function getProductById(id) {
+  return fetch(Constants.API_URL + "getproduct.php?id=" + id)
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok.");
       return response.json().then((courses) => {
-        if (courses.length !== 1) throw new Error("Course not found: " + slug);
+        if (courses.length !== 1) throw new Error("Product not found: " + id);
         return courses[0]; // should only find one course for a given slug, so return it.
       });
     })
     .catch(handleError);
 }
 
+/* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {
     method: course.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.

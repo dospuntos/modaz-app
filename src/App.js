@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "./modules/ScrollToTop";
 import Dashboard from "./components/Dashboard";
 import Products from "./components/Products";
+import ProductEdit from "./components/ProductEdit";
 import Orders from "./components/Orders";
 import OrderDetails from "./components/OrderDetails";
 import Stock from "./components/Stock";
@@ -54,6 +55,7 @@ function App() {
         />
         <Switch>
           <Route exact path="/" component={Dashboard} />
+          <Route path="/products/:productid" component={ProductEdit} />
           <Route
             path="/products"
             render={(props) => (

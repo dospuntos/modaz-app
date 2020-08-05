@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./productcardlg.css";
 import * as Constants from "constants.js";
 import ChangeStock from "modules/ChangeStock";
+import { Link } from "react-router-dom";
 import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 
 function ProductCardLg({ product, updateStockInState, handleAddItem }) {
@@ -41,7 +42,9 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
               <RiCloseLine />
             </div>
             <div className="details">
-              <h1>{product.name}</h1>
+              <h1>
+                <Link to={"products/" + product.id}>{product.name}</Link>
+              </h1>
               <p></p>
             </div>
             <div className="remove">
@@ -119,14 +122,6 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
               <tr>
                 <td>{product.order_date}</td>
                 <td>{product.release_date}</td>
-              </tr>
-              <tr>
-                <th>Something</th>
-                <th>Something</th>
-              </tr>
-              <tr>
-                <td>200mm</td>
-                <td>200mm</td>
               </tr>
             </tbody>
           </table>
