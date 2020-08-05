@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./productcardsm.css";
-import * as Constants from "constants/index";
+import * as Constants from "constants.js";
 import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 
 function ProductCardSm({ product, handleAddItem }) {

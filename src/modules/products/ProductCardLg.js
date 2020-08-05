@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./productcardlg.css";
-import * as Constants from "constants/index";
+import * as Constants from "constants.js";
 import ChangeStock from "modules/ChangeStock";
 import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 

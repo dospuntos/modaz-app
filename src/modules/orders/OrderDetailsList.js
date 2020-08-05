@@ -1,5 +1,5 @@
 import React from "react";
-import * as Constants from "constants/index";
+import * as Constants from "constants.js";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 function OrderDetailsList({ item }) {

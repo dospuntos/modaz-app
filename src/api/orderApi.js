@@ -1,5 +1,5 @@
 import { handleResponse, handleError } from "./apiUtils";
-import * as Constants from "constants/index";
+import * as Constants from "constants.js";
 
 export function getOrders() {
   return fetch(Constants.API_URL + "getorders.php")
