@@ -1,7 +1,7 @@
 import React from "react";
 import "./productlist.css";
-import ChangeStock from "./ChangeStock";
-import * as Constants from "../constants";
+import ChangeStock from "modules/ChangeStock";
+import * as Constants from "constants/index";
 import { RiShoppingCartLine } from "react-icons/ri";
 
 function ProductList({ product, updateStockInState, handleAddItem }) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getOrders } from "../api/orderApi";
-import OrderListItem from "../modules/OrderListItem";
+import { getOrders } from "api/orderApi";
+import OrderListItem from "modules/orders/OrderListItem";
 
 function Orders() {
   const [searchText, setSearchText] = useState("");

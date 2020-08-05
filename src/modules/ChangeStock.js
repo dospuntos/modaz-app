@@ -1,6 +1,6 @@
 import React from "react";
 import "./changestock.css";
-import { changeStock } from "../api/productApi";
+import { changeStock } from "api/productApi";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 
 function ChangeStock(props) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createOrder } from "../api/productApi";
+import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { RiShoppingCartLine, RiDeleteBin5Line } from "react-icons/ri";
 import "./cart.css";

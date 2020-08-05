@@ -6,8 +6,8 @@ import {
   RiFileList3Line,
 } from "react-icons/ri";
 import { GiCardboardBox } from "react-icons/gi";
-import { getStatistics } from "../api/statisticsApi";
-import "../modules/card.css";
+import { getStatistics } from "api/statisticsApi";
+import "modules/card.css";
 
 function Dashboard() {
   const [statistics, setStatistics] = useState([]);

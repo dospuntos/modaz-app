@@ -6,9 +6,9 @@ import {
   RiShoppingCartLine,
 } from "react-icons/ri";
 import { FaBoxOpen } from "react-icons/fa";
-import Cart from "../modules/Cart";
+import Cart from "modules/cart/Cart";
 import pkg from "../../package.json";
-import { getStatistics } from "../api/statisticsApi";
+import { getStatistics } from "api/statisticsApi";
 
 function SidebarMenu({
   cart,

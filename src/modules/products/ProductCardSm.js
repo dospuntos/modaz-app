@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import "./productcardlg.css";
-import * as Constants from "../constants";
-import ChangeStock from "./ChangeStock";
+import "./productcardsm.css";
+import * as Constants from "constants/index";
 import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 
-function ProductCardLg({ product, updateStockInState, handleAddItem }) {
+function ProductCardSm({ product, handleAddItem }) {
   const [clicked, setClicked] = useState(false);
+
   const bgimg =
     product.images !== "0"
       ? Constants.PROD_IMG_URL + product.images
       : Constants.DEFAULT_IMG_URL;
 
   return (
-    <div className="wrapper">
+    <div className="wrapper-sml">
       <div className="container">
         <div
           className="top"
@@ -24,8 +24,8 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
         <div className={clicked ? "bottom clicked" : "bottom"}>
           <div className="left">
             <div className="details">
-              <h1>{product.name}</h1>
-              <p>Bs. {product.price}</p>
+              <h4>{product.name}</h4>
+              <p>{product.price}</p>
             </div>
             <div
               className="buy"
@@ -41,11 +41,10 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
               <RiCloseLine />
             </div>
             <div className="details">
-              <h1>{product.name}</h1>
-              <p></p>
+              <h4>{product.name}</h4>
             </div>
             <div className="remove">
-              <RiCloseLine />
+              <i className="material-icons">clear</i>
             </div>
           </div>
         </div>
@@ -81,53 +80,10 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
                           <RiShoppingCartLine />
                         </span>
                       )}
-                      <ChangeStock
-                        variantId={variant.vid}
-                        productId={variant.product_id}
-                        updateStockInState={updateStockInState}
-                      />
                     </td>
                   </tr>
                 );
               })}
-              <tr>
-                <th>Precio ZWear</th>
-                <th>Precio c/imp.</th>
-              </tr>
-              <tr>
-                <td>
-                  ${product.wholesaleprice} (Bs.
-                  {Math.round(+product.wholesaleprice * 6.96)})
-                </td>
-                <td>
-                  ${Math.round(product.wholesaleprice * 1.5)} (Bs.
-                  {Math.round(+product.wholesaleprice * 6.96 * 1.5)})
-                </td>
-              </tr>
-              <tr>
-                <th>Precio</th>
-                <th>Precio ZIN</th>
-              </tr>
-              <tr>
-                <td>Bs. {product.price}</td>
-                <td>Bs. {product.zinprice}</td>
-              </tr>
-              <tr>
-                <th>Order Date</th>
-                <th>Release Date</th>
-              </tr>
-              <tr>
-                <td>{product.order_date}</td>
-                <td>{product.release_date}</td>
-              </tr>
-              <tr>
-                <th>Something</th>
-                <th>Something</th>
-              </tr>
-              <tr>
-                <td>200mm</td>
-                <td>200mm</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -136,4 +92,4 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
   );
 }
 
-export default ProductCardLg;
+export default ProductCardSm;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
-import ProductCardLg from "../modules/ProductCardLg";
-import ProductCardSm from "../modules/ProductCardSm";
-import ProductList from "../modules/ProductList";
+import ProductCardLg from "modules/products/ProductCardLg";
+import ProductCardSm from "modules/products/ProductCardSm";
+import ProductList from "modules/products/ProductList";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
-import { useStickyState } from "../hooks";
-import { getProducts } from "../api/productApi";
+import { useStickyState } from "hooks";
+import { getProducts } from "api/productApi";
 
 function Products(props) {
   const [products, setProducts] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getOrderById } from "../api/orderApi";
-import OrderDetailsList from "../modules/OrderDetailsList";
+import { getOrderById } from "api/orderApi";
+import OrderDetailsList from "modules/orders/OrderDetailsList";
 
 function OrderDetails() {
   const [order, setOrder] = useState([]);
