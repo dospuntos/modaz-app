@@ -50,6 +50,15 @@ export function getVariantsById(id) {
     .catch(handleError);
 }
 
+export function saveVariant(variant) {
+  return fetch(Constants.API_URL + "savevariant.php", {
+    method: "post",
+    body: JSON.stringify({ ...variant[0] }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {

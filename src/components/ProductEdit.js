@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById, getVariantsById } from "api/productApi";
+import { getProductById, getVariantsById, saveVariant } from "api/productApi";
 import { RiSave2Line, RiArrowLeftSLine } from "react-icons/ri";
 import * as Constants from "constants.js";
 import TextInput from "modules/form/TextInput";
@@ -52,18 +52,17 @@ function ProductEdit(props) {
   }
 
   function handleVariantChange(e, id, field) {
-    /*     alert(
-      "Changed ID " +
-        id +
-        " to " +
-        target.value +
-        " on item with name " +
-        [target.name]
-    ); */
     const updatedVariants = variants.map((variant) =>
       variant.id === id ? { ...variant, [field]: e.target.value } : variant
     );
     setVariants(updatedVariants);
+  }
+
+  function handleVariantSave(id) {
+    const variant = variants.filter((variant) => {
+      return variant.id === id;
+    });
+    saveVariant(variant);
   }
 
   return (
@@ -125,6 +124,7 @@ function ProductEdit(props) {
                         key={item.id}
                         item={item}
                         handleVariantChange={handleVariantChange}
+                        handleVariantSave={handleVariantSave}
                       />
                     );
                   })}

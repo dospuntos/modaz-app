@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProductVariant({ item, handleVariantChange }) {
+function ProductVariant({ item, handleVariantChange, handleVariantSave }) {
   return (
     <div className="pure-form pure-form-stacked">
       <fieldset>
@@ -12,6 +12,7 @@ function ProductVariant({ item, handleVariantChange }) {
               placeholder={item.upc}
               className="pure-u-23-24"
               onChange={(e) => handleVariantChange(e, item.id, "upc")}
+              onBlur={(e) => handleVariantSave(item.id)}
               value={item.upc}
             />
           </div>
@@ -21,6 +22,7 @@ function ProductVariant({ item, handleVariantChange }) {
               placeholder={item.size}
               className="pure-u-23-24"
               onChange={(e) => handleVariantChange(e, item.id, "size")}
+              onBlur={(e) => handleVariantSave(item.id)}
               value={item.size}
             />
           </div>
@@ -30,6 +32,7 @@ function ProductVariant({ item, handleVariantChange }) {
               placeholder={item.color}
               className="pure-u-23-24"
               onChange={(e) => handleVariantChange(e, item.id, "color")}
+              onBlur={(e) => handleVariantSave(item.id)}
               value={item.color}
             />
           </div>
@@ -39,6 +42,7 @@ function ProductVariant({ item, handleVariantChange }) {
               placeholder={item.stock}
               className="pure-u-23-24"
               onChange={(e) => handleVariantChange(e, item.id, "stock")}
+              onBlur={(e) => handleVariantSave(item.id)}
               value={item.stock}
             />
           </div>
