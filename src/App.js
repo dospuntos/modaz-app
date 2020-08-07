@@ -37,6 +37,7 @@ function App() {
     setCart(newCart);
   }
 
+  // Remove all items from cart
   function handleEmptyCart(confirm = true) {
     if (!confirm || window.confirm("Quieres vaciar el carrito de compras?")) {
       setCart([]);

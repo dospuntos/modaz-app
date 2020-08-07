@@ -51,14 +51,19 @@ function ProductEdit(props) {
     setProduct(updatedProduct);
   }
 
-  function handleVariantChange(e, id) {
-    console.log(e);
-    alert("Changed ID " + id + " to " + e.target.value);
-    /* const updatedVariants = variants.map(p =>
-        p.value === 'jquery-ui'
-          ? { ...p, desc: 'new description' }
-          : p
-      ); */
+  function handleVariantChange(e, id, field) {
+    /*     alert(
+      "Changed ID " +
+        id +
+        " to " +
+        target.value +
+        " on item with name " +
+        [target.name]
+    ); */
+    const updatedVariants = variants.map((variant) =>
+      variant.id === id ? { ...variant, [field]: e.target.value } : variant
+    );
+    setVariants(updatedVariants);
   }
 
   return (
@@ -117,6 +122,7 @@ function ProductEdit(props) {
                   variants.map((item) => {
                     return (
                       <ProductVariant
+                        key={item.id}
                         item={item}
                         handleVariantChange={handleVariantChange}
                       />

@@ -11,7 +11,7 @@ function ProductVariant({ item, handleVariantChange }) {
               type="text"
               placeholder={item.upc}
               className="pure-u-23-24"
-              onChange={(e) => handleVariantChange(e, item.id)}
+              onChange={(e) => handleVariantChange(e, item.id, "upc")}
               value={item.upc}
             />
           </div>
@@ -20,7 +20,7 @@ function ProductVariant({ item, handleVariantChange }) {
               type="text"
               placeholder={item.size}
               className="pure-u-23-24"
-              onChange={(e) => handleVariantChange(e, item.id)}
+              onChange={(e) => handleVariantChange(e, item.id, "size")}
               value={item.size}
             />
           </div>
@@ -29,7 +29,7 @@ function ProductVariant({ item, handleVariantChange }) {
               type="text"
               placeholder={item.color}
               className="pure-u-23-24"
-              onChange={(e) => handleVariantChange(e, item.id)}
+              onChange={(e) => handleVariantChange(e, item.id, "color")}
               value={item.color}
             />
           </div>
@@ -38,7 +38,7 @@ function ProductVariant({ item, handleVariantChange }) {
               type="text"
               placeholder={item.stock}
               className="pure-u-23-24"
-              onChange={(e) => handleVariantChange(e, item.id)}
+              onChange={(e) => handleVariantChange(e, item.id, "stock")}
               value={item.stock}
             />
           </div>
