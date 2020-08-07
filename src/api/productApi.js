@@ -44,6 +44,12 @@ export function getProductById(id) {
     .catch(handleError);
 }
 
+export function getVariantsById(id) {
+  return fetch(Constants.API_URL + "getvariants.php?id=" + id)
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {

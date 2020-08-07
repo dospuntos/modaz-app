@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "api/productApi";
+import { getProductById, getVariantsById } from "api/productApi";
 import { RiSave2Line, RiArrowLeftSLine } from "react-icons/ri";
 import * as Constants from "constants.js";
 import TextInput from "modules/form/TextInput";
-
-// Input field
-const Input = (value) => {
-  return <input type="text" placeholder="Input" />;
-};
+import ProductVariant from "modules/products/ProductVariant";
 
 function ProductEdit(props) {
   const [product, setProduct] = useState([
@@ -26,15 +22,24 @@ function ProductEdit(props) {
       weight: "",
       composition: "",
       manufacturer: "",
-      variants: [],
+      coo: "",
+      country: "",
     },
   ]);
+
+  const [variants, setVariants] = useState([]);
+
   let { productid } = useParams();
 
   useEffect(() => {
     // Get products
     getProductById(productid).then((product) => {
       setProduct(product);
+    });
+
+    // Get variants
+    getVariantsById(productid).then((variants) => {
+      setVariants(variants);
     });
   }, [productid]);
 
@@ -44,6 +49,16 @@ function ProductEdit(props) {
       [target.name]: target.value,
     };
     setProduct(updatedProduct);
+  }
+
+  function handleVariantChange(e, id) {
+    console.log(e);
+    alert("Changed ID " + id + " to " + e.target.value);
+    /* const updatedVariants = variants.map(p =>
+        p.value === 'jquery-ui'
+          ? { ...p, desc: 'new description' }
+          : p
+      ); */
   }
 
   return (
@@ -57,76 +72,117 @@ function ProductEdit(props) {
         </div>
 
         <div className="email-content-body order-cards-container">
-          <div className="pure-g">
-            <div className="pure-u-1 pure-u-md-3-4">
-              <form className="pure-form">
+          <form className="pure-form pure-form-aligned">
+            <div className="pure-g">
+              <div className="pure-u-1 pure-u-md-3-4">
                 <TextInput
-                  id="name"
-                  label="Name"
+                  label="Nombre"
                   onChange={handleChange}
                   name="name"
                   value={product.name}
-                  /* error={props.errors.name} */
+                  className="pure-u-2-3"
                 />
                 <TextInput
-                  id="price"
-                  label="Precio ModaZ"
+                  label="Precio ModaZ (Bs)"
                   onChange={handleChange}
                   name="price"
                   value={product.price}
-                  /* error={props.errors.name} */
                 />
                 <TextInput
                   id="zinprice"
-                  label="Precio ZIN"
+                  label="Precio ZIN (Bs)"
                   onChange={handleChange}
                   name="zinprice"
                   value={product.zinprice}
-                  /* error={props.errors.name} */
                 />
                 <TextInput
-                  id="wholesaleprice"
-                  label="Precio revendedora"
+                  label="Precio revendedora ($US)"
                   onChange={handleChange}
                   name="wholesaleprice"
                   value={product.wholesaleprice}
-                  /* error={props.errors.name} */
                 />
-              </form>
+                <TextInput
+                  label="MSRP ($US)"
+                  onChange={handleChange}
+                  name="msrp"
+                  value={product.msrp}
+                />
 
-              <table className="pure-table">
-                <thead>
-                  <tr>
-                    <td>Precio ModaZ</td>
-                    <td>Precio ModaZ ZIN</td>
-                    <td>Precio Revendedora</td>
-                    <td>MSRP</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <Input />
-                      {product.price}
-                    </td>
-                    <td>{product.zinprice}</td>
-                    <td>{product.wholesaleprice}</td>
-                    <td>{product.msrp}</td>
-                  </tr>
-                </tbody>
-              </table>
+                <hr />
+                <h2>Modelos</h2>
+                <p>
+                  <small>(Los cambios se guardan immediatamente)</small>
+                </p>
+                {variants !== undefined &&
+                  variants.map((item) => {
+                    return (
+                      <ProductVariant
+                        item={item}
+                        handleVariantChange={handleVariantChange}
+                      />
+                    );
+                  })}
+              </div>
+              <div className="pure-u-1 pure-u-md-1-4">
+                <img
+                  src={
+                    product.images !== "0"
+                      ? Constants.PROD_IMG_URL + product.images
+                      : Constants.DEFAULT_IMG_URL
+                  }
+                  alt={product.name}
+                />
+                <TextInput
+                  label="Order Date"
+                  onChange={handleChange}
+                  name="order_date"
+                  value={product.order_date}
+                />
+                <TextInput
+                  label="Release Date"
+                  onChange={handleChange}
+                  name="release_date"
+                  value={product.release_date}
+                />
+                <TextInput
+                  label="Season"
+                  onChange={handleChange}
+                  name="season"
+                  value={product.season}
+                />
+                <TextInput
+                  label="Weight"
+                  onChange={handleChange}
+                  name="weight"
+                  value={product.weight}
+                />
+                <TextInput
+                  label="Composition"
+                  onChange={handleChange}
+                  name="composition"
+                  value={product.composition}
+                />
+                <TextInput
+                  label="Manufacturer"
+                  onChange={handleChange}
+                  name="manufacturer"
+                  value={product.manufacturer}
+                />
+                <TextInput
+                  label="COO"
+                  onChange={handleChange}
+                  name="coo"
+                  value={product.coo}
+                />
+                <TextInput
+                  label="Country"
+                  onChange={handleChange}
+                  name="country"
+                  value={product.country}
+                />
+              </div>
             </div>
-            <div className="pure-u-1 pure-u-md-1-4">
-              <img
-                src={
-                  product.images !== "0"
-                    ? Constants.PROD_IMG_URL + product.images
-                    : Constants.DEFAULT_IMG_URL
-                }
-                alt={product.name}
-              />
-            </div>
-          </div>
+          </form>
           <p>
             <button
               className="pure-button secondary-button"

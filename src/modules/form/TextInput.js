@@ -2,23 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function TextInput(props) {
-  let wrapperClass = "pure-group";
-  if (props.error.length > 0) {
-    wrapperClass += " has-error";
-  }
-
   return (
-    <div className={wrapperClass}>
-      <label htmlFor={props.id}>{props.label}</label>
+    <div className="pure-control-group">
+      <label htmlFor={props.name}>{props.label}</label>
       <input
-        id={props.id}
+        id={props.name}
         type="text"
         onChange={props.onChange}
         name={props.name}
-        className="form-control"
+        className={props.className}
         value={props.value}
       />
-      {props.error && <div className="alert alert-danger">{props.error}</div>}
     </div>
   );
 }
@@ -36,4 +30,5 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
   error: "",
+  id: "",
 };
