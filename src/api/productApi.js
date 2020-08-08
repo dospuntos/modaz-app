@@ -44,6 +44,15 @@ export function getProductById(id) {
     .catch(handleError);
 }
 
+export function saveProduct(product) {
+  return fetch(Constants.API_URL + "saveproduct.php", {
+    method: "post",
+    body: JSON.stringify({ ...product }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 export function getVariantsById(id) {
   return fetch(Constants.API_URL + "getvariants.php?id=" + id)
     .then(handleResponse)

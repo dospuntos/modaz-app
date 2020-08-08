@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById, getVariantsById, saveVariant } from "api/productApi";
+import {
+  getProductById,
+  getVariantsById,
+  saveVariant,
+  saveProduct,
+} from "api/productApi";
 import { RiSave2Line, RiArrowLeftSLine } from "react-icons/ri";
 import * as Constants from "constants.js";
 import TextInput from "modules/form/TextInput";
@@ -69,7 +74,7 @@ function ProductEdit(props) {
   }
 
   function handleProductSave() {
-    alert("Saving product ID " + product.id);
+    saveProduct(product).then(setEdited(false));
   }
 
   return (
