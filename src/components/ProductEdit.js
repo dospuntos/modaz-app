@@ -27,6 +27,8 @@ function ProductEdit(props) {
     },
   ]);
 
+  const [edited, setEdited] = useState(false);
+
   const [variants, setVariants] = useState([]);
 
   let { productid } = useParams();
@@ -49,6 +51,7 @@ function ProductEdit(props) {
       [target.name]: target.value,
     };
     setProduct(updatedProduct);
+    setEdited(true);
   }
 
   function handleVariantChange(e, id, field) {
@@ -63,6 +66,10 @@ function ProductEdit(props) {
       return variant.id === id;
     });
     saveVariant(variant);
+  }
+
+  function handleProductSave() {
+    alert("Saving product ID " + product.id);
   }
 
   return (
@@ -139,6 +146,12 @@ function ProductEdit(props) {
                   alt={product.name}
                 />
                 <TextInput
+                  label="Imágen"
+                  onChange={handleChange}
+                  name="images"
+                  value={product.images || ""}
+                />
+                <TextInput
                   label="Order Date"
                   onChange={handleChange}
                   name="order_date"
@@ -192,12 +205,21 @@ function ProductEdit(props) {
           <p>
             <button
               className="pure-button secondary-button"
-              onClick={() => props.history.goBack()}
+              onClick={() =>
+                !edited ||
+                window.confirm("¿Quieres volver sin guardar los cambios?")
+                  ? props.history.goBack()
+                  : null
+              }
             >
               <RiArrowLeftSLine /> Volver
             </button>
             &nbsp;
-            <button className="pure-button primary-button">
+            <button
+              className="pure-button primary-button"
+              onClick={handleProductSave}
+              disabled={!edited}
+            >
               <RiSave2Line /> Guardar
             </button>
           </p>
