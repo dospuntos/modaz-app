@@ -77,6 +77,20 @@ function ProductEdit(props) {
     saveProduct(product).then(setEdited(false));
   }
 
+  function addVariant(e) {
+    e.preventDefault();
+    const newVariant = {
+      id: "",
+      product_id: product.id,
+      upc: "",
+      item_code: "",
+      color: "",
+      size: "",
+      stock: "",
+    };
+    setVariants([...variants, newVariant]);
+  }
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -140,6 +154,12 @@ function ProductEdit(props) {
                       />
                     );
                   })}
+                <button
+                  className="pure-button primary-button"
+                  onClick={addVariant}
+                >
+                  +
+                </button>
               </div>
               <div className="pure-u-1 pure-u-md-1-4">
                 <img
