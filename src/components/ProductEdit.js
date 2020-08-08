@@ -83,33 +83,33 @@ function ProductEdit(props) {
                   label="Nombre"
                   onChange={handleChange}
                   name="name"
-                  value={product.name}
+                  value={product.name || ""}
                   className="pure-u-2-3"
                 />
                 <TextInput
                   label="Precio ModaZ (Bs)"
                   onChange={handleChange}
                   name="price"
-                  value={product.price}
+                  value={product.price || ""}
                 />
                 <TextInput
                   id="zinprice"
                   label="Precio ZIN (Bs)"
                   onChange={handleChange}
                   name="zinprice"
-                  value={product.zinprice}
+                  value={product.zinprice || ""}
                 />
                 <TextInput
                   label="Precio revendedora ($US)"
                   onChange={handleChange}
                   name="wholesaleprice"
-                  value={product.wholesaleprice}
+                  value={product.wholesaleprice || ""}
                 />
                 <TextInput
                   label="MSRP ($US)"
                   onChange={handleChange}
                   name="msrp"
-                  value={product.msrp}
+                  value={product.msrp || ""}
                 />
 
                 <hr />
@@ -142,49 +142,49 @@ function ProductEdit(props) {
                   label="Order Date"
                   onChange={handleChange}
                   name="order_date"
-                  value={product.order_date}
+                  value={product.order_date || ""}
                 />
                 <TextInput
                   label="Release Date"
                   onChange={handleChange}
                   name="release_date"
-                  value={product.release_date}
+                  value={product.release_date || ""}
                 />
                 <TextInput
                   label="Season"
                   onChange={handleChange}
                   name="season"
-                  value={product.season}
+                  value={product.season || ""}
                 />
                 <TextInput
                   label="Weight"
                   onChange={handleChange}
                   name="weight"
-                  value={product.weight}
+                  value={product.weight || ""}
                 />
                 <TextInput
                   label="Composition"
                   onChange={handleChange}
                   name="composition"
-                  value={product.composition}
+                  value={product.composition || ""}
                 />
                 <TextInput
                   label="Manufacturer"
                   onChange={handleChange}
                   name="manufacturer"
-                  value={product.manufacturer}
+                  value={product.manufacturer || ""}
                 />
                 <TextInput
                   label="COO"
                   onChange={handleChange}
                   name="coo"
-                  value={product.coo}
+                  value={product.coo || ""}
                 />
                 <TextInput
                   label="Country"
                   onChange={handleChange}
                   name="country"
-                  value={product.country}
+                  value={product.country || ""}
                 />
               </div>
             </div>
