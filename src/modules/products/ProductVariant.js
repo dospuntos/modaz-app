@@ -1,6 +1,12 @@
 import React from "react";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
-function ProductVariant({ item, handleVariantChange, handleVariantSave }) {
+function ProductVariant({
+  item,
+  handleVariantChange,
+  handleVariantSave,
+  handleVariantDelete,
+}) {
   return (
     <div className="pure-form pure-form-stacked">
       <fieldset>
@@ -45,6 +51,14 @@ function ProductVariant({ item, handleVariantChange, handleVariantSave }) {
               onBlur={(e) => handleVariantSave(item.id)}
               value={item.stock}
             />
+          </div>
+          <div className="pure-u-1 pure-u-md-1-5">
+            <button
+              className="pure-button secondary-button"
+              onClick={(e) => handleVariantDelete(e, item.id)}
+            >
+              <RiDeleteBin5Line />
+            </button>
           </div>
         </div>
       </fieldset>

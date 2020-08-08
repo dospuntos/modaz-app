@@ -5,6 +5,7 @@ import {
   getVariantsById,
   saveVariant,
   saveProduct,
+  deleteVariant,
 } from "api/productApi";
 import { RiSave2Line, RiArrowLeftSLine } from "react-icons/ri";
 import * as Constants from "constants.js";
@@ -91,6 +92,15 @@ function ProductEdit(props) {
     setVariants([...variants, newVariant]);
   }
 
+  function handleVariantDelete(e, id) {
+    e.preventDefault();
+    if (window.confirm("¿Quieres eliminar este modelo?")) {
+      deleteVariant(id);
+      let _variants = variants.filter((v) => v.id !== id);
+      setVariants(_variants);
+    }
+  }
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -151,6 +161,7 @@ function ProductEdit(props) {
                         item={item}
                         handleVariantChange={handleVariantChange}
                         handleVariantSave={handleVariantSave}
+                        handleVariantDelete={handleVariantDelete}
                       />
                     );
                   })}

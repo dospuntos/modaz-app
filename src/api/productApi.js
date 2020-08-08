@@ -68,6 +68,15 @@ export function saveVariant(variant) {
     .catch(handleError);
 }
 
+export function deleteVariant(variantId) {
+  return fetch(Constants.API_URL + "deletevariant.php", {
+    method: "post",
+    body: JSON.stringify({ id: variantId }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {
