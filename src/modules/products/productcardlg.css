@@ -105,9 +105,21 @@
 }
 
 .wrapper .container .bottom .right .details {
-  padding: 20px;
+  padding: 0 !important;
   float  : right;
   width  : calc(70% - 40px);
+}
+
+.right .details span {
+  width      : 24%;
+  display    : inline-block;
+  font-size  : 25px;
+  line-height: 100px;
+}
+
+.right .details span svg:hover {
+  opacity: .8;
+  cursor : pointer;
 }
 
 .wrapper .container .bottom .right .done {

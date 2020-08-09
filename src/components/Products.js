@@ -6,7 +6,7 @@ import ProductList from "modules/products/ProductList";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "hooks";
-import { getProducts } from "api/productApi";
+import { getProducts, togglePublished } from "api/productApi";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -49,6 +49,16 @@ function Products(props) {
       newVariantStock
     );
     setProducts([...tempProducts]);
+  }
+
+  function changePublishedState(id) {
+    togglePublished(product.id)
+    .then(()=>
+      const updatedVariants = variants.map((variant) =>
+      variant.id === id ? { ...variant, [field]: e.target.value } : variant
+    );
+    setVariants(updatedVariants);
+    )
   }
 
   let filteredProducts = products;

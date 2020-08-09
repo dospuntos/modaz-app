@@ -77,6 +77,15 @@ export function deleteVariant(variantId) {
     .catch(handleError);
 }
 
+export function togglePublished(id) {
+  return fetch(Constants.API_URL + "changepublished.php", {
+    method: "post",
+    body: JSON.stringify({ id: id }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {

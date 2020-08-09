@@ -3,9 +3,22 @@ import "./productcardlg.css";
 import * as Constants from "constants.js";
 import ChangeStock from "modules/ChangeStock";
 import { Link } from "react-router-dom";
-import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
+import {
+  RiShoppingCartLine,
+  RiCloseLine,
+  RiDeleteBinLine,
+  RiEdit2Line,
+  RiStarLine,
+  RiCheckboxCircleLine,
+} from "react-icons/ri";
+import { BsGear } from "react-icons/bs";
 
-function ProductCardLg({ product, updateStockInState, handleAddItem }) {
+function ProductCardLg({
+  product,
+  updateStockInState,
+  handleAddItem,
+  changePublishedState,
+}) {
   const [clicked, setClicked] = useState(false);
   const bgimg =
     product.images !== "0"
@@ -28,26 +41,37 @@ function ProductCardLg({ product, updateStockInState, handleAddItem }) {
               <h1>{product.name}</h1>
               <p>Bs. {product.price}</p>
             </div>
-            <div
-              className="buy"
-              onClick={() => {
-                setClicked(true);
-              }}
-            >
-              <RiShoppingCartLine />
+            <div className="buy" onClick={() => setClicked(true)}>
+              <BsGear />
             </div>
           </div>
-          <div className="right" onClick={() => setClicked(false)}>
+          <div className="right">
             <div className="done">
               <RiCloseLine />
             </div>
             <div className="details">
-              <h1>
-                <Link to={"products/" + product.id}>{product.name}</Link>
-              </h1>
-              <p></p>
+              <span /* onClick={() => deleteProduct(product.id)} */>
+                <RiDeleteBinLine color="red" />
+              </span>
+              <span>
+                <RiStarLine
+                  color={product.featured === "1" ? "yellow" : "grey"}
+                />
+              </span>
+              <span onClick={() => changePublishedState(product.id)}>
+                {product.published === "1" ? (
+                  <RiCheckboxCircleLine color="green" />
+                ) : (
+                  <RiCloseLine color="red" />
+                )}
+              </span>
+              <span>
+                <Link to={"products/" + product.id}>
+                  <RiEdit2Line />
+                </Link>
+              </span>
             </div>
-            <div className="remove">
+            <div className="remove" onClick={() => setClicked(false)}>
               <RiCloseLine />
             </div>
           </div>
