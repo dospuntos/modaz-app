@@ -51,15 +51,15 @@ function Products(props) {
     setProducts([...tempProducts]);
   }
 
-  function changePublishedState(id) {
-    togglePublished(product.id)
+  /* function changePublishedState(id) {
+    togglePublished(product.id);
     .then(()=>
       const updatedVariants = variants.map((variant) =>
       variant.id === id ? { ...variant, [field]: e.target.value } : variant
     );
     setVariants(updatedVariants);
     )
-  }
+  } */
 
   let filteredProducts = products;
 

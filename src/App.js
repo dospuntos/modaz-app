@@ -46,7 +46,7 @@ function App() {
 
   return (
     <Router>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <div id="layout" className="content pure-g">
         <SidebarMenu
           cart={cart}

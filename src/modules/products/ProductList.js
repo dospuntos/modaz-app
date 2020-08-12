@@ -3,6 +3,7 @@ import "./productlist.css";
 import ChangeStock from "modules/ChangeStock";
 import * as Constants from "constants.js";
 import { RiShoppingCartLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 function ProductList({ product, updateStockInState, handleAddItem }) {
   return (
@@ -20,7 +21,9 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
         />
       </div>
       <div className="pure-u-6-24">
-        <h4>{product.name} </h4>
+        <h4>
+          <Link to={"products/" + product.id}>{product.name}</Link>
+        </h4>
       </div>
 
       <div className="pure-u-6-24">
@@ -50,14 +53,14 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
                     <RiShoppingCartLine />
                   </span>
                 )}
-                {variant.size} - {variant.color} ({variant.stock})<br />
+                {variant.size} - {variant.color} ({variant.stock})
                 <small
                   onClick={() => {
                     navigator.clipboard.writeText(variant.upc);
                   }}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "grey" }}
                 >
-                  UPC: {variant.upc}
+                  (UPC: {variant.upc})
                 </small>
               </li>
             );
