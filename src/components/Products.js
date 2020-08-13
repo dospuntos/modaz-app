@@ -15,6 +15,10 @@ function Products(props) {
     "product-layout"
   );
   const [stockFilter, setStockFilter] = useStickyState("all", "stockFilter");
+  const [publishedFilter, setPublishedFilter] = useStickyState(
+    "all",
+    "publishedFilter"
+  );
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
@@ -82,6 +86,15 @@ function Products(props) {
     });
   }
 
+  /* Filter by published state */
+  if (publishedFilter !== "all") {
+    filteredProducts = filteredProducts.filter((eachItem) => {
+      return publishedFilter === "1"
+        ? Number(eachItem["state"]) > 0
+        : Number(eachItem["state"]) < 1;
+    });
+  }
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -102,6 +115,14 @@ function Products(props) {
               <option value="all">Todos</option>
               <option value="1">Disponible</option>
               <option value="0">Agotado</option>
+            </select>
+            <select
+              value={publishedFilter}
+              onChange={(e) => setPublishedFilter(e.target.value)}
+            >
+              <option value="all">Todos</option>
+              <option value="1">Publicado</option>
+              <option value="0">Despublicado</option>
             </select>
             <input
               className="pure-input-1"
