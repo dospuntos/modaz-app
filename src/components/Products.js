@@ -87,9 +87,10 @@ function Products(props) {
       <div className="email-content">
         <div className="email-content-header pure-g">
           <div className="pure-u-1-2">
-            <h1 className="email-content-title">Productos - component</h1>
+            <h1 className="email-content-title">Productos</h1>
             <p className="email-content-subtitle">
-              From at <span>3:56pm, April 3, 2012</span>
+              <span>Mostrando</span> {filteredProducts.length}/{products.length}{" "}
+              productos.
             </p>
           </div>
 

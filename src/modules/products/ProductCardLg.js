@@ -59,7 +59,7 @@ function ProductCardLg({
                 />
               </span>
               <span onClick={() => changePublishedState(product.id)}>
-                {product.published === "1" ? (
+                {product.state === "1" ? (
                   <RiCheckboxCircleLine color="green" />
                 ) : (
                   <RiCloseLine color="red" />
@@ -77,7 +77,7 @@ function ProductCardLg({
           </div>
         </div>
       </div>
-      <div className="inside">
+      <div className={Number(product.state) ? "inside" : "inside unpublished"}>
         <div className="icon">{product.totalstock}</div>
         <div className="contents">
           <table>

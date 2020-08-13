@@ -178,6 +178,10 @@
   overflow     : hidden;
 }
 
+.wrapper .inside.unpublished {
+  background: #b94a4a;
+}
+
 .wrapper .inside .icon {
   position: absolute;
   right   : 85px;
