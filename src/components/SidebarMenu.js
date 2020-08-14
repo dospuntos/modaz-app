@@ -5,7 +5,7 @@ import {
   RiBarcodeBoxLine,
   RiShoppingCartLine,
 } from "react-icons/ri";
-import { FaBoxOpen } from "react-icons/fa";
+import { FaBoxOpen, FaUsers } from "react-icons/fa";
 import Cart from "modules/cart/Cart";
 import pkg from "../../package.json";
 import { getStatistics } from "api/statisticsApi";
@@ -65,6 +65,12 @@ function SidebarMenu({
                 <span className="email-count">
                   ({statistics.products}/{statistics.variants})
                 </span>
+              </NavLink>
+            </li>
+            <li className="pure-menu-item">
+              <NavLink to="/users" className="pure-menu-link">
+                <FaUsers /> Usuarios
+                <span className="email-count">({statistics.users})</span>
               </NavLink>
             </li>
             <li className="pure-menu-item">
