@@ -55,15 +55,16 @@ function Products(props) {
     setProducts([...tempProducts]);
   }
 
-  /* function changePublishedState(id) {
-    togglePublished(product.id);
-    .then(()=>
-      const updatedVariants = variants.map((variant) =>
-      variant.id === id ? { ...variant, [field]: e.target.value } : variant
-    );
-    setVariants(updatedVariants);
-    )
-  } */
+  function changePublishedState(id) {
+    togglePublished(id);
+
+    let tempProducts = products;
+    let prevState = _.find(tempProducts, { id: id })["state"];
+    let newState = 1 - prevState;
+    _.set(_.find(tempProducts, { id: id }), "state", newState);
+
+    setProducts([...tempProducts]);
+  }
 
   let filteredProducts = products;
 
@@ -171,6 +172,7 @@ function Products(props) {
                     product={product}
                     updateStockInState={updateStockInState}
                     handleAddItem={props.handleAddItem}
+                    changePublishedState={changePublishedState}
                   />
                 );
               case "grid-sm":
