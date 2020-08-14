@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { getOrders } from "api/orderApi";
 import OrderListItem from "modules/orders/OrderListItem";
+import { getUsers } from "api/usersApi";
 
 function Orders() {
   const [searchText, setSearchText] = useState("");
   const [orders, setOrders] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     // Get orders
     getOrders().then((orders) => {
       setOrders(orders);
     });
+    getUsers().then((users) => {
+      setUsers(users);
+    });
   }, []);
+
+  const getUser = (userId) => users.find((x) => x.id === userId)?.name;
 
   return (
     <div id="main" className="pure-u-1">
@@ -20,7 +27,7 @@ function Orders() {
           <div className="pure-u-1-2">
             <h1 className="email-content-title">Pedidos y cotizaciones</h1>
             <p className="email-content-subtitle">
-              Responder y crear pedidos y cotizaciones.
+              <h4>Número de pedidos: {orders.length}</h4>
             </p>
           </div>
 
@@ -36,9 +43,14 @@ function Orders() {
         </div>
 
         <div className="email-content-body product-cards-container">
-          <h4>Número de pedidos: {orders.length}</h4>
           {orders.map((order) => {
-            return <OrderListItem key={order.id} order={order} />;
+            return (
+              <OrderListItem
+                key={order.id}
+                order={order}
+                userName={getUser(order.client)}
+              />
+            );
           })}
         </div>
       </div>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
+import { getUsers } from "api/usersApi";
 import { RiShoppingCartLine, RiDeleteBin5Line } from "react-icons/ri";
 import "./cart.css";
 
@@ -11,22 +12,22 @@ function Cart({
   handleDeleteCartItem,
 }) {
   const [cartUser, setCartUser] = useState("0");
+  const [users, setUsers] = useState([]);
+
   let history = useHistory();
+
+  useEffect(() => {
+    // Get users
+    getUsers().then((users) => {
+      setUsers(users);
+    });
+  }, []);
 
   function saveCart(cart, user, type) {
     createOrder(cart, user, type);
     handleEmptyCart(false); // Empty cart without confirmation
     history.push("/orders"); // Redirect to orders
   }
-
-  /*   function removeDuplicates(data, key) {
-    return [...new Map(data.map((x) => [key(x), x])).values()];
-  }
-
-  let cart2 = removeDuplicates(cart, (it) => it.vid);
-  console.log(cart2); 
-
-  console.log(_.uniq(cart, true));*/
 
   return (
     <div className="shopping-cart">
@@ -75,8 +76,15 @@ function Cart({
                 onChange={(e) => setCartUser(e.target.value)}
               >
                 <option value="0">- Users -</option>
-                <option value="345">Johan (345)</option>
-                <option value="346">Joanne (346)</option>
+                {users.length ? (
+                  users.map((user) => (
+                    <option key={user.id} value={user.id}>
+                      {user.name}
+                    </option>
+                  ))
+                ) : (
+                  <option>Cargando usuarios...</option>
+                )}
               </select>
               {cartUser === "0" ? (
                 ""

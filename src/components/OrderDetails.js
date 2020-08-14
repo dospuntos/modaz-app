@@ -16,11 +16,10 @@ function OrderDetails() {
       }
     });
     // Get order items
-    getOrderById(orderid, true).then((order) => {
-      setOrderItems(order);
+    getOrderById(orderid, true).then((orderItems) => {
+      setOrderItems(orderItems);
     });
   }, [orderid]);
-  console.log(order);
 
   return (
     <div id="main" className="pure-u-1">
