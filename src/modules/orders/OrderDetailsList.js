@@ -15,8 +15,11 @@ function OrderDetailsList({ item }) {
       <td>
         {item.name ? (
           <>
-            <h4>{item.name}</h4>
-            <small>UPC: {item.upc}</small>
+            <h4>
+              {item.name}
+              <br />
+              <small>UPC: {item.upc}</small>
+            </h4>
           </>
         ) : (
           <i style={{ color: "red" }}>
@@ -28,7 +31,12 @@ function OrderDetailsList({ item }) {
         {item.color}, {item.size}
       </td>
       <td>
-        Bs. <input type="number" value={item.order_item_price} />
+        Bs.{" "}
+        <input
+          type="number"
+          value={item.order_item_price}
+          onChange={() => console.log("Saving change to DB")}
+        />
       </td>
       <td>
         Cantidad: {item.order_item_quantity}
