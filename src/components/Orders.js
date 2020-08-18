@@ -81,7 +81,7 @@ function Orders() {
               <option value="create_date">Fecha</option>
             </select>
             <span
-              class="pure-button secondary-button"
+              className="pure-button secondary-button"
               onClick={() => setOrderDir(orderDir === "asc" ? "desc" : "asc")}
             >
               {orderDir}

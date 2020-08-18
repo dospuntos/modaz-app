@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getOrderById } from "api/orderApi";
+import { getOrderById, deleteOrderItem } from "api/orderApi";
 import { getProducts } from "api/productApi";
 import * as Constants from "constants.js";
 import { useStickyState } from "hooks";
@@ -40,6 +40,19 @@ function OrderDetails() {
 
   function updateOrderItem(id) {
     alert("Updating order item ID " + id);
+  }
+
+  function handleDeleteClick(id) {
+    if (
+      window.confirm("¿Quieres eliminar el producto " + id + " del pedido?")
+    ) {
+      deleteOrderItem(id).then(() => {
+        let _orderItems = orderItems.filter(
+          (item) => item.order_item_id !== id
+        );
+        setOrderItems(_orderItems);
+      });
+    }
   }
 
   let result = products.filter((product) => {
@@ -111,7 +124,7 @@ function OrderDetails() {
                     {result.length &&
                       result[0].variants.map((variant) => {
                         return (
-                          <option value={variant.vid}>
+                          <option key={variant.vid} value={variant.vid}>
                             {variant.color} - {variant.size} ({variant.stock})
                           </option>
                         );
@@ -151,6 +164,7 @@ function OrderDetails() {
                       key={index}
                       item={item}
                       updateOrderItem={updateOrderItem}
+                      handleDeleteClick={handleDeleteClick}
                     />
                   );
                 })

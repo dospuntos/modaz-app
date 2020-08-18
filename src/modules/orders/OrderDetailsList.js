@@ -2,7 +2,7 @@ import React from "react";
 import * as Constants from "constants.js";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
-function OrderDetailsList({ item }) {
+function OrderDetailsList({ item, handleDeleteClick }) {
   const img =
     item.images !== "0"
       ? Constants.PROD_IMG_URL + item.images
@@ -14,13 +14,11 @@ function OrderDetailsList({ item }) {
       </td>
       <td>
         {item.name ? (
-          <>
-            <h4>
-              {item.name}
-              <br />
-              <small>UPC: {item.upc}</small>
-            </h4>
-          </>
+          <h4>
+            {item.name}
+            <br />
+            <small>UPC: {item.upc}</small>
+          </h4>
         ) : (
           <i style={{ color: "red" }}>
             Producto {item.product_id} no encontrado
@@ -46,7 +44,7 @@ function OrderDetailsList({ item }) {
       <td>
         <button
           className="pure-button pure-button-danger"
-          onClick={() => alert("Deleting product")}
+          onClick={() => handleDeleteClick(item.order_item_id)}
         >
           <RiDeleteBin5Line />{" "}
         </button>

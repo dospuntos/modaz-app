@@ -16,6 +16,15 @@ export function getOrderById(id, details = false) {
     .catch(handleError);
 }
 
+export function deleteOrderItem(id) {
+  return fetch(Constants.API_URL + "deleteorderitem.php", {
+    method: "post",
+    body: JSON.stringify({ id: id }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* 
 export function saveAuthor(author) {
   return fetch(baseUrl + (author.id || ""), {
