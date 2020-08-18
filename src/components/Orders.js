@@ -7,6 +7,8 @@ function Orders() {
   const [searchText, setSearchText] = useState("");
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
+  const [orderBy, setOrderBy] = useState("id");
+  const [orderDir, setOrderDir] = useState("desc");
 
   useEffect(() => {
     // Get orders
@@ -20,6 +22,22 @@ function Orders() {
 
   const getUser = (userId) => users.find((x) => x.id === userId)?.name;
 
+  let order;
+  let filteredOrders = orders;
+  if (orderDir === "asc") {
+    order = 1;
+  } else {
+    order = -1;
+  }
+
+  filteredOrders = filteredOrders.sort((a, b) => {
+    if (a[orderBy].toLowerCase() < b[orderBy].toLowerCase()) {
+      return -1 * order;
+    } else {
+      return 1 * order;
+    }
+  });
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -27,11 +45,36 @@ function Orders() {
           <div className="pure-u-1-2">
             <h1 className="email-content-title">Pedidos y cotizaciones</h1>
             <p className="email-content-subtitle">
-              <h4>Número de pedidos: {orders.length}</h4>
+              <span>Número de pedidos: {orders.length}</span>
+            </p>
+            <p>
+              <span className="small-label orderstatus-1">Para cotizar</span>
+              <span className="small-label orderstatus-2">Cotizado</span>
+              <span className="small-label orderstatus-3">
+                Confirmado (por entregar)
+              </span>
+              <span className="small-label orderstatus-4">
+                Entregado (Pendiente pago)
+              </span>
+              <span className="small-label orderstatus-5">Entregado</span>
             </p>
           </div>
 
           <div className="email-content-controls pure-u-1-2">
+            <select
+              value={orderBy}
+              onChange={(e) => setOrderBy(e.target.value)}
+            >
+              <option value="id">ID</option>
+              <option value="order_state">Estado de pedido</option>
+              <option value="create_date">Fecha</option>
+            </select>
+            <span
+              class="pure-button secondary-button"
+              onClick={() => setOrderDir(orderDir === "asc" ? "desc" : "asc")}
+            >
+              {orderDir}
+            </span>
             <input
               className="pure-input-1"
               type="text"
@@ -43,7 +86,7 @@ function Orders() {
         </div>
 
         <div className="email-content-body product-cards-container">
-          {orders.map((order) => {
+          {filteredOrders.map((order) => {
             return (
               <OrderListItem
                 key={order.id}

@@ -6,33 +6,4 @@
   padding: 8px;
 }
 
-.orderstatus-1 {
-  background-color: rgba(144, 0, 0, 0.4) !important;
-}
-
-/* CotizaciÃ³n pendiente */
-.orderstatus-2 {
-  background-color: rgba(144, 177, 37, 0.4) !important;
-}
-
-/* Cotizado */
-.orderstatus-3 {
-  background-color: rgba(204, 111, 0, 0.4) !important;
-}
-
-/* Confirmado (por entregar) */
-.orderstatus-4 {
-  background-color: rgb(18, 84, 217, 0.4) !important;
-}
-
-/* Entregado (pendiente pago) */
-.orderstatus-5 {
-  background-color: rgb(0, 249, 25, 0.4) !important;
-}
-
-/* Entregado */
-.orderstatus-6 {
-  background-color: rgb(10, 233, 207, 0.4) !important;
-}
-
 /* Cancelado/devuelto */
