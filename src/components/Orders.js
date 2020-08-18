@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { getOrders } from "api/orderApi";
 import OrderListItem from "modules/orders/OrderListItem";
 import { getUsers } from "api/usersApi";
+import { getProducts } from "api/productApi";
 
 function Orders() {
   const [searchText, setSearchText] = useState("");
+  const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
   const [orderBy, setOrderBy] = useState("id");
@@ -18,6 +20,9 @@ function Orders() {
     getUsers().then((users) => {
       setUsers(users);
     });
+    getProducts().then((products) => {
+      setProducts(products);
+    });
   }, []);
 
   const getUser = (userId) => users.find((x) => x.id === userId)?.name;
@@ -30,13 +35,19 @@ function Orders() {
     order = -1;
   }
 
-  filteredOrders = filteredOrders.sort((a, b) => {
-    if (a[orderBy].toLowerCase() < b[orderBy].toLowerCase()) {
-      return -1 * order;
-    } else {
-      return 1 * order;
-    }
-  });
+  filteredOrders = filteredOrders
+    .sort((a, b) => {
+      if (a[orderBy].toLowerCase() < b[orderBy].toLowerCase()) {
+        return -1 * order;
+      } else {
+        return 1 * order;
+      }
+    })
+    .filter((eachItem) => {
+      return eachItem["orderdetails"]
+        .toLowerCase()
+        .includes(searchText.toLowerCase());
+    });
 
   return (
     <div id="main" className="pure-u-1">
@@ -86,11 +97,13 @@ function Orders() {
         </div>
 
         <div className="email-content-body product-cards-container">
+          {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
           {filteredOrders.map((order) => {
             return (
               <OrderListItem
                 key={order.id}
                 order={order}
+                products={products}
                 userName={getUser(order.client)}
               />
             );
