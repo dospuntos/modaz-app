@@ -6,7 +6,7 @@ import ProductList from "modules/products/ProductList";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "hooks";
-import { getProducts, togglePublished } from "api/productApi";
+import { getProducts, togglePublished, toggleFeatured } from "api/productApi";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -62,6 +62,17 @@ function Products(props) {
     let prevState = _.find(tempProducts, { id: id })["state"];
     let newState = 1 - prevState;
     _.set(_.find(tempProducts, { id: id }), "state", newState);
+
+    setProducts([...tempProducts]);
+  }
+
+  function changeFeaturedState(id) {
+    toggleFeatured(id);
+
+    let tempProducts = products;
+    let prevState = _.find(tempProducts, { id: id })["featured"];
+    let newState = 1 - prevState;
+    _.set(_.find(tempProducts, { id: id }), "featured", newState);
 
     setProducts([...tempProducts]);
   }
@@ -173,6 +184,7 @@ function Products(props) {
                     updateStockInState={updateStockInState}
                     handleAddItem={props.handleAddItem}
                     changePublishedState={changePublishedState}
+                    changeFeaturedState={changeFeaturedState}
                   />
                 );
               case "grid-sm":

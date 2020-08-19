@@ -18,6 +18,7 @@ function ProductCardLg({
   updateStockInState,
   handleAddItem,
   changePublishedState,
+  changeFeaturedState,
 }) {
   const [clicked, setClicked] = useState(false);
   const bgimg =
@@ -53,9 +54,9 @@ function ProductCardLg({
               <span /* onClick={() => deleteProduct(product.id)} */>
                 <RiDeleteBinLine color="red" />
               </span>
-              <span>
+              <span onClick={() => changeFeaturedState(product.id)}>
                 <RiStarLine
-                  color={product.featured === "1" ? "yellow" : "grey"}
+                  color={String(product.featured) === "1" ? "yellow" : "grey"}
                 />
               </span>
               <span onClick={() => changePublishedState(product.id)}>

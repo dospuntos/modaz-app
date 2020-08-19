@@ -86,6 +86,15 @@ export function togglePublished(id) {
     .catch(handleError);
 }
 
+export function toggleFeatured(id) {
+  return fetch(Constants.API_URL + "changefeatured.php", {
+    method: "post",
+    body: JSON.stringify({ id: id }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {
