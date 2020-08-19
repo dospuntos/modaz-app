@@ -16,6 +16,19 @@ export function getOrderById(id, details = false) {
     .catch(handleError);
 }
 
+export function addOrderItem(data) {
+  return fetch(Constants.API_URL + "addorderitem.php", {
+    method: "post",
+    body: JSON.stringify({
+      product_id: data.product_id,
+      order_id: data.order_id,
+      order_item_price: data.order_item_price,
+    }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 export function deleteOrderItem(id) {
   return fetch(Constants.API_URL + "deleteorderitem.php", {
     method: "post",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getOrderById, deleteOrderItem } from "api/orderApi";
+import { getOrderById, deleteOrderItem, addOrderItem } from "api/orderApi";
 import { getProducts } from "api/productApi";
 import * as Constants from "constants.js";
 import { useStickyState } from "hooks";
@@ -35,7 +35,16 @@ function OrderDetails() {
   }, [orderid]);
 
   function createOrderItem() {
-    alert("Creating new item");
+    let data = {
+      product_id: variantSelect,
+      order_id: orderid,
+      order_item_price: result[0].price,
+    };
+    addOrderItem(data).then(() => {
+      getOrderById(orderid, true).then((orderItems) => {
+        setOrderItems(orderItems);
+      });
+    });
   }
 
   function updateOrderItem(id) {
@@ -121,6 +130,7 @@ function OrderDetails() {
                     value={variantSelect}
                     onChange={(e) => setVariantSelect(e.target.value)}
                   >
+                    <option value={0}>Talla y color</option>
                     {result.length &&
                       result[0].variants.map((variant) => {
                         return (
@@ -134,7 +144,7 @@ function OrderDetails() {
                 <td>
                   <button
                     className="pure-button primary-button"
-                    onClick={createOrderItem}
+                    onClick={() => createOrderItem()}
                   >
                     +
                   </button>

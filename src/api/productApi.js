@@ -38,7 +38,7 @@ export function getProductById(id) {
       if (!response.ok) throw new Error("Network response was not ok.");
       return response.json().then((courses) => {
         if (courses.length !== 1) throw new Error("Product not found: " + id);
-        return courses[0]; // should only find one course for a given slug, so return it.
+        return courses[0]; // should only find one product for a given slug, so return it.
       });
     })
     .catch(handleError);
