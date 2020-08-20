@@ -29,6 +29,19 @@ export function addOrderItem(data) {
     .catch(handleError);
 }
 
+export function saveOrderItem(data) {
+  return fetch(Constants.API_URL + "saveorderitem.php", {
+    method: "post",
+    body: JSON.stringify({
+      id: data.id,
+      quantity: data.quantity,
+      price: data.price,
+    }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 export function deleteOrderItem(id) {
   return fetch(Constants.API_URL + "deleteorderitem.php", {
     method: "post",

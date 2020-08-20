@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getOrderById, deleteOrderItem, addOrderItem } from "api/orderApi";
+import {
+  getOrderById,
+  deleteOrderItem,
+  addOrderItem,
+  saveOrderItem,
+} from "api/orderApi";
 import { getProducts } from "api/productApi";
 import OrderDetailsList from "modules/orders/OrderDetailsList";
 import AddOrderItem from "modules/orders/AddOrderItem";
@@ -39,8 +44,20 @@ function OrderDetails() {
     });
   }
 
-  function updateOrderItem(id) {
-    alert("Updating order item ID " + id);
+  function updateOrderItem(data) {
+    saveOrderItem(data).then(() => {
+      let _orderItems = orderItems;
+      _orderItems = orderItems.map((item) => {
+        return item.order_item_id === data.id
+          ? {
+              ...item,
+              order_item_quantity: data.quantity,
+              order_item_price: data.price,
+            }
+          : item;
+      });
+      setOrderItems(_orderItems);
+    });
   }
 
   function handleDeleteClick(id) {

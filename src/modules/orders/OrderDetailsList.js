@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Constants from "constants.js";
-import { RiDeleteBin5Line } from "react-icons/ri";
+import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
 
-function OrderDetailsList({ item, handleDeleteClick }) {
+function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
+  const [price, setPrice] = useState(item.order_item_price);
+  const [quantity, setQuantity] = useState(item.order_item_quantity);
+  const [edited, setEdited] = useState(false);
+
+  function handleOrderItemChange(e) {
+    let data = {
+      id: item.order_item_id,
+      price: price,
+      quantity: quantity,
+    };
+    updateOrderItem(data);
+    setEdited(false);
+  }
+
   const img =
     item.images !== "0"
       ? Constants.PROD_IMG_URL + item.images
@@ -32,21 +46,42 @@ function OrderDetailsList({ item, handleDeleteClick }) {
         Bs.{" "}
         <input
           type="number"
-          value={item.order_item_price}
-          onChange={() => console.log("Saving change to DB")}
+          value={price}
+          onChange={(e) => {
+            setPrice(e.target.value);
+            setEdited(true);
+          }}
         />
       </td>
       <td>
-        Cantidad: {item.order_item_quantity}
+        Cantidad:
+        <br />
+        <input
+          type="number"
+          value={quantity}
+          onChange={(e) => {
+            setQuantity(e.target.value);
+            setEdited(true);
+          }}
+        />
         <br />
         <small>(Stock: {item.stock})</small>
+      </td>
+      <td>
+        <button
+          className="pure-button button-success"
+          disabled={!edited}
+          onClick={() => handleOrderItemChange()}
+        >
+          <RiSaveLine />
+        </button>
       </td>
       <td>
         <button
           className="pure-button pure-button-danger"
           onClick={() => handleDeleteClick(item.order_item_id)}
         >
-          <RiDeleteBin5Line />{" "}
+          <RiDeleteBin5Line />
         </button>
       </td>
     </tr>
