@@ -12,10 +12,19 @@ import Orders from "./components/Orders";
 import OrderDetails from "./components/OrderDetails";
 import Stock from "./components/Stock";
 import Users from "./components/Users";
+import Login from "./components/Login";
 import SidebarMenu from "./components/SidebarMenu";
 
 function App() {
   const [cart, setCart] = useStickyState([], "cart");
+  const [loggedIn, setLoggedIn] = useStickyState(false, "loggedIn");
+
+  // Check login state
+  function setLoginState(pw) {
+    if (pw === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l") {
+      setLoggedIn(pw);
+    }
+  }
 
   function handleAddItem(variant) {
     setCart([...cart, variant]);
@@ -45,10 +54,11 @@ function App() {
     }
   }
 
-  return (
+  return loggedIn === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l" ? (
     <Router>
       <ScrollToTop />
       <div id="layout" className="content pure-g">
+        <h1>{loggedIn.stringify}</h1>
         <SidebarMenu
           cart={cart}
           handleVariantCountChange={handleVariantCountChange}
@@ -69,9 +79,12 @@ function App() {
           <Route path="/stock" component={Stock} />
           <Route path="/users/:userid" component={Users} />
           <Route path="/users" component={Users} />
+          <Route path="/login" component={Login} />
         </Switch>
       </div>
     </Router>
+  ) : (
+    <Login handleLogin={setLoginState} />
   );
 }
 

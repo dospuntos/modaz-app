@@ -442,3 +442,26 @@ increase left & right margins a bit**/
     padding: 0;
   }
 }
+
+.absolute-center {
+  height: 100vh;
+  width: 100vw;
+  background: #fff url("https://source.unsplash.com/1600x900/?zumba") center
+    center / cover no-repeat;
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.absolute-center form {
+  border: 1px solid grey;
+  background: rgb(0 0 0 / 68%);
+  border-radius: 5px;
+  padding: 25px;
+}
+
+.absolute-center form img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100px;
+}
