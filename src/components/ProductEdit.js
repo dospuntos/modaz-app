@@ -109,6 +109,29 @@ function ProductEdit(props) {
             <h1 className="email-content-title">{product.name}</h1>
             <p className="email-content-subtitle">Producto #{productid}</p>
           </div>
+          <div className="pure-u-1-4">
+            <p>
+              <button
+                className="pure-button secondary-button"
+                onClick={() =>
+                  !edited ||
+                  window.confirm("¿Quieres volver sin guardar los cambios?")
+                    ? props.history.goBack()
+                    : null
+                }
+              >
+                <RiArrowLeftSLine /> Volver
+              </button>
+              &nbsp;
+              <button
+                className="pure-button primary-button"
+                onClick={handleProductSave}
+                disabled={!edited}
+              >
+                <RiSave2Line /> Guardar
+              </button>
+            </p>
+          </div>
         </div>
 
         <div className="email-content-body order-cards-container">
@@ -238,27 +261,6 @@ function ProductEdit(props) {
               </div>
             </div>
           </form>
-          <p>
-            <button
-              className="pure-button secondary-button"
-              onClick={() =>
-                !edited ||
-                window.confirm("¿Quieres volver sin guardar los cambios?")
-                  ? props.history.goBack()
-                  : null
-              }
-            >
-              <RiArrowLeftSLine /> Volver
-            </button>
-            &nbsp;
-            <button
-              className="pure-button primary-button"
-              onClick={handleProductSave}
-              disabled={!edited}
-            >
-              <RiSave2Line /> Guardar
-            </button>
-          </p>
         </div>
       </div>
     </div>
