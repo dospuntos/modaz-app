@@ -11,6 +11,7 @@ import { BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { getProducts } from "api/productApi";
 import OrderDetailsList from "modules/orders/OrderDetailsList";
+import OrderDetailsQuote from "modules/orders/OrderDetailsQuote";
 import AddOrderItem from "modules/orders/AddOrderItem";
 
 function OrderDetails() {
@@ -20,7 +21,6 @@ function OrderDetails() {
   const [view, setView] = useStickyState("list");
 
   let { orderid } = useParams();
-  /* let result = []; */
 
   useEffect(() => {
     // Get order details
@@ -46,6 +46,15 @@ function OrderDetails() {
         setOrderItems(orderItems);
       });
     });
+  }
+
+  function totalPrice() {
+    let total = 0;
+    orderItems.forEach((item) => {
+      total += item.order_item_quantity * item.order_item_price;
+    });
+
+    return total;
   }
 
   function updateOrderItem(data) {
@@ -150,7 +159,80 @@ function OrderDetails() {
               </table>
             </>
           ) : (
-            <p>Print view</p>
+            <div className="invoice-box" id="pdf-invoice">
+              <table cellpadding="0" cellspacing="0">
+                <tbody>
+                  <tr className="top">
+                    <td colspan="4">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td className="title">
+                              <img
+                                src="/img/ZWS-Dist-Logo-PINK.jpg"
+                                alt="ModaZ Logo"
+                                style={{ width: "100%", maxWidth: 300 }}
+                              />
+                            </td>
+
+                            <td colspan="3">
+                              <h3>Detalles de pedido de Moda Z</h3>
+                              <br /> Fecha:{" "}
+                              {new Date().toLocaleString("es-CO").split(",")[0]}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <tr className="information">
+                    <td colspan="4">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td colspan="3">
+                              <strong>
+                                Moda Z - Distribuidora Autorizada de Zumba Wear
+                                en Bolivia
+                              </strong>
+                              <br /> Joanne Maidana
+                              <br /> Distribuidora Autorizada para Bolivia
+                            </td>
+
+                            <td>
+                              {/* <strong>Sin Nombre</strong> <br />{" "}
+                              sinnombre@modaz.net{" "} */}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr className="heading">
+                    <td>Producto</td>
+                    <td style={{ textAlign: "center" }}>Cantidad</td>
+                    <td>Precio unitario</td>
+                    <td>Precio total</td>
+                  </tr>
+                  {orderItems.map((item, index) => {
+                    return <OrderDetailsQuote key={index} item={item} />;
+                  })}
+
+                  <tr className="total">
+                    <td></td>
+
+                    <td colspan="4">Total: Bs. {totalPrice()} </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="small">
+                <strong>Nota:</strong> No podemos garantizar la disponibilidad
+                de los productos hasta que el pedido haya sido confirmado.
+                <br />
+                La cotización tiene validez de 30 días a partir de la fecha.
+              </p>
+            </div>
           )}
         </div>
       </div>

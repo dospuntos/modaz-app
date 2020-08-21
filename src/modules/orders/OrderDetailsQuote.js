@@ -1,91 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import * as Constants from "constants.js";
-import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
 
-function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
-  const [price, setPrice] = useState(item.order_item_price);
-  const [quantity, setQuantity] = useState(item.order_item_quantity);
-  const [edited, setEdited] = useState(false);
-
-  function handleOrderItemChange(e) {
-    let data = {
-      id: item.order_item_id,
-      price: price,
-      quantity: quantity,
-    };
-    updateOrderItem(data);
-    setEdited(false);
-  }
-
+function OrderDetailsQuote({ item }) {
   const img =
     item.images !== "0"
       ? Constants.PROD_IMG_URL + item.images
       : Constants.DEFAULT_IMG_URL;
   return (
-    <tr>
+    <tr className="item">
       <td>
-        <img src={img} alt={item.name} className="thumbnail zoom" />
-      </td>
-      <td>
-        {item.name ? (
-          <h4>
-            {item.name}
-            <br />
-            <small>UPC: {item.upc}</small>
-          </h4>
-        ) : (
-          <i style={{ color: "red" }}>
-            Producto {item.product_id} no encontrado
-          </i>
-        )}
-      </td>
-      <td>
-        {item.color}, {item.size}
-      </td>
-      <td>
-        Bs.{" "}
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => {
-            setPrice(e.target.value);
-            setEdited(true);
-          }}
-        />
-      </td>
-      <td>
-        Cantidad:
+        <img
+          src={img}
+          alt=""
+          className="thumbnail"
+          style={{ maxWidth: 120, float: "left", marginRight: 15 }}
+        />{" "}
+        <strong>{item.name}</strong>
         <br />
-        <input
-          type="number"
-          value={quantity}
-          onChange={(e) => {
-            setQuantity(e.target.value);
-            setEdited(true);
-          }}
-        />
-        <br />
-        <small>(Stock: {item.stock})</small>
+        <em>
+          {item.color}, {item.size}
+        </em>
+      </td>
+      <td style={{ textAlign: "center" }}>
+        {item.order_item_quantity > 0 ? item.order_item_quantity : "Agotado"}
       </td>
       <td>
-        <button
-          className="pure-button button-success"
-          disabled={!edited}
-          onClick={() => handleOrderItemChange()}
-        >
-          <RiSaveLine />
-        </button>
+        <em>
+          {item.order_item_quantity > 0
+            ? "Bs. " + item.order_item_price
+            : " - "}
+        </em>
       </td>
       <td>
-        <button
-          className="pure-button pure-button-danger"
-          onClick={() => handleDeleteClick(item.order_item_id)}
-        >
-          <RiDeleteBin5Line />
-        </button>
+        {item.order_item_quantity > 0
+          ? "Bs. " + item.order_item_price * item.order_item_quantity
+          : " - "}
       </td>
     </tr>
   );
 }
 
-export default OrderDetailsList;
+export default OrderDetailsQuote;
