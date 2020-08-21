@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useStickyState } from "hooks";
 import {
   getOrderById,
   deleteOrderItem,
   addOrderItem,
   saveOrderItem,
 } from "api/orderApi";
+import { BsGrid3X3GapFill } from "react-icons/bs";
+import { FaThList } from "react-icons/fa";
 import { getProducts } from "api/productApi";
 import OrderDetailsList from "modules/orders/OrderDetailsList";
 import AddOrderItem from "modules/orders/AddOrderItem";
@@ -14,6 +17,7 @@ function OrderDetails() {
   const [order, setOrder] = useState([]);
   const [orderItems, setOrderItems] = useState([]);
   const [products, setProducts] = useState([]);
+  const [view, setView] = useStickyState("list");
 
   let { orderid } = useParams();
   /* let result = []; */
@@ -77,7 +81,7 @@ function OrderDetails() {
     <div id="main" className="pure-u-1">
       <div className="email-content">
         <div className="email-content-header pure-g">
-          <div className="pure-u-1-2">
+          <div className="pure-u-3-4">
             <h1 className="email-content-title">Pedido #{order.id}</h1>
             <p className="email-content-subtitle">
               <strong>{order.orderdetails}</strong> -{" "}
@@ -85,40 +89,69 @@ function OrderDetails() {
               {order.stock_reduced === "1" ? "Si" : "No"}
             </p>
           </div>
+          <div className="pure-u-1-4">
+            <button
+              className={
+                "secondary-button pure-button" +
+                (view === "list" ? " active" : "")
+              }
+              onClick={() => setView("list")}
+            >
+              <FaThList />
+            </button>
+            <button
+              className={
+                "secondary-button pure-button" +
+                (view === "quote" ? " active" : "")
+              }
+              onClick={() => setView("quote")}
+            >
+              <BsGrid3X3GapFill />
+            </button>
+          </div>
         </div>
 
         <div className="email-content-body order-cards-container">
-          <AddOrderItem
-            products={products}
-            handleSave={createOrderItem}
-            orderid={orderid}
-          />
-
-          <table className="pure-table pure-table-striped">
-            <tbody>
-              {orderItems.length ? (
-                orderItems.map((item, index) => {
-                  return (
-                    <OrderDetailsList
-                      key={index}
-                      item={item}
-                      updateOrderItem={updateOrderItem}
-                      handleDeleteClick={handleDeleteClick}
-                    />
-                  );
-                })
-              ) : (
-                <tr className="error">
-                  <td colSpan="100">
-                    <h2>Pedido no encontrado</h2>
-                    <Link to="/orders" className="pure-button primary-button">
-                      Volver a pedidos
-                    </Link>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+          {view === "list" ? (
+            <>
+              <AddOrderItem
+                products={products}
+                handleSave={createOrderItem}
+                orderid={orderid}
+              />
+              <hr />
+              <table className="pure-table pure-table-striped">
+                <tbody>
+                  {orderItems.length ? (
+                    orderItems.map((item, index) => {
+                      return (
+                        <OrderDetailsList
+                          key={index}
+                          item={item}
+                          updateOrderItem={updateOrderItem}
+                          handleDeleteClick={handleDeleteClick}
+                        />
+                      );
+                    })
+                  ) : (
+                    <tr className="error">
+                      <td colSpan="100">
+                        <h2>Pedido no encontrado</h2>
+                        <Link
+                          to="/orders"
+                          className="pure-button primary-button"
+                        >
+                          Volver a pedidos
+                        </Link>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          ) : (
+            <p>Print view</p>
+          )}
         </div>
       </div>
     </div>
