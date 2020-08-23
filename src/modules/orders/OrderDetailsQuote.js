@@ -14,7 +14,9 @@ function OrderDetailsQuote({ item }) {
           alt=""
           className="thumbnail"
           style={{ maxWidth: 120, float: "left", marginRight: 15 }}
-        />{" "}
+        />
+      </td>
+      <td>
         <strong>{item.name}</strong>
         <br />
         <em>

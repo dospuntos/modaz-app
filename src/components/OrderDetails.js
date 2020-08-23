@@ -117,6 +117,16 @@ function OrderDetails() {
             >
               <BsGrid3X3GapFill />
             </button>
+            {view === "quote" && (
+              <button
+                className="pure-button primary-button"
+                onClick={() => {
+                  window.print();
+                }}
+              >
+                Imprimir
+              </button>
+            )}
           </div>
         </div>
 
@@ -160,10 +170,10 @@ function OrderDetails() {
             </>
           ) : (
             <div className="invoice-box" id="pdf-invoice">
-              <table cellpadding="0" cellspacing="0">
+              <table cellPadding="0" cellSpacing="0">
                 <tbody>
                   <tr className="top">
-                    <td colspan="4">
+                    <td colSpan="4">
                       <table>
                         <tbody>
                           <tr>
@@ -175,7 +185,7 @@ function OrderDetails() {
                               />
                             </td>
 
-                            <td colspan="3">
+                            <td colSpan="3">
                               <h3>Detalles de pedido de Moda Z</h3>
                               <br /> Fecha:{" "}
                               {new Date().toLocaleString("es-CO").split(",")[0]}
@@ -187,11 +197,11 @@ function OrderDetails() {
                   </tr>
 
                   <tr className="information">
-                    <td colspan="4">
+                    <td colSpan="4">
                       <table>
                         <tbody>
                           <tr>
-                            <td colspan="3">
+                            <td colSpan="3">
                               <strong>
                                 Moda Z - Distribuidora Autorizada de Zumba Wear
                                 en Bolivia
@@ -210,6 +220,7 @@ function OrderDetails() {
                     </td>
                   </tr>
                   <tr className="heading">
+                    <td></td>
                     <td>Producto</td>
                     <td style={{ textAlign: "center" }}>Cantidad</td>
                     <td>Precio unitario</td>
@@ -222,7 +233,7 @@ function OrderDetails() {
                   <tr className="total">
                     <td></td>
 
-                    <td colspan="4">Total: Bs. {totalPrice()} </td>
+                    <td colSpan="4">Total: Bs. {totalPrice()} </td>
                   </tr>
                 </tbody>
               </table>

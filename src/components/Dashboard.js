@@ -102,11 +102,8 @@ function Dashboard() {
                 </div>
                 <div className="card-content">
                   <ul>
-                    <li>Tarea 1</li>
-                    <li>Tarea 1</li>
-                    <li>Tarea 1</li>
-                    <li>Tarea 1</li>
-                    <li>Tarea 1</li>
+                    <li>Update order state</li>
+                    <li>Print PDF</li>
                   </ul>
                 </div>
               </div>
