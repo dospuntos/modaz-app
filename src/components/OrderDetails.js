@@ -6,8 +6,9 @@ import {
   deleteOrderItem,
   addOrderItem,
   saveOrderItem,
+  changeOrderState,
 } from "api/orderApi";
-import { BsGrid3X3GapFill } from "react-icons/bs";
+import { BsGrid3X3GapFill, BsGearFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { getProducts } from "api/productApi";
 import OrderDetailsList from "modules/orders/OrderDetailsList";
@@ -19,6 +20,11 @@ function OrderDetails() {
   const [orderItems, setOrderItems] = useState([]);
   const [products, setProducts] = useState([]);
   const [view, setView] = useStickyState("list");
+  const [showTools, setShowTools] = useState(false);
+  const [config, setConfig] = useStickyState(
+    [{ name: "", comment: "Comment", shipping: 20, showTotal: true }],
+    "quoteConfig"
+  );
 
   let { orderid } = useParams();
 
@@ -91,7 +97,9 @@ function OrderDetails() {
       <div className="email-content">
         <div className="email-content-header pure-g">
           <div className="pure-u-3-4">
-            <h1 className="email-content-title">Pedido #{order.id}</h1>
+            <h1 className="email-content-title">
+              Pedido #{order.id} - Bs. {totalPrice()}
+            </h1>
             <p className="email-content-subtitle">
               <strong>{order.orderdetails}</strong> -{" "}
               <span>{order.create_date}</span> Stock reducido:{" "}
@@ -99,6 +107,14 @@ function OrderDetails() {
             </p>
           </div>
           <div className="pure-u-1-4">
+            <button
+              className={
+                "primary-button pure-button" + (showTools ? " active" : "")
+              }
+              onClick={() => setShowTools(!showTools)}
+            >
+              <BsGearFill />
+            </button>
             <button
               className={
                 "secondary-button pure-button" +
@@ -127,7 +143,52 @@ function OrderDetails() {
                 Imprimir
               </button>
             )}
+            <select
+              value={order.order_state}
+              onChange={(e) =>
+                setOrder({ ...order, order_state: e.target.value })
+              }
+            >
+              <option value="0">Cotización</option>
+              <option value="1">Para cotizar</option>
+              <option value="2">Cotizado</option>
+              <option value="3">Confirmado</option>
+              <option value="4">Entregado (pago pendiente)</option>
+              <option value="5">Entregado</option>
+            </select>
           </div>
+          {showTools && (
+            <div className="pure-u-1">
+              <h4>Configuración</h4>
+              Mostrar campos (para vista de impresión):{" "}
+              <button
+                className={
+                  "secondary-button pure-button" +
+                  (config.showTotal ? " active" : "")
+                }
+                onClick={() =>
+                  setConfig({ ...config, showTotal: !config.showTotal })
+                }
+              >
+                Mostrar total
+              </button>
+              <input
+                type="text"
+                value={config.name}
+                onChange={(e) => setConfig({ ...config, name: e.target.value })}
+                placeholder="Nombre"
+              />
+              <textarea
+                style={{ width: "100%", display: "block" }}
+                onChange={(e) =>
+                  setConfig({ ...config, comment: e.target.value })
+                }
+                placeholder="Comentario/nota"
+              >
+                {config.comment}
+              </textarea>
+            </div>
+          )}
         </div>
 
         <div className="email-content-body order-cards-container">
@@ -211,8 +272,13 @@ function OrderDetails() {
                             </td>
 
                             <td>
-                              {/* <strong>Sin Nombre</strong> <br />{" "}
-                              sinnombre@modaz.net{" "} */}
+                              {config.name && (
+                                <strong>
+                                  Cotización para:
+                                  <br />
+                                  {config.name}
+                                </strong>
+                              )}
                             </td>
                           </tr>
                         </tbody>
@@ -227,22 +293,40 @@ function OrderDetails() {
                     <td>Precio total</td>
                   </tr>
                   {orderItems.map((item, index) => {
-                    return <OrderDetailsQuote key={index} item={item} />;
+                    return (
+                      <OrderDetailsQuote
+                        key={index}
+                        item={item}
+                        config={config}
+                      />
+                    );
                   })}
 
-                  <tr className="total">
-                    <td></td>
+                  {config.showTotal && (
+                    <tr className="total">
+                      <td></td>
 
-                    <td colSpan="4">Total: Bs. {totalPrice()} </td>
-                  </tr>
+                      <td colSpan="4">Total: Bs. {totalPrice()}</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
-              <p className="small">
-                <strong>Nota:</strong> No podemos garantizar la disponibilidad
-                de los productos hasta que el pedido haya sido confirmado.
-                <br />
-                La cotización tiene validez de 30 días a partir de la fecha.
-              </p>
+
+              {config.comment === "" ? (
+                <p className="small">
+                  <strong>Nota:</strong> No podemos garantizar la disponibilidad
+                  de los productos hasta que el pedido haya sido confirmado.
+                  <br />
+                  La cotización tiene validez de 30 días a partir de la fecha.
+                </p>
+              ) : (
+                <p className="small">
+                  <strong>Nota: </strong>
+                  <span style={{ whiteSpace: "pre-line" }}>
+                    {config.comment}
+                  </span>
+                </p>
+              )}
             </div>
           )}
         </div>

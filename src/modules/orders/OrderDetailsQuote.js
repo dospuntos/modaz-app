@@ -1,7 +1,7 @@
 import React from "react";
 import * as Constants from "constants.js";
 
-function OrderDetailsQuote({ item }) {
+function OrderDetailsQuote({ item, config }) {
   const img =
     item.images !== "0"
       ? Constants.PROD_IMG_URL + item.images

@@ -103,7 +103,14 @@ function Dashboard() {
                 <div className="card-content">
                   <ul>
                     <li>Update order state</li>
-                    <li>Print PDF</li>
+                    <li>Deleting product also removes variants</li>
+                    <li>Select fields to display in print view</li>
+                    <li>Create product</li>
+                    <li>Duplicate product (and create an empty variant)</li>
+                    <li>Support multiple images (JSON-encode images)</li>
+                    <li>
+                      <s>Print PDF</s>
+                    </li>
                   </ul>
                 </div>
               </div>
