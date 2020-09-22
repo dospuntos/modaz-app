@@ -8,7 +8,6 @@ import {
   deleteVariant,
 } from "api/productApi";
 import { RiSave2Line, RiArrowLeftSLine } from "react-icons/ri";
-import * as Constants from "constants.js";
 import TextInput from "modules/form/TextInput";
 import ProductVariant from "modules/products/ProductVariant";
 
@@ -199,8 +198,8 @@ function ProductEdit(props) {
                 <img
                   src={
                     product.images !== "0"
-                      ? Constants.PROD_IMG_URL + product.images
-                      : Constants.DEFAULT_IMG_URL
+                      ? process.env.REACT_APP_PROD_IMG_URL + product.images
+                      : process.env.REACT_APP_DEFAULT_IMG_URL
                   }
                   alt={product.name}
                 />

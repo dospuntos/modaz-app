@@ -101,7 +101,8 @@ function SidebarMenu({
         <img src="/img/admin-logo.png" alt="Moda Z App" />
         <br />
         <small>
-          Version: {pkg.version}
+          Version: {pkg.version}{" "}
+          <strong>{process.env.NODE_ENV.substring(0, 3)}</strong>
           <br />
           <a href="/" onClick={() => localStorage.removeItem("loggedIn")}>
             Salir

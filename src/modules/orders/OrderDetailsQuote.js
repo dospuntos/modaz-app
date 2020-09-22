@@ -1,11 +1,10 @@
 import React from "react";
-import * as Constants from "constants.js";
 
 function OrderDetailsQuote({ item, config }) {
   const img =
     item.images !== "0"
-      ? Constants.PROD_IMG_URL + item.images
-      : Constants.DEFAULT_IMG_URL;
+      ? process.env.REACT_APP_PROD_IMG_URL + item.images
+      : process.env.REACT_APP_DEFAULT_IMG_URL;
   return (
     <tr className="item">
       <td>

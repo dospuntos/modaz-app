@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useStickyState } from "hooks";
-import * as Constants from "constants.js";
 
 function AddOrderItem({ products, handleSave, orderid }) {
   const [productSelect, setProductSelect] = useState(0);
@@ -30,7 +29,7 @@ function AddOrderItem({ products, handleSave, orderid }) {
           <td>
             {result.length && result[0].images !== "" && (
               <img
-                src={Constants.PROD_IMG_URL + result[0].images}
+                src={process.env.REACT_APP_PROD_IMG_URL + result[0].images}
                 alt={result[0].name}
                 style={{ maxWidth: 75 }}
               />

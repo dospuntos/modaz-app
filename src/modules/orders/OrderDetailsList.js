@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import * as Constants from "constants.js";
 import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
 
 function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
@@ -19,8 +18,8 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
 
   const img =
     item.images !== "0"
-      ? Constants.PROD_IMG_URL + item.images
-      : Constants.DEFAULT_IMG_URL;
+      ? process.env.REACT_APP_PROD_IMG_URL + item.images
+      : process.env.REACT_APP_DEFAULT_IMG_URL;
   return (
     <tr>
       <td>

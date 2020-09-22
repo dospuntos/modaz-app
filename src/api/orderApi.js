@@ -1,8 +1,7 @@
 import { handleResponse, handleError } from "./apiUtils";
-import * as Constants from "constants.js";
 
 export function getOrders() {
-  return fetch(Constants.API_URL + "getorders.php")
+  return fetch(process.env.REACT_APP_API_URL + "getorders.php")
     .then(handleResponse)
     .catch(handleError);
 }
@@ -10,14 +9,17 @@ export function getOrders() {
 export function getOrderById(id, details = false) {
   // set details to false to get order details, true to get order items
   return fetch(
-    Constants.API_URL + "getorder.php?id=" + id + (details ? "&details=1" : "")
+    process.env.REACT_APP_API_URL +
+      "getorder.php?id=" +
+      id +
+      (details ? "&details=1" : "")
   )
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function addOrderItem(data) {
-  return fetch(Constants.API_URL + "addorderitem.php", {
+  return fetch(process.env.REACT_APP_API_URL + "addorderitem.php", {
     method: "post",
     body: JSON.stringify({
       product_id: data.product_id,
@@ -30,7 +32,7 @@ export function addOrderItem(data) {
 }
 
 export function saveOrderItem(data) {
-  return fetch(Constants.API_URL + "saveorderitem.php", {
+  return fetch(process.env.REACT_APP_API_URL + "saveorderitem.php", {
     method: "post",
     body: JSON.stringify({
       id: data.id,
@@ -43,7 +45,7 @@ export function saveOrderItem(data) {
 }
 
 export function deleteOrderItem(id) {
-  return fetch(Constants.API_URL + "deleteorderitem.php", {
+  return fetch(process.env.REACT_APP_API_URL + "deleteorderitem.php", {
     method: "post",
     body: JSON.stringify({ id: id }),
   })
@@ -52,7 +54,9 @@ export function deleteOrderItem(id) {
 }
 
 export function changeOrderState(state) {
-  return fetch(Constants.API_URL + "setordersite.php?state=" + state)
+  return fetch(
+    process.env.REACT_APP_API_URL + "setordersite.php?state=" + state
+  )
     .then(handleResponse)
     .catch(handleError);
 }

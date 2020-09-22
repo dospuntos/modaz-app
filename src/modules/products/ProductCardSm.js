@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./productcardsm.css";
-import * as Constants from "constants.js";
 import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
 
 function ProductCardSm({ product, handleAddItem }) {
@@ -8,8 +7,8 @@ function ProductCardSm({ product, handleAddItem }) {
 
   const bgimg =
     product.images !== "0"
-      ? Constants.PROD_IMG_URL + product.images
-      : Constants.DEFAULT_IMG_URL;
+      ? process.env.REACT_APP_PROD_IMG_URL + product.images
+      : process.env.REACT_APP_DEFAULT_IMG_URL;
 
   return (
     <div className="wrapper-sml">

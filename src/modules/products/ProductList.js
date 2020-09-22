@@ -1,7 +1,6 @@
 import React from "react";
 import "./productlist.css";
 import ChangeStock from "modules/ChangeStock";
-import * as Constants from "constants.js";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
@@ -13,8 +12,8 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
         <img
           src={
             product.images !== "0"
-              ? Constants.PROD_IMG_URL + product.images
-              : Constants.DEFAULT_IMG_URL
+              ? process.env.REACT_APP_PROD_IMG_URL + product.images
+              : process.env.REACT_APP_DEFAULT_IMG_URL
           }
           alt={product.name}
           className="thumbnail zoom"

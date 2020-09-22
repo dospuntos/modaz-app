@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./productcardlg.css";
-import * as Constants from "constants.js";
 import ChangeStock from "modules/ChangeStock";
 import { Link } from "react-router-dom";
 import {
@@ -23,8 +22,8 @@ function ProductCardLg({
   const [clicked, setClicked] = useState(false);
   const bgimg =
     product.images !== "0"
-      ? Constants.PROD_IMG_URL + product.images
-      : Constants.DEFAULT_IMG_URL;
+      ? process.env.REACT_APP_PROD_IMG_URL + product.images
+      : process.env.REACT_APP_DEFAULT_IMG_URL;
 
   return (
     <div className="wrapper">

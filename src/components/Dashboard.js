@@ -101,17 +101,23 @@ function Dashboard() {
                   <h2>ToDo</h2>
                 </div>
                 <div className="card-content">
-                  <ul>
+                  <ol>
                     <li>Update order state</li>
-                    <li>Deleting product also removes variants</li>
-                    <li>Select fields to display in print view</li>
+                    <li>Search by UPC</li>
                     <li>Create product</li>
                     <li>Duplicate product (and create an empty variant)</li>
+                    <li>Handle categories</li>
                     <li>Support multiple images (JSON-encode images)</li>
+                    <li>Deleting product also removes variants</li>
+                    <li>Implement material-ui</li>
+                    <li>Different API URL for staging and deployed app</li>
+                    <li>
+                      <s>Select fields to display in print view</s>
+                    </li>
                     <li>
                       <s>Print PDF</s>
                     </li>
-                  </ul>
+                  </ol>
                 </div>
               </div>
             </div>
