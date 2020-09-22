@@ -6,7 +6,12 @@ import ProductList from "modules/products/ProductList";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "hooks";
-import { getProducts, togglePublished, toggleFeatured } from "api/productApi";
+import {
+  getProducts,
+  togglePublished,
+  toggleFeatured,
+  deleteProduct,
+} from "api/productApi";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -75,6 +80,17 @@ function Products(props) {
     _.set(_.find(tempProducts, { id: id }), "featured", newState);
 
     setProducts([...tempProducts]);
+  }
+
+  function handleDeleteProduct(id) {
+    if (window.confirm("Eliminar producto?")) {
+      // Delete product from database
+      deleteProduct(id);
+
+      // Remove from state
+      const newList = products.filter((item) => item.id !== id);
+      setProducts(newList);
+    }
   }
 
   let filteredProducts = products;
@@ -185,6 +201,7 @@ function Products(props) {
                     handleAddItem={props.handleAddItem}
                     changePublishedState={changePublishedState}
                     changeFeaturedState={changeFeaturedState}
+                    deleteProduct={handleDeleteProduct}
                   />
                 );
               case "grid-sm":

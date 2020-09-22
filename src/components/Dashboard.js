@@ -110,7 +110,9 @@ function Dashboard() {
                     <li>Support multiple images (JSON-encode images)</li>
                     <li>Deleting product also removes variants</li>
                     <li>Implement material-ui</li>
-                    <li>Different API URL for staging and deployed app</li>
+                    <li>
+                      <s>Different API URL for staging and deployed app</s>
+                    </li>
                     <li>
                       <s>Select fields to display in print view</s>
                     </li>

@@ -76,6 +76,15 @@ export function deleteVariant(variantId) {
     .catch(handleError);
 }
 
+export function deleteProduct(id) {
+  return fetch(process.env.REACT_APP_API_URL + "deleteproduct.php", {
+    method: "post",
+    body: JSON.stringify({ id: id }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 export function togglePublished(id) {
   return fetch(process.env.REACT_APP_API_URL + "changepublished.php", {
     method: "post",
