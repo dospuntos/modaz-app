@@ -14,6 +14,8 @@ import Stock from "./components/Stock";
 import Users from "./components/Users";
 import Login from "./components/Login";
 import SidebarMenu from "./components/SidebarMenu";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   const [cart, setCart] = useStickyState([], "cart");
@@ -21,6 +23,7 @@ function App() {
 
   // Check login state
   function setLoginState(pw) {
+    /* User: joanne.tatiana@gmail.com, PW: joanne */
     if (pw === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l") {
       setLoggedIn(pw);
     }
@@ -28,6 +31,7 @@ function App() {
 
   function handleAddItem(variant) {
     setCart([...cart, variant]);
+    toast.info("Producto agregado al carrito.");
   }
 
   // Update item count
@@ -51,12 +55,14 @@ function App() {
   function handleEmptyCart(confirm = true) {
     if (!confirm || window.confirm("Quieres vaciar el carrito de compras?")) {
       setCart([]);
+      toast.info("Carrito de compras vaciado");
     }
   }
 
   return loggedIn === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l" ? (
     <Router>
       <ScrollToTop />
+      <ToastContainer autoClose={3000} hideProgressBar />
       <div id="layout" className="content pure-g">
         <h1>{loggedIn.stringify}</h1>
         <SidebarMenu

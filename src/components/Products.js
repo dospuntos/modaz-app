@@ -6,6 +6,7 @@ import ProductList from "modules/products/ProductList";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "hooks";
+import { toast } from "react-toastify";
 import {
   getProducts,
   togglePublished,
@@ -58,6 +59,8 @@ function Products(props) {
       newVariantStock
     );
     setProducts([...tempProducts]);
+
+    toast.info("Stock del producto cambiado a " + newVariantStock);
   }
 
   function changePublishedState(id) {
@@ -69,6 +72,11 @@ function Products(props) {
     _.set(_.find(tempProducts, { id: id }), "state", newState);
 
     setProducts([...tempProducts]);
+    if (newState) {
+      toast.success("Producto publicado");
+    } else {
+      toast.warning("Producto despublicado");
+    }
   }
 
   function changeFeaturedState(id) {
@@ -80,16 +88,24 @@ function Products(props) {
     _.set(_.find(tempProducts, { id: id }), "featured", newState);
 
     setProducts([...tempProducts]);
+
+    if (newState) {
+      toast.success("Producto destacado");
+    } else {
+      toast.warning("Producto NO destacado");
+    }
   }
 
   function handleDeleteProduct(id) {
-    if (window.confirm("Eliminar producto?")) {
+    if (window.confirm("Eliminar producto? No se puede restaurar.")) {
       // Delete product from database
       deleteProduct(id);
 
       // Remove from state
       const newList = products.filter((item) => item.id !== id);
       setProducts(newList);
+
+      toast.info("Producto eliminado.");
     }
   }
 
