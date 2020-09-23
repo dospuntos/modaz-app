@@ -103,13 +103,16 @@ function Dashboard() {
                 <div className="card-content">
                   <ol>
                     <li>Update order state</li>
+                    <li>Create new variant</li>
                     <li>Search by UPC</li>
                     <li>Create product</li>
                     <li>Duplicate product (and create an empty variant)</li>
                     <li>Handle categories</li>
                     <li>Support multiple images (JSON-encode images)</li>
-                    <li>Deleting product also removes variants</li>
                     <li>Implement material-ui</li>
+                    <li>
+                      <s>Deleting product also removes variants</s>
+                    </li>
                     <li>
                       <s>Different API URL for staging and deployed app</s>
                     </li>

@@ -14,6 +14,7 @@ import { getProducts } from "api/productApi";
 import OrderDetailsList from "modules/orders/OrderDetailsList";
 import OrderDetailsQuote from "modules/orders/OrderDetailsQuote";
 import AddOrderItem from "modules/orders/AddOrderItem";
+import { toast } from "react-toastify";
 
 function OrderDetails() {
   const [order, setOrder] = useState([]);
@@ -77,6 +78,13 @@ function OrderDetails() {
       });
       setOrderItems(_orderItems);
     });
+  }
+
+  function updateOrderState(e) {
+    changeOrderState(order.id, e.target.value).then((result) => {
+      toast.info("Estado del pedido actualizado");
+    });
+    setOrder({ ...order, order_state: e.target.value });
   }
 
   function handleDeleteClick(id) {
@@ -145,9 +153,7 @@ function OrderDetails() {
             )}
             <select
               value={order.order_state}
-              onChange={(e) =>
-                setOrder({ ...order, order_state: e.target.value })
-              }
+              onChange={(e) => updateOrderState(e)}
             >
               <option value="0">Cotización</option>
               <option value="1">Para cotizar</option>

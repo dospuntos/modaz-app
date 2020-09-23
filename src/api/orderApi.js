@@ -53,10 +53,14 @@ export function deleteOrderItem(id) {
     .catch(handleError);
 }
 
-export function changeOrderState(state) {
-  return fetch(
-    process.env.REACT_APP_API_URL + "setordersite.php?state=" + state
-  )
+export function changeOrderState(id, state) {
+  return fetch(process.env.REACT_APP_API_URL + "setorderstate.php", {
+    method: "post",
+    body: JSON.stringify({
+      id: id,
+      state: state,
+    }),
+  })
     .then(handleResponse)
     .catch(handleError);
 }
