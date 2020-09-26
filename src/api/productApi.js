@@ -103,6 +103,15 @@ export function toggleFeatured(id) {
     .catch(handleError);
 }
 
+export function searchUPC(upc) {
+  return fetch(process.env.REACT_APP_API_URL + "searchupc.php", {
+    method: "post",
+    body: JSON.stringify({ upc: upc }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {

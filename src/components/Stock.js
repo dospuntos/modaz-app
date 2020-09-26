@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { useStickyState } from "hooks";
+import Add from "modules/stock/Add";
+import Remove from "modules/stock/Remove";
+import Consult from "modules/stock/Consult";
+import Tools from "modules/stock/Tools";
 
 function Stock() {
-  const [searchText, setSearchText] = useState("");
+  const [tab, setTab] = useStickyState("add", "tab");
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -9,23 +14,56 @@ function Stock() {
           <div className="pure-u-1-2">
             <h1 className="email-content-title">Stock</h1>
             <p className="email-content-subtitle">
-              Manejar productos en stock - agregar, editar y borrar. Filtrar por
-              disponible, agotado etc.
+              Manejar productos en stock - agregar, editar y borrar.
             </p>
           </div>
 
           <div className="email-content-controls pure-u-1-2">
-            <input
-              className="pure-input-1"
-              type="text"
-              placeholder="Buscar pedido"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
+            <button
+              className={
+                "secondary-button pure-button" +
+                (tab === "consult" ? " active" : "")
+              }
+              onClick={() => setTab("consult")}
+            >
+              Consultar
+            </button>
+            <button
+              className={
+                "secondary-button pure-button" +
+                (tab === "add" ? " active" : "")
+              }
+              onClick={() => setTab("add")}
+            >
+              Agregar
+            </button>
+            <button
+              className={
+                "secondary-button pure-button" +
+                (tab === "remove" ? " active" : "")
+              }
+              onClick={() => setTab("remove")}
+            >
+              Reducir
+            </button>
+            <button
+              className={
+                "secondary-button pure-button" +
+                (tab === "tools" ? " active" : "")
+              }
+              onClick={() => setTab("tools")}
+            >
+              Herramientas
+            </button>
           </div>
         </div>
 
-        <div className="email-content-body product-cards-container">&nbsp;</div>
+        <div className="email-content-body product-cards-container">
+          {tab === "add" && <Add />}
+          {tab === "consult" && <Consult />}
+          {tab === "remove" && <Remove />}
+          {tab === "tools" && <Tools />}
+        </div>
       </div>
     </div>
   );
