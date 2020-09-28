@@ -24,11 +24,6 @@ function Add() {
     setUpc("");
   }
 
-  /* function handleChangeStock(id, dir, productId) {
-    changeStock(id, dir);
-    props.updateStockInState(id, dir, productId);
-  } */
-
   return (
     <div className="add">
       <h1>Agregar stock para producto con UPC:</h1>

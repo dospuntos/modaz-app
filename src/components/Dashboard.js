@@ -105,13 +105,15 @@ function Dashboard() {
                     <li>Create new variant</li>
                     <li>Add filtered items to cart (empty cart first?)</li>
                     <li>Filter by product size</li>
-                    <li>Search by UPC</li>
                     <li>Create product</li>
                     <li>Duplicate product (and create an empty variant)</li>
                     <li>Handle categories</li>
                     <li>Filter by category</li>
                     <li>Support multiple images (JSON-encode images)</li>
                     <li>Implement material-ui</li>
+                    <li>
+                      <s>Search, add and reduce by UPC</s>
+                    </li>
                     <li>
                       <s>Update order state</s>
                     </li>

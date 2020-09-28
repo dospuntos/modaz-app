@@ -62,7 +62,11 @@ function App() {
   return loggedIn === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l" ? (
     <Router>
       <ScrollToTop />
-      <ToastContainer autoClose={3000} hideProgressBar />
+      <ToastContainer
+        autoClose={3000}
+        hideProgressBar
+        position="bottom-right"
+      />
       <div id="layout" className="content pure-g">
         <h1>{loggedIn.stringify}</h1>
         <SidebarMenu
