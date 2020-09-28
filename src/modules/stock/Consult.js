@@ -31,7 +31,8 @@ export default function Tools() {
         <div className="result pure-g">
           <div className="pure-u-1 pure-u-sm-2-3">
             <h2 style={result[0].state ? { color: "green" } : { color: "red" }}>
-              {result[0].name} (#{result[0].id}) {result[0].featured ? "*" : ""}
+              {result[0].name} (#{result[0].vid}){" "}
+              {result[0].featured === "1" ? "*" : ""}
             </h2>
             <h4>
               Categorías: {result[0].category} - UPC: {result[0].upc}
@@ -54,16 +55,18 @@ export default function Tools() {
               {result[0].stock}
             </span>
             <ul>
+              <li>Notes: {result[0].notes}</li>
+              <li>Description: {result[0].description}</li>
               <li>Composition: {result[0].composition}</li>
               <li>Country: {result[0].country}</li>
-              <li>Description: {result[0].description}</li>
               <li>Manufacturer: {result[0].manufacturer}</li>
-              <li>Notes: {result[0].notes}</li>
               <li>Order Date: {result[0].orderdate}</li>
               <li>Release Date: {result[0].release_date}</li>
               <li>Season: {result[0].season}</li>
               <li>Tags: {result[0].tags}</li>
               <li>Weight: {result[0].weight}</li>
+              <li>Variant ID: {result[0].vid}</li>
+              <li>Product ID: {result[0].product_id}</li>
             </ul>
           </div>
           <div className="pure-u-1 pure-u-sm-1-3">

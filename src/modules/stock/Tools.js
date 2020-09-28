@@ -49,7 +49,12 @@ function Tools() {
         </div>
         <div className="pure-u-1 pure-u-sm-1-5">
           <p>Mostrar productos sin imagen</p>
-          <button className="pure-button secondary-button">Mostrar</button>
+          <button
+            className="pure-button secondary-button"
+            onClick={() => alert("No implementado todavía")}
+          >
+            Mostrar
+          </button>
         </div>
       </div>
     </div>
