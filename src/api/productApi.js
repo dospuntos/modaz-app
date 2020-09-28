@@ -112,6 +112,12 @@ export function searchUPC(upc) {
     .catch(handleError);
 }
 
+export function resetStock() {
+  return fetch(process.env.REACT_APP_API_URL + "resetstock.php?confirm=2egcryr")
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {

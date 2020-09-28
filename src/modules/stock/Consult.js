@@ -10,7 +10,6 @@ export default function Tools() {
     e.preventDefault();
     searchUPC(upc).then((result) => {
       result.length ? setResult(result) : setResult({});
-      console.log(result);
     });
     setUpc("");
   }
@@ -60,8 +59,8 @@ export default function Tools() {
               <li>Description: {result[0].description}</li>
               <li>Manufacturer: {result[0].manufacturer}</li>
               <li>Notes: {result[0].notes}</li>
-              <li>Orderdate: {result[0].orderdate}</li>
-              <li>Release_date: {result[0].release_date}</li>
+              <li>Order Date: {result[0].orderdate}</li>
+              <li>Release Date: {result[0].release_date}</li>
               <li>Season: {result[0].season}</li>
               <li>Tags: {result[0].tags}</li>
               <li>Weight: {result[0].weight}</li>
