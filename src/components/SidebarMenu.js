@@ -78,7 +78,7 @@ function SidebarMenu({
                 Trash
               </a>
             </li>
-            <li className="pure-menu-heading">Labels</li>
+            {/*  <li className="pure-menu-heading">Labels</li>
             <li className="pure-menu-item">
               <a href="#/" className="pure-menu-link">
                 <span className="email-label-personal"></span>Personal
@@ -93,12 +93,14 @@ function SidebarMenu({
               <a href="#/" className="pure-menu-link">
                 <span className="email-label-travel"></span>Travel
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
       <div className="version">
-        <img src="/img/admin-logo.png" alt="Moda Z App" />
+        <a href="https://modaz.net" target="_blank" rel="noopener noreferrer">
+          <img src="/img/admin-logo.png" alt="Moda Z App" />
+        </a>
         <br />
         <small>
           Version: {pkg.version}{" "}

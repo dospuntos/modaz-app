@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { resetStock } from "api/productApi";
+import MissingImages from "modules/stock/MissingImages";
 
 function Tools() {
+  const [showMissing, setShowMissing] = useState(false);
   function handleStockReset() {
     if (
       window.confirm(
@@ -51,12 +53,17 @@ function Tools() {
           <p>Mostrar productos sin imagen</p>
           <button
             className="pure-button secondary-button"
-            onClick={() => alert("No implementado todavía")}
+            onClick={() => setShowMissing(!showMissing)}
           >
             Mostrar
           </button>
         </div>
       </div>
+      {showMissing && (
+        <div className="missingImages">
+          <MissingImages />
+        </div>
+      )}
     </div>
   );
 }
