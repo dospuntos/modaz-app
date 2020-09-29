@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useStickyState } from "hooks";
 import { searchUPC } from "api/productApi";
 import PriceDisplay from "modules/PriceDisplay";
 import { changeStock } from "api/productApi";
+import { quickOrder } from "api/orderApi";
 import { toast } from "react-toastify";
 
 function Remove() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
+  const [createOrder, setCreateOrder] = useStickyState(false, "createOrder");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,6 +19,12 @@ function Remove() {
         setResult(result, { ...(result[0].stock = newStock) });
         changeStock(result[0].vid, false); // Reduce stock by 1 in database
         toast.info("Stock reducido a " + newStock);
+        if (createOrder) {
+          /* Create quick-order in database with default price */
+          quickOrder(result[0].vid, result[0].price).then((result) => {
+            toast.success("Pedido rápido generado.");
+          });
+        }
       } else {
         setResult({});
         toast.warning("Producto NO encontrado");
@@ -78,6 +87,14 @@ function Remove() {
       ) : (
         <p>Producto no encontrado.</p>
       )}
+      <button
+        className={
+          "secondary-button pure-button" + (createOrder ? " active" : "")
+        }
+        onClick={() => setCreateOrder(!createOrder)}
+      >
+        Crear pedido
+      </button>
     </div>
   );
 }

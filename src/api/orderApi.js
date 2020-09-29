@@ -64,3 +64,15 @@ export function changeOrderState(id, state) {
     .then(handleResponse)
     .catch(handleError);
 }
+
+export function quickOrder(vid, price = 0) {
+  return fetch(process.env.REACT_APP_API_URL + "createquickorder.php", {
+    method: "post",
+    body: JSON.stringify({
+      vid: vid,
+      price: price,
+    }),
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
