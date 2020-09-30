@@ -79,16 +79,19 @@ function ProductEdit(props) {
 
   function addVariant(e) {
     e.preventDefault();
-    const newVariant = {
-      id: "",
-      product_id: product.id,
-      upc: "",
-      item_code: "",
-      color: "",
-      size: "",
-      stock: "",
-    };
-    setVariants([...variants, newVariant]);
+    const newVariant = [
+      {
+        id: "0",
+        product_id: product.id,
+        upc: "0",
+        item_code: "0",
+        color: "-",
+        size: "-",
+        stock: "0",
+      },
+    ];
+    setVariants([...variants, newVariant[0]]);
+    saveVariant({ ...newVariant });
   }
 
   function handleVariantDelete(e, id) {
