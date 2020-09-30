@@ -90,8 +90,13 @@ function ProductEdit(props) {
         stock: "0",
       },
     ];
-    setVariants([...variants, newVariant[0]]);
-    saveVariant({ ...newVariant });
+    saveVariant({ ...newVariant }).then((result) => {
+      getVariantsById(productid).then((variants) => {
+        setVariants(variants);
+      });
+    });
+
+    // Get variants again:
   }
 
   function handleVariantDelete(e, id) {
