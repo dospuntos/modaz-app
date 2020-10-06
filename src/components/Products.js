@@ -26,6 +26,7 @@ function Products(props) {
     "publishedFilter"
   );
   const [searchText, setSearchText] = useState("");
+  const [sizeFilter, setSizeFilter] = useStickyState("all", "sizeFilter");
 
   useEffect(() => {
     // Get products
@@ -119,7 +120,12 @@ function Products(props) {
     );
   });
 
-  /* TODO: Filter by Size */
+  /* Filter by size */
+  if (sizeFilter !== "all") {
+    filteredProducts = filteredProducts.filter((obj) =>
+      obj.variants.some((cat) => cat.size.toLowerCase() === sizeFilter)
+    );
+  }
 
   /* Filter by available stock */
   if (stockFilter !== "all") {
@@ -143,7 +149,7 @@ function Products(props) {
     <div id="main" className="pure-u-1">
       <div className="email-content">
         <div className="email-content-header pure-g">
-          <div className="pure-u-1-2">
+          <div className="pure-u-1-3">
             <h1 className="email-content-title">Productos</h1>
             <p className="email-content-subtitle">
               <span>Mostrando</span> {filteredProducts.length}/{products.length}{" "}
@@ -151,7 +157,19 @@ function Products(props) {
             </p>
           </div>
 
-          <div className="email-content-controls pure-u-1-2">
+          <div className="email-content-controls pure-u-2-3">
+            <select
+              value={sizeFilter}
+              onChange={(e) => setSizeFilter(e.target.value)}
+            >
+              <option value="all">Todos</option>
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+              <option value="xxl">XXL</option>
+            </select>
             <select
               value={stockFilter}
               onChange={(e) => setStockFilter(e.target.value)}
@@ -206,6 +224,9 @@ function Products(props) {
         </div>
 
         <div className="email-content-body product-cards-container">
+          {!filteredProducts.length && (
+            <h3>Ningún producto coincide con los filtros.</h3>
+          )}
           {filteredProducts.map((product, index) => {
             switch (productLayout) {
               case "grid-lg":

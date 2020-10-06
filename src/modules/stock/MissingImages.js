@@ -7,7 +7,6 @@ function MissingImages() {
   useEffect(() => {
     getMissingImages().then((result) => {
       setMissing(result);
-      console.log(result);
     });
   }, []);
 
@@ -31,6 +30,11 @@ function MissingImages() {
   }
   return (
     <ul>
+      {!missing.length && (
+        <li>
+          <strong>No hay imágenes faltantes.</strong>
+        </li>
+      )}
       {missing.map((item, index) => {
         return (
           <li key={index}>

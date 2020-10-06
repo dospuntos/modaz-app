@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function ProductList({ product, updateStockInState, handleAddItem }) {
   return (
     <div className="pure-g list-item-wrap">
-      <div className="pure-u-2-24">
+      <div className="pure-u-3-24">
         {/* IMAGE | NAME / UPC | VARIANTS / STOCK | PRICES | ID */}
         <img
           src={
@@ -19,13 +19,14 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
           className="thumbnail zoom"
         />
       </div>
-      <div className="pure-u-6-24">
+      <div className="pure-u-7-24">
         <h4>
-          <Link to={"products/" + product.id}>{product.name}</Link>
+          <Link to={"products/" + product.id}>{product.name}</Link>({product.id}
+          )
         </h4>
       </div>
 
-      <div className="pure-u-6-24">
+      <div className="pure-u-12-24">
         <ul className="unstyled-list">
           {product.variants.map((variant) => {
             return (
@@ -66,7 +67,7 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
           })}
         </ul>
       </div>
-      <div className="pure-u-10-24">{product.id}</div>
+      <div className="pure-u-2-24">{product.id}</div>
     </div>
   );
 }

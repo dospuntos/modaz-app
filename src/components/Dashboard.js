@@ -102,15 +102,19 @@ function Dashboard() {
                 </div>
                 <div className="card-content">
                   <ol>
-                    <li>Create new variant</li>
-                    <li>Add filtered items to cart (empty cart first?)</li>
-                    <li>Filter by product size</li>
                     <li>Create product</li>
                     <li>Duplicate product (and create an empty variant)</li>
+                    <li>Add filtered items to cart (empty cart first?)</li>
                     <li>Handle categories</li>
                     <li>Filter by category</li>
                     <li>Support multiple images (JSON-encode images)</li>
                     <li>Implement material-ui</li>
+                    <li>
+                      <s>Filter by product size</s>
+                    </li>
+                    <li>
+                      <s>Create new variant</s>
+                    </li>
                     <li>
                       <s>Search, add and reduce by UPC</s>
                     </li>
