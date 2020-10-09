@@ -179,8 +179,7 @@ function Products(props) {
                 <MenuItem value="xl">XL</MenuItem>
                 <MenuItem value="xxl">XXL</MenuItem>
               </Select>
-            </FormControl>
-
+            </FormControl>{" "}
             <FormControl>
               <InputLabel>Stock</InputLabel>
               <Select
@@ -191,8 +190,7 @@ function Products(props) {
                 <MenuItem value="1">Disponible</MenuItem>
                 <MenuItem value="0">Agotado</MenuItem>
               </Select>
-            </FormControl>
-
+            </FormControl>{" "}
             <FormControl>
               <InputLabel>Estado</InputLabel>
               <Select
@@ -203,21 +201,12 @@ function Products(props) {
                 <MenuItem value="1">Publicado</MenuItem>
                 <MenuItem value="0">Despublicado</MenuItem>
               </Select>
-            </FormControl>
-
+            </FormControl>{" "}
             <TextField
               label="Buscar"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-            />
-            {/* <input
-              className="pure-input-1"
-              type="text"
-              placeholder="Buscar"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            /> */}
-
+            />{" "}
             <ToggleButtonGroup
               value={productLayout}
               exclusive
