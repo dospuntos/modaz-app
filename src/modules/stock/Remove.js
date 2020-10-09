@@ -5,6 +5,8 @@ import PriceDisplay from "modules/PriceDisplay";
 import { changeStock } from "api/productApi";
 import { quickOrder } from "api/orderApi";
 import { toast } from "react-toastify";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 function Remove() {
   const [upc, setUpc] = useState("");
@@ -87,14 +89,25 @@ function Remove() {
       ) : (
         <p>Producto no encontrado.</p>
       )}
-      <button
+      {/* <button
         className={
           "secondary-button pure-button" + (createOrder ? " active" : "")
         }
         onClick={() => setCreateOrder(!createOrder)}
       >
         Crear pedido
-      </button>
+      </button> */}
+      <FormControlLabel
+        control={
+          <Switch
+            checked={createOrder}
+            onChange={() => setCreateOrder(!createOrder)}
+            name="createOrder"
+            color="primary"
+          />
+        }
+        label="Crear pedido (no implementado)"
+      />
     </div>
   );
 }

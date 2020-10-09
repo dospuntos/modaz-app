@@ -1,4 +1,5 @@
 import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { useStickyState } from "./hooks";
 import "purecss/build/pure-min.css";
 import "purecss/build/grids-responsive.css";
@@ -62,13 +63,13 @@ function App() {
   return loggedIn === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l" ? (
     <Router>
       <ScrollToTop />
+      <CssBaseline />
       <ToastContainer
         autoClose={3000}
         hideProgressBar
         position="bottom-right"
       />
       <div id="layout" className="content pure-g">
-        <h1>{loggedIn.stringify}</h1>
         <SidebarMenu
           cart={cart}
           handleVariantCountChange={handleVariantCountChange}
