@@ -23,7 +23,15 @@ function OrderDetails() {
   const [view, setView] = useStickyState("list");
   const [showTools, setShowTools] = useState(false);
   const [config, setConfig] = useStickyState(
-    [{ name: "", comment: "Comment", shipping: 20, showTotal: true }],
+    [
+      {
+        name: "",
+        comment: "Comment",
+        shipping: 20,
+        showTotal: true,
+        showPrice: true,
+      },
+    ],
     "quoteConfig"
   );
 
@@ -178,6 +186,17 @@ function OrderDetails() {
               >
                 Mostrar total
               </button>
+              <button
+                className={
+                  "secondary-button pure-button" +
+                  (config.showPrice ? " active" : "")
+                }
+                onClick={() =>
+                  setConfig({ ...config, showPrice: !config.showPrice })
+                }
+              >
+                Mostrar precios
+              </button>
               <input
                 type="text"
                 value={config.name}
@@ -295,8 +314,8 @@ function OrderDetails() {
                     <td></td>
                     <td>Producto</td>
                     <td style={{ textAlign: "center" }}>Cantidad</td>
-                    <td>Precio unitario</td>
-                    <td>Precio total</td>
+                    {config.showPrice && <td>Precio unitario</td>}
+                    {config.showPrice && <td>Precio total</td>}
                   </tr>
                   {orderItems.map((item, index) => {
                     return (
