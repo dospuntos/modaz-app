@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";
-import { RiShoppingCartLine, RiDeleteBin5Line } from "react-icons/ri";
+import { RiDeleteBin5Line } from "react-icons/ri";
+/* import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete"; */
 import "./cart.css";
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
+import Delete from "@material-ui/icons/Delete";
+import Badge from "@material-ui/core/Badge";
 
 function Cart({
   cart,
@@ -32,11 +37,12 @@ function Cart({
   return (
     <div className="shopping-cart">
       <div className="icon">
-        <RiShoppingCartLine size={32} />
-        {cart.length}
+        <Badge badgeContent={cart.length} color="secondary">
+          <ShoppingCart size={32} />
+        </Badge>
         <div className="cart-dropdown">
           <span className="empty-cart" onClick={handleEmptyCart}>
-            <RiDeleteBin5Line
+            <Delete
               color={"red"}
               style={{ position: "absolute", top: "15px", right: "5px" }}
             />
@@ -71,6 +77,17 @@ function Cart({
                   );
                 })}
               </ul>
+              {/* <Autocomplete
+                id="combo-box-demo"
+                options={users}
+                value={cartUser}
+                onChange={(e, newValue) => setCartUser(newValue)}
+                getOptionLabel={(user) => user.name}
+                style={{ width: 300 }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Combo box" variant="outlined" />
+                )}
+              /> */}
               <select
                 value={cartUser}
                 onChange={(e) => setCartUser(e.target.value)}
@@ -86,6 +103,7 @@ function Cart({
                   <option>Cargando usuarios...</option>
                 )}
               </select>
+              {cartUser}
               {cartUser === "0" ? (
                 ""
               ) : (

@@ -179,7 +179,7 @@ function Products(props) {
                 <MenuItem value="xl">XL</MenuItem>
                 <MenuItem value="xxl">XXL</MenuItem>
               </Select>
-            </FormControl>{" "}
+            </FormControl>
             <FormControl>
               <InputLabel>Stock</InputLabel>
               <Select
