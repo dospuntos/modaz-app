@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./productcardsm.css";
-import { RiShoppingCartLine, RiCloseLine } from "react-icons/ri";
+import IconButton from "@material-ui/core/IconButton";
+import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
 
 function ProductCardSm({ product, handleAddItem }) {
-  const [clicked, setClicked] = useState(false);
-
   const bgimg =
     product.images !== "0"
       ? process.env.REACT_APP_PROD_IMG_URL + product.images
@@ -20,30 +19,13 @@ function ProductCardSm({ product, handleAddItem }) {
               "#fff url(" + bgimg + ") center center /cover no-repeat",
           }}
         ></div>
-        <div className={clicked ? "bottom clicked" : "bottom"}>
+        <div className="bottom">
           <div className="left">
             <div className="details">
               <h4>{product.name}</h4>
-              <p>{product.price}</p>
             </div>
-            <div
-              className="buy"
-              onClick={() => {
-                setClicked(true);
-              }}
-            >
-              <RiShoppingCartLine />
-            </div>
-          </div>
-          <div className="right" onClick={() => setClicked(false)}>
-            <div className="done">
-              <RiCloseLine />
-            </div>
-            <div className="details">
-              <h4>{product.name}</h4>
-            </div>
-            <div className="remove">
-              <i className="material-icons">clear</i>
+            <div className="buy" style={{ textAlign: "center" }}>
+              <p>Bs. {product.price}</p>
             </div>
           </div>
         </div>
@@ -56,17 +38,15 @@ function ProductCardSm({ product, handleAddItem }) {
               {product.variants.map((variant, index) => {
                 return (
                   <tr key={index}>
-                    <td
-                      colSpan="2"
-                      key={index}
-                      style={{ borderBottom: "1px solid grey" }}
-                    >
+                    <td colSpan="2" style={{ borderBottom: "1px solid grey" }}>
                       {variant.size} - {variant.color} ({variant.stock}){" "}
                       {variant.stock < 1 ? (
                         ""
                       ) : (
-                        <span
-                          className="pure-button pure-button-cart-sm"
+                        <IconButton
+                          color="secondary"
+                          noWrap
+                          aria-label="add to shopping cart"
                           onClick={() => {
                             // Add product name to variant object (for cart display)
                             variant["name"] = product.name;
@@ -76,8 +56,11 @@ function ProductCardSm({ product, handleAddItem }) {
                             handleAddItem(variant);
                           }}
                         >
-                          <RiShoppingCartLine />
-                        </span>
+                          <AddShoppingCartOutlined
+                            style={{ fontSize: 14 }}
+                            noWrap
+                          />
+                        </IconButton>
                       )}
                     </td>
                   </tr>

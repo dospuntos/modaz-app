@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";
-import { RiShoppingCartLine, RiDeleteBin5Line } from "react-icons/ri";
+/* import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete"; */
 import "./cart.css";
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
+import Delete from "@material-ui/icons/Delete";
+import Badge from "@material-ui/core/Badge";
 
-function Cart({
+export default function Cart({
   cart,
   handleEmptyCart,
   handleVariantCountChange,
@@ -32,12 +36,13 @@ function Cart({
   return (
     <div className="shopping-cart">
       <div className="icon">
-        <RiShoppingCartLine size={32} />
-        {cart.length}
+        <Badge badgeContent={cart.length} color="secondary">
+          <ShoppingCart size={32} />
+        </Badge>
         <div className="cart-dropdown">
           <span className="empty-cart" onClick={handleEmptyCart}>
-            <RiDeleteBin5Line
-              color={"red"}
+            <Delete
+              color={"error"}
               style={{ position: "absolute", top: "15px", right: "5px" }}
             />
           </span>
@@ -62,8 +67,8 @@ function Cart({
                         value={item.order_item_quantity}
                         onChange={(e) => handleVariantCountChange(e, item.vid)}
                       />
-                      <RiDeleteBin5Line
-                        color="red"
+                      <ShoppingCart
+                        color="primary"
                         style={{ float: "right" }}
                         onClick={() => handleDeleteCartItem(item.vid)}
                       />
@@ -71,6 +76,17 @@ function Cart({
                   );
                 })}
               </ul>
+              {/* <Autocomplete
+                id="combo-box-demo"
+                options={users}
+                value={cartUser}
+                onChange={(e, newValue) => setCartUser(newValue)}
+                getOptionLabel={(user) => user.name}
+                style={{ width: 300 }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Combo box" variant="outlined" />
+                )}
+              /> */}
               <select
                 value={cartUser}
                 onChange={(e) => setCartUser(e.target.value)}
@@ -86,6 +102,7 @@ function Cart({
                   <option>Cargando usuarios...</option>
                 )}
               </select>
+              {cartUser}
               {cartUser === "0" ? (
                 ""
               ) : (
@@ -111,5 +128,3 @@ function Cart({
     </div>
   );
 }
-
-export default Cart;

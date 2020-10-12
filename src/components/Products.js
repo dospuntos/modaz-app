@@ -3,6 +3,8 @@ import _ from "lodash";
 import ProductCardLg from "modules/products/ProductCardLg";
 import ProductCardSm from "modules/products/ProductCardSm";
 import ProductList from "modules/products/ProductList";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "hooks";
@@ -13,6 +15,11 @@ import {
   toggleFeatured,
   deleteProduct,
 } from "api/productApi";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -158,68 +165,64 @@ function Products(props) {
           </div>
 
           <div className="email-content-controls pure-u-2-3">
-            <select
-              value={sizeFilter}
-              onChange={(e) => setSizeFilter(e.target.value)}
-            >
-              <option value="all">Todos</option>
-              <option value="xs">XS</option>
-              <option value="s">S</option>
-              <option value="m">M</option>
-              <option value="l">L</option>
-              <option value="xl">XL</option>
-              <option value="xxl">XXL</option>
-            </select>
-            <select
-              value={stockFilter}
-              onChange={(e) => setStockFilter(e.target.value)}
-            >
-              <option value="all">Todos</option>
-              <option value="1">Disponible</option>
-              <option value="0">Agotado</option>
-            </select>
-            <select
-              value={publishedFilter}
-              onChange={(e) => setPublishedFilter(e.target.value)}
-            >
-              <option value="all">Todos</option>
-              <option value="1">Publicado</option>
-              <option value="0">Despublicado</option>
-            </select>
-            <input
-              className="pure-input-1"
-              type="text"
-              placeholder="Buscar"
+            <FormControl>
+              <InputLabel>Talla</InputLabel>
+              <Select
+                value={sizeFilter}
+                onChange={(e) => setSizeFilter(e.target.value)}
+              >
+                <MenuItem value="all">Todos</MenuItem>
+                <MenuItem value="xs">XS</MenuItem>
+                <MenuItem value="s">S</MenuItem>
+                <MenuItem value="m">M</MenuItem>
+                <MenuItem value="l">L</MenuItem>
+                <MenuItem value="xl">XL</MenuItem>
+                <MenuItem value="xxl">XXL</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl>
+              <InputLabel>Stock</InputLabel>
+              <Select
+                value={stockFilter}
+                onChange={(e) => setStockFilter(e.target.value)}
+              >
+                <MenuItem value="all">Todos</MenuItem>
+                <MenuItem value="1">Disponible</MenuItem>
+                <MenuItem value="0">Agotado</MenuItem>
+              </Select>
+            </FormControl>{" "}
+            <FormControl>
+              <InputLabel>Estado</InputLabel>
+              <Select
+                value={publishedFilter}
+                onChange={(e) => setPublishedFilter(e.target.value)}
+              >
+                <MenuItem value="all">Todos</MenuItem>
+                <MenuItem value="1">Publicado</MenuItem>
+                <MenuItem value="0">Despublicado</MenuItem>
+              </Select>
+            </FormControl>{" "}
+            <TextField
+              label="Buscar"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-            />
-            <button
-              className={
-                "secondary-button pure-button" +
-                (productLayout === "grid-lg" ? " active" : "")
-              }
-              onClick={() => setProductLayout("grid-lg")}
+            />{" "}
+            <ToggleButtonGroup
+              value={productLayout}
+              exclusive
+              onChange={(e, newLayout) => setProductLayout(newLayout)}
+              aria-label="text alignment"
             >
-              <BsFillGridFill />
-            </button>
-            <button
-              className={
-                "secondary-button pure-button" +
-                (productLayout === "grid-sm" ? " active" : "")
-              }
-              onClick={() => setProductLayout("grid-sm")}
-            >
-              <BsGrid3X3GapFill />
-            </button>
-            <button
-              className={
-                "secondary-button pure-button" +
-                (productLayout === "list" ? " active" : "")
-              }
-              onClick={() => setProductLayout("list")}
-            >
-              <FaThList />
-            </button>
+              <ToggleButton value="grid-lg" aria-label="grid large">
+                <BsFillGridFill />
+              </ToggleButton>
+              <ToggleButton value="grid-sm" aria-label="grid large">
+                <BsGrid3X3GapFill />
+              </ToggleButton>
+              <ToggleButton value="list" aria-label="grid large">
+                <FaThList />
+              </ToggleButton>
+            </ToggleButtonGroup>
           </div>
         </div>
 

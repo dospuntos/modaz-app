@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  RiDashboardLine,
-  RiBarcodeBoxLine,
-  RiShoppingCartLine,
-} from "react-icons/ri";
-import { FaBoxOpen, FaUsers } from "react-icons/fa";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import StoreIcon from "@material-ui/icons/Store";
+import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import Badge from "@material-ui/core/Badge";
+import { FaBoxOpen } from "react-icons/fa";
 import Cart from "modules/cart/Cart";
-import pkg from "../../package.json";
 import { getStatistics } from "api/statisticsApi";
 
 function SidebarMenu({
@@ -26,91 +30,69 @@ function SidebarMenu({
   }, []);
 
   return (
-    <div id="nav" className="pure-u">
-      <a href="#/" className="nav-menu-button">
-        Menu
-      </a>
-
-      <div className="nav-inner">
+    <div>
+      <List>
         <Cart
           cart={cart}
           handleEmptyCart={handleEmptyCart}
           handleVariantCountChange={handleVariantCountChange}
           handleDeleteCartItem={handleDeleteCartItem}
         />
-        <button className="primary-button pure-button">Moda Z Admin</button>
-
-        <div className="pure-menu">
-          <ul className="pure-menu-list">
-            <li className="pure-menu-item">
-              <NavLink to="/" className="pure-menu-link">
-                <RiDashboardLine /> Dashboard
-              </NavLink>
-            </li>
-            <li className="pure-menu-item">
-              <NavLink to="/products" className="pure-menu-link">
-                <RiBarcodeBoxLine /> Productos{" "}
-                <span className="email-count">({statistics.products})</span>
-              </NavLink>
-            </li>
-            <li className="pure-menu-item">
-              <NavLink to="/orders" className="pure-menu-link">
-                <RiShoppingCartLine /> Pedidos
-                <span className="email-count">({statistics.orders})</span>
-              </NavLink>
-            </li>
-            <li className="pure-menu-item">
-              <NavLink to="/stock" className="pure-menu-link">
-                <FaBoxOpen /> Stock
-                <span className="email-count">
-                  ({statistics.products}/{statistics.variants})
-                </span>
-              </NavLink>
-            </li>
-            <li className="pure-menu-item">
-              <NavLink to="/users" className="pure-menu-link">
-                <FaUsers /> Usuarios
-                <span className="email-count">({statistics.users})</span>
-              </NavLink>
-            </li>
-            <li className="pure-menu-item">
-              <a href="#/" className="pure-menu-link">
-                Trash
-              </a>
-            </li>
-            {/*  <li className="pure-menu-heading">Labels</li>
-            <li className="pure-menu-item">
-              <a href="#/" className="pure-menu-link">
-                <span className="email-label-personal"></span>Personal
-              </a>
-            </li>
-            <li className="pure-menu-item">
-              <a href="#/" className="pure-menu-link">
-                <span className="email-label-work"></span>Work
-              </a>
-            </li>
-            <li className="pure-menu-item">
-              <a href="#/" className="pure-menu-link">
-                <span className="email-label-travel"></span>Travel
-              </a>
-            </li> */}
-          </ul>
-        </div>
-      </div>
-      <div className="version">
-        <a href="https://modaz.net" target="_blank" rel="noopener noreferrer">
-          <img src="/img/admin-logo.png" alt="Moda Z App" />
-        </a>
-        <br />
-        <small>
-          Version: {pkg.version}{" "}
-          <strong>{process.env.NODE_ENV.substring(0, 3)}</strong>
-          <br />
-          <a href="/" onClick={() => localStorage.removeItem("loggedIn")}>
-            Salir
-          </a>
-        </small>
-      </div>
+      </List>
+      <Divider />
+      <List>
+        <NavLink to="/">
+          <ListItem button>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/products">
+          <ListItem button>
+            <ListItemIcon>
+              <Badge
+                badgeContent={statistics.products}
+                max={999}
+                color="primary"
+              >
+                <StoreIcon />
+              </Badge>
+            </ListItemIcon>
+            <ListItemText primary="Productos" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/orders">
+          <ListItem button>
+            <ListItemIcon>
+              <Badge badgeContent={statistics.orders} color="secondary">
+                <ShoppingBasket />
+              </Badge>
+            </ListItemIcon>
+            <ListItemText primary="Pedidos" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/stock">
+          <ListItem button>
+            <ListItemIcon>
+              <FaBoxOpen />
+            </ListItemIcon>
+            <ListItemText primary="Stock" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/users">
+          <ListItem button>
+            <ListItemIcon>
+              <Badge badgeContent={statistics.users} color="secondary">
+                <PeopleAltIcon />
+              </Badge>
+            </ListItemIcon>
+            <ListItemText primary="Usuarios" />
+          </ListItem>
+        </NavLink>
+      </List>
+      <Divider />
     </div>
   );
 }

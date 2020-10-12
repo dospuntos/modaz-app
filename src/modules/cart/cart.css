@@ -15,7 +15,7 @@
   box-shadow   : 1px 1px 1px #fff;
   cursor       : pointer;
   transition   : all 0.4s ease-in-out;
-  color        : #fff;
+  color        : rgb(37, 37, 37);
   z-index      : 10;
 }
 

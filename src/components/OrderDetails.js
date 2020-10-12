@@ -2,13 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useStickyState } from "hooks";
 import {
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+} from "@material-ui/core";
+import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
+import {
   getOrderById,
   deleteOrderItem,
   addOrderItem,
   saveOrderItem,
   changeOrderState,
 } from "api/orderApi";
-import { BsGrid3X3GapFill, BsGearFill } from "react-icons/bs";
+import { BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { getProducts } from "api/productApi";
 import OrderDetailsList from "modules/orders/OrderDetailsList";
@@ -123,53 +133,47 @@ function OrderDetails() {
             </p>
           </div>
           <div className="pure-u-1-4">
-            <button
-              className={
-                "primary-button pure-button" + (showTools ? " active" : "")
-              }
-              onClick={() => setShowTools(!showTools)}
-            >
-              <BsGearFill />
-            </button>
-            <button
-              className={
-                "secondary-button pure-button" +
-                (view === "list" ? " active" : "")
-              }
-              onClick={() => setView("list")}
-            >
-              <FaThList />
-            </button>
-            <button
-              className={
-                "secondary-button pure-button" +
-                (view === "quote" ? " active" : "")
-              }
-              onClick={() => setView("quote")}
-            >
-              <BsGrid3X3GapFill />
-            </button>
-            {view === "quote" && (
-              <button
-                className="pure-button primary-button"
-                onClick={() => {
-                  window.print();
-                }}
+            <FormGroup row>
+              <ToggleButtonGroup
+                value={view}
+                exclusive
+                onChange={(e, newView) => setView(newView)}
+                aria-label="layout"
               >
-                Imprimir
-              </button>
-            )}
-            <select
-              value={order.order_state}
-              onChange={(e) => updateOrderState(e)}
-            >
-              <option value="0">Cotización</option>
-              <option value="1">Para cotizar</option>
-              <option value="2">Cotizado</option>
-              <option value="3">Confirmado</option>
-              <option value="4">Entregado (pago pendiente)</option>
-              <option value="5">Entregado</option>
-            </select>
+                <ToggleButton value="list">
+                  <FaThList />
+                </ToggleButton>
+                <ToggleButton value="quote">
+                  <BsGrid3X3GapFill />
+                </ToggleButton>
+              </ToggleButtonGroup>
+
+              <FormControl>
+                <InputLabel>Estado</InputLabel>
+                <Select
+                  value={order.order_state ? order.order_state : 0}
+                  onChange={(e) => updateOrderState(e)}
+                >
+                  <MenuItem value="0">Cotización</MenuItem>
+                  <MenuItem value="1">Para cotizar</MenuItem>
+                  <MenuItem value="2">Cotizado</MenuItem>
+                  <MenuItem value="3">Confirmado</MenuItem>
+                  <MenuItem value="4">Entregado (pago pendiente)</MenuItem>
+                  <MenuItem value="5">Entregado</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={showTools}
+                    onChange={() => setShowTools(!showTools)}
+                    name="checkedA"
+                  />
+                }
+                label="Ajustes"
+                labelPlacement="start"
+              />
+            </FormGroup>
           </div>
           {showTools && (
             <div className="pure-u-1">
@@ -209,9 +213,8 @@ function OrderDetails() {
                   setConfig({ ...config, comment: e.target.value })
                 }
                 placeholder="Comentario/nota"
-              >
-                {config.comment}
-              </textarea>
+                value={config.comment}
+              />
             </div>
           )}
         </div>
