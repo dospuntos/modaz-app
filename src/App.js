@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
 export default function App() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useStickyState(false, "menuOpen");
 
   const [cart, setCart] = useStickyState([], "cart");
   const [loggedIn, setLoggedIn] = useStickyState(false, "loggedIn");

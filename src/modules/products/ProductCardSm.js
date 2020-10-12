@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./productcardsm.css";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
 
 function ProductCardSm({ product, handleAddItem }) {
-  const [clicked, setClicked] = useState(false);
-
   const bgimg =
     product.images !== "0"
       ? process.env.REACT_APP_PROD_IMG_URL + product.images
@@ -21,7 +19,7 @@ function ProductCardSm({ product, handleAddItem }) {
               "#fff url(" + bgimg + ") center center /cover no-repeat",
           }}
         ></div>
-        <div className={clicked ? "bottom clicked" : "bottom"}>
+        <div className="bottom">
           <div className="left">
             <div className="details">
               <h4>{product.name}</h4>
@@ -46,7 +44,7 @@ function ProductCardSm({ product, handleAddItem }) {
                         ""
                       ) : (
                         <IconButton
-                          color="success"
+                          color="secondary"
                           noWrap
                           aria-label="add to shopping cart"
                           onClick={() => {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";
-import { RiDeleteBin5Line } from "react-icons/ri";
 /* import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete"; */
 import "./cart.css";
@@ -10,7 +9,7 @@ import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import Delete from "@material-ui/icons/Delete";
 import Badge from "@material-ui/core/Badge";
 
-function Cart({
+export default function Cart({
   cart,
   handleEmptyCart,
   handleVariantCountChange,
@@ -43,7 +42,7 @@ function Cart({
         <div className="cart-dropdown">
           <span className="empty-cart" onClick={handleEmptyCart}>
             <Delete
-              color={"red"}
+              color={"error"}
               style={{ position: "absolute", top: "15px", right: "5px" }}
             />
           </span>
@@ -68,8 +67,8 @@ function Cart({
                         value={item.order_item_quantity}
                         onChange={(e) => handleVariantCountChange(e, item.vid)}
                       />
-                      <RiDeleteBin5Line
-                        color="red"
+                      <ShoppingCart
+                        color="primary"
                         style={{ float: "right" }}
                         onClick={() => handleDeleteCartItem(item.vid)}
                       />
@@ -129,5 +128,3 @@ function Cart({
     </div>
   );
 }
-
-export default Cart;

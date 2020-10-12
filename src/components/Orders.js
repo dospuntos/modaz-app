@@ -3,6 +3,17 @@ import { getOrders } from "api/orderApi";
 import OrderListItem from "modules/orders/OrderListItem";
 import { getUsers } from "api/usersApi";
 import { getProducts } from "api/productApi";
+import {
+  TextField,
+  Select,
+  FormControl,
+  FormGroup,
+  InputLabel,
+  MenuItem,
+  IconButton,
+} from "@material-ui/core";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 function Orders() {
   const [searchText, setSearchText] = useState("");
@@ -72,27 +83,40 @@ function Orders() {
           </div>
 
           <div className="email-content-controls pure-u-1-2">
-            <select
-              value={orderBy}
-              onChange={(e) => setOrderBy(e.target.value)}
-            >
-              <option value="id">ID</option>
-              <option value="order_state">Estado de pedido</option>
-              <option value="create_date">Fecha</option>
-            </select>
-            <span
-              className="pure-button secondary-button"
-              onClick={() => setOrderDir(orderDir === "asc" ? "desc" : "asc")}
-            >
-              {orderDir}
-            </span>
-            <input
-              className="pure-input-1"
-              type="text"
-              placeholder="Buscar pedido"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
+            <FormGroup row>
+              <FormControl>
+                <InputLabel>Ordenar por</InputLabel>
+                <Select
+                  value={orderBy}
+                  onChange={(e) => setOrderBy(e.target.value)}
+                >
+                  <MenuItem value="id">ID</MenuItem>
+                  <MenuItem value="order_state">Estado de pedido</MenuItem>
+                  <MenuItem value="create_date">Fecha</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl>
+                <IconButton
+                  aria-label="sort order"
+                  onClick={() =>
+                    setOrderDir(orderDir === "asc" ? "desc" : "asc")
+                  }
+                >
+                  {orderDir === "asc" ? (
+                    <ArrowUpwardIcon />
+                  ) : (
+                    <ArrowDownwardIcon />
+                  )}
+                </IconButton>
+              </FormControl>
+
+              <TextField
+                label="Buscar pedido"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+            </FormGroup>
           </div>
         </div>
 
