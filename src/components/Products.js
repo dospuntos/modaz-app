@@ -120,12 +120,14 @@ function Products(props) {
   let filteredProducts = products;
 
   /* Filter by search */
-  filteredProducts = filteredProducts.filter((eachItem) => {
-    return (
-      eachItem["name"].toLowerCase().includes(searchText.toLowerCase()) ||
-      eachItem["season"].toLowerCase().includes(searchText.toLowerCase())
-    );
-  });
+  if (searchText.length > 2) {
+    filteredProducts = filteredProducts.filter((eachItem) => {
+      return (
+        eachItem["name"].toLowerCase().includes(searchText.toLowerCase()) ||
+        eachItem["season"].toLowerCase().includes(searchText.toLowerCase())
+      );
+    });
+  }
 
   /* Filter by size */
   if (sizeFilter !== "all") {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getUsers } from "api/usersApi";
 import UserListItem from "modules/UserListItem";
+import { TextField, InputAdornment } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 function Users() {
   const [searchText, setSearchText] = useState("");
@@ -36,12 +38,11 @@ function Users() {
           </div>
 
           <div className="email-content-controls pure-u-1-2">
-            <input
-              className="pure-input-1"
-              type="text"
-              placeholder="Buscar usuario"
+            <TextField
+              label="Buscar usuario"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
+              variant="outlined"
             />
           </div>
         </div>
