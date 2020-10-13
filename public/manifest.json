@@ -1,5 +1,5 @@
 {
-  "short_name": "Moda Z",
+  "short_name": "Moda Z App",
   "name": "Moda Z Product Management App",
   "icons": [
     {
@@ -18,7 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
