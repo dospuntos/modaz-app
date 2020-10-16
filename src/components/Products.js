@@ -14,6 +14,7 @@ import {
   togglePublished,
   toggleFeatured,
   deleteProduct,
+  getCategories,
 } from "api/productApi";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -34,11 +35,18 @@ function Products(props) {
   );
   const [searchText, setSearchText] = useState("");
   const [sizeFilter, setSizeFilter] = useStickyState("all", "sizeFilter");
+  const [categories, setCategories] = useState([]);
+  const [catFilter, setCatFilter] = useStickyState("all", "catFilter");
 
   useEffect(() => {
     // Get products
     getProducts().then((products) => {
       setProducts(products);
+    });
+
+    // Get categories
+    getCategories().then((categories) => {
+      setCategories(categories);
     });
   }, []);
 
@@ -154,6 +162,13 @@ function Products(props) {
     });
   }
 
+  /* Filter by category  */
+  if (catFilter !== "all") {
+    filteredProducts = filteredProducts.filter((eachItem) => {
+      return eachItem.category.includes(catFilter);
+    });
+  }
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -180,6 +195,22 @@ function Products(props) {
                 <MenuItem value="l">L</MenuItem>
                 <MenuItem value="xl">XL</MenuItem>
                 <MenuItem value="xxl">XXL</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl>
+              <InputLabel>Categoría</InputLabel>
+              <Select
+                value={catFilter}
+                onChange={(e) => setCatFilter(e.target.value)}
+              >
+                <MenuItem value="all">Todos</MenuItem>
+                {categories.map((cat) => {
+                  return (
+                    <MenuItem value={cat.id}>
+                      {cat.title} ({cat.path})
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
             <FormControl>
