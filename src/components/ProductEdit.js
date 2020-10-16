@@ -6,10 +6,12 @@ import {
   saveVariant,
   saveProduct,
   deleteVariant,
+  getCategories,
 } from "api/productApi";
 import { RiSave2Line, RiArrowLeftSLine } from "react-icons/ri";
 import TextInput from "modules/form/TextInput";
 import ProductVariant from "modules/products/ProductVariant";
+import Categories from "modules/products/Categories";
 
 function ProductEdit(props) {
   const [product, setProduct] = useState([
@@ -19,6 +21,7 @@ function ProductEdit(props) {
       images: "0",
       order_date: "",
       release_date: "",
+      category: "",
       season: "",
       wholesaleprice: "",
       msrp: "",
@@ -33,20 +36,26 @@ function ProductEdit(props) {
   ]);
 
   const [edited, setEdited] = useState(false);
-
   const [variants, setVariants] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   let { productid } = useParams();
 
   useEffect(() => {
-    // Get products
+    // Get products and split category list to array
     getProductById(productid).then((product) => {
-      setProduct(product);
+      setProduct({ ...product, category: product.category.split(",") });
     });
 
     // Get variants
     getVariantsById(productid).then((variants) => {
       setVariants(variants);
+    });
+
+    // Get categories
+    getCategories().then((categories) => {
+      setCategories(categories);
+      console.log(categories);
     });
   }, [productid]);
 
@@ -74,7 +83,12 @@ function ProductEdit(props) {
   }
 
   function handleProductSave() {
-    saveProduct(product).then(setEdited(false));
+    //saveProduct(product).then(setEdited(false));
+    let _product = product;
+    saveProduct({
+      ...product,
+      category: _product.category.join(","),
+    }).then(setEdited(false));
   }
 
   function addVariant(e) {
@@ -90,7 +104,7 @@ function ProductEdit(props) {
         stock: "0",
       },
     ];
-    saveVariant({ ...newVariant }).then((result) => {
+    saveVariant({ ...newVariant }).then(() => {
       getVariantsById(productid).then((variants) => {
         setVariants(variants);
       });
@@ -106,6 +120,11 @@ function ProductEdit(props) {
       let _variants = variants.filter((v) => v.id !== id);
       setVariants(_variants);
     }
+  }
+
+  function handleCategoryChange(value) {
+    setProduct({ ...product, category: value });
+    setEdited(true);
   }
 
   return (
@@ -183,18 +202,17 @@ function ProductEdit(props) {
                 <p>
                   <small>(Los cambios se guardan immediatamente)</small>
                 </p>
-                {variants !== undefined &&
-                  variants.map((item) => {
-                    return (
-                      <ProductVariant
-                        key={item.id}
-                        item={item}
-                        handleVariantChange={handleVariantChange}
-                        handleVariantSave={handleVariantSave}
-                        handleVariantDelete={handleVariantDelete}
-                      />
-                    );
-                  })}
+                {variants.map((item) => {
+                  return (
+                    <ProductVariant
+                      key={item.id}
+                      item={item}
+                      handleVariantChange={handleVariantChange}
+                      handleVariantSave={handleVariantSave}
+                      handleVariantDelete={handleVariantDelete}
+                    />
+                  );
+                })}
                 <button
                   className="pure-button primary-button"
                   onClick={addVariant}
@@ -203,6 +221,11 @@ function ProductEdit(props) {
                 </button>
               </div>
               <div className="pure-u-1 pure-u-md-1-4">
+                <Categories
+                  categories={categories}
+                  prodCats={product.category || []}
+                  handleChange={handleCategoryChange}
+                />
                 <img
                   src={
                     product.images !== "0"

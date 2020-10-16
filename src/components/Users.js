@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUsers } from "api/usersApi";
 import UserListItem from "modules/UserListItem";
-import { TextField, InputAdornment } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+import { TextField } from "@material-ui/core";
 
 function Users() {
   const [searchText, setSearchText] = useState("");

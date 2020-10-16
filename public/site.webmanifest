@@ -1,7 +1,12 @@
 {
-    "name": "Moda Z App",
+    "name": "Moda Z Product Management App",
     "short_name": "Moda Z App",
     "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+          },
         {
             "src": "/android-chrome-192x192.png",
             "sizes": "192x192",
@@ -13,6 +18,7 @@
             "type": "image/png"
         }
     ],
+    "start_url": ".",
     "theme_color": "#e5529c",
     "background_color": "#e5529c",
     "display": "standalone"

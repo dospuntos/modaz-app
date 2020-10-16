@@ -118,6 +118,12 @@ export function resetStock() {
     .catch(handleError);
 }
 
+export function getCategories() {
+  return fetch(process.env.REACT_APP_API_URL + "getcategories.php")
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 /* Additional functions to be updated 
 export function saveCourse(course) {
   return fetch(baseUrl + (course.id || ""), {
