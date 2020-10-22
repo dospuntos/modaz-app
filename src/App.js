@@ -145,7 +145,7 @@ export default function App() {
       <div className={classes.root}>
         <ScrollToTop />
         <ToastContainer
-          autoClose={3000}
+          autoClose={2000}
           hideProgressBar
           position="bottom-right"
         />
@@ -237,7 +237,12 @@ export default function App() {
             />
             <Route path="/orders/:orderid" component={OrderDetails} />
             <Route path="/orders" component={Orders} />
-            <Route path="/stock" component={Stock} />
+            <Route
+              path="/stock"
+              render={(props) => (
+                <Stock {...props} handleAddItem={handleAddItem} />
+              )}
+            />
             <Route path="/users/:userid" component={Users} />
             <Route path="/users" component={Users} />
             <Route path="/login" component={Login} />

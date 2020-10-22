@@ -4,8 +4,9 @@ import Add from "modules/stock/Add";
 import Remove from "modules/stock/Remove";
 import Consult from "modules/stock/Consult";
 import Tools from "modules/stock/Tools";
+import AddToCart from "modules/stock/AddToCart";
 
-function Stock() {
+function Stock({ handleAddItem }) {
   const [tab, setTab] = useStickyState("add", "tab");
   return (
     <div id="main" className="pure-u-1">
@@ -55,6 +56,15 @@ function Stock() {
             >
               Herramientas
             </button>
+            <button
+              className={
+                "secondary-button pure-button" +
+                (tab === "cart" ? " active" : "")
+              }
+              onClick={() => setTab("cart")}
+            >
+              Add to cart
+            </button>
           </div>
         </div>
 
@@ -62,6 +72,7 @@ function Stock() {
           {tab === "add" && <Add />}
           {tab === "consult" && <Consult />}
           {tab === "remove" && <Remove />}
+          {tab === "cart" && <AddToCart handleAddItem={handleAddItem} />}
           {tab === "tools" && <Tools />}
         </div>
       </div>
