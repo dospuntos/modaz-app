@@ -60,7 +60,7 @@ function ProductCardLg({
                 />
               </span>
               <span onClick={() => changePublishedState(product.id)}>
-                {product.state ? (
+                {String(product.state) === "1" ? (
                   <RiCheckboxCircleLine color="green" />
                 ) : (
                   <RiCloseLine color="red" />

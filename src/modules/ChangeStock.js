@@ -13,7 +13,7 @@ function ChangeStock(props) {
     <span className="change-stock pull-right">
       <span className="less">
         <FaMinusCircle
-          color="white"
+          color="grey"
           onClick={() => handleChangeStock(props.variantId, 0, props.productId)}
         />
       </span>

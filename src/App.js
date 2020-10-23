@@ -29,8 +29,21 @@ import SidebarMenu from "./components/SidebarMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import pkg from "../package.json";
+import { createMuiTheme } from "@material-ui/core/styles";
+import purple from "@material-ui/core/colors/purple";
 
 const drawerWidth = 240;
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: "#f44336",
+    },
+  },
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,7 +109,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function App() {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = useStickyState(false, "menuOpen");
 
   const [cart, setCart] = useStickyState([], "cart");

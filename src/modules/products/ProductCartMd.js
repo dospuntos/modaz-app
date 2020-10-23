@@ -10,19 +10,26 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
+import { green, grey } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
+import EditIcon from "@material-ui/icons/Edit";
+import Delete from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { Link } from "react-router-dom";
+import ChangeStock from "modules/ChangeStock";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: "32%",
     maxWidth: 345,
+    float: "left",
+    margin: ".5%",
   },
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "84%", // 16:9
   },
   expand: {
     transform: "rotate(0deg)",
@@ -31,15 +38,30 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.shortest,
     }),
   },
+  subheader: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
   expandOpen: {
     transform: "rotate(180deg)",
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: green[500],
+  },
+  avatar2: {
+    backgroundColor: grey[200],
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function ProductCardMd({
+  product,
+  updateStockInState,
+  handleAddItem,
+  changePublishedState,
+  changeFeaturedState,
+  deleteProduct,
+}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -47,12 +69,21 @@ export default function RecipeReviewCard() {
     setExpanded(!expanded);
   };
 
+  const bgimg =
+    product.images !== "0"
+      ? process.env.REACT_APP_PROD_IMG_URL + product.images
+      : process.env.REACT_APP_DEFAULT_IMG_URL;
+
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+          <Avatar
+            aria-label="recipe"
+            className={product.state === "1" ? classes.avatar : classes.avatar2}
+            onClick={() => changePublishedState(product.id)}
+          >
+            {product.totalstock}
           </Avatar>
         }
         action={
@@ -60,28 +91,69 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={product.name}
+        subheader={"Bs. " + product.price + " (ZIN: " + product.zinprice + ")"}
+        className={classes.subheader}
       />
-      <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      />
+      <CardMedia className={classes.media} image={bgimg} title={product.name} />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        {/* <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the
           mussels, if you like.
-        </Typography>
+        </Typography> */}
+        {product.variants.map((variant, index) => {
+          return (
+            <table>
+              <tr key={index}>
+                <td colSpan="2" key={index}>
+                  {variant.size} - {variant.color} ({variant.stock}){" "}
+                  {variant.stock < 1 ? (
+                    ""
+                  ) : (
+                    <span
+                      className="pure-button pure-button-cart-sm"
+                      onClick={() => {
+                        // Add product name to variant object (for cart display)
+                        variant["name"] = product.name;
+                        variant["price"] = product.price;
+                        variant["order_item_quantity"] = "1";
+                        // Add to cart
+                        handleAddItem(variant);
+                      }}
+                    >
+                      <AddShoppingCartIcon />
+                    </span>
+                  )}
+                  <ChangeStock
+                    variantId={variant.vid}
+                    productId={variant.product_id}
+                    updateStockInState={updateStockInState}
+                  />
+                </td>
+              </tr>
+            </table>
+          );
+        })}
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon
+            color={parseInt(product.featured) === 1 ? "secondary" : ""}
+            onClick={() => changeFeaturedState(product.id)}
+          />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton
+          aria-label="delete"
+          onClick={() => deleteProduct(product.id)}
+        >
+          <Delete />
         </IconButton>
+        <Link to={"products/" + product.id}>
+          <IconButton aria-label="edit">
+            <EditIcon />
+          </IconButton>
+        </Link>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import ProductCardLg from "modules/products/ProductCardLg";
+import ProductCardMd from "modules/products/ProductCartMd";
 import ProductCardSm from "modules/products/ProductCardSm";
 import ProductList from "modules/products/ProductList";
 import ToggleButton from "@material-ui/lab/ToggleButton";
@@ -249,10 +250,13 @@ function Products(props) {
               <ToggleButton value="grid-lg" aria-label="grid large">
                 <BsFillGridFill />
               </ToggleButton>
-              <ToggleButton value="grid-sm" aria-label="grid large">
+              <ToggleButton value="grid-md" aria-label="grid medium">
+                <BsFillGridFill />
+              </ToggleButton>
+              <ToggleButton value="grid-sm" aria-label="grid small">
                 <BsGrid3X3GapFill />
               </ToggleButton>
-              <ToggleButton value="list" aria-label="grid large">
+              <ToggleButton value="list" aria-label="list">
                 <FaThList />
               </ToggleButton>
             </ToggleButtonGroup>
@@ -268,6 +272,18 @@ function Products(props) {
               case "grid-lg":
                 return (
                   <ProductCardLg
+                    key={index}
+                    product={product}
+                    updateStockInState={updateStockInState}
+                    handleAddItem={props.handleAddItem}
+                    changePublishedState={changePublishedState}
+                    changeFeaturedState={changeFeaturedState}
+                    deleteProduct={handleDeleteProduct}
+                  />
+                );
+              case "grid-md":
+                return (
+                  <ProductCardMd
                     key={index}
                     product={product}
                     updateStockInState={updateStockInState}
