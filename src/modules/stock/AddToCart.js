@@ -14,15 +14,11 @@ function AddToCart({ handleAddItem }) {
     e.preventDefault();
     searchUPC(upc).then((result) => {
       if (result.length) {
-        // Add product name to variant object (for cart display)
-        /* result["name"] = result[0].name; */
-        /* result["price"] = result[0].price; */
         result[0]["order_item_quantity"] = "1";
         // Add to cart
         handleAddItem(result[0]);
 
-        setResult(result[0]);
-        toast.info("Producto agregado al carrito");
+        setResult(result);
       } else {
         setResult({});
         toast.warning("Producto NO encontrado");

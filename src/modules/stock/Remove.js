@@ -47,6 +47,17 @@ function Remove() {
           onChange={(e) => setUpc(e.target.value)}
         />
       </form>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={createOrder}
+            onChange={() => setCreateOrder(!createOrder)}
+            name="createOrder"
+            color="primary"
+          />
+        }
+        label="Crear pedido"
+      />
       {result.length ? (
         <div className="result pure-g">
           <div className="pure-u-1 pure-u-sm-2-3">
@@ -89,25 +100,6 @@ function Remove() {
       ) : (
         <p>Producto no encontrado.</p>
       )}
-      {/* <button
-        className={
-          "secondary-button pure-button" + (createOrder ? " active" : "")
-        }
-        onClick={() => setCreateOrder(!createOrder)}
-      >
-        Crear pedido
-      </button> */}
-      <FormControlLabel
-        control={
-          <Switch
-            checked={createOrder}
-            onChange={() => setCreateOrder(!createOrder)}
-            name="createOrder"
-            color="primary"
-          />
-        }
-        label="Crear pedido (no implementado)"
-      />
     </div>
   );
 }

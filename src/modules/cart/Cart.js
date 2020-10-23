@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";
-/* import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete"; */
 import "./cart.css";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import Delete from "@material-ui/icons/Delete";
@@ -67,7 +65,7 @@ export default function Cart({
                         value={item.order_item_quantity}
                         onChange={(e) => handleVariantCountChange(e, item.vid)}
                       />
-                      <ShoppingCart
+                      <Delete
                         color="primary"
                         style={{ float: "right" }}
                         onClick={() => handleDeleteCartItem(item.vid)}
@@ -76,17 +74,7 @@ export default function Cart({
                   );
                 })}
               </ul>
-              {/* <Autocomplete
-                id="combo-box-demo"
-                options={users}
-                value={cartUser}
-                onChange={(e, newValue) => setCartUser(newValue)}
-                getOptionLabel={(user) => user.name}
-                style={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Combo box" variant="outlined" />
-                )}
-              /> */}
+
               <select
                 value={cartUser}
                 onChange={(e) => setCartUser(e.target.value)}
@@ -106,7 +94,7 @@ export default function Cart({
               {cartUser === "0" ? (
                 ""
               ) : (
-                <>
+                <p>
                   <button
                     className="pure-button primary-button pure-button-create-order"
                     onClick={() => saveCart(cart, cartUser, "order")}
@@ -119,7 +107,7 @@ export default function Cart({
                   >
                     Cotización
                   </button>
-                </>
+                </p>
               )}
             </>
           )}
