@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { searchUPC } from "api/productApi";
 import PriceDisplay from "modules/PriceDisplay";
-import { changeStock } from "api/productApi";
 import { toast } from "react-toastify";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 
 function AddToCart({ handleAddItem }) {
   const [upc, setUpc] = useState("");

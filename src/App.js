@@ -1,7 +1,7 @@
 import React from "react";
 
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -29,21 +29,8 @@ import SidebarMenu from "./components/SidebarMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import pkg from "../package.json";
-import { createMuiTheme } from "@material-ui/core/styles";
-import purple from "@material-ui/core/colors/purple";
 
 const drawerWidth = 240;
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: "#f44336",
-    },
-  },
-});
 
 const useStyles = makeStyles((theme) => ({
   root: {
