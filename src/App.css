@@ -564,9 +564,8 @@ increase left & right margins a bit**/
 }
 
 @media print {
-
   #nav,
-  .email-content-header {
-    display: none;
+  .email-content-header, .MuiAppBar-root, .MuiDrawer-root {
+    display: none!important;
   }
 }

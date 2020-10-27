@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useStickyState } from "hooks";
 import { getOrders } from "api/orderApi";
 import OrderListItem from "modules/orders/OrderListItem";
 import { getUsers } from "api/usersApi";
@@ -20,7 +21,7 @@ function Orders() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
-  const [orderBy, setOrderBy] = useState("id");
+  const [orderBy, setOrderBy] = useStickyState("id", "ordersOrderDir");
   const [orderDir, setOrderDir] = useState("desc");
 
   useEffect(() => {

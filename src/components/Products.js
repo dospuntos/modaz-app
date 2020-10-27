@@ -23,7 +23,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 
-function Products(props) {
+export default function Products(props) {
   const [products, setProducts] = useState([]);
   const [productLayout, setProductLayout] = useStickyState(
     "grid-lg",
@@ -318,5 +318,3 @@ function Products(props) {
     </div>
   );
 }
-
-export default Products;

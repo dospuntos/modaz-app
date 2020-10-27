@@ -105,10 +105,19 @@ function Dashboard() {
                     <li>Create product</li>
                     <li>Duplicate product (and create an empty variant)</li>
                     <li>Add filtered items to cart (empty cart first?)</li>
-                    <li>Handle categories</li>
-                    <li>Filter by category</li>
                     <li>Support multiple images (JSON-encode images)</li>
-                    <li>Implement material-ui</li>
+                    <li>
+                      Fix editing and deleting items with same name from cart
+                    </li>
+                    <li>
+                      <s>Handle categories</s>
+                    </li>
+                    <li>
+                      <s>Filter by category</s>
+                    </li>
+                    <li>
+                      <s>Implement material-ui</s>
+                    </li>
                     <li>
                       <s>Filter by product size</s>
                     </li>
