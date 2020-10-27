@@ -1,4 +1,3 @@
-import React from "react";
 import "./productcardsm.css";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";

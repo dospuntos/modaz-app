@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./productcardlg.css";
 import ChangeStock from "modules/ChangeStock";
 import { Link } from "react-router-dom";

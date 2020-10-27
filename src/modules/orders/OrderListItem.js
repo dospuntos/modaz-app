@@ -1,4 +1,3 @@
-import React from "react";
 import "./orderlistitem.css";
 import { Link } from "react-router-dom";
 import { TiClipboard } from "react-icons/ti";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
 
 function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {

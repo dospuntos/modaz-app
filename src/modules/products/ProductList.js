@@ -1,4 +1,3 @@
-import React from "react";
 import "./productlist.css";
 import ChangeStock from "modules/ChangeStock";
 import { RiShoppingCartLine } from "react-icons/ri";

@@ -1,4 +1,3 @@
-import React from "react";
 import { useStickyState } from "hooks";
 import Add from "modules/stock/Add";
 import Remove from "modules/stock/Remove";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useStickyState } from "hooks";
 
 function AddOrderItem({ products, handleSave, orderid }) {

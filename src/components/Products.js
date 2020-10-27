@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import _ from "lodash";
 import ProductCardLg from "modules/products/ProductCardLg";
 import ProductCardMd from "modules/products/ProductCartMd";

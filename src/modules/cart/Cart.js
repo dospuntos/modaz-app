@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";

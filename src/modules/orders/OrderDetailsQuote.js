@@ -1,5 +1,3 @@
-import React from "react";
-
 function OrderDetailsQuote({ item, config }) {
   const imgMaxWidth = config.showPrice ? 120 : 200;
   const img =

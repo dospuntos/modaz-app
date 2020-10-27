@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { resetStock } from "api/productApi";
 import MissingImages from "modules/stock/MissingImages";
 

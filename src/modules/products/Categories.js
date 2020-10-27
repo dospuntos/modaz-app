@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -48,12 +48,12 @@ function getStyles(name, personName, theme) {
 export default function Categories({ categories, prodCats, handleChange }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = useState([]);
   /* const handleChange = (event) => {
     setPersonName(event.target.value);
   }; */
 
-  React.useEffect(() => {
+  useEffect(() => {
     setPersonName(prodCats);
   }, [prodCats]);
 

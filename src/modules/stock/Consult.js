@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { searchUPC } from "api/productApi";
 import PriceDisplay from "modules/PriceDisplay";
 

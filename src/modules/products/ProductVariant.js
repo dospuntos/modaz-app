@@ -1,4 +1,3 @@
-import React from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 function ProductVariant({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useStickyState } from "hooks";
 import { getOrders } from "api/orderApi";
 import OrderListItem from "modules/orders/OrderListItem";
