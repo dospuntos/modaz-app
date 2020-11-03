@@ -44,7 +44,6 @@ function ProductCardSm({ product, handleAddItem }) {
                       ) : (
                         <IconButton
                           color="secondary"
-                          noWrap
                           aria-label="add to shopping cart"
                           onClick={() => {
                             // Add product name to variant object (for cart display)
@@ -55,10 +54,7 @@ function ProductCardSm({ product, handleAddItem }) {
                             handleAddItem(variant);
                           }}
                         >
-                          <AddShoppingCartOutlined
-                            style={{ fontSize: 14 }}
-                            noWrap
-                          />
+                          <AddShoppingCartOutlined style={{ fontSize: 14 }} />
                         </IconButton>
                       )}
                     </td>

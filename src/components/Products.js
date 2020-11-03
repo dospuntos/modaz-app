@@ -128,15 +128,21 @@ export default function Products(props) {
 
   let filteredProducts = products;
 
-  /* Filter by search */
-  if (searchText.length > 2) {
+  /* Filter by category  */
+  if (catFilter !== "all" && filteredProducts.length) {
     filteredProducts = filteredProducts.filter((eachItem) => {
-      return (
-        eachItem["name"].toLowerCase().includes(searchText.toLowerCase()) ||
-        eachItem["season"].toLowerCase().includes(searchText.toLowerCase())
-      );
+      return eachItem.category !== null
+        ? eachItem.category.includes(catFilter)
+        : false;
     });
   }
+
+  /* Filter by search */
+  filteredProducts = filteredProducts.filter(
+    (eachItem) =>
+      eachItem["name"].toLowerCase().includes(searchText.toLowerCase()) ||
+      eachItem["season"].toLowerCase().includes(searchText.toLowerCase())
+  );
 
   /* Filter by size */
   if (sizeFilter !== "all") {
@@ -147,27 +153,20 @@ export default function Products(props) {
 
   /* Filter by available stock */
   if (stockFilter !== "all") {
-    filteredProducts = filteredProducts.filter((eachItem) => {
-      return stockFilter === "1"
+    filteredProducts = filteredProducts.filter((eachItem) =>
+      stockFilter === "1"
         ? Number(eachItem["totalstock"]) > 0
-        : Number(eachItem["totalstock"]) < 1;
-    });
+        : Number(eachItem["totalstock"]) < 1
+    );
   }
 
   /* Filter by published state */
   if (publishedFilter !== "all") {
-    filteredProducts = filteredProducts.filter((eachItem) => {
-      return publishedFilter === "1"
+    filteredProducts = filteredProducts.filter((eachItem) =>
+      publishedFilter === "1"
         ? Number(eachItem["state"]) > 0
-        : Number(eachItem["state"]) < 1;
-    });
-  }
-
-  /* Filter by category  */
-  if (catFilter !== "all") {
-    filteredProducts = filteredProducts.filter((eachItem) => {
-      return eachItem.category.includes(catFilter);
-    });
+        : Number(eachItem["state"]) < 1
+    );
   }
 
   return (
@@ -177,8 +176,18 @@ export default function Products(props) {
           <div className="pure-u-1-3">
             <h1 className="email-content-title">Productos</h1>
             <p className="email-content-subtitle">
-              <span>Mostrando</span> {filteredProducts.length}/{products.length}{" "}
-              productos.
+              <span>Mostrando</span>{" "}
+              {filteredProducts.length < 100 ? filteredProducts.length : 100}/
+              {products.length} productos.
+              {filteredProducts.length > 100 && (
+                <>
+                  <br />
+                  <strong>
+                    {filteredProducts.length - 100} productos más coinciden con
+                    los filtros.
+                  </strong>
+                </>
+              )}
             </p>
           </div>
 
@@ -198,6 +207,17 @@ export default function Products(props) {
                 <MenuItem value="xxl">XXL</MenuItem>
               </Select>
             </FormControl>
+            {/* <select
+              value={catFilter}
+              onChange={(e) => setCatFilter(e.target.value)}
+            >
+              <option value="all">Todos</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.title}
+                </option>
+              ))}
+            </select> */}
             <FormControl>
               <InputLabel>Categoría</InputLabel>
               <Select
@@ -207,7 +227,7 @@ export default function Products(props) {
                 <MenuItem value="all">Todos</MenuItem>
                 {categories.map((cat) => {
                   return (
-                    <MenuItem value={cat.id}>
+                    <MenuItem key={cat.id} value={cat.id}>
                       {cat.title} ({cat.path})
                     </MenuItem>
                   );
@@ -267,12 +287,12 @@ export default function Products(props) {
           {!filteredProducts.length && (
             <h3>Ningún producto coincide con los filtros.</h3>
           )}
-          {filteredProducts.map((product, index) => {
+          {filteredProducts.slice(0, 100).map((product) => {
             switch (productLayout) {
               case "grid-lg":
                 return (
                   <ProductCardLg
-                    key={index}
+                    key={product.name}
                     product={product}
                     updateStockInState={updateStockInState}
                     handleAddItem={props.handleAddItem}
@@ -284,7 +304,7 @@ export default function Products(props) {
               case "grid-md":
                 return (
                   <ProductCardMd
-                    key={index}
+                    key={product.name}
                     product={product}
                     updateStockInState={updateStockInState}
                     handleAddItem={props.handleAddItem}
@@ -296,7 +316,7 @@ export default function Products(props) {
               case "grid-sm":
                 return (
                   <ProductCardSm
-                    key={index}
+                    key={product.name}
                     product={product}
                     updateStockInState={updateStockInState}
                     handleAddItem={props.handleAddItem}
@@ -305,7 +325,7 @@ export default function Products(props) {
               default:
                 return (
                   <ProductList
-                    key={index}
+                    key={product.name}
                     product={product}
                     updateStockInState={updateStockInState}
                     handleAddItem={props.handleAddItem}

@@ -83,14 +83,10 @@ function ProductCardLg({
         <div className="contents">
           <table>
             <tbody>
-              {product.variants.map((variant, index) => {
+              {product.variants.map((variant) => {
                 return (
-                  <tr key={index}>
-                    <td
-                      colSpan="2"
-                      key={index}
-                      style={{ borderBottom: "1px solid grey" }}
-                    >
+                  <tr key={variant.vid}>
+                    <td colSpan="2" style={{ borderBottom: "1px solid grey" }}>
                       {variant.size} - {variant.color} ({variant.stock}){" "}
                       {variant.stock < 1 ? (
                         ""
@@ -139,6 +135,16 @@ function ProductCardLg({
               <tr>
                 <td>Bs. {product.price}</td>
                 <td>Bs. {product.zinprice}</td>
+              </tr>
+              <tr>
+                <th>MSRP</th>
+                <th>Categorías</th>
+              </tr>
+              <tr>
+                <td>
+                  $ {product.msrp} (Bs. {Math.round(product.msrp * 6.96)})
+                </td>
+                <td>{typeof product.category}</td>
               </tr>
               <tr>
                 <th>Order Date</th>
