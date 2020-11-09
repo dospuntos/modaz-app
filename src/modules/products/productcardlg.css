@@ -81,7 +81,7 @@
 
 .wrapper .container .bottom .left .buy svg {
   font-size : 30px;
-  padding   : 30px;
+  margin   : 30px;
   color     : #254053;
   transition: transform 0.5s;
 }
@@ -132,7 +132,7 @@
 
 .wrapper .container .bottom .right .done svg {
   font-size: 30px;
-  padding  : 30px;
+  margin  : 30px;
   color    : white;
 }
 
@@ -156,7 +156,7 @@
 .wrapper .container .bottom .right .remove svg {
   transition: transform 0.5s;
   font-size : 30px;
-  padding   : 30px;
+  margin   : 30px;
   color     : white;
 }
 

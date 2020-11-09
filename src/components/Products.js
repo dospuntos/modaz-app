@@ -41,14 +41,10 @@ export default function Products(props) {
 
   useEffect(() => {
     // Get products
-    getProducts().then((products) => {
-      setProducts(products);
-    });
+    getProducts().then((products) => setProducts(products));
 
     // Get categories
-    getCategories().then((categories) => {
-      setCategories(categories);
-    });
+    getCategories().then((categories) => setCategories(categories));
   }, []);
 
   // Function to update stock in state object
@@ -130,11 +126,9 @@ export default function Products(props) {
 
   /* Filter by category  */
   if (catFilter !== "all" && filteredProducts.length) {
-    filteredProducts = filteredProducts.filter((eachItem) => {
-      return eachItem.category !== null
-        ? eachItem.category.includes(catFilter)
-        : false;
-    });
+    filteredProducts = filteredProducts.filter((eachItem) =>
+      eachItem.category !== null ? eachItem.category.includes(catFilter) : false
+    );
   }
 
   /* Filter by search */
@@ -180,13 +174,11 @@ export default function Products(props) {
               {filteredProducts.length < 100 ? filteredProducts.length : 100}/
               {products.length} productos.
               {filteredProducts.length > 100 && (
-                <>
+                <strong>
                   <br />
-                  <strong>
-                    {filteredProducts.length - 100} productos más coinciden con
-                    los filtros.
-                  </strong>
-                </>
+                  {filteredProducts.length - 100} productos más coinciden con
+                  los filtros.
+                </strong>
               )}
             </p>
           </div>
@@ -225,13 +217,11 @@ export default function Products(props) {
                 onChange={(e) => setCatFilter(e.target.value)}
               >
                 <MenuItem value="all">Todos</MenuItem>
-                {categories.map((cat) => {
-                  return (
-                    <MenuItem key={cat.id} value={cat.id}>
-                      {cat.title} ({cat.path})
-                    </MenuItem>
-                  );
-                })}
+                {categories.map((cat) => (
+                  <MenuItem key={cat.id} value={cat.id}>
+                    {cat.title} ({cat.path})
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
             <FormControl>

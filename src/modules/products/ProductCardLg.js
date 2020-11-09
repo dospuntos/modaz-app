@@ -144,14 +144,14 @@ function ProductCardLg({
                 <td>
                   $ {product.msrp} (Bs. {Math.round(product.msrp * 6.96)})
                 </td>
-                <td>{typeof product.category}</td>
+                <td>{product.category}</td>
               </tr>
               <tr>
                 <th>Order Date</th>
                 <th>Release Date</th>
               </tr>
               <tr>
-                <td>{product.order_date}</td>
+                <td>{product.orderdate}</td>
                 <td>{product.release_date}</td>
               </tr>
             </tbody>

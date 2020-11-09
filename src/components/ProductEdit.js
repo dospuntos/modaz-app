@@ -19,7 +19,7 @@ function ProductEdit(props) {
       id: "",
       name: "",
       images: "0",
-      order_date: "",
+      orderdate: "",
       release_date: "",
       category: "",
       season: "",
@@ -243,8 +243,8 @@ function ProductEdit(props) {
                 <TextInput
                   label="Order Date"
                   onChange={handleChange}
-                  name="order_date"
-                  value={product.order_date || ""}
+                  name="orderdate"
+                  value={product.orderdate || ""}
                 />
                 <TextInput
                   label="Release Date"
