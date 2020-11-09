@@ -38,14 +38,18 @@ export default function Products(props) {
   const [sizeFilter, setSizeFilter] = useStickyState("all", "sizeFilter");
   const [categories, setCategories] = useState([]);
   const [catFilter, setCatFilter] = useStickyState("all", "catFilter");
+  const [refreshProducts, setRefreshProducts] = useState(true);
 
   useEffect(() => {
     // Get products
-    getProducts().then((products) => setProducts(products));
+    console.log("Refreshing product list");
+    getProducts().then((products) => {
+      setProducts(products);
+    });
 
     // Get categories
     getCategories().then((categories) => setCategories(categories));
-  }, []);
+  }, [refreshProducts]);
 
   // Function to update stock in state object
   // ToDo: might need some cleanup!!
@@ -120,6 +124,10 @@ export default function Products(props) {
 
       toast.info("Producto eliminado.");
     }
+  }
+
+  function forceProductRefresh() {
+    setRefreshProducts(!refreshProducts);
   }
 
   let filteredProducts = products;
@@ -199,17 +207,6 @@ export default function Products(props) {
                 <MenuItem value="xxl">XXL</MenuItem>
               </Select>
             </FormControl>
-            {/* <select
-              value={catFilter}
-              onChange={(e) => setCatFilter(e.target.value)}
-            >
-              <option value="all">Todos</option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.title}
-                </option>
-              ))}
-            </select> */}
             <FormControl>
               <InputLabel>Categoría</InputLabel>
               <Select
@@ -289,6 +286,7 @@ export default function Products(props) {
                     changePublishedState={changePublishedState}
                     changeFeaturedState={changeFeaturedState}
                     deleteProduct={handleDeleteProduct}
+                    forceProductRefresh={forceProductRefresh}
                   />
                 );
               case "grid-md":

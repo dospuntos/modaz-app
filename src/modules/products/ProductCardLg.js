@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./productcardlg.css";
 import ChangeStock from "modules/ChangeStock";
-import { Link } from "react-router-dom";
 import {
   RiShoppingCartLine,
   RiCloseLine,
@@ -11,6 +10,25 @@ import {
   RiCheckboxCircleLine,
 } from "react-icons/ri";
 import { BsGear } from "react-icons/bs";
+import ProductEdit from "components/ProductEdit";
+import Modal from "@material-ui/core/Modal";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    position: "absolute",
+    width: "80%",
+    maxHeight: "90%",
+    overflow: "auto",
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 function ProductCardLg({
   product,
@@ -19,8 +37,12 @@ function ProductCardLg({
   changePublishedState,
   changeFeaturedState,
   deleteProduct,
+  forceProductRefresh,
 }) {
   const [clicked, setClicked] = useState(false);
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
   const bgimg =
     product.images !== "0"
       ? process.env.REACT_APP_PROD_IMG_URL + product.images
@@ -28,6 +50,17 @@ function ProductCardLg({
 
   return (
     <div className="wrapper">
+      <Modal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+          forceProductRefresh();
+        }}
+      >
+        <div className={classes.paper}>
+          <ProductEdit id={product.id} />
+        </div>
+      </Modal>
       <div className="container">
         <div
           className="top"
@@ -67,9 +100,7 @@ function ProductCardLg({
                 )}
               </span>
               <span>
-                <Link to={"products/" + product.id}>
-                  <RiEdit2Line />
-                </Link>
+                <RiEdit2Line onClick={() => setOpen(true)} />
               </span>
             </div>
             <div className="remove" onClick={() => setClicked(false)}>

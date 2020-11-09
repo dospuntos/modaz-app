@@ -40,6 +40,9 @@ function ProductEdit(props) {
   const [categories, setCategories] = useState([]);
 
   let { productid } = useParams();
+  if (!productid) {
+    productid = props.id;
+  }
 
   useEffect(() => {
     // Get products and split category list to array
@@ -55,7 +58,6 @@ function ProductEdit(props) {
     // Get categories
     getCategories().then((categories) => {
       setCategories(categories);
-      console.log(categories);
     });
   }, [productid]);
 
@@ -137,17 +139,19 @@ function ProductEdit(props) {
           </div>
           <div className="pure-u-1-4">
             <p>
-              <button
-                className="pure-button secondary-button"
-                onClick={() =>
-                  !edited ||
-                  window.confirm("¿Quieres volver sin guardar los cambios?")
-                    ? props.history.goBack()
-                    : null
-                }
-              >
-                <RiArrowLeftSLine /> Volver
-              </button>
+              {!props.id && (
+                <button
+                  className="pure-button secondary-button"
+                  onClick={() =>
+                    !edited ||
+                    window.confirm("¿Quieres volver sin guardar los cambios?")
+                      ? props.history.goBack()
+                      : null
+                  }
+                >
+                  <RiArrowLeftSLine /> Volver
+                </button>
+              )}
               &nbsp;
               <button
                 className="pure-button primary-button"
