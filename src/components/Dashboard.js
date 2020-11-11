@@ -10,6 +10,7 @@ import Card from "@material-ui/core/Card";
 import ProductStats from "modules/dashboard/ProductStats";
 import OrderStats from "modules/dashboard/OrderStats";
 import IncomeStats from "modules/dashboard/IncomeStats";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,14 +41,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const [statistics, setStatistics] = useState([]);
   const classes = useStyles();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Get statistics
     getStatistics().then((statistics) => {
       setStatistics(statistics);
+      setLoading(false);
     });
   }, []);
 
+  if (loading) return <CircularProgress />;
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -15,6 +14,7 @@ import TextField from "@material-ui/core/TextField";
 import { getUsers } from "api/usersApi";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const columns = [
   { id: "icon", label: "", minWidth: 50 },
@@ -40,13 +40,27 @@ const useStyles = makeStyles({
 export default function Users() {
   const [searchText, setSearchText] = useState("");
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const classes = useStyles();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     // Get users
     getUsers().then((users) => {
       setUsers(users);
+      setIsLoading(false);
     });
   }, []);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   /* Filter by search */
   let filteredUsers = users;
@@ -58,19 +72,7 @@ export default function Users() {
     );
   });
 
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
+  if (isLoading) return <CircularProgress />;
   return (
     <>
       <Grid

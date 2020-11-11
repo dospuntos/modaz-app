@@ -22,6 +22,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
+import TablePagination from "@material-ui/core/TablePagination";
 
 export default function Products(props) {
   const [products, setProducts] = useState([]);
@@ -39,10 +40,11 @@ export default function Products(props) {
   const [categories, setCategories] = useState([]);
   const [catFilter, setCatFilter] = useStickyState("all", "catFilter");
   const [refreshProducts, setRefreshProducts] = useState(true);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useStickyState(10, "rowsPerPage");
 
   useEffect(() => {
     // Get products
-    console.log("Refreshing product list");
     getProducts().then((products) => {
       setProducts(products);
     });
@@ -50,6 +52,15 @@ export default function Products(props) {
     // Get categories
     getCategories().then((categories) => setCategories(categories));
   }, [refreshProducts]);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   // Function to update stock in state object
   // ToDo: might need some cleanup!!
@@ -178,16 +189,8 @@ export default function Products(props) {
           <div className="pure-u-1-3">
             <h1 className="email-content-title">Productos</h1>
             <p className="email-content-subtitle">
-              <span>Mostrando</span>{" "}
-              {filteredProducts.length < 100 ? filteredProducts.length : 100}/
-              {products.length} productos.
-              {filteredProducts.length > 100 && (
-                <strong>
-                  <br />
-                  {filteredProducts.length - 100} productos más coinciden con
-                  los filtros.
-                </strong>
-              )}
+              <span>Mostrando</span> {filteredProducts.length}/{products.length}{" "}
+              productos.
             </p>
           </div>
 
@@ -267,6 +270,18 @@ export default function Products(props) {
                 <FaThList />
               </ToggleButton>
             </ToggleButtonGroup>
+            <br />
+            {filteredProducts.length && (
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100, 500]}
+                component="div"
+                count={filteredProducts.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            )}
           </div>
         </div>
 
@@ -274,53 +289,56 @@ export default function Products(props) {
           {!filteredProducts.length && (
             <h3>Ningún producto coincide con los filtros.</h3>
           )}
-          {filteredProducts.slice(0, 100).map((product) => {
-            switch (productLayout) {
-              case "grid-lg":
-                return (
-                  <ProductCardLg
-                    key={product.name}
-                    product={product}
-                    updateStockInState={updateStockInState}
-                    handleAddItem={props.handleAddItem}
-                    changePublishedState={changePublishedState}
-                    changeFeaturedState={changeFeaturedState}
-                    deleteProduct={handleDeleteProduct}
-                    forceProductRefresh={forceProductRefresh}
-                  />
-                );
-              case "grid-md":
-                return (
-                  <ProductCardMd
-                    key={product.name}
-                    product={product}
-                    updateStockInState={updateStockInState}
-                    handleAddItem={props.handleAddItem}
-                    changePublishedState={changePublishedState}
-                    changeFeaturedState={changeFeaturedState}
-                    deleteProduct={handleDeleteProduct}
-                  />
-                );
-              case "grid-sm":
-                return (
-                  <ProductCardSm
-                    key={product.name}
-                    product={product}
-                    updateStockInState={updateStockInState}
-                    handleAddItem={props.handleAddItem}
-                  />
-                );
-              default:
-                return (
-                  <ProductList
-                    key={product.name}
-                    product={product}
-                    updateStockInState={updateStockInState}
-                    handleAddItem={props.handleAddItem}
-                  />
-                );
-            }
-          })}
+
+          {filteredProducts
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((product) => {
+              switch (productLayout) {
+                case "grid-lg":
+                  return (
+                    <ProductCardLg
+                      key={product.name}
+                      product={product}
+                      updateStockInState={updateStockInState}
+                      handleAddItem={props.handleAddItem}
+                      changePublishedState={changePublishedState}
+                      changeFeaturedState={changeFeaturedState}
+                      deleteProduct={handleDeleteProduct}
+                      forceProductRefresh={forceProductRefresh}
+                    />
+                  );
+                case "grid-md":
+                  return (
+                    <ProductCardMd
+                      key={product.name}
+                      product={product}
+                      updateStockInState={updateStockInState}
+                      handleAddItem={props.handleAddItem}
+                      changePublishedState={changePublishedState}
+                      changeFeaturedState={changeFeaturedState}
+                      deleteProduct={handleDeleteProduct}
+                    />
+                  );
+                case "grid-sm":
+                  return (
+                    <ProductCardSm
+                      key={product.name}
+                      product={product}
+                      updateStockInState={updateStockInState}
+                      handleAddItem={props.handleAddItem}
+                    />
+                  );
+                default:
+                  return (
+                    <ProductList
+                      key={product.name}
+                      product={product}
+                      updateStockInState={updateStockInState}
+                      handleAddItem={props.handleAddItem}
+                    />
+                  );
+              }
+            })}
         </div>
       </div>
     </div>
