@@ -1,16 +1,47 @@
 import { useState, useEffect } from "react";
-import {
-  RiShoppingCartLine,
-  RiFileList2Line,
-  RiMoneyDollarBoxLine,
-  RiFileList3Line,
-} from "react-icons/ri";
-import { GiCardboardBox } from "react-icons/gi";
+import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import TodoList from "modules/TodoList";
+import { RiShoppingCartLine, RiFileList3Line } from "react-icons/ri";
 import { getStatistics } from "api/statisticsApi";
 import "modules/card.css";
+import Card from "@material-ui/core/Card";
+import ProductStats from "modules/dashboard/ProductStats";
+import OrderStats from "modules/dashboard/OrderStats";
+import IncomeStats from "modules/dashboard/IncomeStats";
 
-function Dashboard() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+  },
+  fixedHeight: {
+    height: 240,
+  },
+}));
+
+export default function Dashboard() {
   const [statistics, setStatistics] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     // Get statistics
@@ -20,7 +51,68 @@ function Dashboard() {
   }, []);
 
   return (
-    <div id="main" className="pure-u-1">
+    <Container maxWidth="lg" className={classes.container}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={4}>
+          <ProductStats stats={statistics} />
+          {/* <div className="card card-1">
+              <div className="card-title color-tertiary">
+                <span className="icon">
+                  <GiCardboardBox />
+                </span>
+                <h2>Productos</h2>
+              </div>
+              <div className="card-content">
+                <h3>
+                  {statistics.products}/{statistics.variants}
+                </h3>
+                <p className="text-center">Productos/variantes</p>
+              </div>
+            </div> */}
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <OrderStats stats={statistics} />
+          {/* <Paper className={classes.paper}>
+            <div className="card card-1">
+              <div className="card-title color-primary">
+                <span className="icon">
+                  <RiShoppingCartLine />
+                </span>
+                <h2>Pedidos</h2>
+              </div>
+              <div className="card-content">
+                <h3>{statistics.orders}</h3>
+                <p>Total</p>
+              </div>
+            </div>
+          </Paper> */}
+        </Grid>
+        {/* Recent Orders */}
+        <Grid item xs={12} md={4}>
+          <IncomeStats stats={statistics} />
+          {/* <Paper className={classes.paper}>
+            <div className="card card-1">
+              <div className="card-title color-secondary">
+                <span className="icon">
+                  <RiFileList3Line />
+                </span>
+                <h2>Cotizaciones</h2>
+              </div>
+              <div className="card-content">
+                <h3>5/23</h3>
+                <p>Pendientes / Confirmados</p>
+              </div>
+            </div>
+          </Paper> */}
+        </Grid>
+      </Grid>
+      <Box pt={4}>
+        <Card variant="outlined">
+          <TodoList />
+        </Card>
+      </Box>
+
+      {/* <div id="main" className="pure-u-1">
       <div className="email-content">
         <div className="email-content-header pure-g">
           <div className="pure-u-1-2">
@@ -149,8 +241,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
+    </Container>
   );
 }
-
-export default Dashboard;
