@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import TodoList from "modules/TodoList";
+import NewsList from "modules/NewsList";
 import { getStatistics } from "api/statisticsApi";
 import "modules/card.css";
 import Card from "@material-ui/core/Card";
@@ -65,11 +66,22 @@ export default function Dashboard() {
           <IncomeStats stats={statistics} />
         </Grid>
       </Grid>
-      <Box pt={4}>
-        <Card variant="outlined">
-          <TodoList />
-        </Card>
-      </Box>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={7}>
+          <Box pt={4}>
+            <Card variant="outlined">
+              <TodoList />
+            </Card>
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={5}>
+          <Box pt={4}>
+            <Card variant="outlined">
+              <NewsList />
+            </Card>
+          </Box>
+        </Grid>
+      </Grid>
 
       {/* <div id="main" className="pure-u-1">
       <div className="email-content">
