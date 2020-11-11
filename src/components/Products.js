@@ -53,15 +53,6 @@ export default function Products(props) {
     getCategories().then((categories) => setCategories(categories));
   }, [refreshProducts]);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
   // Function to update stock in state object
   // ToDo: might need some cleanup!!
   function updateStockInState(id, dir, productId) {
@@ -278,8 +269,11 @@ export default function Products(props) {
                 count={filteredProducts.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
+                onChangePage={(event, newPage) => setPage(newPage)}
+                onChangeRowsPerPage={(event) => {
+                  setRowsPerPage(+event.target.value);
+                  setPage(0);
+                }}
               />
             )}
           </div>

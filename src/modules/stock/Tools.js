@@ -1,9 +1,14 @@
 import { useState } from "react";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import { resetStock } from "api/productApi";
 import MissingImages from "modules/stock/MissingImages";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 function Tools() {
   const [showMissing, setShowMissing] = useState(false);
+
   function handleStockReset() {
     if (
       window.confirm(
@@ -20,7 +25,54 @@ function Tools() {
     }
   }
   return (
-    <div className="tools">
+    <Grid container spacing={3}>
+      <Grid item xs={12} sm={4}>
+        <p>
+          Iniciar copia de seguridad de ModaZ.net. Recomendado antes de hacer
+          cambios de los productos o stock.
+        </p>
+        <a
+          href="https://modaz.net/index.php?option=com_akeeba&view=Backup&key=m224rI-19VUwve5aUe-ZXGmttHTvFvo9"
+          className="pure-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Copia de Seguridad
+          <br />
+          (ModaZ.net)
+        </a>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <p>Resetear stock para todos los productos</p>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => handleStockReset()}
+        >
+          Resetear stock
+        </Button>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <p>Mostrar productos sin imagen</p>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={showMissing}
+              onChange={() => setShowMissing(!showMissing)}
+              name="checkedA"
+            />
+          }
+          label="Mostrar"
+        />
+      </Grid>
+
+      {showMissing && (
+        <div className="missingImages">
+          <MissingImages />
+        </div>
+      )}
+
+      {/* <div className="tools">
       <h1>Herramientas - usar con cuidado</h1>
       <div className="pure-g">
         <div className="pure-u-1 pure-u-sm-1-5">
@@ -64,7 +116,8 @@ function Tools() {
           <MissingImages />
         </div>
       )}
-    </div>
+    </div> */}
+    </Grid>
   );
 }
 
