@@ -80,8 +80,11 @@ export default function CartContents({
                 secondary={`${item.color} - ${item.size} (Stock: ${item.stock})`}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
-                  <DeleteIcon onClick={() => handleDeleteCartItem(item.vid)} />
+                <IconButton
+                  edge="end"
+                  onClick={() => handleDeleteCartItem(item.vid)}
+                >
+                  <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>

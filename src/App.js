@@ -107,9 +107,28 @@ export default function App() {
     }
   }
 
-  function handleAddItem(variant) {
+  /* function handleAddItem(variant) {
     setCart([...cart, variant]);
     toast.info("Producto agregado al carrito.");
+  } */
+
+  function handleAddItem(variant) {
+    setCart((items) => {
+      const itemInCart = items.find((i) => i.vid === variant.vid);
+      if (itemInCart) {
+        // Return new array with the matching item replaced
+        toast.info("Producto existe en el carrito, cantidad incrementado.");
+        return items.map((i) =>
+          i.vid === variant.vid
+            ? { ...i, order_item_quantity: parseInt(i.order_item_quantity) + 1 }
+            : i
+        );
+      } else {
+        // Return new array with the new item appended
+        toast.info("Producto agregado al carrito");
+        return [...items, variant];
+      }
+    });
   }
 
   // Update item count

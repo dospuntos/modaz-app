@@ -13,7 +13,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const news = ["Nuevo dashboard", "Nuevo diseño para manejo de Stock"];
+const news = [
+  "Carrito de compras mejorado",
+  "Nuevo dashboard",
+  "Nuevo diseño para manejo de Stock",
+];
 
 export default function TodoList() {
   const classes = useStyles();

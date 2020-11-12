@@ -58,10 +58,16 @@ export default function Cart({
     history.push("/orders"); // Redirect to orders
   }
 
+  function countCartItems() {
+    let cartItems = 0;
+    cart.map((i) => (cartItems += parseInt(i.order_item_quantity)));
+    return cartItems;
+  }
+
   return (
     <div className={classes.root}>
       <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
-        <Badge badgeContent={cart.length} color="secondary">
+        <Badge badgeContent={countCartItems()} color="secondary">
           <ShoppingCart />
         </Badge>
       </Fab>
