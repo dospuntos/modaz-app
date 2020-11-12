@@ -2,10 +2,22 @@ import { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";
-import "./cart.css";
+import { makeStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import Delete from "@material-ui/icons/Delete";
 import Badge from "@material-ui/core/Badge";
+import CartContents from "modules/cart/CartContents";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: "fixed",
+    right: 25,
+    bottom: 25,
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 export default function Cart({
   cart,
@@ -13,6 +25,9 @@ export default function Cart({
   handleVariantCountChange,
   handleDeleteCartItem,
 }) {
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
   const [cartUser, setCartUser] = useState("0");
   const [users, setUsers] = useState([]);
 
@@ -25,6 +40,18 @@ export default function Cart({
     });
   }, []);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
+
+  function handleSetCartUser(e) {
+    setCartUser(e.target.value);
+  }
+
   function saveCart(cart, user, type) {
     createOrder(cart, user, type);
     handleEmptyCart(false); // Empty cart without confirmation
@@ -32,87 +59,24 @@ export default function Cart({
   }
 
   return (
-    <div className="shopping-cart">
-      <div className="icon">
+    <div className={classes.root}>
+      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
         <Badge badgeContent={cart.length} color="secondary">
-          <ShoppingCart size={32} />
+          <ShoppingCart />
         </Badge>
-        <div className="cart-dropdown">
-          <span className="empty-cart" onClick={handleEmptyCart}>
-            <Delete
-              color={"error"}
-              style={{ position: "absolute", top: "15px", right: "5px" }}
-            />
-          </span>
-          {!cart.length ? (
-            <em>No hay productos en el carrito</em>
-          ) : (
-            <>
-              <ul className="cart-items">
-                {cart.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      {item.name}
-                      <br />
-                      <small>
-                        {item.color}, {item.size}
-                      </small>
-                      <input
-                        type="number"
-                        min="0"
-                        max="50"
-                        step="1"
-                        value={item.order_item_quantity}
-                        onChange={(e) => handleVariantCountChange(e, item.vid)}
-                      />
-                      <Delete
-                        color="primary"
-                        style={{ float: "right" }}
-                        onClick={() => handleDeleteCartItem(item.vid)}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
+      </Fab>
 
-              <select
-                value={cartUser}
-                onChange={(e) => setCartUser(e.target.value)}
-              >
-                <option value="0">- Users -</option>
-                {users.length ? (
-                  users.map((user) => (
-                    <option key={user.id} value={user.id}>
-                      {user.name}
-                    </option>
-                  ))
-                ) : (
-                  <option>Cargando usuarios...</option>
-                )}
-              </select>
-              {cartUser}
-              {cartUser === "0" ? (
-                ""
-              ) : (
-                <p>
-                  <button
-                    className="pure-button primary-button pure-button-create-order"
-                    onClick={() => saveCart(cart, cartUser, "order")}
-                  >
-                    Pedido
-                  </button>
-                  <button
-                    className="pure-button secondary-button pure-button-create-quote"
-                    onClick={() => saveCart(cart, cartUser, "quote")}
-                  >
-                    Cotización
-                  </button>
-                </p>
-              )}
-            </>
-          )}
-        </div>
-      </div>
+      <CartContents
+        open={open}
+        cart={cart}
+        onClose={handleClose}
+        handleEmptyCart={handleEmptyCart}
+        users={users}
+        cartUser={cartUser}
+        handleSetCartUser={handleSetCartUser}
+        handleDeleteCartItem={handleDeleteCartItem}
+        saveCart={saveCart}
+      />
     </div>
   );
 }
