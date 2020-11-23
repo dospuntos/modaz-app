@@ -1,6 +1,6 @@
 {
   "name": "modaz-app",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -16,8 +16,8 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
-    "react-toastify": "^6.0.9",
-    "surge": "^0.21.6"
+    "react-toastify": "^6.1.0",
+    "surge": "^0.21.7"
   },
   "scripts": {
     "start": "react-scripts start",

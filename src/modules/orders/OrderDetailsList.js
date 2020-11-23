@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Tooltip from "@material-ui/core/Tooltip";
+import Button from "@material-ui/core/Button";
 import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
 
 function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
@@ -51,6 +53,34 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
             setEdited(true);
           }}
         />
+        <br />
+        {/* PRECIO - PRECIO DESCUENTO - PRECIO ZIN - MSRP - COSTO */}
+        <Tooltip title="Precio regular">
+          <Button size="small" color="primary">
+            Bs. {item.price}
+          </Button>
+        </Tooltip>
+        <Tooltip title="Precio descuento">
+          <Button size="small">
+            Bs. {item.price_discount ? item.price_discount : item.price}
+          </Button>
+        </Tooltip>
+        <Tooltip title="Precio ZIN">
+          <Button size="small" color="secondary">
+            Bs. {item.zinprice}
+          </Button>
+        </Tooltip>
+        <Tooltip title="MSRP">
+          <Button size="small" color="secondary">
+            ${item.msrp} (Bs. {(item.msrp * 6.96).toFixed(2)})
+          </Button>
+        </Tooltip>
+        <Tooltip title="Costo (con impuesto y transporte)">
+          <Button size="small">
+            ${(item.wholesaleprice * 1.5).toFixed(1)} (Bs.{" "}
+            {(item.wholesaleprice * 6.96 * 1.5).toFixed(0)})
+          </Button>
+        </Tooltip>
       </td>
       <td>
         Cantidad:

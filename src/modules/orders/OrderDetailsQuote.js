@@ -27,9 +27,18 @@ function OrderDetailsQuote({ item, config }) {
       {config.showPrice && (
         <td>
           <em>
-            {item.order_item_quantity > 0
-              ? "Bs. " + item.order_item_price
-              : " - "}
+            {item.order_item_price < item.price && (
+              <s style={{ color: "red" }}>
+                Bs.
+                {item.price}
+                <br />
+              </s>
+            )}
+            {item.order_item_quantity > 0 ? (
+              <strong>Bs. {item.order_item_price}</strong>
+            ) : (
+              " - "
+            )}
           </em>
         </td>
       )}

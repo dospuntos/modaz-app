@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tasks = [
+  "Switch from useState to useReducer for cart",
   "Create product",
   "Duplicate product (and create an empty variant)",
   "Add filtered items to cart (empty cart first?)",

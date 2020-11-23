@@ -31,15 +31,12 @@ function SidebarMenu({
 
   return (
     <div>
-      <List>
-        <Cart
-          cart={cart}
-          handleEmptyCart={handleEmptyCart}
-          handleVariantCountChange={handleVariantCountChange}
-          handleDeleteCartItem={handleDeleteCartItem}
-        />
-      </List>
-      <Divider />
+      <Cart
+        cart={cart}
+        handleEmptyCart={handleEmptyCart}
+        handleVariantCountChange={handleVariantCountChange}
+        handleDeleteCartItem={handleDeleteCartItem}
+      />
       <List>
         <NavLink to="/">
           <ListItem button>
