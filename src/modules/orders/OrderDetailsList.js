@@ -53,13 +53,7 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
           }}
         />
         <br />
-        <ShowPrices
-          price={item.price}
-          price_discount={item.price_discount}
-          zinprice={item.zinprice}
-          msrp={item.msrp}
-          wholesaleprice={item.wholesaleprice}
-        />
+        <ShowPrices product={item} />
       </td>
       <td>
         Cantidad:

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useStickyState } from "hooks";
 import { searchUPC } from "api/productApi";
-import PriceDisplay from "modules/PriceDisplay";
+//import PriceDisplay from "modules/PriceDisplay";
+import ShowPrices from "modules/ShowPrices";
 import { changeStock } from "api/productApi";
 import { quickOrder } from "api/orderApi";
 import { toast } from "react-toastify";
@@ -67,7 +68,7 @@ function Remove() {
             <h4>
               Categorías: {result[0].category} - UPC: {result[0].upc}
             </h4>
-            <PriceDisplay product={result[0]} />
+            <ShowPrices product={result[0]} />
             <h2>
               {result[0].size}, {result[0].color}
             </h2>

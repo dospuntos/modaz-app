@@ -1,5 +1,6 @@
 import "./productlist.css";
 import ChangeStock from "modules/ChangeStock";
+import ShowPrices from "modules/ShowPrices";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
@@ -7,7 +8,6 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
   return (
     <div className="pure-g list-item-wrap">
       <div className="pure-u-3-24">
-        {/* IMAGE | NAME / UPC | VARIANTS / STOCK | PRICES | ID */}
         <img
           src={
             product.images !== "0"
@@ -23,6 +23,7 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
           <Link to={"products/" + product.id}>{product.name}</Link>({product.id}
           )
         </h4>
+        <ShowPrices product={product} />
       </div>
 
       <div className="pure-u-12-24">

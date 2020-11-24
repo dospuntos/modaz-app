@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { searchUPC } from "api/productApi";
-import PriceDisplay from "modules/PriceDisplay";
+//import PriceDisplay from "modules/PriceDisplay";
+import ShowPrices from "modules/ShowPrices";
 import { changeStock } from "api/productApi";
 import TextField from "@material-ui/core/TextField";
 import { toast } from "react-toastify";
@@ -29,13 +30,6 @@ function Add() {
     <div className="add">
       <h1>Agregar stock para producto con UPC:</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
-        {/* <input
-          className="pure-input-1"
-          type="text"
-          placeholder="Buscar UPC"
-          value={upc}
-          onChange={(e) => setUpc(e.target.value)}
-        /> */}
         <TextField
           id="filled-full-width"
           label="Buscar UPC"
@@ -64,7 +58,7 @@ function Add() {
             <h4>
               Categorías: {result[0].category} - UPC: {result[0].upc}
             </h4>
-            <PriceDisplay product={result[0]} />
+            <ShowPrices product={result[0]} />
             <h2>
               {result[0].size}, {result[0].color}
             </h2>

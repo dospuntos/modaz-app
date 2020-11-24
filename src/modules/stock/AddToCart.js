@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { searchUPC } from "api/productApi";
-import PriceDisplay from "modules/PriceDisplay";
+//import PriceDisplay from "modules/PriceDisplay";
+import ShowPrices from "modules/ShowPrices";
 import { toast } from "react-toastify";
 
 function AddToCart({ handleAddItem }) {
@@ -45,7 +46,7 @@ function AddToCart({ handleAddItem }) {
             <h4>
               Categorías: {result[0].category} - UPC: {result[0].upc}
             </h4>
-            <PriceDisplay product={result[0]} />
+            <ShowPrices product={result[0]} />
             <h2>
               {result[0].size}, {result[0].color}
             </h2>

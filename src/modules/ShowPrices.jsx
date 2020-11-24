@@ -26,41 +26,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShowPrices({
-  price,
-  price_discount,
-  zinprice,
-  msrp,
-  wholesaleprice,
-}) {
+export default function ShowPrices({ product }) {
   const classes = useStyles();
 
   return (
     <>
       <Tooltip title="Precio regular (ModaZ)">
-        <span className={classes.pricetag}>Bs. {price}</span>
+        <span className={classes.pricetag}>Bs. {product.price}</span>
       </Tooltip>
-      {price_discount && price_discount > 0 && (
+      {product.price_discount && product.price_discount > 0 && (
         <Tooltip title="Precio descuento">
           <span className={clsx(classes.pricetag, classes.discount)}>
-            Bs. {price_discount}
+            Bs. {product.price_discount}
           </span>
         </Tooltip>
       )}
       <Tooltip title="Precio ZIN">
         <span className={clsx(classes.pricetag, classes.zin)}>
-          Bs. {zinprice}
+          Bs. {product.zinprice}
         </span>
       </Tooltip>
       <Tooltip title="MSRP (Precio sugerido de venta)">
         <span className={clsx(classes.pricetag, classes.msrp)}>
-          ${msrp} (Bs. {(msrp * 6.96).toFixed(0)})
+          ${product.msrp} (Bs. {(product.msrp * 6.96).toFixed(0)})
         </span>
       </Tooltip>
       <Tooltip title="Costo (con impuesto y transporte)">
         <span className={clsx(classes.pricetag, classes.wholesaleprice)}>
-          ${(wholesaleprice * 1.5).toFixed(1)} (Bs.{" "}
-          {(wholesaleprice * 6.96 * 1.5).toFixed(0)})
+          ${(product.wholesaleprice * 1.5).toFixed(1)} (Bs.{" "}
+          {(product.wholesaleprice * 6.96 * 1.5).toFixed(0)})
         </span>
       </Tooltip>
     </>
