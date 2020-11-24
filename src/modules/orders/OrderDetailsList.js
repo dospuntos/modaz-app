@@ -1,11 +1,32 @@
 import { useState } from "react";
 import ShowPrices from "modules/ShowPrices";
 import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
+import Modal from "@material-ui/core/Modal";
+import { makeStyles } from "@material-ui/core/styles";
+import ProductEdit from "components/ProductEdit";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    position: "absolute",
+    width: "80%",
+    maxHeight: "90%",
+    overflow: "auto",
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
   const [price, setPrice] = useState(item.order_item_price);
   const [quantity, setQuantity] = useState(item.order_item_quantity);
   const [edited, setEdited] = useState(false);
+  const [open, setOpen] = useState(false);
+  const classes = useStyles();
 
   function handleOrderItemChange(e) {
     let data = {
@@ -28,7 +49,7 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
       </td>
       <td>
         {item.name ? (
-          <h4>
+          <h4 onClick={() => setOpen(true)}>
             {item.name}
             <br />
             <small>UPC: {item.upc}</small>
@@ -38,6 +59,16 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
             Producto {item.product_id} no encontrado
           </i>
         )}
+        <Modal
+          open={open}
+          onClose={() => {
+            setOpen(false);
+          }}
+        >
+          <div className={classes.paper}>
+            <ProductEdit id={item.id} />
+          </div>
+        </Modal>
       </td>
       <td>
         {item.color}, {item.size}

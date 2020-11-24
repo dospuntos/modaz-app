@@ -182,6 +182,12 @@ function ProductEdit(props) {
                   value={product.price || ""}
                 />
                 <TextInput
+                  label="Descuento"
+                  onChange={handleChange}
+                  name="price_discount"
+                  value={product.price_discount || ""}
+                />
+                <TextInput
                   id="zinprice"
                   label="Precio ZIN (Bs)"
                   onChange={handleChange}

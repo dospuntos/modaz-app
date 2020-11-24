@@ -27,7 +27,7 @@ function OrderDetailsQuote({ item, config }) {
       {config.showPrice && (
         <td>
           <em>
-            {item.order_item_price < item.price && (
+            {parseInt(item.order_item_price) < parseInt(item.price) && (
               <s style={{ color: "red" }}>
                 Bs.
                 {item.price}
@@ -45,7 +45,9 @@ function OrderDetailsQuote({ item, config }) {
       {config.showPrice && (
         <td>
           {item.order_item_quantity > 0
-            ? "Bs. " + item.order_item_price * item.order_item_quantity
+            ? "Bs. " +
+              parseInt(item.order_item_price) *
+                parseInt(item.order_item_quantity)
             : " - "}
         </td>
       )}
