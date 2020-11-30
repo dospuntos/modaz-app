@@ -27,13 +27,14 @@ function OrderDetailsQuote({ item, config }) {
       {config.showPrice && (
         <td>
           <em>
-            {parseInt(item.order_item_price) < parseInt(item.price) && (
-              <s style={{ color: "red" }}>
-                Bs.
-                {item.price}
-                <br />
-              </s>
-            )}
+            {parseInt(item.order_item_price) < parseInt(item.price) &&
+              item.order_item_quantity > 0 && (
+                <s style={{ color: "red" }}>
+                  Bs.
+                  {item.price}
+                  <br />
+                </s>
+              )}
             {item.order_item_quantity > 0 ? (
               <strong>Bs. {item.order_item_price}</strong>
             ) : (
