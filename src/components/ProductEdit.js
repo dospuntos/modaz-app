@@ -129,6 +129,11 @@ function ProductEdit(props) {
     setEdited(true);
   }
 
+  let encodedImage = JSON.stringify({
+    default: product.images,
+    boldblack: product.images,
+  });
+
   return (
     <div id="main" className="pure-u-1">
       <div className="email-content">
@@ -165,7 +170,10 @@ function ProductEdit(props) {
         </div>
 
         <div className="email-content-body order-cards-container">
-          <form className="pure-form pure-form-aligned">
+          <form
+            className="pure-form pure-form-aligned"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <div className="pure-g">
               <div className="pure-u-1 pure-u-md-3-4">
                 <TextInput
@@ -244,12 +252,15 @@ function ProductEdit(props) {
                   }
                   alt={product.name}
                 />
+
                 <TextInput
                   label="Imágen"
                   onChange={handleChange}
                   name="images"
                   value={product.images || ""}
+                  style={{ width: "100%" }}
                 />
+                {encodedImage}
                 <TextInput
                   label="Order Date"
                   onChange={handleChange}

@@ -107,11 +107,6 @@ export default function App() {
     }
   }
 
-  /* function handleAddItem(variant) {
-    setCart([...cart, variant]);
-    toast.info("Producto agregado al carrito.");
-  } */
-
   function handleAddItem(variant) {
     setCart((items) => {
       const itemInCart = items.find((i) => i.vid === variant.vid);

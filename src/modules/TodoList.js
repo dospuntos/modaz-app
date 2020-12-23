@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tasks = [
+  "Include users name in quotes when available",
+  "Fix bug when pressing enter in product edit",
   "Switch from useState to useReducer for cart",
   "Create product",
   "Duplicate product (and create an empty variant)",

@@ -270,7 +270,7 @@ function OrderDetails() {
                               <img
                                 src="/img/ZWS-Dist-Logo-PINK.jpg"
                                 alt="ModaZ Logo"
-                                style={{ width: "100%", maxWidth: 300 }}
+                                style={{ width: "100%", maxWidth: 150 }}
                               />
                             </td>
 
