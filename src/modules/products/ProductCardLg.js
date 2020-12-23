@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProductCardLg({
+  dispatch,
   product,
   updateStockInState,
-  handleAddItem,
   changePublishedState,
   changeFeaturedState,
   deleteProduct,
@@ -130,7 +130,10 @@ function ProductCardLg({
                             variant["price"] = product.price;
                             variant["order_item_quantity"] = "1";
                             // Add to cart
-                            handleAddItem(variant);
+                            dispatch({
+                              type: "add",
+                              variant,
+                            });
                           }}
                         >
                           <RiShoppingCartLine />

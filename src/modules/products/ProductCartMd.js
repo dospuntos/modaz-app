@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductCardMd({
   product,
+  dispatch,
   updateStockInState,
-  handleAddItem,
   changePublishedState,
   changeFeaturedState,
   deleteProduct,
@@ -119,7 +119,10 @@ export default function ProductCardMd({
                         variant["price"] = product.price;
                         variant["order_item_quantity"] = "1";
                         // Add to cart
-                        handleAddItem(variant);
+                        dispatch({
+                          type: "add",
+                          variant,
+                        });
                       }}
                     >
                       <AddShoppingCartIcon />

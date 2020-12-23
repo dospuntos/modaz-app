@@ -1,4 +1,6 @@
+import { useReducer, useEffect } from "react";
 import clsx from "clsx";
+import { useStickyState } from "./hooks";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -9,7 +11,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { useStickyState } from "./hooks";
 import "purecss/build/pure-min.css";
 import "purecss/build/grids-responsive.css";
 import "./App.css";
@@ -24,9 +25,10 @@ import Stock from "./components/Stock";
 import Users from "./components/Users";
 import Login from "./components/Login";
 import SidebarMenu from "./components/SidebarMenu";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import pkg from "../package.json";
+import cartReducer from "./cartReducer";
 
 const drawerWidth = 240;
 
@@ -92,62 +94,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+let initialCart;
+try {
+  initialCart = JSON.parse(localStorage.getItem("cart")) ?? [];
+} catch {
+  console.error("The cart could not be parsed into JSON.");
+  initialCart = [];
+}
+
 export default function App() {
   const classes = useStyles();
   const [open, setOpen] = useStickyState(false, "menuOpen");
-
-  const [cart, setCart] = useStickyState([], "cart");
+  //const [initialCart, setInitialCart] = useStickyState([], "cart");
   const [loggedIn, setLoggedIn] = useStickyState(false, "loggedIn");
+  const [cart, dispatch] = useReducer(cartReducer, initialCart);
+
+  useEffect(() => localStorage.setItem("cart", JSON.stringify(cart)), [cart]);
 
   // Check login state
   function setLoginState(pw) {
     /* User: joanne.tatiana@gmail.com, PW: joanne */
     if (pw === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l") {
       setLoggedIn(pw);
-    }
-  }
-
-  function handleAddItem(variant) {
-    setCart((items) => {
-      const itemInCart = items.find((i) => i.vid === variant.vid);
-      if (itemInCart) {
-        // Return new array with the matching item replaced
-        toast.info("Producto existe en el carrito, cantidad incrementado.");
-        return items.map((i) =>
-          i.vid === variant.vid
-            ? { ...i, order_item_quantity: parseInt(i.order_item_quantity) + 1 }
-            : i
-        );
-      } else {
-        // Return new array with the new item appended
-        toast.info("Producto agregado al carrito");
-        return [...items, variant];
-      }
-    });
-  }
-
-  // Update item count
-  function handleVariantCountChange(e, vid) {
-    let newCart = cart.map((item) => {
-      if (item.vid === vid) {
-        item.order_item_quantity = e.target.value;
-      }
-      return item;
-    });
-    setCart(newCart);
-  }
-
-  // Remove selected item from cart
-  function handleDeleteCartItem(vid) {
-    let newCart = cart.filter((item) => item.vid !== vid);
-    setCart(newCart);
-  }
-
-  // Remove all items from cart
-  function handleEmptyCart(confirm = true) {
-    if (!confirm || window.confirm("Quieres vaciar el carrito de compras?")) {
-      setCart([]);
-      toast.info("Carrito de compras vaciado");
     }
   }
 
@@ -228,10 +196,9 @@ export default function App() {
           </div>
           <Divider />
           <SidebarMenu
+            dispatch={dispatch}
             cart={cart}
-            handleVariantCountChange={handleVariantCountChange}
-            handleEmptyCart={handleEmptyCart}
-            handleDeleteCartItem={handleDeleteCartItem}
+            handleVariantCountChange={null}
           />
         </Drawer>
         {/* <div id="layout" className="content pure-g"> */}
@@ -242,17 +209,13 @@ export default function App() {
             <Route path="/products/:productid" component={ProductEdit} />
             <Route
               path="/products"
-              render={(props) => (
-                <Products {...props} handleAddItem={handleAddItem} />
-              )}
+              render={(props) => <Products {...props} dispatch={dispatch} />}
             />
             <Route path="/orders/:orderid" component={OrderDetails} />
             <Route path="/orders" component={Orders} />
             <Route
               path="/stock"
-              render={(props) => (
-                <Stock {...props} handleAddItem={handleAddItem} />
-              )}
+              render={(props) => <Stock {...props} dispatch={dispatch} />}
             />
             <Route path="/users/:userid" component={Users} />
             <Route path="/users" component={Users} />

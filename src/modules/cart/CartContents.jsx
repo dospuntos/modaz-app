@@ -28,25 +28,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CartContents({
+  dispatch,
   onClose,
   selectedValue,
   open,
-  handleEmptyCart,
   cart,
   users,
   cartUser,
   handleSetCartUser,
-  handleDeleteCartItem,
   saveCart,
 }) {
   const classes = useStyles();
 
   const handleClose = () => {
     onClose(selectedValue);
-  };
-
-  const handleListItemClick = (value) => {
-    onClose(value);
   };
 
   return (
@@ -56,7 +51,9 @@ export default function CartContents({
         <IconButton edge="end">
           <DeleteIcon
             style={{ color: red[900] }}
-            onClick={() => handleEmptyCart()}
+            onClick={() => {
+              dispatch({ type: "empty" });
+            }}
           />
         </IconButton>
       </DialogTitle>
@@ -67,7 +64,13 @@ export default function CartContents({
           {cart.map((item) => (
             <ListItem
               button
-              onClick={() => handleListItemClick(item)}
+              onClick={() =>
+                dispatch({
+                  type: "updateQuantity",
+                  vid: item.vid,
+                  quantity: 2,
+                })
+              }
               key={item}
             >
               <ListItemAvatar>
@@ -82,7 +85,13 @@ export default function CartContents({
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
-                  onClick={() => handleDeleteCartItem(item.vid)}
+                  onClick={(e) =>
+                    dispatch({
+                      type: "updateQuantity",
+                      vid: item.vid,
+                      quantity: 0,
+                    })
+                  }
                 >
                   <DeleteIcon />
                 </IconButton>

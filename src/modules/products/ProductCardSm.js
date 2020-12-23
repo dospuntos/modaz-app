@@ -2,7 +2,7 @@ import "./productcardsm.css";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
 
-function ProductCardSm({ product, handleAddItem }) {
+function ProductCardSm({ product, dispatch }) {
   const bgimg =
     product.images !== "0"
       ? process.env.REACT_APP_PROD_IMG_URL + product.images
@@ -51,7 +51,10 @@ function ProductCardSm({ product, handleAddItem }) {
                             variant["price"] = product.price;
                             variant["order_item_quantity"] = "1";
                             // Add to cart
-                            handleAddItem(variant);
+                            dispatch({
+                              type: "add",
+                              variant,
+                            });
                           }}
                         >
                           <AddShoppingCartOutlined style={{ fontSize: 14 }} />

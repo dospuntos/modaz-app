@@ -4,7 +4,7 @@ import ShowPrices from "modules/ShowPrices";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-function ProductList({ product, updateStockInState, handleAddItem }) {
+function ProductList({ product, updateStockInState, dispatch }) {
   return (
     <div className="pure-g list-item-wrap">
       <div className="pure-u-3-24">
@@ -47,7 +47,10 @@ function ProductList({ product, updateStockInState, handleAddItem }) {
                       variant["price"] = product.price;
                       variant["order_item_quantity"] = "1";
                       // Add to cart
-                      handleAddItem(variant);
+                      dispatch({
+                        type: "add",
+                        variant,
+                      });
                     }}
                   >
                     <RiShoppingCartLine />

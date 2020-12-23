@@ -19,12 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Cart({
-  cart,
-  handleEmptyCart,
-  handleVariantCountChange,
-  handleDeleteCartItem,
-}) {
+export default function Cart({ dispatch, cart, handleVariantCountChange }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -54,7 +49,8 @@ export default function Cart({
 
   function saveCart(cart, user, type) {
     createOrder(cart, user, type);
-    handleEmptyCart(false); // Empty cart without confirmation
+    //TODO: Empty cart using cartReducer.
+    //handleEmptyCart(false); // Empty cart without confirmation
     history.push("/orders"); // Redirect to orders
   }
 
@@ -73,14 +69,13 @@ export default function Cart({
       </Fab>
 
       <CartContents
+        dispatch={dispatch}
         open={open}
         cart={cart}
         onClose={handleClose}
-        handleEmptyCart={handleEmptyCart}
         users={users}
         cartUser={cartUser}
         handleSetCartUser={handleSetCartUser}
-        handleDeleteCartItem={handleDeleteCartItem}
         saveCart={saveCart}
       />
     </div>

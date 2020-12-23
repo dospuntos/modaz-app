@@ -14,12 +14,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import Cart from "modules/cart/Cart";
 import { getStatistics } from "api/statisticsApi";
 
-function SidebarMenu({
-  cart,
-  handleEmptyCart,
-  handleVariantCountChange,
-  handleDeleteCartItem,
-}) {
+function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
   const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
@@ -32,10 +27,9 @@ function SidebarMenu({
   return (
     <div>
       <Cart
+        dispatch={dispatch}
         cart={cart}
-        handleEmptyCart={handleEmptyCart}
         handleVariantCountChange={handleVariantCountChange}
-        handleDeleteCartItem={handleDeleteCartItem}
       />
       <List>
         <NavLink to="/">
