@@ -7,9 +7,11 @@ import TextField from "@material-ui/core/TextField";
 export default function Tools() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
+  const [hasSearched, setHasSearched] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
+    setHasSearched(true);
     searchUPC(upc).then((result) => {
       result.length ? setResult(result) : setResult({});
     });
@@ -97,7 +99,7 @@ export default function Tools() {
           </div>
         </div>
       ) : (
-        <p>Producto no encontrado.</p>
+        hasSearched && <p>Producto no encontrado.</p>
       )}
     </div>
   );

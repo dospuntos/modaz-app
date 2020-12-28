@@ -8,9 +8,9 @@ import NewsList from "modules/NewsList";
 import { getStatistics } from "api/statisticsApi";
 import "modules/card.css";
 import Card from "@material-ui/core/Card";
-import ProductStats from "modules/dashboard/ProductStats";
+/* import ProductStats from "modules/dashboard/ProductStats";
 import OrderStats from "modules/dashboard/OrderStats";
-import IncomeStats from "modules/dashboard/IncomeStats";
+import IncomeStats from "modules/dashboard/IncomeStats"; */
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   RiShoppingCartLine,

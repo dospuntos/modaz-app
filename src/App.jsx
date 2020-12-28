@@ -119,14 +119,17 @@ export default function App() {
     }
   }
 
-  return loggedIn === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l" ? (
+  if (loggedIn !== "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l")
+    return <Login handleLogin={setLoginState} />;
+
+  return (
     <Router>
       <div className={classes.root}>
         <ScrollToTop />
         <ToastContainer
           autoClose={2000}
           hideProgressBar
-          position="bottom-right"
+          position="bottom-center"
         />
 
         <AppBar
@@ -224,7 +227,5 @@ export default function App() {
         </main>
       </div>
     </Router>
-  ) : (
-    <Login handleLogin={setLoginState} />
   );
 }

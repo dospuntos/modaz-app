@@ -13,9 +13,11 @@ function Remove() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
   const [createOrder, setCreateOrder] = useStickyState(false, "createOrder");
+  const [hasSearched, setHasSearched] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
+    setHasSearched(true);
     searchUPC(upc).then((result) => {
       if (result.length) {
         let newStock = parseInt(result[0].stock, 10) - 1;
@@ -99,7 +101,7 @@ function Remove() {
           </div>
         </div>
       ) : (
-        <p>Producto no encontrado.</p>
+        hasSearched && <p>Producto no encontrado.</p>
       )}
     </div>
   );

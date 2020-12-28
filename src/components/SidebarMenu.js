@@ -7,10 +7,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import StoreIcon from "@material-ui/icons/Store";
+import SettingsIcon from "@material-ui/icons/Settings";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import Badge from "@material-ui/core/Badge";
-import { FaBoxOpen } from "react-icons/fa";
 import Cart from "modules/cart/Cart";
 import { getStatistics } from "api/statisticsApi";
 
@@ -67,7 +67,7 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
         <NavLink to="/stock">
           <ListItem button>
             <ListItemIcon>
-              <FaBoxOpen />
+              <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary="Stock" />
           </ListItem>
