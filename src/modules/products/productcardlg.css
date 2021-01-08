@@ -1,12 +1,12 @@
 .wrapper {
   width        : 300px;
-  height       : 500px;
+  height       : 350px;
   background   : white;
   margin       : auto;
   position     : relative;
   overflow     : hidden;
   border-radius: 10px 10px 10px 10px;
-  box-shadow   : 0;
+  box-shadow   : none;
   transform    : scale(0.95);
   transition   : box-shadow 0.5s, transform 0.5s;
   float        : left;
@@ -45,6 +45,8 @@
 .wrapper .container .bottom h1 {
   margin : 0;
   padding: 0;
+  font-size: 1em;
+  line-height: 1;
 }
 
 .wrapper .container .bottom p {
@@ -61,13 +63,9 @@
 }
 
 .wrapper .container .bottom .left .details {
-  padding: 20px;
+  padding: 10px 15px;
   float  : left;
   width  : calc(70% - 40px);
-}
-
-.wrapper .container .bottom h1 {
-  font-size: 1em;
 }
 
 .wrapper .container .bottom .left .buy {
@@ -81,7 +79,7 @@
 
 .wrapper .container .bottom .left .buy svg {
   font-size : 30px;
-  margin   : 30px;
+  margin: 20px 30px;
   color     : #254053;
   transition: transform 0.5s;
 }
@@ -114,7 +112,7 @@
   width      : 24%;
   display    : inline-block;
   font-size  : 25px;
-  line-height: 100px;
+  line-height: 75px;
 }
 
 .right .details span svg:hover {
@@ -127,12 +125,12 @@
   float       : left;
   transition  : transform 0.5s;
   border-right: solid thin rgba(255, 255, 255, 0.3);
-  height      : 50%;
+  height      : 54%;
 }
 
 .wrapper .container .bottom .right .done svg {
   font-size: 30px;
-  margin  : 30px;
+  margin  : 20px 30px;
   color    : white;
 }
 
@@ -140,7 +138,7 @@
   width       : calc(30% - 1px);
   clear       : both;
   border-right: solid thin rgba(255, 255, 255, 0.3);
-  height      : 50%;
+  height      : 54%;
   background  : #bc3b59;
   transition  : transform 0.5s, background 0.5s;
 }
@@ -156,7 +154,7 @@
 .wrapper .container .bottom .right .remove svg {
   transition: transform 0.5s;
   font-size : 30px;
-  margin   : 30px;
+  margin   : 20px 30px;
   color     : white;
 }
 
@@ -175,7 +173,7 @@
   right        : -70px;
   border-radius: 0px 0px 200px 200px;
   transition   : all 0.5s, border-radius 2s, top 1s;
-  overflow     : hidden;
+  overflow     : auto;
 }
 
 .wrapper .inside.unpublished {
