@@ -64,13 +64,13 @@ export default function CartContents({
           {cart.map((item) => (
             <ListItem
               button
-              onClick={() =>
+              /* onClick={() =>
                 dispatch({
                   type: "updateQuantity",
                   vid: item.vid,
                   quantity: 2,
                 })
-              }
+              } */
               key={item}
             >
               <ListItemAvatar>

@@ -8,6 +8,8 @@ export default function cartReducer(cart, action) {
         return [];
       }
       return cart;
+    case "empty2" /* Empty cart without confirmation */:
+      return [];
     case "updateQuantity": {
       const { vid, quantity } = action;
       // Send Toast notification

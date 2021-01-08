@@ -51,6 +51,7 @@ export default function Cart({ dispatch, cart, handleVariantCountChange }) {
     createOrder(cart, user, type);
     //TODO: Empty cart using cartReducer.
     //handleEmptyCart(false); // Empty cart without confirmation
+    dispatch({ type: "empty2" });
     history.push("/orders"); // Redirect to orders
   }
 
