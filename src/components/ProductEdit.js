@@ -260,7 +260,6 @@ function ProductEdit(props) {
                   value={product.images || ""}
                   style={{ width: "100%" }}
                 />
-                {encodedImage}
                 <TextInput
                   label="Order Date"
                   onChange={handleChange}

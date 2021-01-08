@@ -65,7 +65,7 @@
 .wrapper .container .bottom .left .details {
   padding: 10px 15px;
   float  : left;
-  width  : calc(70% - 40px);
+  width  : calc(80% - 40px);
 }
 
 .wrapper .container .bottom .left .buy {
@@ -172,7 +172,7 @@
   top          : -70px;
   right        : -70px;
   border-radius: 0px 0px 200px 200px;
-  transition   : all 0.5s, border-radius 2s, top 1s;
+  transition   : all 0.3s, border-radius 2s, top .7s;
   overflow     : auto;
 }
 
