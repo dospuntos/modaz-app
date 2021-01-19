@@ -4,18 +4,15 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 function ProductList({ product, updateStockInState, dispatch }) {
+  const images = JSON.parse(product.images);
+  const img =
+    images["0"]["image"] !== "0" || images["0"]["image"] !== ""
+      ? process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"]
+      : process.env.REACT_APP_DEFAULT_IMG_URL;
   return (
     <div className="pure-g list-item-wrap">
       <div className="pure-u-3-24">
-        <img
-          src={
-            product.images !== "0"
-              ? process.env.REACT_APP_PROD_IMG_URL + product.images
-              : process.env.REACT_APP_DEFAULT_IMG_URL
-          }
-          alt={product.name}
-          className="thumbnail zoom"
-        />
+        <img src={img} alt={product.name} className="thumbnail zoom" />
       </div>
       <div className="pure-u-7-24">
         <h4>

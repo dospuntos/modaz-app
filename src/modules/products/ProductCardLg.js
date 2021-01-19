@@ -43,9 +43,10 @@ function ProductCardLg({
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
+  const images = JSON.parse(product.images);
   const bgimg =
-    product.images !== "0"
-      ? process.env.REACT_APP_PROD_IMG_URL + product.images
+    images["0"]["image"] !== "0" || images["0"]["image"] !== ""
+      ? process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"]
       : process.env.REACT_APP_DEFAULT_IMG_URL;
 
   return (
