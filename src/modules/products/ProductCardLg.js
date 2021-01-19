@@ -13,6 +13,7 @@ import { BsGear } from "react-icons/bs";
 import ProductEdit from "components/ProductEdit";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
+import { getDefaultImage } from "functions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,12 +43,7 @@ function ProductCardLg({
   const [clicked, setClicked] = useState(false);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
-  const images = JSON.parse(product.images);
-  const bgimg =
-    images["0"]["image"] !== "0" || images["0"]["image"] !== ""
-      ? process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"]
-      : process.env.REACT_APP_DEFAULT_IMG_URL;
+  const defaultImg = getDefaultImage(product.images);
 
   return (
     <div className="wrapper">
@@ -67,7 +63,7 @@ function ProductCardLg({
           className="top"
           style={{
             background:
-              "#fff url(" + bgimg + ") center center /cover no-repeat",
+              "#fff url(" + defaultImg + ") center center /cover no-repeat",
           }}
         ></div>
         <div className={clicked ? "bottom clicked" : "bottom"}>

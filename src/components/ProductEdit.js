@@ -8,17 +8,40 @@ import {
   deleteVariant,
   getCategories,
 } from "api/productApi";
-import { RiSave2Line, RiArrowLeftSLine } from "react-icons/ri";
+import { RiArrowLeftSLine } from "react-icons/ri";
 import TextInput from "modules/form/TextInput";
 import ProductVariant from "modules/products/ProductVariant";
 import Categories from "modules/products/Categories";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Edit";
+import SaveIcon from "@material-ui/icons/Save";
+import ImageEdit from "components/ImageEdit";
+import { getDefaultImage } from "functions";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    position: "absolute",
+    width: "60%",
+    maxHeight: "90%",
+    overflow: "auto",
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 function ProductEdit(props) {
   const [product, setProduct] = useState([
     {
       id: "",
       name: "",
-      images: "0",
+      images: "{}",
       orderdate: "",
       release_date: "",
       category: "",
@@ -38,6 +61,9 @@ function ProductEdit(props) {
   const [edited, setEdited] = useState(false);
   const [variants, setVariants] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const classes = useStyles();
 
   let { productid } = useParams();
   if (!productid) {
@@ -85,7 +111,6 @@ function ProductEdit(props) {
   }
 
   function handleProductSave() {
-    //saveProduct(product).then(setEdited(false));
     let _product = product;
     saveProduct({
       ...product,
@@ -111,8 +136,6 @@ function ProductEdit(props) {
         setVariants(variants);
       });
     });
-
-    // Get variants again:
   }
 
   function handleVariantDelete(e, id) {
@@ -129,10 +152,27 @@ function ProductEdit(props) {
     setEdited(true);
   }
 
-  let encodedImage = JSON.stringify({
-    default: product.images,
-    boldblack: product.images,
-  });
+  function handleClose() {
+    setOpen(false);
+  }
+
+  function handleImageChange(type, index, value) {
+    let _images;
+    console.log(typeof _images);
+    try {
+      _images = JSON.parse(product.images);
+    } catch (e) {
+      console.log("No JSON");
+    }
+    _images[index][type] = value;
+    _images = JSON.stringify(_images);
+    setProduct({ ...product, images: _images });
+    setEdited(true);
+  }
+
+  function handleMakeDefaultImage(index) {
+    alert(index);
+  }
 
   return (
     <div id="main" className="pure-u-1">
@@ -158,13 +198,15 @@ function ProductEdit(props) {
                 </button>
               )}
               &nbsp;
-              <button
-                className="pure-button primary-button"
+              <Button
                 onClick={handleProductSave}
                 disabled={!edited}
+                variant="contained"
+                color="primary"
+                startIcon={<SaveIcon />}
               >
-                <RiSave2Line /> Guardar
-              </button>
+                Guardar
+              </Button>
             </p>
           </div>
         </div>
@@ -244,15 +286,15 @@ function ProductEdit(props) {
                   prodCats={product.category || []}
                   handleChange={handleCategoryChange}
                 />
-                <img
-                  src={
-                    product.images !== "0"
-                      ? process.env.REACT_APP_PROD_IMG_URL + product.images
-                      : process.env.REACT_APP_DEFAULT_IMG_URL
-                  }
-                  alt={product.name}
-                />
-
+                <img src={getDefaultImage(product.images)} alt={product.name} />
+                <Button
+                  fullWidth
+                  variant="contained"
+                  startIcon={<EditIcon />}
+                  onClick={() => setOpen(true)}
+                >
+                  Editar
+                </Button>
                 <TextInput
                   label="Imágen"
                   onChange={handleChange}
@@ -260,6 +302,7 @@ function ProductEdit(props) {
                   value={product.images || ""}
                   style={{ width: "100%" }}
                 />
+
                 <TextInput
                   label="Order Date"
                   onChange={handleChange}
@@ -313,6 +356,15 @@ function ProductEdit(props) {
           </form>
         </div>
       </div>
+      <Modal open={open} onClose={handleClose}>
+        <div className={classes.paper}>
+          <ImageEdit
+            images={product.images}
+            handleImageChange={handleImageChange}
+            handleMakeDefaultImage={handleMakeDefaultImage}
+          />
+        </div>
+      </Modal>
     </div>
   );
 }
