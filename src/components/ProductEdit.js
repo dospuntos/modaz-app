@@ -157,14 +157,14 @@ function ProductEdit(props) {
   }
 
   function handleImageChange(type, index, value) {
-    let images = JSON.parse(product.images);
+    let images = getAllImages(product.images);
     images[index][type] = value;
     setProduct({ ...product, images: JSON.stringify(images) });
     setEdited(true);
   }
 
   function handleMakeDefaultImage(index) {
-    let images = JSON.parse(product.images);
+    let images = getAllImages(product.images);
     images.forEach(function (item, i) {
       if (i === index) {
         images.splice(i, 1);
@@ -178,7 +178,7 @@ function ProductEdit(props) {
 
   function handleAddImage() {
     let images = [
-      ...JSON.parse(product.images),
+      ...getAllImages(product.images),
       { image: "default.png", color: "bold black" },
     ];
     setProduct({ ...product, images: JSON.stringify(images) });
@@ -186,7 +186,7 @@ function ProductEdit(props) {
   }
 
   function handleDeleteImage(index) {
-    let images = JSON.parse(product.images);
+    let images = getAllImages(product.images);
     images.splice(index, 1);
     setProduct({ ...product, images: JSON.stringify(images) });
     setEdited(true);

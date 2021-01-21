@@ -19,6 +19,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import ChangeStock from "modules/ChangeStock";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import { getAllImages } from "functions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,11 +70,8 @@ export default function ProductCardMd({
     setExpanded(!expanded);
   };
 
-  const images = JSON.parse(product.images);
-  const bgimg =
-    images["0"]["image"] !== "0" || images["0"]["image"] !== ""
-      ? process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"]
-      : process.env.REACT_APP_DEFAULT_IMG_URL;
+  const images = getAllImages(product.images);
+  const bgimg = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
 
   return (
     <Card className={classes.root}>

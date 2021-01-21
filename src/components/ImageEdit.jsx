@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
+import { getAllImages } from "functions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +34,7 @@ export default function ImageEdit({
   handleDeleteImage,
 }) {
   const classes = useStyles();
-  const imgObj = typeof images !== "undefined" ? JSON.parse(images) : "";
+  const imgObj = getAllImages(images);
 
   return (
     <div>

@@ -1,13 +1,11 @@
 import "./productcardsm.css";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
+import { getAllImages } from "functions";
 
 function ProductCardSm({ product, dispatch }) {
-  const images = JSON.parse(product.images);
-  const bgimg =
-    images["0"]["image"] !== "0" || images["0"]["image"] !== ""
-      ? process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"]
-      : process.env.REACT_APP_DEFAULT_IMG_URL;
+  const images = getAllImages(product.images);
+  const bgimg = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
 
   return (
     <div className="wrapper-sml">

@@ -2,13 +2,12 @@ import ChangeStock from "modules/ChangeStock";
 import ShowPrices from "modules/ShowPrices";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { getAllImages } from "functions";
 
 function ProductList({ product, updateStockInState, dispatch }) {
-  const images = JSON.parse(product.images);
-  const img =
-    images["0"]["image"] !== "0" || images["0"]["image"] !== ""
-      ? process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"]
-      : process.env.REACT_APP_DEFAULT_IMG_URL;
+  const images = getAllImages(product.images);
+  const img = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+
   return (
     <div className="pure-g list-item-wrap">
       <div className="pure-u-3-24">
