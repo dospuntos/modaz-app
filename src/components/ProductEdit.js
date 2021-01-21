@@ -18,7 +18,7 @@ import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import ImageEdit from "components/ImageEdit";
-import { getDefaultImage } from "functions";
+import { getDefaultImage, getAllImages } from "functions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -306,6 +306,20 @@ function ProductEdit(props) {
                   handleChange={handleCategoryChange}
                 />
                 <img src={getDefaultImage(product.images)} alt={product.name} />
+                <br />
+                {getAllImages(product.images).map((item, index) => {
+                  return (
+                    index > 0 && (
+                      <img
+                        className="thumbnail zoom"
+                        style={{ display: "inline-block", maxWidth: 50 }}
+                        src={process.env.REACT_APP_PROD_IMG_URL + item.image}
+                        alt={item.color}
+                        onClick={() => handleMakeDefaultImage(index)}
+                      />
+                    )
+                  );
+                })}
                 <Button
                   fullWidth
                   variant="contained"
@@ -314,14 +328,13 @@ function ProductEdit(props) {
                 >
                   Editar
                 </Button>
-                <TextInput
+                {/* <TextInput
                   label="Imágen"
                   onChange={handleChange}
                   name="images"
                   value={product.images || ""}
                   style={{ width: "100%" }}
-                />
-
+                /> */}
                 <TextInput
                   label="Order Date"
                   onChange={handleChange}

@@ -4,6 +4,7 @@ import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductEdit from "components/ProductEdit";
+import { getImagesByColor } from "functions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,14 +39,14 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
     setEdited(false);
   }
 
-  const img =
-    item.images !== "0"
-      ? process.env.REACT_APP_PROD_IMG_URL + item.images
-      : process.env.REACT_APP_DEFAULT_IMG_URL;
   return (
     <tr>
       <td>
-        <img src={img} alt={item.name} className="thumbnail zoom" />
+        <img
+          src={getImagesByColor(item.images, item.color)}
+          alt={item.name}
+          className="thumbnail zoom"
+        />
       </td>
       <td>
         {item.name ? (
