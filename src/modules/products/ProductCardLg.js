@@ -13,7 +13,8 @@ import { BsGear } from "react-icons/bs";
 import ProductEdit from "components/ProductEdit";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
-import { getDefaultImage } from "functions";
+import { getDefaultImage, getImageCount } from "functions";
+import BurstModeIcon from "@material-ui/icons/BurstMode";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -65,7 +66,13 @@ function ProductCardLg({
             background:
               "#fff url(" + defaultImg + ") center center /cover no-repeat",
           }}
-        ></div>
+        >
+          {getImageCount(product.images) > 1 && (
+            <span className="image-count" style={{ margin: 15 }}>
+              <BurstModeIcon color="primary" />
+            </span>
+          )}
+        </div>
         <div className={clicked ? "bottom clicked" : "bottom"}>
           <div className="left">
             <div className="details">
@@ -96,7 +103,7 @@ function ProductCardLg({
                   <RiCloseLine color="red" />
                 )}
               </span>
-              <span>
+              <span style={{ paddingLeft: 15 }}>
                 <RiEdit2Line onClick={() => setOpen(true)} />
               </span>
             </div>

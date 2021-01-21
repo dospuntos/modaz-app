@@ -1,12 +1,7 @@
 // Return default image from image JSON
 export function getDefaultImage(imgJSON) {
   let images = validateJSON(imgJSON);
-  const img =
-    images["0"]["image"] !== "0" || images["0"]["image"] !== ""
-      ? process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"]
-      : process.env.REACT_APP_DEFAULT_IMG_URL;
-  // Return full image url
-  return img;
+  return process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
 }
 
 // Return all images from JSON as array
@@ -14,20 +9,17 @@ export function getAllImages(imgJSON) {
   return validateJSON(imgJSON);
 }
 
-export function getImagesByColor(imgJSON, color) {
-  if (imgJSON === "" || imgJSON === null || imgJSON === "undefined")
-    return process.env.REACT_APP_DEFAULT_IMG_URL;
-  // Return first image that matches color, default image if none
-  let images;
-  try {
-    images = JSON.parse(imgJSON);
-  } catch (e) {
-    // JSON error, return default image
-    console.warn("Invalid JSON - " + imgJSON);
-    return [];
-  }
+export function getImageCount(imgJSON) {
+  return validateJSON(imgJSON).length;
+}
 
-  const retval = images.find((image) => image.color === color);
+export function getImagesByColor(imgJSON, color) {
+  let images = validateJSON(imgJSON);
+  if (color === null || color === "") color = "multi";
+
+  const retval = images.find(
+    (image) => image.color.toLowerCase() === color.toLowerCase()
+  );
   return retval
     ? process.env.REACT_APP_PROD_IMG_URL + retval.image
     : process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
@@ -47,7 +39,7 @@ function validateJSON(imgJSON) {
       "There was an error decoding image JSON - default value used. - " +
         imgJSON
     );
-    return JSON.parse('[{"image":"default.png","color":""}]');
+    return JSON.parse('[{"image":"default.png","color":"multi"}]');
   } else {
     return JSON.parse(imgJSON);
   }
