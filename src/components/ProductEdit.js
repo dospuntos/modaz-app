@@ -157,21 +157,39 @@ function ProductEdit(props) {
   }
 
   function handleImageChange(type, index, value) {
-    let _images;
-    console.log(typeof _images);
-    try {
-      _images = JSON.parse(product.images);
-    } catch (e) {
-      console.log("No JSON");
-    }
-    _images[index][type] = value;
-    _images = JSON.stringify(_images);
-    setProduct({ ...product, images: _images });
+    let images = JSON.parse(product.images);
+    images[index][type] = value;
+    setProduct({ ...product, images: JSON.stringify(images) });
     setEdited(true);
   }
 
   function handleMakeDefaultImage(index) {
-    alert(index);
+    let images = JSON.parse(product.images);
+    images.forEach(function (item, i) {
+      if (i === index) {
+        images.splice(i, 1);
+        images.unshift(item);
+      }
+    });
+
+    setProduct({ ...product, images: JSON.stringify(images) });
+    setEdited(true);
+  }
+
+  function handleAddImage() {
+    let images = [
+      ...JSON.parse(product.images),
+      { image: "default.png", color: "bold black" },
+    ];
+    setProduct({ ...product, images: JSON.stringify(images) });
+    setEdited(true);
+  }
+
+  function handleDeleteImage(index) {
+    let images = JSON.parse(product.images);
+    images.splice(index, 1);
+    setProduct({ ...product, images: JSON.stringify(images) });
+    setEdited(true);
   }
 
   return (
@@ -201,6 +219,7 @@ function ProductEdit(props) {
               <Button
                 onClick={handleProductSave}
                 disabled={!edited}
+                fullwidth
                 variant="contained"
                 color="primary"
                 startIcon={<SaveIcon />}
@@ -362,6 +381,8 @@ function ProductEdit(props) {
             images={product.images}
             handleImageChange={handleImageChange}
             handleMakeDefaultImage={handleMakeDefaultImage}
+            handleAddImage={handleAddImage}
+            handleDeleteImage={handleDeleteImage}
           />
         </div>
       </Modal>
