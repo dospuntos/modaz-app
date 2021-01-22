@@ -13,14 +13,22 @@ import TextInput from "modules/form/TextInput";
 import ProductVariant from "modules/products/ProductVariant";
 import Categories from "modules/products/Categories";
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import Modal from "@material-ui/core/Modal";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import ImageEdit from "components/ImageEdit";
 import { getDefaultImage, getAllImages } from "functions";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   paper: {
     top: "50%",
     left: "50%",
@@ -36,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductEdit(props) {
+export default function ProductEdit(props) {
   const [product, setProduct] = useState([
     {
       id: "",
@@ -193,201 +201,7 @@ function ProductEdit(props) {
   }
 
   return (
-    <div id="main" className="pure-u-1">
-      <div className="email-content">
-        <div className="email-content-header pure-g">
-          <div className="pure-u-3-4">
-            <h1 className="email-content-title">{product.name}</h1>
-            <p className="email-content-subtitle">Producto #{productid}</p>
-          </div>
-          <div className="pure-u-1-4">
-            <p>
-              {!props.id && (
-                <button
-                  className="pure-button secondary-button"
-                  onClick={() =>
-                    !edited ||
-                    window.confirm("¿Quieres volver sin guardar los cambios?")
-                      ? props.history.goBack()
-                      : null
-                  }
-                >
-                  <RiArrowLeftSLine /> Volver
-                </button>
-              )}
-              &nbsp;
-              <Button
-                onClick={handleProductSave}
-                disabled={!edited}
-                fullwidth
-                variant="contained"
-                color="primary"
-                startIcon={<SaveIcon />}
-              >
-                Guardar
-              </Button>
-            </p>
-          </div>
-        </div>
-
-        <div className="email-content-body order-cards-container">
-          <form
-            className="pure-form pure-form-aligned"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <div className="pure-g">
-              <div className="pure-u-1 pure-u-md-3-4">
-                <TextInput
-                  label="Nombre"
-                  onChange={handleChange}
-                  name="name"
-                  value={product.name || ""}
-                  className="pure-u-2-3"
-                />
-                <TextInput
-                  label="Precio ModaZ (Bs)"
-                  onChange={handleChange}
-                  name="price"
-                  value={product.price || ""}
-                />
-                <TextInput
-                  label="Descuento"
-                  onChange={handleChange}
-                  name="price_discount"
-                  value={product.price_discount || ""}
-                />
-                <TextInput
-                  id="zinprice"
-                  label="Precio ZIN (Bs)"
-                  onChange={handleChange}
-                  name="zinprice"
-                  value={product.zinprice || ""}
-                />
-                <TextInput
-                  label="Precio revendedora ($US)"
-                  onChange={handleChange}
-                  name="wholesaleprice"
-                  value={product.wholesaleprice || ""}
-                />
-                <TextInput
-                  label="MSRP ($US)"
-                  onChange={handleChange}
-                  name="msrp"
-                  value={product.msrp || ""}
-                />
-
-                <hr />
-                <h2>Modelos</h2>
-                <p>
-                  <small>(Los cambios se guardan immediatamente)</small>
-                </p>
-                {variants.map((item) => {
-                  return (
-                    <ProductVariant
-                      key={item.id}
-                      item={item}
-                      handleVariantChange={handleVariantChange}
-                      handleVariantSave={handleVariantSave}
-                      handleVariantDelete={handleVariantDelete}
-                    />
-                  );
-                })}
-                <button
-                  className="pure-button primary-button"
-                  onClick={addVariant}
-                >
-                  +
-                </button>
-              </div>
-              <div className="pure-u-1 pure-u-md-1-4">
-                <Categories
-                  categories={categories}
-                  prodCats={product.category || []}
-                  handleChange={handleCategoryChange}
-                />
-                <img src={getDefaultImage(product.images)} alt={product.name} />
-                <br />
-                {getAllImages(product.images).map((item, index) => {
-                  return (
-                    index > 0 && (
-                      <img
-                        className="thumbnail zoom"
-                        style={{ display: "inline-block", maxWidth: 50 }}
-                        src={process.env.REACT_APP_PROD_IMG_URL + item.image}
-                        alt={item.color}
-                        onClick={() => handleMakeDefaultImage(index)}
-                      />
-                    )
-                  );
-                })}
-                <Button
-                  fullWidth
-                  variant="contained"
-                  startIcon={<EditIcon />}
-                  onClick={() => setOpen(true)}
-                >
-                  Editar
-                </Button>
-                {/* <TextInput
-                  label="Imágen"
-                  onChange={handleChange}
-                  name="images"
-                  value={product.images || ""}
-                  style={{ width: "100%" }}
-                /> */}
-                <TextInput
-                  label="Order Date"
-                  onChange={handleChange}
-                  name="orderdate"
-                  value={product.orderdate || ""}
-                />
-                <TextInput
-                  label="Release Date"
-                  onChange={handleChange}
-                  name="release_date"
-                  value={product.release_date || ""}
-                />
-                <TextInput
-                  label="Season"
-                  onChange={handleChange}
-                  name="season"
-                  value={product.season || ""}
-                />
-                <TextInput
-                  label="Weight"
-                  onChange={handleChange}
-                  name="weight"
-                  value={product.weight || ""}
-                />
-                <TextInput
-                  label="Composition"
-                  onChange={handleChange}
-                  name="composition"
-                  value={product.composition || ""}
-                />
-                <TextInput
-                  label="Manufacturer"
-                  onChange={handleChange}
-                  name="manufacturer"
-                  value={product.manufacturer || ""}
-                />
-                <TextInput
-                  label="COO"
-                  onChange={handleChange}
-                  name="coo"
-                  value={product.coo || ""}
-                />
-                <TextInput
-                  label="Country"
-                  onChange={handleChange}
-                  name="country"
-                  value={product.country || ""}
-                />
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+    <div className={classes.root}>
       <Modal open={open} onClose={handleClose}>
         <div className={classes.paper}>
           <ImageEdit
@@ -399,8 +213,231 @@ function ProductEdit(props) {
           />
         </div>
       </Modal>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={8}>
+          <h1>{product.name}</h1>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <p>
+            {!props.id && (
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() =>
+                  !edited || window.confirm("¿Volver sin guardar?")
+                    ? props.history.goBack()
+                    : null
+                }
+              >
+                <RiArrowLeftSLine /> Volver
+              </Button>
+            )}
+            &nbsp;
+            <Button
+              onClick={handleProductSave}
+              disabled={!edited}
+              variant="contained"
+              color="primary"
+              startIcon={<SaveIcon />}
+            >
+              Guardar
+            </Button>
+          </p>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={8}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <TextField
+                name="name"
+                value={product.name || ""}
+                onChange={handleChange}
+                label="Nombre"
+                variant="filled"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <TextField
+                label="Precio ModaZ"
+                onChange={handleChange}
+                name="price"
+                value={product.price || ""}
+                size="small"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">Bs</InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <TextField
+                label="Descuento"
+                onChange={handleChange}
+                name="price_discount"
+                value={product.price_discount || ""}
+                size="small"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">Bs</InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <TextField
+                label="Precio ZIN"
+                onChange={handleChange}
+                name="zinprice"
+                value={product.zinprice || ""}
+                size="small"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">Bs</InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={6}>
+              <TextField
+                label="Precio revendedora"
+                onChange={handleChange}
+                name="wholesaleprice"
+                value={product.wholesaleprice || ""}
+                size="small"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$US</InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={6}>
+              <TextField
+                label="MSRP"
+                onChange={handleChange}
+                name="msrp"
+                value={product.msrp || ""}
+                size="small"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$US</InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          </Grid>
+          <hr />
+          <h2>Modelos</h2>
+          <p>
+            <small>(Los cambios se guardan inmediatamente)</small>
+          </p>
+          {variants.map((item) => {
+            return (
+              <ProductVariant
+                key={item.id}
+                item={item}
+                handleVariantChange={handleVariantChange}
+                handleVariantSave={handleVariantSave}
+                handleVariantDelete={handleVariantDelete}
+              />
+            );
+          })}
+          <Button
+            variant="contained"
+            onClick={addVariant}
+            startIcon={<AddCircleOutlineIcon />}
+            size="small"
+          >
+            Agregar modelo
+          </Button>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Categories
+            categories={categories}
+            prodCats={product.category || []}
+            handleChange={handleCategoryChange}
+          />
+          <img src={getDefaultImage(product.images)} alt={product.name} />
+          <br />
+          {getAllImages(product.images).map((item, index) => {
+            return (
+              index > 0 && (
+                <img
+                  className="thumbnail zoom"
+                  style={{ display: "inline-block", maxWidth: 50 }}
+                  src={process.env.REACT_APP_PROD_IMG_URL + item.image}
+                  alt={item.color}
+                  onClick={() => handleMakeDefaultImage(index)}
+                />
+              )
+            );
+          })}
+          <Button
+            fullWidth
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={() => setOpen(true)}
+          >
+            Editar
+          </Button>
+          <TextInput
+            label="Order Date"
+            onChange={handleChange}
+            name="orderdate"
+            value={product.orderdate || ""}
+          />
+          <TextInput
+            label="Release Date"
+            onChange={handleChange}
+            name="release_date"
+            value={product.release_date || ""}
+          />
+          <TextInput
+            label="Season"
+            onChange={handleChange}
+            name="season"
+            value={product.season || ""}
+          />
+          <TextInput
+            label="Weight"
+            onChange={handleChange}
+            name="weight"
+            value={product.weight || ""}
+          />
+          <TextInput
+            label="Composition"
+            onChange={handleChange}
+            name="composition"
+            value={product.composition || ""}
+          />
+          <TextInput
+            label="Manufacturer"
+            onChange={handleChange}
+            name="manufacturer"
+            value={product.manufacturer || ""}
+          />
+          <TextInput
+            label="COO"
+            onChange={handleChange}
+            name="coo"
+            value={product.coo || ""}
+          />
+          <TextInput
+            label="Country"
+            onChange={handleChange}
+            name="country"
+            value={product.country || ""}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 }
-
-export default ProductEdit;

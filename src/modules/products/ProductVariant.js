@@ -1,4 +1,5 @@
-import { RiDeleteBin5Line } from "react-icons/ri";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function ProductVariant({
   item,
@@ -52,12 +53,12 @@ function ProductVariant({
             />
           </div>
           <div className="pure-u-1 pure-u-md-1-5">
-            <button
-              className="pure-button secondary-button"
+            <IconButton
               onClick={(e) => handleVariantDelete(e, item.id)}
+              style={{ float: "right" }}
             >
-              <RiDeleteBin5Line />
-            </button>
+              <DeleteIcon color="error" />
+            </IconButton>
           </div>
         </div>
       </fieldset>
