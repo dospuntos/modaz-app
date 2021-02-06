@@ -1,9 +1,8 @@
+import { getImagesByColor } from "functions";
+
 function OrderDetailsQuote({ item, config }) {
   const imgMaxWidth = config.showPrice ? 120 : 200;
-  const img =
-    item.images !== "0"
-      ? process.env.REACT_APP_PROD_IMG_URL + item.images
-      : process.env.REACT_APP_DEFAULT_IMG_URL;
+  const img = getImagesByColor(item.images, item.color);
   return (
     <tr className="item">
       <td>
