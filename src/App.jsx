@@ -1,4 +1,6 @@
 import { useReducer, useEffect } from "react";
+import useToken from "api/useToken";
+import { logOut } from "api/usersApi";
 import clsx from "clsx";
 import { useStickyState } from "./hooks";
 import { makeStyles } from "@material-ui/core/styles";
@@ -105,22 +107,22 @@ try {
 export default function App() {
   const classes = useStyles();
   const [open, setOpen] = useStickyState(false, "menuOpen");
-  //const [initialCart, setInitialCart] = useStickyState([], "cart");
-  const [loggedIn, setLoggedIn] = useStickyState(false, "loggedIn");
+  const { token, setToken } = useToken();
   const [cart, dispatch] = useReducer(cartReducer, initialCart);
 
   useEffect(() => localStorage.setItem("cart", JSON.stringify(cart)), [cart]);
 
-  // Check login state
-  function setLoginState(pw) {
-    /* User: joanne.tatiana@gmail.com, PW: joanne */
-    if (pw === "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l") {
-      setLoggedIn(pw);
-    }
-  }
+  if (!token) return <Login setToken={setToken} />;
 
-  if (loggedIn !== "am9hbm5lLnRhdGlhbmFAZ21haWwuY29tam9hbm5l")
-    return <Login handleLogin={setLoginState} />;
+  function handleLogout(e) {
+    e.preventDefault();
+    logOut()
+      .then((data) => data.json())
+      .then(() => {
+        localStorage.removeItem("token");
+        window.location.reload();
+      });
+  }
 
   return (
     <Router>
@@ -167,10 +169,7 @@ export default function App() {
                   Version: {pkg.version}{" "}
                   <strong>{process.env.NODE_ENV.substring(0, 3)}</strong>
                   <br />
-                  <a
-                    href="/"
-                    onClick={() => localStorage.removeItem("loggedIn")}
-                  >
+                  <a href="#/" onClick={(e) => handleLogout(e)}>
                     Salir
                   </a>
                 </div>

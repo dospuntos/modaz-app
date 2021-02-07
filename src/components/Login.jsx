@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { loginUser } from "api/usersApi";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,9 +8,14 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import MuiAlert from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function Copyright() {
   return (
@@ -57,11 +63,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login({ handleLogin }) {
+export default function Login({ setToken }) {
   const classes = useStyles();
 
-  const [emailField, setEmailField] = useState("");
-  const [pwField, setPwField] = useState("");
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [errors, setErrors] = useState([]);
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -77,8 +84,17 @@ export default function Login({ handleLogin }) {
           </Typography>
           <form
             className={classes.form}
-            noValidate
-            onSubmit={(e) => handleLogin(btoa(emailField + pwField))}
+            onSubmit={(e) => {
+              e.preventDefault();
+              loginUser({
+                username,
+                password,
+              }).then((response) => {
+                response.success
+                  ? setToken(response)
+                  : setErrors(response.messages);
+              });
+            }}
           >
             <TextField
               variant="outlined"
@@ -86,11 +102,11 @@ export default function Login({ handleLogin }) {
               required
               fullWidth
               id="email"
-              label="Email"
+              label="Usuario"
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(e) => setEmailField(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -102,12 +118,9 @@ export default function Login({ handleLogin }) {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(e) => setPwField(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+
             <Button
               type="submit"
               fullWidth
@@ -117,7 +130,8 @@ export default function Login({ handleLogin }) {
             >
               Ingresar
             </Button>
-            {/*  <Grid container>
+
+            <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -128,7 +142,15 @@ export default function Login({ handleLogin }) {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
+            {errors.length > 0 &&
+              errors.map((error, index) => {
+                return (
+                  <Alert key={index} severity="error">
+                    {error}
+                  </Alert>
+                );
+              })}
             <Box mt={5}>
               <Copyright />
             </Box>
