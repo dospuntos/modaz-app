@@ -170,7 +170,7 @@ export default function App() {
                   <strong>{process.env.NODE_ENV.substring(0, 3)}</strong>
                   <br />
                   <a href="#/" onClick={(e) => handleLogout(e)}>
-                    Salir
+                    Salir {token.full_name && <span>({token.full_name})</span>}
                   </a>
                 </div>
               </Grid>

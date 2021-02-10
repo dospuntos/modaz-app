@@ -90,7 +90,7 @@ export default function Login({ setToken }) {
                 username,
                 password,
               }).then((response) => {
-                response.success
+                response?.success
                   ? setToken(response)
                   : setErrors(response.messages);
               });
