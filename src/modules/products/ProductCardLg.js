@@ -15,6 +15,7 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDefaultImage, getImageCount } from "functions";
 import BurstModeIcon from "@material-ui/icons/BurstMode";
+import { useCart } from "modules/cart/cartContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductCardLg({
-  dispatch,
+export default function ProductCardLg({
   product,
   updateStockInState,
   changePublishedState,
@@ -41,6 +41,8 @@ function ProductCardLg({
   deleteProduct,
   forceProductRefresh,
 }) {
+  const { dispatch } = useCart();
+
   const [clicked, setClicked] = useState(false);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -199,5 +201,3 @@ function ProductCardLg({
     </div>
   );
 }
-
-export default ProductCardLg;

@@ -1,4 +1,3 @@
-import { useReducer, useEffect } from "react";
 import useToken from "api/useToken";
 import { logOut } from "api/usersApi";
 import clsx from "clsx";
@@ -30,7 +29,6 @@ import SidebarMenu from "./components/SidebarMenu";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import pkg from "../package.json";
-import cartReducer from "./cartReducer";
 
 const drawerWidth = 240;
 
@@ -96,21 +94,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let initialCart;
-try {
-  initialCart = JSON.parse(localStorage.getItem("cart")) ?? [];
-} catch {
-  console.error("The cart could not be parsed into JSON.");
-  initialCart = [];
-}
-
 export default function App() {
   const classes = useStyles();
   const [open, setOpen] = useStickyState(false, "menuOpen");
   const { token, setToken } = useToken();
-  const [cart, dispatch] = useReducer(cartReducer, initialCart);
-
-  useEffect(() => localStorage.setItem("cart", JSON.stringify(cart)), [cart]);
 
   if (!token) return <Login setToken={setToken} />;
 
@@ -197,11 +184,7 @@ export default function App() {
             </IconButton>
           </div>
           <Divider />
-          <SidebarMenu
-            dispatch={dispatch}
-            cart={cart}
-            handleVariantCountChange={null}
-          />
+          <SidebarMenu handleVariantCountChange={null} />
         </Drawer>
         {/* <div id="layout" className="content pure-g"> */}
         <main className={classes.content}>
@@ -209,16 +192,10 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={Dashboard} />
             <Route path="/products/:productid" component={ProductEdit} />
-            <Route
-              path="/products"
-              render={(props) => <Products {...props} dispatch={dispatch} />}
-            />
+            <Route path="/products" component={Products} />
             <Route path="/orders/:orderid" component={OrderDetails} />
             <Route path="/orders" component={Orders} />
-            <Route
-              path="/stock"
-              render={(props) => <Stock {...props} dispatch={dispatch} />}
-            />
+            <Route path="/stock" component={Stock} />
             <Route path="/users/:userid" component={Users} />
             <Route path="/users" component={Users} />
             <Route path="/login" component={Login} />

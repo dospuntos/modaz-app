@@ -7,6 +7,7 @@ import Fab from "@material-ui/core/Fab";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import CartContents from "modules/cart/CartContents";
+import { useCart } from "modules/cart/cartContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Cart({ dispatch, cart, handleVariantCountChange }) {
+export default function Cart({ handleVariantCountChange }) {
+  const { cart, dispatch } = useCart();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 

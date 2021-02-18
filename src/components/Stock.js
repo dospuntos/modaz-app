@@ -38,9 +38,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Stock({ handleAddItem }) {
+export default function Stock() {
   const [tab, setTab] = useStickyState("add", "tab");
-
   const classes = useStyles();
 
   return (
@@ -61,7 +60,6 @@ export default function Stock({ handleAddItem }) {
             value={tab}
             exclusive
             onChange={(e, tab) => setTab(tab)}
-            aria-label="text alignment"
           >
             <ToggleButton value="consult">Consultar</ToggleButton>
             <ToggleButton value="add">Agregar</ToggleButton>
@@ -76,7 +74,7 @@ export default function Stock({ handleAddItem }) {
         {tab === "add" && <Add />}
         {tab === "consult" && <Consult />}
         {tab === "remove" && <Remove />}
-        {tab === "cart" && <AddToCart handleAddItem={handleAddItem} />}
+        {tab === "cart" && <AddToCart />}
         {tab === "tools" && <Tools />}
       </Paper>
     </Container>

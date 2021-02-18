@@ -5,6 +5,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { esES } from "@material-ui/core/locale";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { CartProvider } from "modules/cart/cartContext";
 
 const theme = createMuiTheme(
   {
@@ -24,7 +25,9 @@ ReactDOM.render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </ThemeProvider>
   </StrictMode>,
   document.getElementById("root")

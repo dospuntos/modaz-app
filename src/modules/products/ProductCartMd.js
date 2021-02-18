@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import ChangeStock from "modules/ChangeStock";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { getAllImages } from "functions";
+import { useCart } from "modules/cart/cartContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,12 +58,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductCardMd({
   product,
-  dispatch,
   updateStockInState,
   changePublishedState,
   changeFeaturedState,
   deleteProduct,
 }) {
+  const { dispatch } = useCart();
+
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 

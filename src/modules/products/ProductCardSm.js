@@ -2,8 +2,11 @@ import "./productcardsm.css";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
 import { getAllImages } from "functions";
+import { useCart } from "modules/cart/cartContext";
 
-function ProductCardSm({ product, dispatch }) {
+function ProductCardSm({ product }) {
+  const { dispatch } = useCart();
+
   const images = getAllImages(product.images);
   const bgimg = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
 

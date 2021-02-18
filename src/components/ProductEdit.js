@@ -23,7 +23,6 @@ import ImageEdit from "components/ImageEdit";
 import { getDefaultImage, getAllImages } from "functions";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {

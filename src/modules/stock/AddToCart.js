@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { searchUPC } from "api/productApi";
-//import PriceDisplay from "modules/PriceDisplay";
 import ShowPrices from "modules/ShowPrices";
 import { toast } from "react-toastify";
+//import { useCart } from "modules/cart/cartContext";
 
-function AddToCart({ handleAddItem }) {
+export default function AddToCart() {
+  //const { dispatch } = useCart();
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
 
@@ -14,7 +15,10 @@ function AddToCart({ handleAddItem }) {
       if (result.length) {
         result[0]["order_item_quantity"] = "1";
         // Add to cart
-        handleAddItem(result[0]);
+        /* dispatch({
+          type: "add",
+          variant: result[0],
+        }); */
 
         setResult(result);
       } else {
@@ -82,5 +86,3 @@ function AddToCart({ handleAddItem }) {
     </div>
   );
 }
-
-export default AddToCart;

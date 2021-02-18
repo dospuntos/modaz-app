@@ -292,7 +292,6 @@ export default function Products(props) {
                   return (
                     <ProductCardLg
                       key={product.name}
-                      dispatch={props.dispatch}
                       product={product}
                       updateStockInState={updateStockInState}
                       changePublishedState={changePublishedState}
@@ -306,7 +305,6 @@ export default function Products(props) {
                     <ProductCardMd
                       key={product.name}
                       product={product}
-                      dispatch={props.dispatch}
                       updateStockInState={updateStockInState}
                       changePublishedState={changePublishedState}
                       changeFeaturedState={changeFeaturedState}
@@ -318,7 +316,6 @@ export default function Products(props) {
                     <ProductCardSm
                       key={product.name}
                       product={product}
-                      dispatch={props.dispatch}
                       updateStockInState={updateStockInState}
                     />
                   );
@@ -328,7 +325,6 @@ export default function Products(props) {
                       key={product.name}
                       product={product}
                       updateStockInState={updateStockInState}
-                      dispatch={props.dispatch}
                     />
                   );
               }
