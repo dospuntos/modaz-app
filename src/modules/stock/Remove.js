@@ -8,8 +8,9 @@ import { quickOrder } from "api/orderApi";
 import { toast } from "react-toastify";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import { getDefaultImage } from "functions";
 
-function Remove() {
+export default function Remove() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
   const [createOrder, setCreateOrder] = useStickyState(false, "createOrder");
@@ -91,11 +92,7 @@ function Remove() {
           <div className="pure-u-1 pure-u-sm-1-3">
             <img
               style={{ width: "100%" }}
-              src={
-                result[0].images !== "0"
-                  ? process.env.REACT_APP_PROD_IMG_URL + result[0].images
-                  : process.env.REACT_APP_DEFAULT_IMG_URL
-              }
+              src={getDefaultImage(result[0].images)}
               alt={result[0].name}
             />
           </div>
@@ -106,5 +103,3 @@ function Remove() {
     </div>
   );
 }
-
-export default Remove;

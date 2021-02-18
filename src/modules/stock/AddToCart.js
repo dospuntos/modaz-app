@@ -2,10 +2,11 @@ import { useState } from "react";
 import { searchUPC } from "api/productApi";
 import ShowPrices from "modules/ShowPrices";
 import { toast } from "react-toastify";
-//import { useCart } from "modules/cart/cartContext";
+import { getDefaultImage } from "functions";
+import { useCart } from "modules/cart/cartContext";
 
 export default function AddToCart() {
-  //const { dispatch } = useCart();
+  const { dispatch } = useCart();
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
 
@@ -15,10 +16,10 @@ export default function AddToCart() {
       if (result.length) {
         result[0]["order_item_quantity"] = "1";
         // Add to cart
-        /* dispatch({
+        dispatch({
           type: "add",
           variant: result[0],
-        }); */
+        });
 
         setResult(result);
       } else {
@@ -71,11 +72,7 @@ export default function AddToCart() {
           <div className="pure-u-1 pure-u-sm-1-3">
             <img
               style={{ width: "100%" }}
-              src={
-                result[0].images !== "0"
-                  ? process.env.REACT_APP_PROD_IMG_URL + result[0].images
-                  : process.env.REACT_APP_DEFAULT_IMG_URL
-              }
+              src={getDefaultImage(result[0].images)}
               alt={result[0].name}
             />
           </div>

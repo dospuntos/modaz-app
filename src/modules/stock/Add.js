@@ -5,8 +5,9 @@ import ShowPrices from "modules/ShowPrices";
 import { changeStock } from "api/productApi";
 import TextField from "@material-ui/core/TextField";
 import { toast } from "react-toastify";
+import { getDefaultImage } from "functions";
 
-function Add() {
+export default function Add() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
   const [hasSearched, setHasSearched] = useState(false);
@@ -81,11 +82,7 @@ function Add() {
           <div className="pure-u-1 pure-u-sm-1-3">
             <img
               style={{ width: "100%" }}
-              src={
-                result[0].images !== "0"
-                  ? process.env.REACT_APP_PROD_IMG_URL + result[0].images
-                  : process.env.REACT_APP_DEFAULT_IMG_URL
-              }
+              src={getDefaultImage(result[0].images)}
               alt={result[0].name}
             />
           </div>
@@ -96,5 +93,3 @@ function Add() {
     </div>
   );
 }
-
-export default Add;

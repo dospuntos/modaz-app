@@ -3,6 +3,7 @@ import { searchUPC } from "api/productApi";
 //import PriceDisplay from "modules/PriceDisplay";
 import ShowPrices from "modules/ShowPrices";
 import TextField from "@material-ui/core/TextField";
+import { getDefaultImage } from "functions";
 
 export default function Tools() {
   const [upc, setUpc] = useState("");
@@ -89,11 +90,7 @@ export default function Tools() {
           <div className="pure-u-1 pure-u-sm-1-3">
             <img
               style={{ width: "100%" }}
-              src={
-                result[0].images !== "0"
-                  ? process.env.REACT_APP_PROD_IMG_URL + result[0].images
-                  : process.env.REACT_APP_DEFAULT_IMG_URL
-              }
+              src={getDefaultImage(result[0].images)}
               alt={result[0].name}
             />
           </div>
