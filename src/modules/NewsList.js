@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const news = [
+  "Nuevo sistema de carrito",
+  "Nuevo sistema de login (API v2)",
   "Mostrar descuentos en cotizaciónes",
   "Carrito de compras mejorado",
   "Nuevo dashboard",
