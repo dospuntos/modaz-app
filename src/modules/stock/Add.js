@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { searchUPC } from "api/productApi";
-//import PriceDisplay from "modules/PriceDisplay";
-import ShowPrices from "modules/ShowPrices";
 import { changeStock } from "api/productApi";
 import TextField from "@material-ui/core/TextField";
 import { toast } from "react-toastify";
-import { getDefaultImage } from "functions";
+import ProductDetails from "./ProductDetails";
 
 export default function Add() {
   const [upc, setUpc] = useState("");
@@ -53,40 +51,7 @@ export default function Add() {
         />
       </form>
       {result.length ? (
-        <div className="result pure-g">
-          <div className="pure-u-1 pure-u-sm-2-3">
-            <h2 style={result[0].state ? { color: "green" } : { color: "red" }}>
-              {result[0].name} (#{result[0].id}) {result[0].featured ? "*" : ""}
-            </h2>
-            <h4>
-              Categorías: {result[0].category} - UPC: {result[0].upc}
-            </h4>
-            <ShowPrices product={result[0]} />
-            <h2>
-              {result[0].size}, {result[0].color}
-            </h2>
-            <span
-              className="product-stock"
-              style={{
-                float: "right",
-                fontSize: 75,
-                border: "1px solid black",
-                padding: 10,
-                borderRadius: 10,
-                color: result[0].stock > 0 ? "green" : "red",
-              }}
-            >
-              {result[0].stock}
-            </span>
-          </div>
-          <div className="pure-u-1 pure-u-sm-1-3">
-            <img
-              style={{ width: "100%" }}
-              src={getDefaultImage(result[0].images)}
-              alt={result[0].name}
-            />
-          </div>
-        </div>
+        <ProductDetails product={result[0]} />
       ) : (
         hasSearched && <p>Producto no encontrado.</p>
       )}
