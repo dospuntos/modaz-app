@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { searchUPC } from "api/productApi";
-//import PriceDisplay from "modules/PriceDisplay";
-import ShowPrices from "modules/ShowPrices";
 import TextField from "@material-ui/core/TextField";
-import { getDefaultImage } from "functions";
 import ProductDetails from "./ProductDetails";
 
 export default function Tools() {

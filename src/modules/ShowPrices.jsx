@@ -30,7 +30,7 @@ export default function ShowPrices({ product }) {
   const classes = useStyles();
 
   return (
-    <>
+    <div>
       <Tooltip title="Precio regular (ModaZ)">
         <span className={classes.pricetag}>Bs. {product.price}</span>
       </Tooltip>
@@ -57,6 +57,6 @@ export default function ShowPrices({ product }) {
           {(product.wholesaleprice * 6.96 * 1.5).toFixed(0)})
         </span>
       </Tooltip>
-    </>
+    </div>
   );
 }
