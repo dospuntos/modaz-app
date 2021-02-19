@@ -1,4 +1,9 @@
 // Return default image from image JSON
+/* export function getDefaultImage(imgJSON) {
+  let images = validateJSON(imgJSON);
+  return process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+} */
+
 export function getDefaultImage(imgJSON) {
   let images = validateJSON(imgJSON);
   return process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
