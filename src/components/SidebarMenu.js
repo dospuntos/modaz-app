@@ -10,6 +10,7 @@ import StoreIcon from "@material-ui/icons/Store";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import CropFreeIcon from "@material-ui/icons/CropFree";
 import Badge from "@material-ui/core/Badge";
 import Cart from "modules/cart/Cart";
 import { getStatistics } from "api/statisticsApi";
@@ -64,14 +65,6 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
             <ListItemText primary="Pedidos" />
           </ListItem>
         </NavLink>
-        <NavLink to="/stock">
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Stock" />
-          </ListItem>
-        </NavLink>
         <NavLink to="/users">
           <ListItem button>
             <ListItemIcon>
@@ -80,6 +73,22 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
               </Badge>
             </ListItemIcon>
             <ListItemText primary="Usuarios" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/stock">
+          <ListItem button>
+            <ListItemIcon>
+              <CropFreeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Escanear UPC" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/tools">
+          <ListItem button>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Herramientas" />
           </ListItem>
         </NavLink>
       </List>

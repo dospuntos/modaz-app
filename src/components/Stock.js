@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Add from "modules/stock/Add";
 import Remove from "modules/stock/Remove";
 import Consult from "modules/stock/Consult";
-import Tools from "modules/stock/Tools";
 import AddToCart from "modules/stock/AddToCart";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
@@ -64,7 +63,6 @@ export default function Stock() {
             <ToggleButton value="consult">Consultar</ToggleButton>
             <ToggleButton value="add">Agregar</ToggleButton>
             <ToggleButton value="remove">Reducir</ToggleButton>
-            <ToggleButton value="tools">Herramientas</ToggleButton>
             <ToggleButton value="cart">Agregar a carrito</ToggleButton>
           </ToggleButtonGroup>
         </Grid>
@@ -75,7 +73,6 @@ export default function Stock() {
         {tab === "consult" && <Consult />}
         {tab === "remove" && <Remove />}
         {tab === "cart" && <AddToCart />}
-        {tab === "tools" && <Tools />}
       </Paper>
     </Container>
   );

@@ -25,6 +25,7 @@ import OrderDetails from "./components/OrderDetails";
 import Stock from "./components/Stock";
 import Users from "./components/Users";
 import Login from "./components/Login";
+import Tools from "modules/stock/Tools";
 import SidebarMenu from "./components/SidebarMenu";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -196,6 +197,7 @@ export default function App() {
             <Route path="/orders/:orderid" component={OrderDetails} />
             <Route path="/orders" component={Orders} />
             <Route path="/stock" component={Stock} />
+            <Route path="/tools" component={Tools} />
             <Route path="/users/:userid" component={Users} />
             <Route path="/users" component={Users} />
             <Route path="/login" component={Login} />
