@@ -35,14 +35,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductCardLg({
   product,
-  updateStockInState,
-  changePublishedState,
-  changeFeaturedState,
-  deleteProduct,
+  prodDispatch,
   forceProductRefresh,
 }) {
   const { dispatch } = useCart();
-
   const [clicked, setClicked] = useState(false);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -90,15 +86,36 @@ export default function ProductCardLg({
               <RiCloseLine />
             </div>
             <div className="details">
-              <span onClick={() => deleteProduct(product.id)}>
+              <span
+                onClick={() =>
+                  prodDispatch({
+                    type: "delete",
+                    id: product.id,
+                  })
+                }
+              >
                 <RiDeleteBinLine color="red" />
               </span>
-              <span onClick={() => changeFeaturedState(product.id)}>
+              <span
+                onClick={() =>
+                  prodDispatch({
+                    type: "featuredToggle",
+                    id: product.id,
+                  })
+                }
+              >
                 <RiStarLine
                   color={String(product.featured) === "1" ? "yellow" : "grey"}
                 />
               </span>
-              <span onClick={() => changePublishedState(product.id)}>
+              <span
+                onClick={() =>
+                  prodDispatch({
+                    type: "publishedToggle",
+                    id: product.id,
+                  })
+                }
+              >
                 {String(product.state) === "1" ? (
                   <RiCheckboxCircleLine color="green" />
                 ) : (
@@ -148,7 +165,7 @@ export default function ProductCardLg({
                       <ChangeStock
                         variantId={variant.vid}
                         productId={variant.product_id}
-                        updateStockInState={updateStockInState}
+                        prodDispatch={prodDispatch}
                       />
                     </td>
                   </tr>

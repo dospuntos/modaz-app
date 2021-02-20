@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import _ from "lodash";
+import { useEffect, useState, useReducer } from "react";
 import ProductCardLg from "modules/products/ProductCardLg";
 import ProductCardMd from "modules/products/ProductCartMd";
 import ProductCardSm from "modules/products/ProductCardSm";
@@ -9,23 +8,19 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "hooks";
-import { toast } from "react-toastify";
-import {
-  getProducts,
-  togglePublished,
-  toggleFeatured,
-  deleteProduct,
-  getCategories,
-} from "api/productApi";
+import { getProducts, getCategories } from "api/productApi";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import TablePagination from "@material-ui/core/TablePagination";
+import productReducer from "productReducer";
 
-export default function Products(props) {
-  const [products, setProducts] = useState([]);
+const initialState = [];
+
+export default function Products() {
+  const [products, prodDispatch] = useReducer(productReducer, initialState);
   const [productLayout, setProductLayout] = useStickyState(
     "grid-lg",
     "product-layout"
@@ -46,87 +41,12 @@ export default function Products(props) {
   useEffect(() => {
     // Get products
     getProducts().then((products) => {
-      setProducts(products);
+      prodDispatch({ type: "set", data: products });
     });
 
     // Get categories
     getCategories().then((categories) => setCategories(categories));
   }, [refreshProducts]);
-
-  // Function to update stock in state object
-  // ToDo: might need some cleanup!!
-  function updateStockInState(id, dir, productId) {
-    let tempProducts = products;
-    let prevTotalstock = _.find(tempProducts, { id: productId })["totalstock"];
-    let prevVariantstock = _.find(_.flatten(_.map(tempProducts, "variants")), {
-      vid: id,
-    })["stock"];
-    let newTotalStock = dir ? prevTotalstock + 1 : prevTotalstock - 1;
-    let newVariantStock = dir
-      ? Number(prevVariantstock) + 1
-      : Number(prevVariantstock) - 1;
-
-    // Update totalstock (products->productId->totalstock)
-    _.set(_.find(tempProducts, { id: productId }), "totalstock", newTotalStock);
-
-    // Update variant (products->productId->variants->vId->totalstock)
-    _.set(
-      _.find(_.flatten(_.map(tempProducts, "variants")), {
-        vid: id,
-      }),
-      "stock",
-      newVariantStock
-    );
-    setProducts([...tempProducts]);
-
-    toast.info("Stock del producto cambiado a " + newVariantStock);
-  }
-
-  function changePublishedState(id) {
-    togglePublished(id);
-
-    let tempProducts = products;
-    let prevState = _.find(tempProducts, { id: id })["state"];
-    let newState = 1 - prevState;
-    _.set(_.find(tempProducts, { id: id }), "state", newState);
-
-    setProducts([...tempProducts]);
-    if (newState) {
-      toast.success("Producto publicado");
-    } else {
-      toast.warning("Producto despublicado");
-    }
-  }
-
-  function changeFeaturedState(id) {
-    toggleFeatured(id);
-
-    let tempProducts = products;
-    let prevState = _.find(tempProducts, { id: id })["featured"];
-    let newState = 1 - prevState;
-    _.set(_.find(tempProducts, { id: id }), "featured", newState);
-
-    setProducts([...tempProducts]);
-
-    if (newState) {
-      toast.success("Producto destacado");
-    } else {
-      toast.warning("Producto NO destacado");
-    }
-  }
-
-  function handleDeleteProduct(id) {
-    if (window.confirm("Eliminar producto? No se puede restaurar.")) {
-      // Delete product from database
-      deleteProduct(id);
-
-      // Remove from state
-      const newList = products.filter((item) => item.id !== id);
-      setProducts(newList);
-
-      toast.info("Producto eliminado.");
-    }
-  }
 
   function forceProductRefresh() {
     setRefreshProducts(!refreshProducts);
@@ -293,10 +213,7 @@ export default function Products(props) {
                     <ProductCardLg
                       key={product.name}
                       product={product}
-                      updateStockInState={updateStockInState}
-                      changePublishedState={changePublishedState}
-                      changeFeaturedState={changeFeaturedState}
-                      deleteProduct={handleDeleteProduct}
+                      prodDispatch={prodDispatch}
                       forceProductRefresh={forceProductRefresh}
                     />
                   );
@@ -305,10 +222,7 @@ export default function Products(props) {
                     <ProductCardMd
                       key={product.name}
                       product={product}
-                      updateStockInState={updateStockInState}
-                      changePublishedState={changePublishedState}
-                      changeFeaturedState={changeFeaturedState}
-                      deleteProduct={handleDeleteProduct}
+                      prodDispatch={prodDispatch}
                     />
                   );
                 case "grid-sm":
@@ -316,7 +230,7 @@ export default function Products(props) {
                     <ProductCardSm
                       key={product.name}
                       product={product}
-                      updateStockInState={updateStockInState}
+                      prodDispatch={prodDispatch}
                     />
                   );
                 default:
@@ -324,7 +238,7 @@ export default function Products(props) {
                     <ProductList
                       key={product.name}
                       product={product}
-                      updateStockInState={updateStockInState}
+                      prodDispatch={prodDispatch}
                     />
                   );
               }

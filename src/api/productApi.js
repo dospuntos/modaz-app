@@ -1,6 +1,7 @@
 import { handleResponse, handleError } from "./apiUtils";
 
 export function getProducts() {
+  console.log("Getting products from API");
   return fetch(process.env.REACT_APP_API_URL + "get.php")
     .then(handleResponse)
     .catch(handleError);

@@ -56,13 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductCardMd({
-  product,
-  updateStockInState,
-  changePublishedState,
-  changeFeaturedState,
-  deleteProduct,
-}) {
+export default function ProductCardMd({ product, prodDispatch }) {
   const { dispatch } = useCart();
 
   const classes = useStyles();
@@ -82,7 +76,12 @@ export default function ProductCardMd({
           <Avatar
             aria-label="recipe"
             className={product.state === "1" ? classes.avatar : classes.avatar2}
-            onClick={() => changePublishedState(product.id)}
+            onClick={() =>
+              prodDispatch({
+                type: "publishedToggle",
+                id: product.id,
+              })
+            }
           >
             {product.totalstock}
           </Avatar>
@@ -106,36 +105,38 @@ export default function ProductCardMd({
         {product.variants.map((variant, index) => {
           return (
             <table>
-              <tr key={index}>
-                <td colSpan="2" key={index}>
-                  {variant.size} - {variant.color} ({variant.stock}){" "}
-                  {variant.stock < 1 ? (
-                    ""
-                  ) : (
-                    <span
-                      className="pure-button pure-button-cart-sm"
-                      onClick={() => {
-                        // Add product name to variant object (for cart display)
-                        variant["name"] = product.name;
-                        variant["price"] = product.price;
-                        variant["order_item_quantity"] = "1";
-                        // Add to cart
-                        dispatch({
-                          type: "add",
-                          variant,
-                        });
-                      }}
-                    >
-                      <AddShoppingCartIcon />
-                    </span>
-                  )}
-                  <ChangeStock
-                    variantId={variant.vid}
-                    productId={variant.product_id}
-                    updateStockInState={updateStockInState}
-                  />
-                </td>
-              </tr>
+              <tbody>
+                <tr key={index}>
+                  <td colSpan="2" key={index}>
+                    {variant.size} - {variant.color} ({variant.stock}){" "}
+                    {variant.stock < 1 ? (
+                      ""
+                    ) : (
+                      <span
+                        className="pure-button pure-button-cart-sm"
+                        onClick={() => {
+                          // Add product name to variant object (for cart display)
+                          variant["name"] = product.name;
+                          variant["price"] = product.price;
+                          variant["order_item_quantity"] = "1";
+                          // Add to cart
+                          dispatch({
+                            type: "add",
+                            variant,
+                          });
+                        }}
+                      >
+                        <AddShoppingCartIcon />
+                      </span>
+                    )}
+                    <ChangeStock
+                      variantId={variant.vid}
+                      productId={variant.product_id}
+                      prodDispatch={prodDispatch}
+                    />
+                  </td>
+                </tr>
+              </tbody>
             </table>
           );
         })}
@@ -144,12 +145,22 @@ export default function ProductCardMd({
         <IconButton aria-label="add to favorites">
           <FavoriteIcon
             color={parseInt(product.featured) === 1 ? "secondary" : ""}
-            onClick={() => changeFeaturedState(product.id)}
+            onClick={() =>
+              prodDispatch({
+                type: "featuredToggle",
+                id: product.id,
+              })
+            }
           />
         </IconButton>
         <IconButton
           aria-label="delete"
-          onClick={() => deleteProduct(product.id)}
+          onClick={() =>
+            prodDispatch({
+              type: "delete",
+              id: product.id,
+            })
+          }
         >
           <Delete />
         </IconButton>

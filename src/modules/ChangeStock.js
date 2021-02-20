@@ -1,28 +1,34 @@
 import "./changestock.css";
-import { changeStock } from "api/productApi";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 
-function ChangeStock(props) {
-  function handleChangeStock(id, dir, productId) {
-    changeStock(id, dir);
-    props.updateStockInState(id, dir, productId);
-  }
-
+export default function ChangeStock(props) {
   return (
     <span className="change-stock pull-right">
       <span className="less">
         <FaMinusCircle
           color="grey"
-          onClick={() => handleChangeStock(props.variantId, 0, props.productId)}
+          onClick={() =>
+            props.prodDispatch({
+              type: "updateStock",
+              id: props.variantId,
+              dir: 0,
+              productId: props.productId,
+            })
+          }
         />
       </span>
       <span className="more">
         <FaPlusCircle
-          onClick={() => handleChangeStock(props.variantId, 1, props.productId)}
+          onClick={() =>
+            props.prodDispatch({
+              type: "updateStock",
+              id: props.variantId,
+              dir: 1,
+              productId: props.productId,
+            })
+          }
         />
       </span>
     </span>
   );
 }
-
-export default ChangeStock;
