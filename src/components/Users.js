@@ -15,6 +15,7 @@ import { getUsers } from "api/usersApi";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Gravatar from "modules/Gravatar";
 
 const columns = [
   { id: "icon", label: "", minWidth: 50 },
@@ -121,7 +122,8 @@ export default function Users() {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell>
-                        <PersonIcon size="64" />
+                        {/* <PersonIcon size="64" /> */}
+                        <Gravatar email={row.email} />
                       </TableCell>
                       <TableCell>
                         <Link
