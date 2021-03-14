@@ -1,5 +1,3 @@
-import React from "react";
-
 function Gravatar({ email }) {
   function get_gravatar(email, size = 80) {
     // MD5 (Message-Digest Algorithm) by WebToolkit

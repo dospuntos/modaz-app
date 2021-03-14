@@ -12,7 +12,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import { getUsers } from "api/usersApi";
-import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Gravatar from "modules/Gravatar";
@@ -42,9 +41,9 @@ export default function Users() {
   const [searchText, setSearchText] = useState("");
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const classes = useStyles();
-  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);
+  const classes = useStyles();
 
   useEffect(() => {
     // Get users
@@ -122,7 +121,6 @@ export default function Users() {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell>
-                        {/* <PersonIcon size="64" /> */}
                         <Gravatar email={row.email} />
                       </TableCell>
                       <TableCell>
