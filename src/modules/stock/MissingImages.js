@@ -28,6 +28,7 @@ function MissingImages() {
       window.open(e.target.href);
     }
   }
+
   return (
     <ul>
       {!missing.length && (
@@ -36,6 +37,7 @@ function MissingImages() {
         </li>
       )}
       {missing.map((item, index) => {
+        const imageUrl = JSON.parse(item.images)[0].image;
         return (
           <li key={index}>
             <a
@@ -46,7 +48,7 @@ function MissingImages() {
               }
               target="imagesearch"
               rel="noopener noreferrer"
-              onClick={(e) => handleClick(e, item.images)}
+              onClick={(e) => handleClick(e, imageUrl)}
             >
               {item.name}
             </a>
