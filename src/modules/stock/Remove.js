@@ -7,16 +7,19 @@ import { toast } from "react-toastify";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import ProductDetails from "./ProductDetails";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Remove() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
   const [createOrder, setCreateOrder] = useStickyState(false, "createOrder");
   const [hasSearched, setHasSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     setHasSearched(true);
+    setLoading(true);
     searchUPC(upc).then((result) => {
       if (result.length) {
         let newStock = parseInt(result[0].stock, 10) - 1;
@@ -33,9 +36,12 @@ export default function Remove() {
         setResult({});
         toast.warning("Producto NO encontrado");
       }
+      setLoading(false);
     });
     setUpc("");
   }
+
+  if (loading) return <CircularProgress />;
 
   return (
     <div className="remove">

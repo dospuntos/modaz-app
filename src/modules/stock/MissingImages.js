@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { getMissingImages } from "api/statisticsApi";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 function MissingImages() {
   const [missing, setMissing] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getMissingImages().then((result) => {
       setMissing(result);
+      setLoading(false);
     });
   }, []);
 
@@ -28,6 +31,8 @@ function MissingImages() {
       window.open(e.target.href);
     }
   }
+
+  if (loading) return <CircularProgress />;
 
   return (
     <ul>

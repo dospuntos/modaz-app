@@ -4,15 +4,18 @@ import { changeStock } from "api/productApi";
 import TextField from "@material-ui/core/TextField";
 import { toast } from "react-toastify";
 import ProductDetails from "./ProductDetails";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Add() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
   const [hasSearched, setHasSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     setHasSearched(true);
+    setLoading(true);
     searchUPC(upc).then((result) => {
       if (result.length) {
         let newStock = parseInt(result[0].stock, 10) + 1;
@@ -23,9 +26,12 @@ export default function Add() {
         setResult({});
         toast.warning("Producto NO encontrado");
       }
+      setLoading(false);
     });
     setUpc("");
   }
+
+  if (loading) return <CircularProgress />;
 
   return (
     <div className="add">

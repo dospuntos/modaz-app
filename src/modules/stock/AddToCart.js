@@ -4,14 +4,17 @@ import { toast } from "react-toastify";
 import { useCart } from "modules/cart/cartContext";
 import ProductDetails from "./ProductDetails";
 import TextField from "@material-ui/core/TextField";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function AddToCart() {
   const { dispatch } = useCart();
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
+  const [loading, setLoading] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     searchUPC(upc).then((result) => {
       if (result.length) {
         result[0]["order_item_quantity"] = "1";
@@ -26,9 +29,12 @@ export default function AddToCart() {
         setResult({});
         toast.warning("Producto NO encontrado");
       }
+      setLoading(false);
     });
     setUpc("");
   }
+
+  if (loading) return <CircularProgress />;
 
   return (
     <div className="remove">

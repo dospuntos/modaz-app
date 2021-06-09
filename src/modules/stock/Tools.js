@@ -5,8 +5,27 @@ import { resetStock } from "api/productApi";
 import MissingImages from "modules/stock/MissingImages";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(1),
+      padding: theme.spacing(6),
+      width: "100%",
+    },
+  },
+  card: {
+    padding: theme.spacing(3),
+  },
+}));
 
 function Tools() {
+  const classes = useStyles();
   const [showMissing, setShowMissing] = useState(false);
 
   function handleStockReset() {
@@ -25,99 +44,63 @@ function Tools() {
     }
   }
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={4}>
-        <p>
-          Iniciar copia de seguridad de ModaZ.net. Recomendado antes de hacer
-          cambios de los productos o stock.
-        </p>
-        <a
-          href="https://modaz.net/index.php?option=com_akeeba&view=Backup&key=m224rI-19VUwve5aUe-ZXGmttHTvFvo9"
-          className="pure-button"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Copia de Seguridad
-          <br />
-          (ModaZ.net)
-        </a>
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <p>Resetear stock para todos los productos</p>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => handleStockReset()}
-        >
-          Resetear stock
-        </Button>
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <p>Mostrar productos sin imagen</p>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={showMissing}
-              onChange={() => setShowMissing(!showMissing)}
-              name="checkedA"
-            />
-          }
-          label="Mostrar"
-        />
-      </Grid>
-
+    <div className={classes.root}>
+      <Paper>
+        <Grid container spacing={6}>
+          <Grid item sm={12} md={4}>
+            <Card className={classes.card} variant="outlined">
+              <p>
+                Iniciar copia de seguridad de ModaZ.net. Recomendado antes de
+                hacer cambios de los productos o stock.
+              </p>
+              <a
+                href="https://modaz.net/index.php?option=com_akeeba&view=Backup&key=m224rI-19VUwve5aUe-ZXGmttHTvFvo9"
+                className="pure-button"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Copia de Seguridad
+                <br />
+                (ModaZ.net)
+              </a>
+            </Card>
+          </Grid>
+          <Grid item sm={12} md={4}>
+            <Card className={classes.card} variant="outlined">
+              <p>Resetear stock para todos los productos</p>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => handleStockReset()}
+              >
+                Resetear stock
+              </Button>
+            </Card>
+          </Grid>
+          <Grid item sm={12} md={4}>
+            <Card className={classes.card} variant="outlined">
+              <p>Mostrar productos sin imagen</p>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={showMissing}
+                    onChange={() => setShowMissing(!showMissing)}
+                    name="checkedA"
+                  />
+                }
+                label="Mostrar"
+              />
+            </Card>
+          </Grid>
+        </Grid>
+      </Paper>
       {showMissing && (
-        <div className="missingImages">
+        <Paper>
+          <h2>Productos sin archivo de imágen válido</h2>
           <MissingImages />
-        </div>
+        </Paper>
       )}
-
-      {/* <div className="tools">
-      <h1>Herramientas - usar con cuidado</h1>
-      <div className="pure-g">
-        <div className="pure-u-1 pure-u-sm-1-5">
-          <p>
-            Iniciar copia de seguridad de ModaZ.net. Recomendado antes de hacer
-            cambios de los productos o stock.
-          </p>
-          <a
-            href="https://modaz.net/index.php?option=com_akeeba&view=Backup&key=m224rI-19VUwve5aUe-ZXGmttHTvFvo9"
-            className="pure-button"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Copia de Seguridad
-            <br />
-            (ModaZ.net)
-          </a>
-        </div>
-        <div className="pure-u-1 pure-u-sm-1-5">
-          <p>Resetear stock para todos los productos</p>
-          <button
-            className="pure-button secondary-button"
-            style={{ backgroundColor: "red", color: "white" }}
-            onClick={() => handleStockReset()}
-          >
-            Resetear stock
-          </button>
-        </div>
-        <div className="pure-u-1 pure-u-sm-1-5">
-          <p>Mostrar productos sin imagen</p>
-          <button
-            className="pure-button secondary-button"
-            onClick={() => setShowMissing(!showMissing)}
-          >
-            Mostrar
-          </button>
-        </div>
-      </div>
-      {showMissing && (
-        <div className="missingImages">
-          <MissingImages />
-        </div>
-      )}
-    </div> */}
-    </Grid>
+    </div>
   );
 }
 

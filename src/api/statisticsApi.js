@@ -7,7 +7,7 @@ export function getStatistics() {
 }
 
 export function getMissingImages() {
-  return fetch(process.env.REACT_APP_API_URL + "getmissingimages.php")
+  return fetch(process.env.REACT_APP_API_URL + "getmissingimages.php?delay=3")
     .then(handleResponse)
     .catch(handleError);
 }

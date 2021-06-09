@@ -2,20 +2,26 @@ import { useState } from "react";
 import { searchUPC } from "api/productApi";
 import TextField from "@material-ui/core/TextField";
 import ProductDetails from "./ProductDetails";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Tools() {
   const [upc, setUpc] = useState("");
   const [result, setResult] = useState({});
   const [hasSearched, setHasSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     setHasSearched(true);
+    setLoading(true);
     searchUPC(upc).then((result) => {
       result.length ? setResult(result) : setResult({});
+      setLoading(false);
     });
     setUpc("");
   }
+
+  if (loading) return <CircularProgress />;
 
   return (
     <div>
