@@ -184,10 +184,9 @@ export default function ProductEdit(props) {
   }
 
   function handleAddImage() {
-    let images = [
-      ...getAllImages(product.images),
-      { image: "default.png", color: "bold black" },
-    ];
+    let images = getAllImages(product.images);
+    let last = images[images.length - 1];
+    images = [...images, last];
     setProduct({ ...product, images: JSON.stringify(images) });
     setEdited(true);
   }
