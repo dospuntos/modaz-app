@@ -8,6 +8,8 @@ import Switch from "@material-ui/core/Switch";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
+import LaunchIcon from "@material-ui/icons/Launch";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,12 +23,14 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     padding: theme.spacing(3),
+    height: "100%",
   },
 }));
 
-function Tools() {
+export default function Tools() {
   const classes = useStyles();
   const [showMissing, setShowMissing] = useState(false);
+  const [date, setDate] = useState("");
 
   function handleStockReset() {
     if (
@@ -47,7 +51,7 @@ function Tools() {
     <div className={classes.root}>
       <Paper>
         <Grid container spacing={6}>
-          <Grid item sm={12} md={4}>
+          <Grid item sm={12} md={6}>
             <Card className={classes.card} variant="outlined">
               <p>
                 Iniciar copia de seguridad de ModaZ.net. Recomendado antes de
@@ -65,7 +69,7 @@ function Tools() {
               </a>
             </Card>
           </Grid>
-          <Grid item sm={12} md={4}>
+          <Grid item sm={12} md={6}>
             <Card className={classes.card} variant="outlined">
               <p>Resetear stock para todos los productos</p>
               <Button
@@ -77,7 +81,7 @@ function Tools() {
               </Button>
             </Card>
           </Grid>
-          <Grid item sm={12} md={4}>
+          <Grid item sm={12} md={6}>
             <Card className={classes.card} variant="outlined">
               <p>Mostrar productos sin imagen</p>
               <FormControlLabel
@@ -92,6 +96,44 @@ function Tools() {
               />
             </Card>
           </Grid>
+          <Grid item sm={12} md={6}>
+            <Card className={classes.card} variant="outlined">
+              <p>Mostrar imágenes de pedido por fecha</p>
+              <form className={classes.container} noValidate>
+                <Grid container spacing={6}>
+                  <Grid item sm={6}>
+                    <TextField
+                      id="date"
+                      label="Fecha de pedido"
+                      type="date"
+                      defaultValue=""
+                      className={classes.textField}
+                      onChange={(e) => setDate(e.target.value)}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Grid>
+                  <Grid item sm={6}>
+                    {date !== "" && (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        href={
+                          process.env.REACT_APP_API_URL +
+                          "getbyorderdate.php?orderdate=" +
+                          date
+                        }
+                        target="_blank"
+                      >
+                        Mostrar para {date} <LaunchIcon />
+                      </Button>
+                    )}
+                  </Grid>
+                </Grid>
+              </form>
+            </Card>
+          </Grid>
         </Grid>
       </Paper>
       {showMissing && (
@@ -103,5 +145,3 @@ function Tools() {
     </div>
   );
 }
-
-export default Tools;
