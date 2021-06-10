@@ -16,6 +16,7 @@ import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import TablePagination from "@material-ui/core/TablePagination";
 import productReducer from "productReducer";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const initialState = [];
 
@@ -37,11 +38,13 @@ export default function Products() {
   const [refreshProducts, setRefreshProducts] = useState(true);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useStickyState(10, "rowsPerPage");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Get products
     getProducts().then((products) => {
       prodDispatch({ type: "set", data: products });
+      setLoading(false);
     });
 
     // Get categories
@@ -92,6 +95,8 @@ export default function Products() {
         : Number(eachItem["state"]) < 1
     );
   }
+
+  if (loading) return <CircularProgress />;
 
   return (
     <div id="main" className="pure-u-1">
