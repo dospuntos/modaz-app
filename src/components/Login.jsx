@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { loginUser } from "api/usersApi";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -68,7 +67,7 @@ export default function Login({ setToken }) {
   const classes = useStyles();
 
   const [username, setUsername] = useState("johan@dospuntos.no");
-  const [password, setPassword] = useState("2egcryr");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
