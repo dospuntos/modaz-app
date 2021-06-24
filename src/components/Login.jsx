@@ -12,6 +12,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import api from "api/api";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -66,9 +67,31 @@ const useStyles = makeStyles((theme) => ({
 export default function Login({ setToken }) {
   const classes = useStyles();
 
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("johan@dospuntos.no");
+  const [password, setPassword] = useState("2egcryr");
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  function submitLogin(e) {
+    e.preventDefault();
+    setLoading(true);
+    api
+      .login({
+        username,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data?.success) {
+          setToken(response.data.data);
+          window.location.reload();
+        } else {
+          setErrors(response.messages);
+          //toast.error("Unable to log in");
+        }
+        setLoading(false);
+      });
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -84,7 +107,8 @@ export default function Login({ setToken }) {
           </Typography>
           <form
             className={classes.form}
-            onSubmit={(e) => {
+            onSubmit={(e) => submitLogin(e)}
+            /* onSubmit={(e) => {
               e.preventDefault();
               loginUser({
                 username,
@@ -94,7 +118,7 @@ export default function Login({ setToken }) {
                   ? setToken(response)
                   : setErrors(response.messages);
               });
-            }}
+            }} */
           >
             <TextField
               variant="outlined"
@@ -106,6 +130,7 @@ export default function Login({ setToken }) {
               name="email"
               autoComplete="email"
               autoFocus
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
@@ -117,6 +142,7 @@ export default function Login({ setToken }) {
               label="Contraseña"
               type="password"
               id="password"
+              value="password"
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -127,6 +153,7 @@ export default function Login({ setToken }) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={loading}
             >
               Ingresar
             </Button>
@@ -134,12 +161,12 @@ export default function Login({ setToken }) {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Olvidaste la contraseña?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"No tienes cuenta? Regístrate"}
                 </Link>
               </Grid>
             </Grid>
