@@ -1,5 +1,4 @@
 import useToken from "api/useToken";
-import { logOut } from "api/usersApi";
 import clsx from "clsx";
 import { useStickyState } from "./hooks";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,6 +29,7 @@ import SidebarMenu from "./components/SidebarMenu";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import pkg from "../package.json";
+import api from "api/api";
 
 const drawerWidth = 240;
 
@@ -104,15 +104,20 @@ export default function App() {
 
   if (!token) return <Login setToken={setToken} />;
 
-  function handleLogout(e) {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    logOut()
-      .then((data) => data.json())
-      .then(() => {
-        localStorage.removeItem("token");
-        window.location.reload();
-      });
-  }
+    try {
+      await api.logout();
+      /* window.location.reload(); */
+    } catch (error) {
+      const { response } = error;
+      /* const { request, ...errorObject } = response; // take everything but 'request' */
+      console.log("Det oppsto en feil");
+      console.log(response);
+    }
+    localStorage.removeItem("token"); // Should be changed to setToken(null);
+    window.location.reload();
+  };
 
   return (
     <Router>
@@ -156,7 +161,7 @@ export default function App() {
 
               <Grid item>
                 <div>
-                  Version: {pkg.version}{" "}
+                  Ver: {pkg.version}{" "}
                   <strong>{process.env.NODE_ENV.substring(0, 3)}</strong>
                   <br />
                   <a href="#/" onClick={(e) => handleLogout(e)}>

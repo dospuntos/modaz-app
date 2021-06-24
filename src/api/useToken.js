@@ -10,15 +10,7 @@ export default function useToken() {
   const [token, setToken] = useState(getToken);
 
   const saveToken = (userToken) => {
-    if (userToken !== "" && userToken !== "undefined") {
-      userToken.data.access_token_expires = new Date(
-        Date.now() + userToken.data.access_token_expires_in * 1000
-      );
-      userToken.data.refresh_token_expires = new Date(
-        Date.now() + userToken.data.refresh_token_expires_in * 1000
-      );
-    }
-    localStorage.setItem("token", JSON.stringify(userToken.data));
+    localStorage.setItem("token", JSON.stringify(userToken));
     setToken(userToken);
   };
 

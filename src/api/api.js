@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = process.env.REACT_APP_API_URL;
+const baseUrl = process.env.REACT_APP_API2_URL;
 
 const getToken = () => {
   const tokenString = localStorage.getItem("token");
@@ -84,6 +84,9 @@ const api = {
   },
   getProtected: () => {
     return axios.get(`${baseUrl}/products/121`);
+  },
+  getProduct: (id) => {
+    return axios.get(`${baseUrl}/products/${id}`);
   },
 };
 export default api;
