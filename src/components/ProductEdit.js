@@ -21,8 +21,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import ImageEdit from "components/ImageEdit";
 import { getDefaultImage, getAllImages } from "functions";
+import api from "api/api";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,11 +46,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProductEdit(props) {
+  const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([
     {
       id: "",
       name: "",
-      images: "{}",
+      images: [
+        {
+          image: "default.png",
+          color: "bold-black",
+        },
+      ],
       orderdate: "",
       release_date: "",
       category: "",
@@ -79,10 +87,27 @@ export default function ProductEdit(props) {
 
   useEffect(() => {
     // Get products and split category list to array
-    getProductById(productid).then((product) => {
+    (async () => {
+      try {
+        const res = await api.getProduct(productid);
+        console.log("Product: ", res.data.data.products[0]);
+        setProduct({
+          ...res.data.data.products[0],
+          category: res.data.data.products[0].category.split(","),
+        });
+      } catch (error) {
+        const { response } = error;
+        //const { request, ...errorObject } = response; // take everything but 'request'
+        console.log("Det oppsto en feil i useEffect");
+        console.log(response);
+      }
+      setLoading(false);
+    })();
+    /*   api.getProduct(productid).then((product) => {
+      console.log(product);
       setProduct({ ...product, category: product.category.split(",") });
     });
-
+ */
     // Get variants
     getVariantsById(productid).then((variants) => {
       setVariants(variants);
@@ -197,6 +222,8 @@ export default function ProductEdit(props) {
     setProduct({ ...product, images: JSON.stringify(images) });
     setEdited(true);
   }
+
+  if (loading) return <CircularProgress />;
 
   return (
     <div className={classes.root}>

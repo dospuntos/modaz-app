@@ -8,7 +8,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { BsFillGridFill, BsGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { useStickyState } from "hooks";
-import { getProducts, getCategories } from "api/productApi";
+import { getCategories } from "api/productApi";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -17,6 +17,7 @@ import TextField from "@material-ui/core/TextField";
 import TablePagination from "@material-ui/core/TablePagination";
 import productReducer from "productReducer";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import api from "api/api";
 
 const initialState = [];
 
@@ -42,10 +43,22 @@ export default function Products() {
 
   useEffect(() => {
     // Get products
-    getProducts().then((products) => {
+    /* getProducts().then((products) => {
       prodDispatch({ type: "set", data: products });
       setLoading(false);
-    });
+    });*/
+    (async () => {
+      try {
+        const res = await api.getProducts();
+        prodDispatch({ type: "set", data: res.data.data.products });
+      } catch (error) {
+        const { response } = error;
+        //const { request, ...errorObject } = response; // take everything but 'request'
+        console.log("Det oppsto en feil i useEffect");
+        console.log(response);
+      }
+      setLoading(false);
+    })();
 
     // Get categories
     getCategories().then((categories) => setCategories(categories));
@@ -55,7 +68,7 @@ export default function Products() {
     setRefreshProducts(!refreshProducts);
   }
 
-  let filteredProducts = products;
+  let filteredProducts = products !== "undefined" ? products : [];
 
   /* Filter by category  */
   if (catFilter !== "all" && filteredProducts.length) {

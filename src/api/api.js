@@ -89,6 +89,7 @@ const api = {
     return axios.get(`${baseUrl}/products/121`);
   },
   getProduct: (id) => {
+    console.log("Getting product from API v2: ", id);
     return axios.get(`${baseUrl}/products/${id}`);
   },
 };
