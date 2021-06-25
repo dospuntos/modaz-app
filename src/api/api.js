@@ -33,8 +33,8 @@ axios.interceptors.response.use(
   },
   function (error) {
     const originalRequest = error.config;
-    let refresh_token = getToken().refresh_token;
-    let session_id = getToken().session_id;
+    let refresh_token = getToken()?.refresh_token;
+    let session_id = getToken()?.session_id;
     if (
       refresh_token &&
       error.response.status === 401 &&
@@ -77,6 +77,9 @@ const api = {
     let session_id = getToken().session_id;
     console.log("Session ID: ", session_id);
     return axios.delete(`${baseUrl}/sessions/${session_id}`);
+  },
+  clearSessions: () => {
+    return axios.delete(`${baseUrl}/sessions/0`);
   },
   getProducts: () => {
     console.log("Getting products from API v2");

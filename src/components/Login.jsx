@@ -71,26 +71,21 @@ export default function Login({ setToken }) {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  function submitLogin(e) {
+  const submitLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    api
-      .login({
-        username,
-        password,
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.data?.success) {
-          setToken(response.data.data);
-          window.location.reload();
-        } else {
-          setErrors(response.messages);
-          //toast.error("Unable to log in");
-        }
-        setLoading(false);
-      });
-  }
+    try {
+      let res = await api.login({ username, password });
+      setToken(res.data.data);
+    } catch (error) {
+      const { response } = error;
+      /* const { request, ...errorObject } = response; // take everything but 'request' */
+      console.log("Det oppsto en feil ved login");
+      setErrors(response.data.messages);
+      console.log(response);
+      setLoading(false);
+    }
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -104,21 +99,7 @@ export default function Login({ setToken }) {
           <Typography component="h1" variant="h5">
             Ingresar
           </Typography>
-          <form
-            className={classes.form}
-            onSubmit={(e) => submitLogin(e)}
-            /* onSubmit={(e) => {
-              e.preventDefault();
-              loginUser({
-                username,
-                password,
-              }).then((response) => {
-                response?.success
-                  ? setToken(response)
-                  : setErrors(response.messages);
-              });
-            }} */
-          >
+          <form className={classes.form} onSubmit={(e) => submitLogin(e)}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -141,7 +122,7 @@ export default function Login({ setToken }) {
               label="Contraseña"
               type="password"
               id="password"
-              value="password"
+              value={password}
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />

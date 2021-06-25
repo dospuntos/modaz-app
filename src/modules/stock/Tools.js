@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
 import LaunchIcon from "@material-ui/icons/Launch";
 import TextField from "@material-ui/core/TextField";
+import api from "api/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,20 @@ export default function Tools() {
       }
     }
   }
+
+  const handleClearSessions = async () => {
+    try {
+      await api.clearSessions();
+    } catch (error) {
+      const { response } = error;
+      /* const { request, ...errorObject } = response; // take everything but 'request' */
+      console.log("Det oppsto en feil");
+      console.log(response);
+    }
+    localStorage.removeItem("token"); // Should be changed to setToken(null);
+    window.location.reload();
+  };
+
   return (
     <div className={classes.root}>
       <Paper>
@@ -132,6 +147,18 @@ export default function Tools() {
                   </Grid>
                 </Grid>
               </form>
+            </Card>
+          </Grid>
+          <Grid item sm={12} md={6}>
+            <Card className={classes.card} variant="outlined">
+              <p>Eliminar la sessión de todos los usuarios.</p>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => handleClearSessions()}
+              >
+                Eliminar
+              </Button>
             </Card>
           </Grid>
         </Grid>
