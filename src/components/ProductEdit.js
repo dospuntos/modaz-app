@@ -298,6 +298,7 @@ export default function ProductEdit(props) {
                 name="price"
                 value={product.price || ""}
                 size="small"
+                type="number"
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -313,6 +314,7 @@ export default function ProductEdit(props) {
                 name="price_discount"
                 value={product.price_discount || ""}
                 size="small"
+                type="number"
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -328,6 +330,7 @@ export default function ProductEdit(props) {
                 name="zinprice"
                 value={product.zinprice || ""}
                 size="small"
+                type="number"
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -344,6 +347,8 @@ export default function ProductEdit(props) {
                 value={product.wholesaleprice || ""}
                 size="small"
                 variant="outlined"
+                type="number"
+                step=".01"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$US</InputAdornment>
@@ -358,6 +363,7 @@ export default function ProductEdit(props) {
                 name="msrp"
                 value={product.msrp || ""}
                 size="small"
+                type="number"
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
