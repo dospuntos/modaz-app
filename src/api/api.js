@@ -92,5 +92,11 @@ const api = {
     console.log("Getting product from API v2: ", id);
     return axios.get(`${baseUrl}/products/${id}`);
   },
+  createProduct: (body) => {
+    return axios.post(`${baseUrl}/products`, body);
+  },
+  updateProduct: (id, body) => {
+    return axios.patch(`${baseUrl}/products/${id}`, body);
+  },
 };
 export default api;

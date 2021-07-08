@@ -103,11 +103,7 @@ export default function ProductEdit(props) {
       }
       setLoading(false);
     })();
-    /*   api.getProduct(productid).then((product) => {
-      console.log(product);
-      setProduct({ ...product, category: product.category.split(",") });
-    });
- */
+
     // Get variants
     getVariantsById(productid).then((variants) => {
       setVariants(variants);
@@ -142,13 +138,37 @@ export default function ProductEdit(props) {
     saveVariant(variant);
   }
 
-  function handleProductSave() {
+  const handleProductSave = async (e) => {
     let _product = product;
-    saveProduct({
+    try {
+      let res = await api.updateProduct(productid, {
+        ...product,
+        category: _product.category.join(","),
+      });
+      console.log(res);
+      setEdited(false);
+    } catch (error) {
+      const { response } = error;
+      /* const { request, ...errorObject } = response; // take everything but 'request' */
+      console.log("Det oppsto en feil ved lagring av produktet");
+      console.log(response);
+      setLoading(false);
+    }
+  };
+
+  /* function handleProductSave() {
+    let _product = product;
+    api
+      .updateProduct(productid, {
+        ...product,
+        category: _product.category.join(","),
+      })
+      .then(setEdited(false));
+    /* saveProduct({
       ...product,
       category: _product.category.join(","),
     }).then(setEdited(false));
-  }
+  } */
 
   function addVariant(e) {
     e.preventDefault();
