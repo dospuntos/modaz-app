@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  getProductById,
   getVariantsById,
   saveVariant,
-  saveProduct,
   deleteVariant,
   getCategories,
 } from "api/productApi";
@@ -25,6 +23,7 @@ import api from "api/api";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -147,28 +146,17 @@ export default function ProductEdit(props) {
       });
       console.log(res);
       setEdited(false);
+      toast.success("Producto actualizado");
     } catch (error) {
       const { response } = error;
       /* const { request, ...errorObject } = response; // take everything but 'request' */
-      console.log("Det oppsto en feil ved lagring av produktet");
+      toast.error(
+        "Oops, no se pudo guardar los cambios.\n" +
+          JSON.stringify(response.data.messages)
+      );
       console.log(response);
-      setLoading(false);
     }
   };
-
-  /* function handleProductSave() {
-    let _product = product;
-    api
-      .updateProduct(productid, {
-        ...product,
-        category: _product.category.join(","),
-      })
-      .then(setEdited(false));
-    /* saveProduct({
-      ...product,
-      category: _product.category.join(","),
-    }).then(setEdited(false));
-  } */
 
   function addVariant(e) {
     e.preventDefault();
@@ -416,6 +404,7 @@ export default function ProductEdit(props) {
             return (
               index > 0 && (
                 <img
+                  key={index}
                   className="thumbnail zoom"
                   style={{ display: "inline-block", maxWidth: 50 }}
                   src={process.env.REACT_APP_PROD_IMG_URL + item.image}
