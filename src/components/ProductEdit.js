@@ -198,8 +198,9 @@ export default function ProductEdit(props) {
 
   function handleImageChange(type, index, value) {
     let images = getAllImages(product.images);
+    console.log(type);
     images[index][type] = value;
-    setProduct({ ...product, images: JSON.stringify(images) });
+    setProduct({ ...product, images });
     setEdited(true);
   }
 
@@ -212,22 +213,21 @@ export default function ProductEdit(props) {
       }
     });
 
-    setProduct({ ...product, images: JSON.stringify(images) });
+    setProduct({ ...product, images });
     setEdited(true);
   }
 
   function handleAddImage() {
     let images = getAllImages(product.images);
-    let last = images[images.length - 1];
-    images = [...images, last];
-    setProduct({ ...product, images: JSON.stringify(images) });
+    images.push({ ...images[images.length - 1] });
+    setProduct({ ...product, images });
     setEdited(true);
   }
 
   function handleDeleteImage(index) {
     let images = getAllImages(product.images);
     images.splice(index, 1);
-    setProduct({ ...product, images: JSON.stringify(images) });
+    setProduct({ ...product, images });
     setEdited(true);
   }
 

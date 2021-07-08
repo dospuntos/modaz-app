@@ -40,6 +40,7 @@ export default function ImageEdit({
     <div>
       <h1>Imagenes</h1>
       <p>Haz click en cualquier imágen para volverla imágen principal.</p>
+      <p>{JSON.stringify(imgObj)}</p>
       {imgObj.map((item, index) => {
         return (
           <Grid container spacing={1} key={index}>
