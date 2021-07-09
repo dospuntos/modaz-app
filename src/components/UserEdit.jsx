@@ -20,7 +20,6 @@ import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import ImageEdit from "components/ImageEdit";
-import { getDefaultImage, getAllImages } from "functions";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
@@ -164,14 +163,14 @@ export default function ProductEdit(props) {
   }
 
   function handleImageChange(type, index, value) {
-    let images = getAllImages(product.images);
+    let images = product.images;
     images[index][type] = value;
     setProduct({ ...product, images: JSON.stringify(images) });
     setEdited(true);
   }
 
   function handleMakeDefaultImage(index) {
-    let images = getAllImages(product.images);
+    let images = product.images;
     images.forEach(function (item, i) {
       if (i === index) {
         images.splice(i, 1);
@@ -184,7 +183,7 @@ export default function ProductEdit(props) {
   }
 
   function handleAddImage() {
-    let images = getAllImages(product.images);
+    let images = product.images;
     let last = images[images.length - 1];
     images = [...images, last];
     setProduct({ ...product, images: JSON.stringify(images) });
@@ -192,7 +191,7 @@ export default function ProductEdit(props) {
   }
 
   function handleDeleteImage(index) {
-    let images = getAllImages(product.images);
+    let images = product.images;
     images.splice(index, 1);
     setProduct({ ...product, images: JSON.stringify(images) });
     setEdited(true);
@@ -363,9 +362,14 @@ export default function ProductEdit(props) {
             prodCats={product.category || []}
             handleChange={handleCategoryChange}
           />
-          <img src={getDefaultImage(product.images)} alt={product.name} />
+          <img
+            src={
+              process.env.REACT_APP_PROD_IMG_URL + product.images["0"]["image"]
+            }
+            alt={product.name}
+          />
           <br />
-          {getAllImages(product.images).map((item, index) => {
+          {product.images.map((item, index) => {
             return (
               index > 0 && (
                 <img

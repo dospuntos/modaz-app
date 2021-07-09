@@ -19,7 +19,6 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import ChangeStock from "modules/ChangeStock";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import { getAllImages } from "functions";
 import { useCart } from "modules/cart/cartContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +65,7 @@ export default function ProductCardMd({ product, prodDispatch }) {
     setExpanded(!expanded);
   };
 
-  const images = getAllImages(product.images);
+  const images = product.images;
   const bgimg = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
 
   return (

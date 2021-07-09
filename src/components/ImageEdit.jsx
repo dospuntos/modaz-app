@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
-import { getAllImages } from "functions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,14 +33,12 @@ export default function ImageEdit({
   handleDeleteImage,
 }) {
   const classes = useStyles();
-  const imgObj = getAllImages(images);
 
   return (
     <div>
       <h1>Imagenes</h1>
       <p>Haz click en cualquier imágen para volverla imágen principal.</p>
-      <p>{JSON.stringify(imgObj)}</p>
-      {imgObj.map((item, index) => {
+      {images.map((item, index) => {
         return (
           <Grid container spacing={1} key={index}>
             <Grid item xs={6} md={1}>

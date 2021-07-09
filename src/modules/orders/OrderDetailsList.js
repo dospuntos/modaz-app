@@ -42,8 +42,9 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
   return (
     <tr>
       <td>
+        <br />
         <img
-          src={getImagesByColor(item.images, item.color)}
+          src={getImagesByColor(JSON.parse(item.images), item.color)}
           alt={item.name}
           className="thumbnail zoom"
         />

@@ -10,7 +10,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ShowPrices from "modules/ShowPrices";
-import { getDefaultImage, getAllImages } from "functions";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -57,11 +56,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductDetails({ product }) {
   const classes = useStyles();
-  const images = getAllImages(product.images);
+  const images = product.images;
   const [displayImage, setDisplayImage] = useState();
 
   useEffect(() => {
-    setDisplayImage(getDefaultImage(product.images));
+    setDisplayImage(
+      process.env.REACT_APP_PROD_IMG_URL + product.images["0"]["image"]
+    );
   }, [product.images]);
 
   return (

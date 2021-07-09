@@ -24,23 +24,3 @@ export function getImagesByColor(imgJSON, color) {
     ? process.env.REACT_APP_PROD_IMG_URL + retval.image
     : process.env.REACT_APP_PROD_IMG_URL + imgJSON["0"]["image"];
 }
-
-// Run some internal checks for possible errors in JSON encoded images
-/* function validateJSON(imgJSON) {
-  if (
-    imgJSON === "" ||
-    imgJSON === null ||
-    typeof imgJSON === "undefined" ||
-    imgJSON.startsWith('[{"image":"","color":"') ||
-    !imgJSON.startsWith('[{"image":')
-  ) {
-    // Return default JSON
-    console.warn(
-      "There was an error decoding image JSON - default value used. - " +
-        imgJSON
-    );
-    return JSON.parse('[{"image":"default.png","color":"multi"}]');
-  } else {
-    return JSON.parse(imgJSON);
-  }
-} */

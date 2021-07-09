@@ -13,7 +13,6 @@ import { BsGear } from "react-icons/bs";
 import ProductEdit from "components/ProductEdit";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
-import { getDefaultImage, getImageCount } from "functions";
 import BurstModeIcon from "@material-ui/icons/BurstMode";
 import { useCart } from "modules/cart/cartContext";
 
@@ -42,7 +41,8 @@ export default function ProductCardLg({
   const [clicked, setClicked] = useState(false);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const defaultImg = getDefaultImage(product.images);
+  const defaultImg =
+    process.env.REACT_APP_PROD_IMG_URL + product.images["0"]["image"];
 
   return (
     <div className="wrapper">
@@ -65,7 +65,7 @@ export default function ProductCardLg({
               "#fff url(" + defaultImg + ") center center /cover no-repeat",
           }}
         >
-          {getImageCount(product.images) > 1 && (
+          {product.images.length > 1 && (
             <span className="image-count" style={{ margin: 15 }}>
               <BurstModeIcon color="primary" />
             </span>

@@ -1,5 +1,4 @@
 import ShowPrices from "modules/ShowPrices";
-import { getDefaultImage } from "functions";
 
 export default function ProductDetails({ product }) {
   return (
@@ -46,7 +45,9 @@ export default function ProductDetails({ product }) {
       <div className="pure-u-1 pure-u-sm-1-3">
         <img
           style={{ width: "100%" }}
-          src={getDefaultImage(product.images)}
+          src={
+            process.env.REACT_APP_PROD_IMG_URL + product.images["0"]["image"]
+          }
           alt={product.name}
         />
       </div>
