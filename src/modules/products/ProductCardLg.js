@@ -44,6 +44,7 @@ export default function ProductCardLg({
   const [open, setOpen] = useState(false);
   const defaultImg = getDefaultImage(product.images);
 
+  console.log(product);
   return (
     <div className="wrapper">
       <Modal
@@ -75,7 +76,22 @@ export default function ProductCardLg({
           <div className="left">
             <div className="details">
               <h1>{product.name}</h1>
-              <p>Bs. {product.price}</p>
+              <p>
+                Bs.{" "}
+                {product.price_discount && product.price_discount !== "0" ? (
+                  <span>
+                    <small
+                      style={{ color: "red", textDecoration: "line-through" }}
+                    >
+                      {product.price},-
+                    </small>{" "}
+                    {product.price_discount},-
+                  </span>
+                ) : (
+                  product.price + ",-"
+                )}{" "}
+                (ZIN: {product.zinprice},-)
+              </p>
             </div>
             <div className="buy" onClick={() => setClicked(true)}>
               <BsGear />
@@ -173,7 +189,7 @@ export default function ProductCardLg({
               })}
               <tr>
                 <th>Precio ZWear</th>
-                <th>Precio c/imp.</th>
+                <th>Precio c/imp. (90%)</th>
               </tr>
               <tr>
                 <td>
@@ -181,8 +197,8 @@ export default function ProductCardLg({
                   {Math.round(+product.wholesaleprice * 6.96)})
                 </td>
                 <td>
-                  ${Math.round(product.wholesaleprice * 1.5)} (Bs.
-                  {Math.round(+product.wholesaleprice * 6.96 * 1.5)})
+                  ${Math.round(product.wholesaleprice * 1.9)} (Bs.
+                  {Math.round(+product.wholesaleprice * 6.96 * 1.9)})
                 </td>
               </tr>
               <tr>
@@ -190,8 +206,24 @@ export default function ProductCardLg({
                 <th>Precio ZIN</th>
               </tr>
               <tr>
-                <td>Bs. {product.price}</td>
-                <td>Bs. {product.zinprice}</td>
+                <td>
+                  Bs. {product.price}{" "}
+                  <small>
+                    (G{" "}
+                    {product.price -
+                      Math.round(+product.wholesaleprice * 6.96 * 1.9)}
+                    )
+                  </small>
+                </td>
+                <td>
+                  Bs. {product.zinprice}{" "}
+                  <small>
+                    (G{" "}
+                    {product.zinprice -
+                      Math.round(+product.wholesaleprice * 6.96 * 1.9)}
+                    )
+                  </small>
+                </td>
               </tr>
               <tr>
                 <th>MSRP</th>

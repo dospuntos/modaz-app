@@ -57,6 +57,7 @@ export default function ProductEdit(props) {
       msrp: "",
       price: "",
       zinprice: "",
+      price_discount: "",
       weight: "",
       composition: "",
       manufacturer: "",
