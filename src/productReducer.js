@@ -5,6 +5,7 @@ import {
   deleteProduct,
   changeStock,
 } from "api/productApi";
+import api from "api/api";
 import _ from "lodash";
 
 export default function productReducer(products, action) {
@@ -52,10 +53,11 @@ export default function productReducer(products, action) {
     }
 
     case "updateStock": {
+      console.log("Product from updateStock: ", products);
       const { id, dir, productId } = action;
 
       // Apply changes in database
-      changeStock(id, dir);
+      api.changeStock(id, dir);
       let tempProducts = products;
       let prevTotalstock = _.find(tempProducts, { id: productId })[
         "totalstock"
@@ -66,10 +68,12 @@ export default function productReducer(products, action) {
           vid: id,
         }
       )["stock"];
-      let newTotalStock = dir ? prevTotalstock + 1 : prevTotalstock - 1;
-      let newVariantStock = dir
-        ? Number(prevVariantstock) + 1
-        : Number(prevVariantstock) - 1;
+      let newTotalStock =
+        dir === "UP" ? prevTotalstock + 1 : prevTotalstock - 1;
+      let newVariantStock =
+        dir === "UP"
+          ? Number(prevVariantstock) + 1
+          : Number(prevVariantstock) - 1;
 
       // Update totalstock (products->productId->totalstock)
       _.set(
@@ -94,7 +98,7 @@ export default function productReducer(products, action) {
       if (window.confirm("Eliminar producto? No se puede restaurar.")) {
         const { id } = action;
         // Delete product from database
-        deleteProduct(id);
+        api.deleteProduct(id);
 
         // Remove from state
         toast.info("Producto eliminado.");

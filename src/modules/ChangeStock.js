@@ -11,7 +11,7 @@ export default function ChangeStock(props) {
             props.prodDispatch({
               type: "updateStock",
               id: props.variantId,
-              dir: 0,
+              dir: "DOWN",
               productId: props.productId,
             })
           }
@@ -23,7 +23,7 @@ export default function ChangeStock(props) {
             props.prodDispatch({
               type: "updateStock",
               id: props.variantId,
-              dir: 1,
+              dir: "UP",
               productId: props.productId,
             })
           }

@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  getVariantsById,
-  saveVariant,
-  deleteVariant,
-  getCategories,
-} from "api/productApi";
+import { getCategories } from "api/productApi";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import TextInput from "modules/form/TextInput";
 import ProductVariant from "modules/products/ProductVariant";

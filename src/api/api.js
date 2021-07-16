@@ -73,9 +73,7 @@ const api = {
     });
   },
   logout: () => {
-    console.log("Logging out");
     let session_id = getToken().session_id;
-    console.log("Session ID: ", session_id);
     return axios.delete(`${baseUrl}/sessions/${session_id}`);
   },
   clearSessions: () => {
@@ -98,6 +96,9 @@ const api = {
   updateProduct: (id, body) => {
     return axios.patch(`${baseUrl}/products/${id}`, body);
   },
+  deleteProduct: (id) => {
+    return axios.delete(`${baseUrl}/products/${id}`);
+  },
   getVariants: (id) => {
     // Get product variants by product ID
     return axios.get(`${baseUrl}/variants/${id}`);
@@ -110,6 +111,9 @@ const api = {
   },
   deleteVariant: (id) => {
     return axios.delete(`${baseUrl}/variants/${id}`);
+  },
+  changeStock: (id, dir) => {
+    return axios.patch(`${baseUrl}/variants/${id}/${dir}`);
   },
 };
 export default api;
