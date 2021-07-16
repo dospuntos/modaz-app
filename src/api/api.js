@@ -98,5 +98,18 @@ const api = {
   updateProduct: (id, body) => {
     return axios.patch(`${baseUrl}/products/${id}`, body);
   },
+  getVariants: (id) => {
+    // Get product variants by product ID
+    return axios.get(`${baseUrl}/variants/${id}`);
+  },
+  createVariant: (body) => {
+    return axios.post(`${baseUrl}/variants`, body);
+  },
+  updateVariant: (id, body) => {
+    return axios.patch(`${baseUrl}/variants/${id}`, body);
+  },
+  deleteVariant: (id) => {
+    return axios.delete(`${baseUrl}/variants/${id}`);
+  },
 };
 export default api;

@@ -88,11 +88,13 @@ export default function ProductEdit(props) {
     (async () => {
       try {
         const res = await api.getProduct(productid);
-        console.log("Product: ", res.data.data.products[0]);
         setProduct({
           ...res.data.data.products[0],
           category: res.data.data.products[0].category.split(","),
         });
+
+        const variants = await api.getVariants(productid);
+        setVariants(variants.data.data.variants);
       } catch (error) {
         const { response } = error;
         //const { request, ...errorObject } = response; // take everything but 'request'
@@ -101,11 +103,6 @@ export default function ProductEdit(props) {
       }
       setLoading(false);
     })();
-
-    // Get variants
-    getVariantsById(productid).then((variants) => {
-      setVariants(variants);
-    });
 
     // Get categories
     getCategories().then((categories) => {
@@ -130,25 +127,37 @@ export default function ProductEdit(props) {
   }
 
   function handleVariantSave(id) {
+    // Search variants for id
     const variant = variants.filter((variant) => {
       return variant.id === id;
     });
-    saveVariant(variant);
+    // Save to DB
+    (async () => {
+      try {
+        await api.updateVariant(id, variant[0]);
+        toast.success("Guardado");
+      } catch (error) {
+        const { response } = error;
+        console.log(response);
+        toast.error(
+          "Oops, no se pudo guardar los cambios.\n" +
+            JSON.stringify(response.data.messages)
+        );
+      }
+    })();
   }
 
   const handleProductSave = async (e) => {
     let _product = product;
     try {
-      let res = await api.updateProduct(productid, {
+      await api.updateProduct(productid, {
         ...product,
         category: _product.category.join(","),
       });
-      console.log(res);
       setEdited(false);
       toast.success("Producto actualizado");
     } catch (error) {
       const { response } = error;
-      /* const { request, ...errorObject } = response; // take everything but 'request' */
       toast.error(
         "Oops, no se pudo guardar los cambios.\n" +
           JSON.stringify(response.data.messages)
@@ -157,9 +166,24 @@ export default function ProductEdit(props) {
     }
   };
 
-  function addVariant(e) {
+  const addVariant = async (e) => {
     e.preventDefault();
-    const newVariant = [
+    try {
+      const res = await api.createVariant({ product_id: product.id });
+      console.log("Created variant: ", res);
+      const variants = await api.getVariants(productid);
+      setVariants(variants.data.data.variants);
+      /* toast.success(`Modelo creado con ID ${res.data.variant.id}`); */
+      toast.success("Modelo creado");
+    } catch (error) {
+      const { response } = error;
+      toast.error(
+        "Oops, no se pudo crear el modelo.\n" +
+          JSON.stringify(response.data.messages)
+      );
+      console.log(response);
+    }
+    /* const newVariant = [
       {
         id: "0",
         product_id: product.id,
@@ -168,19 +192,20 @@ export default function ProductEdit(props) {
         color: "-",
         size: "-",
         stock: "0",
+
       },
     ];
     saveVariant({ ...newVariant }).then(() => {
       getVariantsById(productid).then((variants) => {
         setVariants(variants);
       });
-    });
-  }
+    }); */
+  };
 
   function handleVariantDelete(e, id) {
     e.preventDefault();
     if (window.confirm("¿Quieres eliminar este modelo?")) {
-      deleteVariant(id);
+      api.deleteVariant(id);
       let _variants = variants.filter((v) => v.id !== id);
       setVariants(_variants);
     }
@@ -285,7 +310,7 @@ export default function ProductEdit(props) {
                 name="name"
                 value={product.name || ""}
                 onChange={handleChange}
-                label="Nombre"
+                label={`Nombre (ID ${product.id})`}
                 variant="filled"
                 fullWidth
               />
