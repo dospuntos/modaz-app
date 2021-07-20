@@ -15,8 +15,7 @@ function ProductCardSm({ product }) {
         <div
           className="top"
           style={{
-            background:
-              "#fff url(" + bgimg + ") center center /cover no-repeat",
+            background: `#fff url(${bgimg}) center center /cover no-repeat`,
           }}
         ></div>
         <div className="bottom">

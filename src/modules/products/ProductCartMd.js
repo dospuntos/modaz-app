@@ -91,7 +91,7 @@ export default function ProductCardMd({ product, prodDispatch }) {
           </IconButton>
         }
         title={product.name}
-        subheader={"Bs. " + product.price + " (ZIN: " + product.zinprice + ")"}
+        subheader={`Bs. ${product.price} (ZIN: ${product.zinprice})`}
         className={classes.subheader}
       />
       <CardMedia className={classes.media} image={bgimg} title={product.name} />
@@ -163,7 +163,7 @@ export default function ProductCardMd({ product, prodDispatch }) {
         >
           <Delete />
         </IconButton>
-        <Link to={"products/" + product.id}>
+        <Link to={`products/${product.id}`}>
           <IconButton aria-label="edit">
             <EditIcon />
           </IconButton>

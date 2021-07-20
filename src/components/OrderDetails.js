@@ -106,9 +106,7 @@ function OrderDetails() {
   }
 
   function handleDeleteClick(id) {
-    if (
-      window.confirm("¿Quieres eliminar el producto " + id + " del pedido?")
-    ) {
+    if (window.confirm(`¿Quieres eliminar el producto ${id} del pedido?`)) {
       deleteOrderItem(id).then(() => {
         let _orderItems = orderItems.filter(
           (item) => item.order_item_id !== id

@@ -1,10 +1,5 @@
 import { toast } from "react-toastify";
-import {
-  toggleFeatured,
-  togglePublished,
-  deleteProduct,
-  changeStock,
-} from "api/productApi";
+import { toggleFeatured, togglePublished } from "api/productApi";
 import api from "api/api";
 import _ from "lodash";
 
@@ -90,24 +85,40 @@ export default function productReducer(products, action) {
         "stock",
         newVariantStock
       );
-      toast.info("Stock del producto cambiado a " + newVariantStock);
+      toast.info(`Stock del producto cambiado a ${newVariantStock}`);
       return [...tempProducts];
     }
 
     case "delete":
       if (window.confirm("Eliminar producto? No se puede restaurar.")) {
         const { id } = action;
+        (async () => {
+          try {
+            await api.deleteProduct(id);
+            toast.success("Producto eliminado.");
+            return products.filter((item) => item.id !== id);
+          } catch (error) {
+            const { response } = error;
+            console.log(response);
+            toast.error(
+              "Oops, no se pudo eliminar el producto.\n" +
+                JSON.stringify(response.data.messages)
+            );
+          }
+        })();
+
         // Delete product from database
-        api.deleteProduct(id);
+        //api.deleteProduct(id);
 
         // Remove from state
-        toast.info("Producto eliminado.");
-        return products.filter((item) => item.id !== id);
+        //toast.info("Producto eliminado.");
+        //return products.filter((item) => item.id !== id);
+        return products;
       } else {
         return products;
       }
 
     default:
-      throw new Error("Unhandled action " + action.type);
+      throw new Error(`Unhandled action ${action.type}`);
   }
 }

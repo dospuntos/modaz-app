@@ -125,7 +125,7 @@ export default function Users() {
                       </TableCell>
                       <TableCell>
                         <Link
-                          to={"/users/" + row.id}
+                          to={`/users/${row.id}`}
                           style={{ textTransform: "capitalize" }}
                         >
                           {row.name} ({row.id})
@@ -133,7 +133,7 @@ export default function Users() {
                       </TableCell>
                       <TableCell>{row.username}</TableCell>
                       <TableCell>
-                        <a href={"mailto:" + row.email}>{row.email}</a>
+                        <a href={`mailto:${row.email}`}>{row.email}</a>
                       </TableCell>
                     </TableRow>
                   );

@@ -25,7 +25,7 @@ export default function Remove() {
         let newStock = parseInt(result[0].stock, 10) - 1;
         setResult(result, { ...(result[0].stock = newStock) });
         changeStock(result[0].vid, false); // Reduce stock by 1 in database
-        toast.info("Stock reducido a " + newStock);
+        toast.info(`Stock reducido a ${newStock}`);
         if (createOrder) {
           /* Create quick-order in database with default price */
           quickOrder(result[0].vid, result[0].price).then((result) => {

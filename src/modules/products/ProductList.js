@@ -16,7 +16,7 @@ export default function ProductList({ product, prodDispatch }) {
       </div>
       <div className="pure-u-7-24">
         <h4>
-          <Link to={"products/" + product.id}>{product.name}</Link>({product.id}
+          <Link to={`products/${product.id}`}>{product.name}</Link>({product.id}
           )
         </h4>
         <ShowPrices product={product} />

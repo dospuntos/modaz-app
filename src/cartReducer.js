@@ -47,6 +47,6 @@ export default function cartReducer(cart, action) {
       }
 
     default:
-      throw new Error("Unhandled action " + action.type);
+      throw new Error(`Unhandled action ${action.type}`);
   }
 }

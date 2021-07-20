@@ -55,11 +55,11 @@ export default function ImageEdit({
                 className={classes.margin}
                 variant="filled"
               >
-                <InputLabel htmlFor={"image-" + index}>
+                <InputLabel htmlFor={`image-${index}`}>
                   {process.env.REACT_APP_PROD_IMG_URL}
                 </InputLabel>
                 <FilledInput
-                  id={"image-" + index}
+                  id={`image-${index}`}
                   value={item.image}
                   onChange={(e) =>
                     handleImageChange("image", index, e.target.value)
@@ -77,9 +77,9 @@ export default function ImageEdit({
                 className={classes.margin}
                 variant="filled"
               >
-                <InputLabel htmlFor={"img-color-" + index}>Color</InputLabel>
+                <InputLabel htmlFor={`img-color-${index}`}>Color</InputLabel>
                 <FilledInput
-                  id={"img-color-" + index}
+                  id={`img-color-${index}`}
                   value={item.color}
                   onChange={(e) =>
                     handleImageChange("color", index, e.target.value)

@@ -21,7 +21,7 @@ export default function Add() {
         let newStock = parseInt(result[0].stock, 10) + 1;
         setResult(result, { ...(result[0].stock = newStock) });
         changeStock(result[0].vid, true); // Increase stock by 1 in database
-        toast.info("Stock incrementado a " + newStock);
+        toast.info(`Stock incrementado a ${newStock}`);
       } else {
         setResult({});
         toast.warning("Producto NO encontrado");

@@ -61,8 +61,7 @@ export default function ProductCardLg({
         <div
           className="top"
           style={{
-            background:
-              "#fff url(" + defaultImg + ") center center /cover no-repeat",
+            background: `#fff url(${defaultImg}) center center /cover no-repeat`,
           }}
         >
           {product.images.length > 1 && (

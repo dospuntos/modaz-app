@@ -4,13 +4,13 @@ import { TiClipboard } from "react-icons/ti";
 
 function OrderListItem({ order, products, userName }) {
   return (
-    <div className={"pure-g order-list-item orderstatus-" + order.order_state}>
+    <div className={`pure-g order-list-item orderstatus-${order.order_state}`}>
       <div className="pure-u-2-24 icon">
         <TiClipboard size={64} />
         {order.id}
       </div>
       <div className="pure-u-4-24">
-        <Link to={"orders/" + order.id}>{userName}</Link>
+        <Link to={`orders/${order.id}`}>{userName}</Link>
         <br />
         {order.create_date}
       </div>

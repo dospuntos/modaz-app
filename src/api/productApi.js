@@ -33,11 +33,11 @@ export function createOrder(cart, user, type) {
 }
 
 export function getProductById(id) {
-  return fetch(process.env.REACT_APP_API_URL + "getproduct.php?id=" + id)
+  return fetch(`${process.env.REACT_APP_API_URL}getproduct.php?id=${id}`)
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok.");
       return response.json().then((courses) => {
-        if (courses.length !== 1) throw new Error("Product not found: " + id);
+        if (courses.length !== 1) throw new Error(`Product not found: ${id}`);
         return courses[0]; // should only find one product for a given slug, so return it.
       });
     })
@@ -45,7 +45,7 @@ export function getProductById(id) {
 }
 
 export function saveProduct(product) {
-  return fetch(process.env.REACT_APP_API_URL + "saveproduct.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}saveproduct.php`, {
     method: "post",
     body: JSON.stringify({ ...product }),
   })
@@ -54,7 +54,7 @@ export function saveProduct(product) {
 }
 
 export function getVariantsById(id) {
-  return fetch(process.env.REACT_APP_API_URL + "getvariants.php?id=" + id)
+  return fetch(`${process.env.REACT_APP_API_URL}getvariants.php?id=${id}`)
     .then(handleResponse)
     .catch(handleError);
 }
