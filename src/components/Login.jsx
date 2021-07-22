@@ -73,16 +73,28 @@ export default function Login({ setToken }) {
 
   const submitLogin = async (e) => {
     e.preventDefault();
+    setErrors([]);
     setLoading(true);
     try {
-      let res = await api.login({ username, password });
-      setToken(res.data.data);
+      let { data } = await api.login({ username, password });
+      setToken(data.data);
     } catch (error) {
-      const { response } = error;
-      /* const { request, ...errorObject } = response; // take everything but 'request' */
-      console.log("Det oppsto en feil ved login");
-      setErrors(response.data.messages);
-      console.log(response);
+      if (error.response) {
+        // Request made and server responded
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        setErrors(error.response.data.messages);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(error.request);
+        setErrors(["Could not get response from API. Check connection"]);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+        setErrors([`Undefined Error: ${error.message}`]);
+      }
+    } finally {
       setLoading(false);
     }
   };
@@ -93,6 +105,14 @@ export default function Login({ setToken }) {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
+          {errors.length > 0 &&
+            errors.map((error, index) => {
+              return (
+                <Alert key={index} severity="error">
+                  {error}
+                </Alert>
+              );
+            })}
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -150,14 +170,7 @@ export default function Login({ setToken }) {
                 </Link>
               </Grid>
             </Grid>
-            {errors.length > 0 &&
-              errors.map((error, index) => {
-                return (
-                  <Alert key={index} severity="error">
-                    {error}
-                  </Alert>
-                );
-              })}
+
             <Box mt={5}>
               <Copyright />
             </Box>

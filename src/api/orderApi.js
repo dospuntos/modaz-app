@@ -1,7 +1,7 @@
 import { handleResponse, handleError } from "./apiUtils";
 
 export function getOrders() {
-  return fetch(process.env.REACT_APP_API_URL + "getorders.php")
+  return fetch(`${process.env.REACT_APP_API_URL}getorders.php`)
     .then(handleResponse)
     .catch(handleError);
 }
@@ -9,17 +9,16 @@ export function getOrders() {
 export function getOrderById(id, details = false) {
   // set details to false to get order details, true to get order items
   return fetch(
-    process.env.REACT_APP_API_URL +
-      "getorder.php?id=" +
-      id +
-      (details ? "&details=1" : "")
+    `${process.env.REACT_APP_API_URL}getorder.php?id=${id}${
+      details ? "&details=1" : ""
+    }`
   )
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function addOrderItem(data) {
-  return fetch(process.env.REACT_APP_API_URL + "addorderitem.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}addorderitem.php`, {
     method: "post",
     body: JSON.stringify({
       product_id: data.product_id,
@@ -32,7 +31,7 @@ export function addOrderItem(data) {
 }
 
 export function saveOrderItem(data) {
-  return fetch(process.env.REACT_APP_API_URL + "saveorderitem.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}saveorderitem.php`, {
     method: "post",
     body: JSON.stringify({
       id: data.id,
@@ -45,7 +44,7 @@ export function saveOrderItem(data) {
 }
 
 export function deleteOrderItem(id) {
-  return fetch(process.env.REACT_APP_API_URL + "deleteorderitem.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}deleteorderitem.php`, {
     method: "post",
     body: JSON.stringify({ id: id }),
   })
@@ -54,7 +53,7 @@ export function deleteOrderItem(id) {
 }
 
 export function changeOrderState(id, state) {
-  return fetch(process.env.REACT_APP_API_URL + "setorderstate.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}setorderstate.php`, {
     method: "post",
     body: JSON.stringify({
       id: id,
@@ -66,7 +65,7 @@ export function changeOrderState(id, state) {
 }
 
 export function quickOrder(vid, price = 0) {
-  return fetch(process.env.REACT_APP_API_URL + "createquickorder.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}createquickorder.php`, {
     method: "post",
     body: JSON.stringify({
       vid: vid,

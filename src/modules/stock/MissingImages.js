@@ -46,11 +46,10 @@ function MissingImages() {
         return (
           <li key={index}>
             <a
-              href={
-                "https://www.google.com/search?q=" +
-                item.name.replace(/ /g, "+") +
-                "&tbm=isch"
-              }
+              href={`https://www.google.com/search?q=${item.name.replace(
+                / /g,
+                "+"
+              )}&tbm=isch`}
               target="imagesearch"
               rel="noopener noreferrer"
               onClick={(e) => handleClick(e, imageUrl)}

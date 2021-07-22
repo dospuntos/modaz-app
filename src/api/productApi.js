@@ -2,13 +2,13 @@ import { handleResponse, handleError } from "./apiUtils";
 
 export function getProducts() {
   console.log("Getting products from API");
-  return fetch(process.env.REACT_APP_API_URL + "get.php")
+  return fetch(`${process.env.REACT_APP_API_URL}get.php`)
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function changeStock(id, dir = 1) {
-  return fetch(process.env.REACT_APP_API_URL + "changeStock.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}changeStock.php`, {
     method: "post",
     body: JSON.stringify({
       id: id,
@@ -20,7 +20,7 @@ export function changeStock(id, dir = 1) {
 }
 
 export function createOrder(cart, user, type) {
-  return fetch(process.env.REACT_APP_API_URL + "createorder.php", {
+  return fetch(`${process.env.REACT_APP_API_URL}createorder.php`, {
     method: "post",
     body: JSON.stringify({
       cart: JSON.stringify(cart),

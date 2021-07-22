@@ -134,11 +134,7 @@ export default function Tools() {
                       <Button
                         variant="contained"
                         color="primary"
-                        href={
-                          process.env.REACT_APP_API_URL +
-                          "getbyorderdate.php?orderdate=" +
-                          date
-                        }
+                        href={`${process.env.REACT_APP_API_URL}getbyorderdate.php?orderdate=${date}`}
                         target="_blank"
                       >
                         Mostrar para {date} <LaunchIcon />
