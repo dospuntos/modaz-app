@@ -28,7 +28,6 @@ export default function productReducer(products, action) {
       }
       return [...tempProducts];
     }
-    // Not a valid action
 
     case "publishedToggle": {
       const { id } = action;
@@ -48,45 +47,78 @@ export default function productReducer(products, action) {
     }
 
     case "updateStock": {
-      console.log("Product from updateStock: ", products);
       const { id, dir, productId } = action;
+      let newVariantStock = 0;
+      let tempProducts = products;
 
       // Apply changes in database
-      api.changeStock(id, dir);
-      let tempProducts = products;
-      let prevTotalstock = _.find(tempProducts, { id: productId })[
-        "totalstock"
-      ];
-      let prevVariantstock = _.find(
-        _.flatten(_.map(tempProducts, "variants")),
-        {
-          vid: id,
+      api
+        .changeStock(id, dir)
+        .then((response) => {
+          newVariantStock = response.data.data.variants[0].stock;
+          // Update stock in state if success
+          let { totalstock: prevTotalstock } = tempProducts.find(
+            (post) => post.id === productId
+          );
+
+          let newTotalStock =
+            dir === "UP" ? prevTotalstock + 1 : prevTotalstock - 1;
+
+          // Update totalstock (products->productId->totalstock)
+          _.set(
+            _.find(tempProducts, { id: productId }),
+            "totalstock",
+            newTotalStock
+          );
+
+          // Update variant (products->productId->variants->vId->totalstock)
+          _.set(
+            _.find(_.flatten(_.map(tempProducts, "variants")), {
+              vid: id,
+            }),
+            "stock",
+            newVariantStock
+          );
+          toast.info(`Stock del producto cambiado a ${newVariantStock}`);
+          return [...tempProducts];
+          // End update stock
+        })
+        .catch((err) => {
+          console.log(err);
+          return products;
+        });
+      break;
+    }
+
+    case "updateVariant": {
+      const { variant } = action;
+      let updatedProducts = products;
+      (async () => {
+        try {
+          await api.updateVariant(variant.id, variant); // Update variant
+          updatedProducts = await api.getProducts(); // Get products and variants from DB
+          toast.info(`Stock del producto cambiado a ${variant.stock}`);
+        } catch (error) {
+          if (error.response) {
+            // Request made and server responded
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            toast.error(JSON.stringify(error.response.data.messages));
+            //setErrors(error.response.data.messages);
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.log(error.request);
+            toast.error("Could not get response from API. Check connection");
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+            toast.error(`Undefined Error: ${error.message}`);
+          }
         }
-      )["stock"];
-      let newTotalStock =
-        dir === "UP" ? prevTotalstock + 1 : prevTotalstock - 1;
-      let newVariantStock =
-        dir === "UP"
-          ? Number(prevVariantstock) + 1
-          : Number(prevVariantstock) - 1;
+      })();
 
-      // Update totalstock (products->productId->totalstock)
-      _.set(
-        _.find(tempProducts, { id: productId }),
-        "totalstock",
-        newTotalStock
-      );
-
-      // Update variant (products->productId->variants->vId->totalstock)
-      _.set(
-        _.find(_.flatten(_.map(tempProducts, "variants")), {
-          vid: id,
-        }),
-        "stock",
-        newVariantStock
-      );
-      toast.info(`Stock del producto cambiado a ${newVariantStock}`);
-      return [...tempProducts];
+      return [...updatedProducts];
     }
 
     case "delete":

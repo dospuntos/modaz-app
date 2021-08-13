@@ -162,8 +162,9 @@ export default function ProductCardLg({
                         </span>
                       )}
                       <ChangeStock
+                        variant={variant}
                         variantId={variant.vid}
-                        productId={variant.product_id}
+                        productId={product.id}
                         prodDispatch={prodDispatch}
                       />
                     </td>

@@ -10,7 +10,6 @@ export function ProductProvider(props) {
   useEffect(() => {
     api.getProducts().then((products) => {
       console.log("UseEffect setting products");
-      console.log("Products: ", products.data.data.products);
       initialProducts = products.data.data.products;
     });
   });

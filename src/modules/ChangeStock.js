@@ -9,10 +9,12 @@ export default function ChangeStock(props) {
           color="grey"
           onClick={() =>
             props.prodDispatch({
-              type: "updateStock",
-              id: props.variantId,
-              dir: "DOWN",
-              productId: props.productId,
+              type: "updateVariant",
+              variant: {
+                id: props.variant.vid,
+                stock:
+                  props.variant.stock - 1 < 0 ? 0 : props.variant.stock - 1, // Should not be less than 0
+              },
             })
           }
         />
@@ -21,10 +23,11 @@ export default function ChangeStock(props) {
         <FaPlusCircle
           onClick={() =>
             props.prodDispatch({
-              type: "updateStock",
-              id: props.variantId,
-              dir: "UP",
-              productId: props.productId,
+              type: "updateVariant",
+              variant: {
+                id: props.variant.vid,
+                stock: props.variant.stock + 1,
+              },
             })
           }
         />
