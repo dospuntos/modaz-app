@@ -25,34 +25,10 @@ export default function Cart({ handleVariantCountChange }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const [cartUser, setCartUser] = useState("0");
-  const [users, setUsers] = useState([]);
-
   let history = useHistory();
-
-  useEffect(() => {
-    // Get users
-    getUsers().then((users) => {
-      setUsers(users);
-    });
-  }, []);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value) => {
-    setOpen(false);
-  };
-
-  function handleSetCartUser(e) {
-    setCartUser(e.target.value);
-  }
 
   function saveCart(cart, user, type) {
     createOrder(cart, user, type);
-    //TODO: Empty cart using cartReducer.
-    //handleEmptyCart(false); // Empty cart without confirmation
     dispatch({ type: "empty2" });
     history.push("/orders"); // Redirect to orders
   }
@@ -65,7 +41,7 @@ export default function Cart({ handleVariantCountChange }) {
 
   return (
     <div className={classes.root}>
-      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
+      <Fab color="primary" aria-label="add" onClick={() => setOpen(true)}>
         <Badge badgeContent={countCartItems()} color="secondary">
           <ShoppingCart />
         </Badge>
@@ -75,10 +51,7 @@ export default function Cart({ handleVariantCountChange }) {
         dispatch={dispatch}
         open={open}
         cart={cart}
-        onClose={handleClose}
-        users={users}
-        cartUser={cartUser}
-        handleSetCartUser={handleSetCartUser}
+        onClose={() => setOpen(false)}
         saveCart={saveCart}
       />
     </div>

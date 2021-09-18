@@ -198,13 +198,14 @@ export default function App() {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/" component={Products} />
             <Route path="/products/:productid" component={ProductEdit} />
             <Route path="/products" component={Products} />
             <Route path="/orders/:orderid" component={OrderDetails} />
             <Route path="/orders" component={Orders} />
             <Route path="/stock" component={Stock} />
             <Route path="/tools" component={Tools} />
+            <Route path="/statistics" component={Dashboard} />
             <Route path="/users/:userid" component={Users} />
             <Route path="/users" component={Users} />
             <Route path="/login" component={Login} />

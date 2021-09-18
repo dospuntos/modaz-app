@@ -6,7 +6,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import StoreIcon from "@material-ui/icons/Store";
+import BarChartIcon from "@material-ui/icons/BarChart";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
@@ -38,10 +38,10 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Dashboard" />
+            <ListItemText primary="Products" />
           </ListItem>
         </NavLink>
-        <NavLink to="/products">
+        {/* <NavLink to="/products">
           <ListItem button>
             <ListItemIcon>
               <Badge
@@ -54,7 +54,7 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
             </ListItemIcon>
             <ListItemText primary="Productos" />
           </ListItem>
-        </NavLink>
+        </NavLink> */}
         <NavLink to="/orders">
           <ListItem button>
             <ListItemIcon>
@@ -89,6 +89,14 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary="Herramientas" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/statistics">
+          <ListItem button>
+            <ListItemIcon>
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Estadísticas" />
           </ListItem>
         </NavLink>
       </List>

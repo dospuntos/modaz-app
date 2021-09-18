@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
@@ -11,6 +12,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import { red } from "@material-ui/core/colors";
+import { getUsers } from "api/usersApi";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,12 +35,18 @@ export default function CartContents({
   selectedValue,
   open,
   cart,
-  users,
-  cartUser,
-  handleSetCartUser,
   saveCart,
 }) {
   const classes = useStyles();
+  const [users, setUsers] = useState([]);
+  const [cartUser, setCartUser] = useState("0");
+
+  useEffect(() => {
+    // Get users
+    getUsers().then((users) => {
+      setUsers(users);
+    });
+  }, []);
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -102,7 +110,7 @@ export default function CartContents({
       )}
       <select
         value={cartUser}
-        onChange={handleSetCartUser}
+        onChange={(e) => setCartUser(e.target.value)}
         style={{ maxWidth: "80%", margin: "15px auto" }}
       >
         <option value="0">- Seleccione usuario -</option>
