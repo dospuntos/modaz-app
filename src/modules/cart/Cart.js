@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
-import { getUsers } from "api/usersApi";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
