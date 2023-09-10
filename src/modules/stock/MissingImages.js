@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getMissingImages } from "api/statisticsApi";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function MissingImages() {
   const [missing, setMissing] = useState([]);

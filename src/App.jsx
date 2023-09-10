@@ -2,16 +2,16 @@ import useToken from "api/useToken";
 import { logOut } from "api/usersApi";
 import clsx from "clsx";
 import { useStickyState } from "./hooks";
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Grid from "@material-ui/core/Grid";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { makeStyles } from "@mui/styles";
+import Drawer from "@mui/material/Drawer";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Grid from "@mui/material/Grid";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import "purecss/build/pure-min.css";
 import "purecss/build/grids-responsive.css";
 import "./App.css";
@@ -123,7 +123,6 @@ export default function App() {
           hideProgressBar
           position="bottom-center"
         />
-
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {

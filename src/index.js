@@ -1,13 +1,13 @@
 import ReactDOM from "react-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import { esES } from "@material-ui/core/locale";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { esES } from "@mui/material/locale";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { CartProvider } from "modules/cart/cartContext";
 import { ProductProvider } from "productContext";
 
-const theme = createMuiTheme(
+const theme = createTheme(
   {
     palette: {
       primary: {

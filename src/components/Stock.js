@@ -1,15 +1,15 @@
 import { useStickyState } from "hooks";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import { makeStyles } from "@mui/styles";
 import Add from "modules/stock/Add";
 import Remove from "modules/stock/Remove";
 import Consult from "modules/stock/Consult";
 import AddToCart from "modules/stock/AddToCart";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@mui/lab/ToggleButtonGroup";
+import ToggleButton from "@mui/lab/ToggleButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {

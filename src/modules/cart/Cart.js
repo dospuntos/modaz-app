@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";
-import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import Badge from "@material-ui/core/Badge";
+import { makeStyles } from "@mui/styles";
+import Fab from "@mui/material/Fab";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
 import CartContents from "modules/cart/CartContents";
 import { useCart } from "modules/cart/cartContext";
 

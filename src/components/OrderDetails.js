@@ -9,8 +9,8 @@ import {
   MenuItem,
   Select,
   InputLabel,
-} from "@material-ui/core";
-import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
+} from "@mui/material";
+import { ToggleButtonGroup, ToggleButton } from "@mui/lab";
 import {
   getOrderById,
   deleteOrderItem,

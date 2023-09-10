@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { searchUPC } from "api/productApi";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import ProductDetails from "./ProductDetails";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Tools() {
   const [upc, setUpc] = useState("");

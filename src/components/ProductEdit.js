@@ -12,17 +12,17 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import TextInput from "modules/form/TextInput";
 import ProductVariant from "modules/products/ProductVariant";
 import Categories from "modules/products/Categories";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Modal from "@material-ui/core/Modal";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import SaveIcon from "@material-ui/icons/Save";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
 import ImageEdit from "components/ImageEdit";
 import { getDefaultImage, getAllImages } from "functions";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const useStyles = makeStyles((theme) => ({
   root: {

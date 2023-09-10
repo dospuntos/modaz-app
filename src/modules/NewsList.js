@@ -1,10 +1,10 @@
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import green from "@material-ui/core/colors/green";
-import ListItemText from "@material-ui/core/ListItemText";
-import AnnouncementIcon from "@material-ui/icons/Announcement";
+import { makeStyles } from "@mui/styles";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import green from "@mui/material/colors/green";
+import ListItemText from "@mui/material/ListItemText";
+import AnnouncementIcon from "@mui/icons-material/Announcement";
 
 const useStyles = makeStyles((theme) => ({
   root: {

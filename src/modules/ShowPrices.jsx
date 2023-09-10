@@ -1,5 +1,5 @@
-import Tooltip from "@material-ui/core/Tooltip";
-import { makeStyles } from "@material-ui/core/styles";
+import Tooltip from "@mui/material/Tooltip";
+import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({

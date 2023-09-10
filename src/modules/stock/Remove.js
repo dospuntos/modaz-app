@@ -4,10 +4,10 @@ import { searchUPC } from "api/productApi";
 import { changeStock } from "api/productApi";
 import { quickOrder } from "api/orderApi";
 import { toast } from "react-toastify";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import ProductDetails from "./ProductDetails";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Remove() {
   const [upc, setUpc] = useState("");

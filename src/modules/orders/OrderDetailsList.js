@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ShowPrices from "modules/ShowPrices";
 import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
-import Modal from "@material-ui/core/Modal";
-import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@mui/material/Modal";
+import { makeStyles } from "@mui/styles";
 import ProductEdit from "components/ProductEdit";
 import { getImagesByColor } from "functions";
 

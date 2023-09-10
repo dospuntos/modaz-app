@@ -3,8 +3,8 @@ import { searchUPC } from "api/productApi";
 import { toast } from "react-toastify";
 import { useCart } from "modules/cart/cartContext";
 import ProductDetails from "./ProductDetails";
-import TextField from "@material-ui/core/TextField";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import TextField from "@mui/material/TextField";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function AddToCart() {
   const { dispatch } = useCart();

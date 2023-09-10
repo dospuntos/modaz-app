@@ -11,10 +11,10 @@ import {
 } from "react-icons/ri";
 import { BsGear } from "react-icons/bs";
 import ProductEdit from "components/ProductEdit";
-import Modal from "@material-ui/core/Modal";
-import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@mui/material/Modal";
+import { makeStyles } from "@mui/styles";
 import { getDefaultImage, getImageCount } from "functions";
-import BurstModeIcon from "@material-ui/icons/BurstMode";
+import BurstModeIcon from "@mui/icons-material/BurstMode";
 import { useCart } from "modules/cart/cartContext";
 
 const useStyles = makeStyles((theme) => ({

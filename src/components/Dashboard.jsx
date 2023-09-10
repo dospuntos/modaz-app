@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import Container from "@mui/material/Container";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import TodoList from "modules/TodoList";
 import NewsList from "modules/NewsList";
 import { getStatistics } from "api/statisticsApi";
 import "modules/card.css";
-import Card from "@material-ui/core/Card";
+import Card from "@mui/material/Card";
 /* import ProductStats from "modules/dashboard/ProductStats";
 import OrderStats from "modules/dashboard/OrderStats";
 import IncomeStats from "modules/dashboard/IncomeStats"; */
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   RiShoppingCartLine,
   RiFileList3Line,
