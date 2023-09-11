@@ -60,7 +60,7 @@ export default function Dashboard() {
 
   if (loading) return <CircularProgress />;
   return (
-    <Container maxWidth="lg" className={classes.container}>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={1}>
         <Grid item xs={12} md={3}>
           <div className="card card-1">
@@ -77,6 +77,7 @@ export default function Dashboard() {
           </div>
           {/* <ProductStats stats={statistics} /> */}
         </Grid>
+
         <Grid item xs={12} md={3}>
           <div className="card card-1">
             <div className="card-title color-secondary">
