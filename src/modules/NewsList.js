@@ -1,4 +1,3 @@
-import { makeStyles } from "@mui/styles";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -6,12 +5,12 @@ import green from "@mui/material/colors/green";
 import ListItemText from "@mui/material/ListItemText";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
-}));
+})); */
 
 const news = [
   "Nuevo sistema de carrito",
@@ -23,10 +22,8 @@ const news = [
 ];
 
 export default function TodoList() {
-  const classes = useStyles();
-
   return (
-    <List className={classes.root}>
+    <List /* className={classes.root} */>
       {news.map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 

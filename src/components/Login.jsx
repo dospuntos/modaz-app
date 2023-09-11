@@ -11,7 +11,6 @@ import Grid from "@mui/material/Grid";
 import MuiAlert from "@mui/lab/Alert";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -30,10 +29,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
+/* const useStyles = makeStyles((theme) => ({
   image: {
     backgroundImage: "url(https://source.unsplash.com/1600x900/?colors)",
     backgroundRepeat: "no-repeat",
@@ -61,29 +57,26 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+})); */
 
 export default function Login({ setToken }) {
-  const classes = useStyles();
-
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component="main">
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={false} sm={4} md={7} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+        <div>
+          <Avatar>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Ingresar
           </Typography>
           <form
-            className={classes.form}
             onSubmit={(e) => {
               e.preventDefault();
               loginUser({
@@ -121,13 +114,7 @@ export default function Login({ setToken }) {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
+            <Button type="submit" fullWidth variant="contained" color="primary">
               Ingresar
             </Button>
 

@@ -1,11 +1,10 @@
-import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-const useStyles = makeStyles({
+/* const useStyles = makeStyles({
   root: {
     maxWidth: "100%",
     height: 300,
@@ -13,20 +12,18 @@ const useStyles = makeStyles({
   media: {
     height: 140,
   },
-});
+}); */
 
 export default function Products({ stats }) {
-  const classes = useStyles();
-
   function currencyFormat(num) {
     return "Bs. " + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }
 
   return (
-    <Card className={classes.root}>
+    <Card /* className={classes.root} */>
       <CardActionArea>
         <CardMedia
-          className={classes.media}
+          /* className={classes.media} */
           image="https://source.unsplash.com/random/?money"
           title="Ingresos"
         />

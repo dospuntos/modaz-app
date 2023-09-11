@@ -3,7 +3,6 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import { makeStyles } from "@mui/styles";
 import Add from "modules/stock/Add";
 import Remove from "modules/stock/Remove";
 import Consult from "modules/stock/Consult";
@@ -11,7 +10,7 @@ import AddToCart from "modules/stock/AddToCart";
 import ToggleButtonGroup from "@mui/lab/ToggleButtonGroup";
 import ToggleButton from "@mui/lab/ToggleButton";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
@@ -35,14 +34,13 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
-}));
+})); */
 
 export default function Stock() {
   const [tab, setTab] = useStickyState("add", "tab");
-  const classes = useStyles();
 
   return (
-    <Container maxWidth="lg" className={classes.container}>
+    <Container maxWidth="lg" /*  className={classes.container} */>
       <Grid
         container
         direction="row"
@@ -68,7 +66,7 @@ export default function Stock() {
         </Grid>
       </Grid>
 
-      <Paper className={classes.paper}>
+      <Paper /* className={classes.paper} */>
         {tab === "add" && <Add />}
         {tab === "consult" && <Consult />}
         {tab === "remove" && <Remove />}

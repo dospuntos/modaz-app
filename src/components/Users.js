@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { makeStyles } from "@mui/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Table from "@mui/material/Table";
@@ -31,19 +30,12 @@ const columns = [
   },
 ];
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-});
-
 export default function Users() {
   const [searchText, setSearchText] = useState("");
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
-  const classes = useStyles();
 
   useEffect(() => {
     // Get users
@@ -99,8 +91,8 @@ export default function Users() {
         </Grid>
       </Grid>
 
-      <Paper className={classes.root}>
-        <TableContainer className={classes.container}>
+      <Paper /*className={classes.root} */>
+        <TableContainer /* className={classes.container} */>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

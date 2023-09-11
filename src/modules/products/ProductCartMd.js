@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { makeStyles } from "@mui/styles";
-import clsx from "clsx";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,7 +8,6 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { green, grey } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
@@ -22,7 +19,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { getAllImages } from "functions";
 import { useCart } from "modules/cart/cartContext";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     width: "32%",
     maxWidth: 345,
@@ -54,14 +51,11 @@ const useStyles = makeStyles((theme) => ({
   avatar2: {
     backgroundColor: grey[200],
   },
-}));
+})); */
 
 export default function ProductCardMd({ product, prodDispatch }) {
   const { dispatch } = useCart();
-
-  const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -70,12 +64,16 @@ export default function ProductCardMd({ product, prodDispatch }) {
   const bgimg = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
 
   return (
-    <Card className={classes.root}>
+    <Card /* className={classes.root} */>
       <CardHeader
         avatar={
           <Avatar
             aria-label="recipe"
-            className={product.state === "1" ? classes.avatar : classes.avatar2}
+            className={
+              product.state === "1"
+                ? "backgroundColor: green[500]"
+                : "backgroundColor: grey[200]"
+            }
             onClick={() =>
               prodDispatch({
                 type: "publishedToggle",
@@ -93,9 +91,12 @@ export default function ProductCardMd({ product, prodDispatch }) {
         }
         title={product.name}
         subheader={"Bs. " + product.price + " (ZIN: " + product.zinprice + ")"}
-        className={classes.subheader}
+        /* className={classes.subheader} */
       />
-      <CardMedia className={classes.media} image={bgimg} title={product.name} />
+      <CardMedia
+        /* className={classes.media} */ image={bgimg}
+        title={product.name}
+      />
       <CardContent>
         {/* <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook
@@ -170,9 +171,9 @@ export default function ProductCardMd({ product, prodDispatch }) {
           </IconButton>
         </Link>
         <IconButton
-          className={clsx(classes.expand, {
+          /* className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
-          })}
+          })} */
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"

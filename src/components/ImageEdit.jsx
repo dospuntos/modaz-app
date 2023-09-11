@@ -1,4 +1,3 @@
-import { makeStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -10,22 +9,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import { getAllImages } from "functions";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: "40%",
-  },
-}));
-
 export default function ImageEdit({
   images,
   handleImageChange,
@@ -33,7 +16,6 @@ export default function ImageEdit({
   handleAddImage,
   handleDeleteImage,
 }) {
-  const classes = useStyles();
   const imgObj = getAllImages(images);
 
   return (
@@ -52,11 +34,7 @@ export default function ImageEdit({
               />
             </Grid>
             <Grid item xs={12} md={7}>
-              <FormControl
-                fullWidth
-                className={classes.margin}
-                variant="filled"
-              >
+              <FormControl fullWidth variant="filled">
                 <InputLabel htmlFor={"image-" + index}>
                   {process.env.REACT_APP_PROD_IMG_URL}
                 </InputLabel>
@@ -74,11 +52,7 @@ export default function ImageEdit({
               </FormControl>
             </Grid>
             <Grid item xs={12} md={3}>
-              <FormControl
-                fullWidth
-                className={classes.margin}
-                variant="filled"
-              >
+              <FormControl fullWidth variant="filled">
                 <InputLabel htmlFor={"img-color-" + index}>Color</InputLabel>
                 <FilledInput
                   id={"img-color-" + index}
@@ -108,7 +82,6 @@ export default function ImageEdit({
             variant="contained"
             color="primary"
             size="small"
-            className={classes.button}
             startIcon={<AddToPhotosIcon />}
             onClick={handleAddImage}
           >

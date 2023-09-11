@@ -5,13 +5,12 @@ import { resetStock } from "api/productApi";
 import MissingImages from "modules/stock/MissingImages";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { makeStyles } from "@mui/styles";
 import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
 import LaunchIcon from "@mui/icons-material/Launch";
 import TextField from "@mui/material/TextField";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
@@ -25,10 +24,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     height: "100%",
   },
-}));
+})); */
 
 export default function Tools() {
-  const classes = useStyles();
   const [showMissing, setShowMissing] = useState(false);
   const [date, setDate] = useState("");
 
@@ -48,11 +46,11 @@ export default function Tools() {
     }
   }
   return (
-    <div className={classes.root}>
+    <div /* className={classes.root} */>
       <Paper>
         <Grid container spacing={6}>
           <Grid item sm={12} md={6}>
-            <Card className={classes.card} variant="outlined">
+            <Card /* className={classes.card} */ variant="outlined">
               <p>
                 Iniciar copia de seguridad de ModaZ.net. Recomendado antes de
                 hacer cambios de los productos o stock.
@@ -70,7 +68,7 @@ export default function Tools() {
             </Card>
           </Grid>
           <Grid item sm={12} md={6}>
-            <Card className={classes.card} variant="outlined">
+            <Card /* className={classes.card} */ variant="outlined">
               <p>Resetear stock para todos los productos</p>
               <Button
                 variant="contained"
@@ -82,7 +80,7 @@ export default function Tools() {
             </Card>
           </Grid>
           <Grid item sm={12} md={6}>
-            <Card className={classes.card} variant="outlined">
+            <Card /* className={classes.card} */ variant="outlined">
               <p>Mostrar productos sin imagen</p>
               <FormControlLabel
                 control={
@@ -97,9 +95,9 @@ export default function Tools() {
             </Card>
           </Grid>
           <Grid item sm={12} md={6}>
-            <Card className={classes.card} variant="outlined">
+            <Card /* className={classes.card} */ variant="outlined">
               <p>Mostrar imágenes de pedido por fecha</p>
-              <form className={classes.container} noValidate>
+              <form /* className={classes.container} */ noValidate>
                 <Grid container spacing={6}>
                   <Grid item sm={6}>
                     <TextField
@@ -107,7 +105,7 @@ export default function Tools() {
                       label="Fecha de pedido"
                       type="date"
                       defaultValue=""
-                      className={classes.textField}
+                      /* className={classes.textField} */
                       onChange={(e) => setDate(e.target.value)}
                       InputLabelProps={{
                         shrink: true,

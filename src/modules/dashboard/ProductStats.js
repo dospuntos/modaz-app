@@ -1,4 +1,3 @@
-import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
@@ -8,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles({
+/* const useStyles = makeStyles({
   root: {
     maxWidth: "100%",
     height: 300,
@@ -16,16 +15,14 @@ const useStyles = makeStyles({
   media: {
     height: 140,
   },
-});
+}); */
 
 export default function ProductStats({ stats }) {
-  const classes = useStyles();
-
   return (
-    <Card className={classes.root}>
+    <Card /* className={classes.root} */>
       <CardActionArea>
         <CardMedia
-          className={classes.media}
+          /* className={classes.media} */
           image="https://source.unsplash.com/random/?clothing%20store"
           title="Productos"
         />

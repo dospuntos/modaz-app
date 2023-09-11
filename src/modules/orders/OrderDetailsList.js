@@ -2,11 +2,10 @@ import { useState } from "react";
 import ShowPrices from "modules/ShowPrices";
 import { RiDeleteBin5Line, RiSaveLine } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
-import { makeStyles } from "@mui/styles";
 import ProductEdit from "components/ProductEdit";
 import { getImagesByColor } from "functions";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   paper: {
     top: "50%",
     left: "50%",
@@ -20,14 +19,13 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-}));
+})); */
 
 function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
   const [price, setPrice] = useState(item.order_item_price);
   const [quantity, setQuantity] = useState(item.order_item_quantity);
   const [edited, setEdited] = useState(false);
   const [open, setOpen] = useState(false);
-  const classes = useStyles();
 
   function handleOrderItemChange(e) {
     let data = {
@@ -66,7 +64,7 @@ function OrderDetailsList({ item, handleDeleteClick, updateOrderItem }) {
             setOpen(false);
           }}
         >
-          <div className={classes.paper}>
+          <div /* className={classes.paper} */>
             <ProductEdit id={item.id} />
           </div>
         </Modal>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { makeStyles } from "@mui/styles";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ShowPrices from "modules/ShowPrices";
 import { getDefaultImage, getAllImages } from "functions";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   card: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
@@ -53,10 +52,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: -theme.spacing(),
     },
   },
-}));
+})); */
 
 export default function ProductDetails({ product }) {
-  const classes = useStyles();
   const images = getAllImages(product.images);
   const [displayImage, setDisplayImage] = useState();
 
@@ -65,9 +63,9 @@ export default function ProductDetails({ product }) {
   }, [product.images]);
 
   return (
-    <Card className={classes.card}>
-      <CardMedia className={classes.media} image={displayImage} />
-      <CardContent className={classes.content}>
+    <Card /* className={classes.card} */>
+      <CardMedia /* className={classes.media} */ image={displayImage} />
+      <CardContent /* className={classes.content} */>
         <Typography
           style={product.state === "1" ? { color: "green" } : { color: "red" }}
           variant={"h5"}
@@ -99,11 +97,11 @@ export default function ProductDetails({ product }) {
             <li>Product ID: {product.product_id}</li>
           </ul>
         </Typography>
-        <Divider className={classes.divider} light />
+        <Divider /* className={classes.divider} */ light />
         {images.length > 1 &&
           images.map((image, index) => (
             <Avatar
-              className={classes.avatar}
+              /* className={classes.avatar} */
               key={index}
               src={process.env.REACT_APP_PROD_IMG_URL + image.image}
               onClick={() =>

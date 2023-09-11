@@ -1,5 +1,4 @@
 import { useStickyState } from "hooks";
-import { makeStyles } from "@mui/styles";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -9,12 +8,12 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import CommentIcon from "@mui/icons-material/Comment";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
-}));
+})); */
 
 const tasks = [
   "Include users name in quotes when available",
@@ -39,7 +38,6 @@ const tasks = [
 ];
 
 export default function TodoList() {
-  const classes = useStyles();
   const [checked, setChecked] = useStickyState([0], "todolist");
 
   const handleToggle = (value) => () => {
@@ -56,7 +54,7 @@ export default function TodoList() {
   };
 
   return (
-    <List className={classes.root}>
+    <List /* className={classes.root} */>
       {tasks.map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 

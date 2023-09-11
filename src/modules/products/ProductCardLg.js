@@ -12,12 +12,11 @@ import {
 import { BsGear } from "react-icons/bs";
 import ProductEdit from "components/ProductEdit";
 import Modal from "@mui/material/Modal";
-import { makeStyles } from "@mui/styles";
 import { getDefaultImage, getImageCount } from "functions";
 import BurstModeIcon from "@mui/icons-material/BurstMode";
 import { useCart } from "modules/cart/cartContext";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   paper: {
     top: "50%",
     left: "50%",
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-}));
+})); */
 
 export default function ProductCardLg({
   product,
@@ -40,7 +39,6 @@ export default function ProductCardLg({
 }) {
   const { dispatch } = useCart();
   const [clicked, setClicked] = useState(false);
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const defaultImg = getDefaultImage(product.images);
 
@@ -54,7 +52,7 @@ export default function ProductCardLg({
           forceProductRefresh();
         }}
       >
-        <div className={classes.paper}>
+        <div /* className={classes.paper} */>
           <ProductEdit id={product.id} />
         </div>
       </Modal>

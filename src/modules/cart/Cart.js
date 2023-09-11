@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
 import { useHistory } from "react-router-dom";
 import { getUsers } from "api/usersApi";
-import { makeStyles } from "@mui/styles";
 import Fab from "@mui/material/Fab";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import CartContents from "modules/cart/CartContents";
 import { useCart } from "modules/cart/cartContext";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
     right: 25,
@@ -18,11 +17,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-}));
+})); */
 
 export default function Cart({ handleVariantCountChange }) {
   const { cart, dispatch } = useCart();
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
 
   const [cartUser, setCartUser] = useState("0");
@@ -64,7 +62,7 @@ export default function Cart({ handleVariantCountChange }) {
   }
 
   return (
-    <div className={classes.root}>
+    <div /* className={classes.root} */>
       <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
         <Badge badgeContent={countCartItems()} color="secondary">
           <ShoppingCart />

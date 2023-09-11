@@ -1,4 +1,3 @@
-import { makeStyles } from "@mui/styles";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -12,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
     right: 25,
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: red[100],
     color: red[600],
   },
-}));
+})); */
 
 export default function CartContents({
   dispatch,
@@ -38,8 +37,6 @@ export default function CartContents({
   handleSetCartUser,
   saveCart,
 }) {
-  const classes = useStyles();
-
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -74,7 +71,7 @@ export default function CartContents({
               key={item}
             >
               <ListItemAvatar>
-                <Avatar className={classes.avatar}>
+                <Avatar /* className={classes.avatar} */>
                   {item.order_item_quantity}
                 </Avatar>
               </ListItemAvatar>

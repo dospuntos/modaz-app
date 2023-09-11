@@ -12,7 +12,6 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import TextInput from "modules/form/TextInput";
 import ProductVariant from "modules/products/ProductVariant";
 import Categories from "modules/products/Categories";
-import { makeStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
@@ -24,7 +23,7 @@ import { getDefaultImage, getAllImages } from "functions";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import InputAdornment from "@mui/material/InputAdornment";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-}));
+})); */
 
 export default function ProductEdit(props) {
   const [product, setProduct] = useState([
@@ -70,8 +69,6 @@ export default function ProductEdit(props) {
   const [variants, setVariants] = useState([]);
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(false);
-
-  const classes = useStyles();
 
   let { productid } = useParams();
   if (!productid) {
@@ -200,17 +197,15 @@ export default function ProductEdit(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <>
       <Modal open={open} onClose={handleClose}>
-        <div className={classes.paper}>
-          <ImageEdit
-            images={product.images}
-            handleImageChange={handleImageChange}
-            handleMakeDefaultImage={handleMakeDefaultImage}
-            handleAddImage={handleAddImage}
-            handleDeleteImage={handleDeleteImage}
-          />
-        </div>
+        <ImageEdit
+          images={product.images}
+          handleImageChange={handleImageChange}
+          handleMakeDefaultImage={handleMakeDefaultImage}
+          handleAddImage={handleAddImage}
+          handleDeleteImage={handleDeleteImage}
+        />
       </Modal>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
@@ -437,6 +432,6 @@ export default function ProductEdit(props) {
           />
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 }

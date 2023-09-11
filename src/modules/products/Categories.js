@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { makeStyles, useTheme } from "@mui/styles";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   noLabel: {
     marginTop: theme.spacing(3),
   },
-}));
+}));*/
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -36,18 +35,18 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, personName, theme) {
+/* function getStyles(name, personName, theme) {
   return {
     fontWeight:
       personName.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
-}
+} */
 
 export default function Categories({ categories, prodCats, handleChange }) {
-  const classes = useStyles();
-  const theme = useTheme();
+  /* const classes = useStyles();
+  const theme = useTheme(); */
   const [personName, setPersonName] = useState([]);
   /* const handleChange = (event) => {
     setPersonName(event.target.value);
@@ -64,7 +63,7 @@ export default function Categories({ categories, prodCats, handleChange }) {
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
+      <FormControl /* className={classes.formControl} */>
         <InputLabel id="categories">Categorías</InputLabel>
         <Select
           labelId="categories"
@@ -73,12 +72,12 @@ export default function Categories({ categories, prodCats, handleChange }) {
           onChange={(event) => handleChange(event.target.value)}
           input={<Input id="select-multiple-chip" />}
           renderValue={(selected) => (
-            <div className={classes.chips}>
+            <div /* className={classes.chips} */>
               {selected.map((value, key) => (
                 <Chip
                   key={key}
                   label={getCategoryName(value)}
-                  className={classes.chip}
+                  /* className={classes.chip} */
                 />
               ))}
             </div>
@@ -89,7 +88,7 @@ export default function Categories({ categories, prodCats, handleChange }) {
             <MenuItem
               key={cat.id}
               value={cat.id}
-              style={getStyles(cat.title, personName, theme)}
+              /* style={getStyles(cat.title, personName, theme)} */
             >
               {cat.title} ({cat.path})
             </MenuItem>
