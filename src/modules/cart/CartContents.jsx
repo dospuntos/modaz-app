@@ -1,6 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -10,21 +10,6 @@ import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
-
-/* const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "fixed",
-    right: 25,
-    bottom: 25,
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  avatar: {
-    backgroundColor: red[100],
-    color: red[600],
-  },
-})); */
 
 export default function CartContents({
   dispatch,
@@ -59,8 +44,7 @@ export default function CartContents({
       ) : (
         <List dense>
           {cart.map((item) => (
-            <ListItem
-              button
+            <ListItemButton
               /* onClick={() =>
                 dispatch({
                   type: "updateQuantity",
@@ -71,7 +55,12 @@ export default function CartContents({
               key={item}
             >
               <ListItemAvatar>
-                <Avatar /* className={classes.avatar} */>
+                <Avatar
+                  sx={{
+                    backgroundColor: red[100],
+                    color: red[600],
+                  }}
+                >
                   {item.order_item_quantity}
                 </Avatar>
               </ListItemAvatar>
@@ -93,7 +82,7 @@ export default function CartContents({
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
-            </ListItem>
+            </ListItemButton>
           ))}
         </List>
       )}

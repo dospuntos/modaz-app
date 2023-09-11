@@ -7,17 +7,7 @@ import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import CartContents from "modules/cart/CartContents";
 import { useCart } from "modules/cart/cartContext";
-
-/* const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "fixed",
-    right: 25,
-    bottom: 25,
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-})); */
+import { createTheme } from "@mui/material/styles";
 
 export default function Cart({ handleVariantCountChange }) {
   const { cart, dispatch } = useCart();
@@ -27,6 +17,7 @@ export default function Cart({ handleVariantCountChange }) {
   const [users, setUsers] = useState([]);
 
   let history = useHistory();
+  const theme = createTheme();
 
   useEffect(() => {
     // Get users
@@ -62,8 +53,20 @@ export default function Cart({ handleVariantCountChange }) {
   }
 
   return (
-    <div /* className={classes.root} */>
-      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
+    <>
+      <Fab
+        color="primary"
+        aria-label="add"
+        onClick={handleClickOpen}
+        sx={{
+          position: "fixed",
+          right: 25,
+          bottom: 25,
+          "& > *": {
+            margin: theme.spacing(1),
+          },
+        }}
+      >
         <Badge badgeContent={countCartItems()} color="secondary">
           <ShoppingCart />
         </Badge>
@@ -79,6 +82,6 @@ export default function Cart({ handleVariantCountChange }) {
         handleSetCartUser={handleSetCartUser}
         saveCart={saveCart}
       />
-    </div>
+    </>
   );
 }
