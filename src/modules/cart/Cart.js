@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createOrder } from "api/productApi";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getUsers } from "api/usersApi";
 import Fab from "@mui/material/Fab";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
@@ -16,7 +16,7 @@ export default function Cart({ handleVariantCountChange }) {
   const [cartUser, setCartUser] = useState("0");
   const [users, setUsers] = useState([]);
 
-  let history = useHistory();
+  let navigate = useNavigate();
   const theme = createTheme();
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function Cart({ handleVariantCountChange }) {
     //TODO: Empty cart using cartReducer.
     //handleEmptyCart(false); // Empty cart without confirmation
     dispatch({ type: "empty2" });
-    history.push("/orders"); // Redirect to orders
+    navigate("/orders"); // Redirect to orders
   }
 
   function countCartItems() {

@@ -16,7 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Box } from "@mui/material";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./modules/ScrollToTop";
 import Dashboard from "./components/Dashboard";
 import Products from "./components/Products";
@@ -105,7 +105,14 @@ export default function App() {
           hideProgressBar
           position="bottom-center"
         />
-        <AppBar position="absolute" open={open}>
+        <AppBar
+          position="absolute"
+          open={open}
+          sx={{
+            backgroundColor:
+              process.env.NODE_ENV === "development" ? "darkred" : "#E44F9A",
+          }}
+        >
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -174,18 +181,18 @@ export default function App() {
           }}
         >
           <Toolbar />
-          <Switch>
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/products/:productid" component={ProductEdit} />
-            <Route path="/products" component={Products} />
-            <Route path="/orders/:orderid" component={OrderDetails} />
-            <Route path="/orders" component={Orders} />
-            <Route path="/stock" component={Stock} />
-            <Route path="/tools" component={Tools} />
-            <Route path="/users/:userid" component={Users} />
-            <Route path="/users" component={Users} />
-            <Route path="/login" component={Login} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/products/:productid" element={<ProductEdit />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/orders/:orderid" element={<OrderDetails />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/stock" element={<Stock />} />
+            <Route path="/tools" element={<Tools />} />
+            <Route path="/users/:userid" element={<Users />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
         </Box>
       </Box>
     </Router>
