@@ -1,4 +1,4 @@
-/* Base colors: 
+/* Base colors:
 #fc4a1a #e54f99 #b0db43 #12eaea
 */
 /*
@@ -15,7 +15,7 @@ body {
 
 a {
   text-decoration: none;
-  color          : #1b98f8;
+  color: #1b98f8;
 }
 
 img {
@@ -33,22 +33,22 @@ img {
 .primary-button,
 .secondary-button {
   -webkit-box-shadow: none;
-  -moz-box-shadow   : none;
-  box-shadow        : none;
-  border-radius     : 20px;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-radius: 20px;
 }
 
 .primary-button {
-  color     : #fff;
+  color: #fff;
   background: #1b98f8;
-  margin    : 1em 0;
+  margin: 1em 0;
 }
 
 .secondary-button {
-  background   : #fff;
-  border       : 1px solid #ddd;
-  color        : #666;
-  padding      : 0.5em 2em;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 0.5em 2em;
   /* font-size : 80%; */
 }
 
@@ -58,7 +58,7 @@ img {
 
 .pure-button-danger {
   background: #802424;
-  color     : #fff;
+  color: #fff;
 }
 
 .button-success {
@@ -80,19 +80,19 @@ img {
   background: #551818;
 }
 
-/* 
+/*
 input[type="text"], */
 select {
   background: #fff;
-  border    : 1px solid #ddd;
-  color     : #666;
-  padding   : 0.5em 2em;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 0.5em 2em;
 }
 
 ul.unstyled-list {
-  list-style  : none;
+  list-style: none;
   padding-left: 0;
-  margin-left : 0;
+  margin-left: 0;
 }
 
 .pull-right {
@@ -100,49 +100,49 @@ ul.unstyled-list {
 }
 
 .thumbnail {
-  display              : block;
-  padding              : 4px;
-  line-height          : 18px;
-  border               : 1px solid #ddd;
+  display: block;
+  padding: 4px;
+  line-height: 18px;
+  border: 1px solid #ddd;
   -webkit-border-radius: 3px;
-  -moz-border-radius   : 3px;
-  border-radius        : 3px;
-  -webkit-box-shadow   : 0 1px 3px rgba(0, 0, 0, 0.055);
-  -moz-box-shadow      : 0 1px 3px rgba(0, 0, 0, 0.055);
-  box-shadow           : 0 1px 3px rgba(0, 0, 0, 0.055);
-  -webkit-transition   : all 0.2s ease-in-out;
-  -moz-transition      : all 0.2s ease-in-out;
-  -o-transition        : all 0.2s ease-in-out;
-  transition           : all 0.2s ease-in-out;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 a.thumbnail:hover,
 a.thumbnail:focus {
-  border-color      : #3071a9;
+  border-color: #3071a9;
   -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-  -moz-box-shadow   : 0 1px 4px rgba(0, 105, 214, 0.25);
-  box-shadow        : 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
 
 .thumbnail>img {
-  display     : block;
-  max-width   : 100%;
-  margin-left : auto;
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
   margin-right: auto;
 }
 
 img.thumbnail {
-  max-width : 85px;
+  max-width: 85px;
   background: white;
 }
 
 .zoom {
   -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition   : all 0.25s ease-in-out;
-  transition        : all 0.25s ease-in-out;
-  cursor            : -webkit-zoom-in;
-  cursor            : -moz-zoom-in;
-  cursor            : zoom-in;
+  -moz-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in;
 }
 
 .zoom:hover,
@@ -150,20 +150,20 @@ img.thumbnail {
 .zoom:focus {
   /**adjust scale to desired size,
 add browser prefixes**/
-  -ms-transform    : scale(3);
-  -moz-transform   : scale(3);
+  -ms-transform: scale(3);
+  -moz-transform: scale(3);
   -webkit-transform: scale(3);
-  -o-transform     : scale(3);
-  transform        : scale(3) translateX(25%);
-  position         : relative;
-  z-index          : 100;
+  -o-transform: scale(3);
+  transform: scale(3) translateX(25%);
+  position: relative;
+  z-index: 100;
 }
 
 /**To keep upscaled images visible on mobile,
 increase left & right margins a bit**/
 @media only screen and (max-width: 768px) {
   ul.gallery {
-    margin-left : 15vw;
+    margin-left: 15vw;
     margin-right: 15vw;
   }
 }
@@ -175,24 +175,24 @@ increase left & right margins a bit**/
 #layout,
 #nav,
 #main {
-  margin : 0;
+  margin: 0;
   padding: 0;
 }
 
 /* Make the navigation 100% width on phones */
 #nav {
-  width     : 100%;
-  height    : 40px;
-  position  : relative;
+  width: 100%;
+  height: 40px;
+  position: relative;
   background: rgb(37, 42, 58);
   text-align: center;
 }
 
 /* Show the "Menu" button on phones */
 #nav .nav-menu-button {
-  display : block;
-  top     : 0.5em;
-  right   : 0.5em;
+  display: block;
+  top: 0.5em;
+  right: 0.5em;
   position: absolute;
 }
 
@@ -218,7 +218,7 @@ increase left & right margins a bit**/
 */
 #nav .pure-menu {
   background: transparent;
-  border    : none;
+  border: none;
   text-align: left;
 }
 
@@ -228,14 +228,14 @@ increase left & right margins a bit**/
 }
 
 #nav .pure-menu-link {
-  color      : #fff;
+  color: #fff;
   margin-left: 0.5em;
 }
 
 #nav .pure-menu-heading {
   border-bottom: none;
-  font-size    : 110%;
-  color        : rgb(75, 113, 151);
+  font-size: 110%;
+  color: rgb(75, 113, 151);
 }
 
 /*
@@ -249,10 +249,10 @@ increase left & right margins a bit**/
 .email-label-personal,
 .email-label-work,
 .email-label-travel {
-  width        : 15px;
-  height       : 15px;
-  display      : inline-block;
-  margin-right : 0.5em;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 0.5em;
   border-radius: 3px;
 }
 
@@ -270,14 +270,14 @@ increase left & right margins a bit**/
 
 /* Email Item Styles */
 .email-item {
-  padding      : 0.9em 1em;
+  padding: 0.9em 1em;
   border-bottom: 1px solid #ddd;
-  border-left  : 6px solid transparent;
+  border-left: 6px solid transparent;
 }
 
 .email-avatar {
   border-radius: 3px;
-  margin-right : 0.5em;
+  margin-right: 0.5em;
 }
 
 .email-name,
@@ -287,12 +287,12 @@ increase left & right margins a bit**/
 
 .email-name {
   text-transform: uppercase;
-  color         : #999;
+  color: #999;
 }
 
 .email-desc {
   font-size: 80%;
-  margin   : 0.4em 0;
+  margin: 0.4em 0;
 }
 
 .email-item-selected {
@@ -319,8 +319,8 @@ increase left & right margins a bit**/
 }
 
 .email-content-subtitle {
-  font-size  : 1em;
-  margin     : 0;
+  font-size: 1em;
+  margin: 0;
   font-weight: normal;
 }
 
@@ -338,15 +338,15 @@ increase left & right margins a bit**/
 }
 
 .email-avatar {
-  width : 40px;
+  width: 40px;
   height: 40px;
 }
 
 .version {
-  color    : #aaa;
-  position : absolute;
-  bottom   : 15px;
-  left     : 50%;
+  color: #aaa;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
   transform: translateX(-50%);
 }
 
@@ -385,12 +385,36 @@ increase left & right margins a bit**/
 }
 
 .small-label {
-  /* width: 15px;
-  height: 15px; */
-  display      : inline-block;
-  margin-right : 0.5em;
+  display: inline-block;
+  margin-right: 0.5em;
   border-radius: 3px;
-  padding      : 4px;
+  padding: 4px;
+}
+
+.price-tag {
+  padding: 2px 4px;
+  border-radius: 100px;
+  margin: 0 3px;
+  font-size: 12px;
+  white-space: nowrap;
+  background: #E44F9A;
+  color: #fff;
+}
+
+.discount {
+  background: red;
+}
+
+.zin {
+  background: #DBE32B;
+}
+
+.msrp {
+  background: #1B98F8;
+}
+
+.wholesaleprice {
+  background: #9CDBAB;
 }
 
 /*
@@ -404,22 +428,22 @@ increase left & right margins a bit**/
   #layout {
     padding-left: 250px;
     /* "left col (nav + list)" width */
-    position    : relative;
+    position: relative;
   }
 
   /* These are position:fixed; elements that will be in the left 250px of the screen */
   #nav {
     position: fixed;
-    top     : 0;
-    bottom  : 0;
+    top: 0;
+    bottom: 0;
     overflow: auto;
   }
 
   #nav {
     margin-left: -250px;
     /* "left col (nav + list)" width */
-    width      : 250px;
-    height     : 100%;
+    width: 250px;
+    height: 100%;
   }
 
   /* Show the menu items on the larger screen */
@@ -435,10 +459,10 @@ increase left & right margins a bit**/
 
   #main {
     position: fixed;
-    top     : 33%;
-    right   : 0;
-    bottom  : 0;
-    left    : 150px;
+    top: 33%;
+    right: 0;
+    bottom: 0;
+    left: 150px;
     overflow: auto;
 
     /* so that it's not 100% */
@@ -455,44 +479,44 @@ increase left & right margins a bit**/
   /* This will now take up it's own column, so don't need position: fixed; */
   #main {
     position: static;
-    margin  : 0;
-    padding : 0;
+    margin: 0;
+    padding: 0;
   }
 }
 
 .absolute-center {
-  height         : 100vh;
-  width          : 100vw;
-  background     : #fff url("https://source.unsplash.com/1600x900/?zumba") center center / cover no-repeat;
-  display        : block;
-  display        : flex;
+  height: 100vh;
+  width: 100vw;
+  background: #fff url("https://source.unsplash.com/1600x900/?zumba") center center / cover no-repeat;
+  display: block;
+  display: flex;
   justify-content: center;
-  align-items    : center;
+  align-items: center;
 }
 
 .absolute-center form {
-  border       : 1px solid grey;
-  background   : rgb(0 0 0 / 68%);
+  border: 1px solid grey;
+  background: rgb(0 0 0 / 68%);
   border-radius: 5px;
-  padding      : 25px;
+  padding: 25px;
 }
 
 .absolute-center form img {
-  display  : block;
-  margin   : 0 auto;
+  display: block;
+  margin: 0 auto;
   max-width: 100px;
 }
 
 /* Invoice style */
 
 .invoice-box table {
-  width      : 100%;
+  width: 100%;
   line-height: inherit;
-  text-align : left;
+  text-align: left;
 }
 
 .invoice-box table td {
-  padding       : 5px;
+  padding: 5px;
   vertical-align: top;
 }
 
@@ -505,9 +529,9 @@ increase left & right margins a bit**/
 }
 
 .invoice-box table tr.top table td.title {
-  font-size  : 45px;
+  font-size: 45px;
   line-height: 45px;
-  color      : #333;
+  color: #333;
 }
 
 .invoice-box table tr.information table td {
@@ -515,9 +539,9 @@ increase left & right margins a bit**/
 }
 
 .invoice-box table tr.heading td {
-  background   : #eee;
+  background: #eee;
   border-bottom: 1px solid #ddd;
-  font-weight  : bold;
+  font-weight: bold;
 }
 
 .invoice-box table tr.details td {
@@ -533,27 +557,30 @@ increase left & right margins a bit**/
 }
 
 .invoice-box table tr.total td:nth-child(2) {
-  border-top : 2px solid #eee;
+  border-top: 2px solid #eee;
   font-weight: bold;
 }
 
 @media only screen and (max-width: 600px) {
   .invoice-box table tr.top table td {
-    width     : 100%;
-    display   : block;
+    width: 100%;
+    display: block;
     text-align: center;
   }
 
   .invoice-box table tr.information table td {
-    width     : 100%;
-    display   : block;
+    width: 100%;
+    display: block;
     text-align: center;
   }
 }
 
 @media print {
+
   #nav,
-  .email-content-header, .MuiAppBar-root, .MuiDrawer-root {
-    display: none!important;
+  .email-content-header,
+  .MuiAppBar-root,
+  .MuiDrawer-root {
+    display: none !important;
   }
 }

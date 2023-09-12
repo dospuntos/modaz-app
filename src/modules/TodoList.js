@@ -8,13 +8,6 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import CommentIcon from "@mui/icons-material/Comment";
 
-/* const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    backgroundColor: theme.palette.background.paper,
-  },
-})); */
-
 const tasks = [
   "Include users name in quotes when available",
   "Fix bug when pressing enter in product edit",
@@ -54,7 +47,7 @@ export default function TodoList() {
   };
 
   return (
-    <List /* className={classes.root} */>
+    <List>
       {tasks.map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
@@ -63,7 +56,6 @@ export default function TodoList() {
             key={value}
             role={undefined}
             dense
-            button
             onClick={handleToggle(value)}
           >
             <ListItemIcon>

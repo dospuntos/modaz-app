@@ -23,25 +23,6 @@ import { getDefaultImage, getAllImages } from "functions";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import InputAdornment from "@mui/material/InputAdornment";
 
-/* const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    position: "absolute",
-    width: "60%",
-    maxHeight: "90%",
-    overflow: "auto",
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-})); */
-
 export default function ProductEdit(props) {
   const [product, setProduct] = useState([
     {
