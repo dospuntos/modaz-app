@@ -5,13 +5,6 @@ import green from "@mui/material/colors/green";
 import ListItemText from "@mui/material/ListItemText";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
 
-/* const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    backgroundColor: theme.palette.background.paper,
-  },
-})); */
-
 const news = [
   "Nuevo sistema de carrito",
   "Nuevo sistema de login (API v2)",
@@ -23,7 +16,7 @@ const news = [
 
 export default function TodoList() {
   return (
-    <List /* className={classes.root} */>
+    <List>
       {news.map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 

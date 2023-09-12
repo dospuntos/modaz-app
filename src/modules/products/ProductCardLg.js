@@ -12,25 +12,11 @@ import {
 import { BsGear } from "react-icons/bs";
 import ProductEdit from "components/ProductEdit";
 import Modal from "@mui/material/Modal";
+import Paper from "@mui/material/Paper";
 import { getDefaultImage, getImageCount } from "functions";
 import BurstModeIcon from "@mui/icons-material/BurstMode";
 import { useCart } from "modules/cart/cartContext";
-
-/* const useStyles = makeStyles((theme) => ({
-  paper: {
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    position: "absolute",
-    width: "80%",
-    maxHeight: "90%",
-    overflow: "auto",
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-})); */
+import { useTheme } from "@mui/material/styles";
 
 export default function ProductCardLg({
   product,
@@ -41,8 +27,8 @@ export default function ProductCardLg({
   const [clicked, setClicked] = useState(false);
   const [open, setOpen] = useState(false);
   const defaultImg = getDefaultImage(product.images);
+  const theme = useTheme();
 
-  console.log(product);
   return (
     <div className="wrapper">
       <Modal
@@ -52,9 +38,22 @@ export default function ProductCardLg({
           forceProductRefresh();
         }}
       >
-        <div /* className={classes.paper} */>
+        <Paper
+          sx={{
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            position: "absolute",
+            width: "80%",
+            maxHeight: "90%",
+            overflow: "auto",
+            border: "2px solid #000",
+            boxShadow: theme.shadows[5],
+            padding: theme.spacing(2, 4, 3),
+          }}
+        >
           <ProductEdit id={product.id} />
-        </div>
+        </Paper>
       </Modal>
       <div className="container">
         <div

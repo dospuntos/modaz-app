@@ -1,71 +1,48 @@
 import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import ShowPrices from "modules/ShowPrices";
 import { getDefaultImage, getAllImages } from "functions";
+import { styled } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 
-/* const useStyles = makeStyles((theme) => ({
-  card: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    maxWidth: "100%",
-    margin: "30px 10px",
-    transition: "0.3s",
-    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
-    "&:hover": {
-      boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
-    },
+const StyledCard = styled("Card")(({ theme }) => ({
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  maxWidth: "100%",
+  margin: theme.spacing(6),
+  transition: "0.3s",
+  boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+  "&:hover": {
+    boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
   },
-  media: {
-    //width:"50%",
-    height: "2rem",
-    paddingTop: "83.75%",
-  },
-  content: {
-    //width:"40%",
-
-    textAlign: "left",
-    padding: theme.spacing(3),
-  },
-  divider: {
-    margin: `${theme.spacing(3)}px 0`,
-  },
-  heading: {
-    fontWeight: "bold",
-  },
-  subheading: {
-    lineHeight: 1.8,
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    display: "inline-block",
-    border: "2px solid white",
-    "&:not(:first-of-type)": {
-      marginLeft: -theme.spacing(),
-    },
-  },
-})); */
+}));
 
 export default function ProductDetails({ product }) {
   const images = getAllImages(product.images);
   const [displayImage, setDisplayImage] = useState();
+  const theme = useTheme();
 
   useEffect(() => {
     setDisplayImage(getDefaultImage(product.images));
   }, [product.images]);
 
   return (
-    <Card /* className={classes.card} */>
-      <CardMedia /* className={classes.media} */ image={displayImage} />
-      <CardContent /* className={classes.content} */>
+    <StyledCard>
+      <CardMedia
+        sx={{
+          height: "2rem",
+          paddingTop: "83.75%",
+        }}
+        image={displayImage}
+      />
+      <CardContent
+        sx={{
+          padding: theme.spacing(3),
+        }}
+      >
         <Typography
           style={product.state === "1" ? { color: "green" } : { color: "red" }}
           variant={"h5"}
@@ -77,11 +54,6 @@ export default function ProductDetails({ product }) {
         </Typography>
         <ShowPrices product={product} />
         <Typography variant={"subtitle2"}>
-          <List component="nav" aria-label="secondary mailbox folders">
-            <ListItem button>
-              <ListItemText primary={product.composition} />
-            </ListItem>
-          </List>
           <ul>
             {product.notes && <li>Notes: {product.notes}</li>}
             {product.description && <li>Description: {product.description}</li>}
@@ -92,16 +64,24 @@ export default function ProductDetails({ product }) {
             <li>Release Date: {product.release_date}</li>
             <li>Season: {product.season}</li>
             <li>Tags: {product.tags}</li>
-            <li>Weight: {product.weight}</li>
+            <li>Weight: {product.weight} lbs</li>
             <li>Variant ID: {product.vid}</li>
             <li>Product ID: {product.product_id}</li>
           </ul>
         </Typography>
-        <Divider /* className={classes.divider} */ light />
+
         {images.length > 1 &&
           images.map((image, index) => (
             <Avatar
-              /* className={classes.avatar} */
+              sx={{
+                width: 100,
+                height: 100,
+                display: "inline-block",
+                border: "2px solid white",
+                "&:not(:first-of-type)": {
+                  marginLeft: -theme.spacing(),
+                },
+              }}
               key={index}
               src={process.env.REACT_APP_PROD_IMG_URL + image.image}
               onClick={() =>
@@ -112,6 +92,6 @@ export default function ProductDetails({ product }) {
             />
           ))}
       </CardContent>
-    </Card>
+    </StyledCard>
   );
 }
