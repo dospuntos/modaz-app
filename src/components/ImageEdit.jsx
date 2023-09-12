@@ -7,7 +7,9 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
+import Paper from "@mui/material/Paper";
 import { getAllImages } from "functions";
+import { useTheme } from "@mui/material/styles";
 
 export default function ImageEdit({
   images,
@@ -17,11 +19,26 @@ export default function ImageEdit({
   handleDeleteImage,
 }) {
   const imgObj = getAllImages(images);
+  const theme = useTheme();
 
   return (
-    <div>
-      <h1>Imagenes</h1>
-      <p>Haz click en cualquier imágen para volverla imágen principal.</p>
+    <Paper
+      sx={{
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        position: "absolute",
+        width: "60%",
+        maxHeight: "90%",
+        overflow: "auto",
+        backgroundColor: theme.palette.background.paper,
+        border: "2px solid #000",
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+      }}
+    >
+      <h1>Imágenes</h1>
+      <p>Haz click en cualquier imagen para volverla imagen principal.</p>
       {imgObj.map((item, index) => {
         return (
           <Grid container spacing={1} key={index}>
@@ -89,6 +106,6 @@ export default function ImageEdit({
           </Button>
         </Grid>
       </Grid>
-    </div>
+    </Paper>
   );
 }

@@ -194,7 +194,7 @@ export default function Products() {
                 count={filteredProducts.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
-                onChangePage={(event, newPage) => setPage(newPage)}
+                onPageChange={(event, newPage) => setPage(newPage)}
                 onChangeRowsPerPage={(event) => {
                   setRowsPerPage(+event.target.value);
                   setPage(0);
