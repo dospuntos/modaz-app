@@ -3,7 +3,6 @@ import { loginUser } from "api/usersApi";
 import Avatar from "@mui/material/Avatar";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
@@ -43,7 +42,6 @@ export default function Login({ setToken }) {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
       <Grid
         item
         xs={false}
