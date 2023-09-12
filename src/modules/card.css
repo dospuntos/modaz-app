@@ -1,14 +1,10 @@
-/* Base colors: 
-#fc4a1a #e54f99 #b0db43 #12eaea
-*/
-
 .card {
-  background   : #fff;
+  background: #fff;
   border-radius: 2px;
-  display      : block;
-  min-height   : 300px;
-  margin       : 1rem;
-  position     : relative;
+  display: block;
+  min-height: 300px;
+  margin: 1rem;
+  position: relative;
 }
 
 .card * {
@@ -41,19 +37,19 @@
 }
 
 .card-title .icon {
-  position     : absolute;
-  top          : -20px;
-  left         : 20px;
-  display      : block;
-  background   : #fc4a1a;
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  display: block;
+  background: #fc4a1a;
   border-radius: 5px;
-  color        : #fff;
-  padding      : 0;
+  color: #fff;
+  padding: 0;
 }
 
 .card-title .icon svg {
   font-size: 60px;
-  padding  : 10px;
+  padding: 10px;
 }
 
 .cart-title.color-secondary .icon {
@@ -69,15 +65,15 @@
 }
 
 .card-title h2 {
-  text-align   : right;
-  margin-top   : -5px;
+  text-align: right;
+  margin-top: -5px;
   margin-bottom: 0;
 }
 
 .card-content h3 {
-  font-size  : 50px;
-  text-align : center;
-  margin     : 0;
-  text-shadow: 4px 4px 4px #000;
-  color      : #fc4a1a;
+  font-size: 32px;
+  text-align: center;
+  margin: 0;
+  text-shadow: 4px 4px 4px #949494;
+  color: #fc4a1a;
 }
