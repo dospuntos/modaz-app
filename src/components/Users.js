@@ -140,7 +140,7 @@ export default function Users() {
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
     </>

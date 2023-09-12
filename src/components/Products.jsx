@@ -195,7 +195,7 @@ export default function Products() {
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={(event, newPage) => setPage(newPage)}
-                onChangeRowsPerPage={(event) => {
+                onRowsPerPageChange={(event) => {
                   setRowsPerPage(+event.target.value);
                   setPage(0);
                 }}
