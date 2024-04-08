@@ -46,6 +46,7 @@ export default function AddToCart() {
           style={{ margin: 8, fontSize: "50px" }}
           placeholder="Ingresar o escanear UPC"
           fullWidth
+          autoFocus
           margin="normal"
           InputLabelProps={{
             shrink: true,
