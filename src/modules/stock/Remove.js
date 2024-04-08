@@ -8,6 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import ProductDetails from "./ProductDetails";
 import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
 
 export default function Remove() {
   const [upc, setUpc] = useState("");
@@ -45,16 +46,27 @@ export default function Remove() {
 
   return (
     <div className="remove">
-      <h1>Reducir stock para producto con UPC:</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          className="pure-input-1"
-          type="text"
-          placeholder="Buscar UPC"
-          value={upc}
-          onChange={(e) => setUpc(e.target.value)}
-        />
-      </form>
+      <TextField
+        id="filled-full-width"
+        label="Buscar UPC"
+        style={{ margin: 8, fontSize: "50px" }}
+        placeholder="UPC para reducir"
+        fullWidth
+        autoFocus
+        margin="normal"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: {
+            fontSize: 50,
+          },
+          pattern: "[7-9]{1}[0-9]{9}",
+        }}
+        variant="filled"
+        value={upc}
+        onChange={(e) => setUpc(e.target.value)}
+      />
       <FormControlLabel
         control={
           <Switch

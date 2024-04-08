@@ -38,13 +38,12 @@ export default function AddToCart() {
 
   return (
     <div className="remove">
-      <h1>Agregar producto a carrito:</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <TextField
           id="filled-full-width"
           label="Buscar UPC"
           style={{ margin: 8, fontSize: "50px" }}
-          placeholder="Ingresar o escanear UPC"
+          placeholder="UPC para agregar a carrito"
           fullWidth
           autoFocus
           margin="normal"
@@ -62,15 +61,7 @@ export default function AddToCart() {
           onChange={(e) => setUpc(e.target.value)}
         />
       </form>
-      {/* <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          className="pure-input-1"
-          type="text"
-          placeholder="Buscar UPC"
-          value={upc}
-          onChange={(e) => setUpc(e.target.value)}
-        />
-      </form> */}
+
       {result.length ? (
         <ProductDetails product={result[0]} />
       ) : (

@@ -35,13 +35,12 @@ export default function Add() {
 
   return (
     <div className="add">
-      <h1>Agregar stock para producto con UPC:</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <TextField
           id="filled-full-width"
           label="Buscar UPC"
           style={{ margin: 8, fontSize: "50px" }}
-          placeholder="Ingresar o escanear UPC"
+          placeholder="UPC para incrementar stock"
           fullWidth
           autoFocus
           margin="normal"

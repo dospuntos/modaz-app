@@ -31,7 +31,7 @@ export default function Tools() {
             id="filled-full-width"
             label="Buscar UPC"
             style={{ margin: 8, fontSize: "50px" }}
-            placeholder="Ingresar o escanear UPC 2"
+            placeholder="UPC para consultar"
             fullWidth
             autoFocus
             margin="normal"
