@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -33,16 +33,16 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
         handleVariantCountChange={handleVariantCountChange}
       />
       <List>
-        <NavLink to="/">
-          <ListItem button>
+        <NavLink to="/dashboard">
+          <ListItemButton>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
-          </ListItem>
+          </ListItemButton>
         </NavLink>
-        <NavLink to="/products">
-          <ListItem button>
+        <NavLink to="/">
+          <ListItemButton>
             <ListItemIcon>
               <Badge
                 badgeContent={statistics.products}
@@ -53,43 +53,43 @@ function SidebarMenu({ dispatch, cart, handleVariantCountChange }) {
               </Badge>
             </ListItemIcon>
             <ListItemText primary="Productos" />
-          </ListItem>
+          </ListItemButton>
         </NavLink>
         <NavLink to="/orders">
-          <ListItem button>
+          <ListItemButton>
             <ListItemIcon>
               <Badge badgeContent={statistics.orders} color="secondary">
                 <ShoppingBasket />
               </Badge>
             </ListItemIcon>
             <ListItemText primary="Pedidos" />
-          </ListItem>
+          </ListItemButton>
         </NavLink>
         <NavLink to="/users">
-          <ListItem button>
+          <ListItemButton>
             <ListItemIcon>
               <Badge badgeContent={statistics.users} color="secondary">
                 <PeopleAltIcon />
               </Badge>
             </ListItemIcon>
             <ListItemText primary="Usuarios" />
-          </ListItem>
+          </ListItemButton>
         </NavLink>
         <NavLink to="/stock">
-          <ListItem button>
+          <ListItemButton>
             <ListItemIcon>
               <CropFreeIcon />
             </ListItemIcon>
             <ListItemText primary="Escanear UPC" />
-          </ListItem>
+          </ListItemButton>
         </NavLink>
         <NavLink to="/tools">
-          <ListItem button>
+          <ListItemButton>
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary="Herramientas" />
-          </ListItem>
+          </ListItemButton>
         </NavLink>
       </List>
       <Divider />

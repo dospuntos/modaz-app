@@ -105,8 +105,9 @@ export default function Products() {
           <div className="pure-u-1-3">
             <h1 className="email-content-title">Productos</h1>
             <p className="email-content-subtitle">
-              <span>Mostrando</span> {filteredProducts.length}/{products.length}{" "}
-              productos.
+              <span>
+                Mostrando {filteredProducts.length}/{products.length} productos.
+              </span>
             </p>
           </div>
 
@@ -116,6 +117,7 @@ export default function Products() {
               <Select
                 value={sizeFilter}
                 onChange={(e) => setSizeFilter(e.target.value)}
+                label="Talla"
               >
                 <MenuItem value="all">Todos</MenuItem>
                 <MenuItem value="xs">XS</MenuItem>
@@ -131,6 +133,7 @@ export default function Products() {
               <Select
                 value={catFilter}
                 onChange={(e) => setCatFilter(e.target.value)}
+                label="Categoría"
               >
                 <MenuItem value="all">Todos</MenuItem>
                 {categories.map((cat) => (
@@ -145,6 +148,7 @@ export default function Products() {
               <Select
                 value={stockFilter}
                 onChange={(e) => setStockFilter(e.target.value)}
+                label="Stock"
               >
                 <MenuItem value="all">Todos</MenuItem>
                 <MenuItem value="1">Disponible</MenuItem>
@@ -156,6 +160,7 @@ export default function Products() {
               <Select
                 value={publishedFilter}
                 onChange={(e) => setPublishedFilter(e.target.value)}
+                label="Estado"
               >
                 <MenuItem value="all">Todos</MenuItem>
                 <MenuItem value="1">Publicado</MenuItem>
@@ -191,6 +196,7 @@ export default function Products() {
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100, 500]}
                 component="div"
+                labelRowsPerPage="Ítems por página:"
                 count={filteredProducts.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

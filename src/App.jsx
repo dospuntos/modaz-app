@@ -182,9 +182,9 @@ export default function App() {
         >
           <Toolbar />
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Products />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products/:productid" element={<ProductEdit />} />
-            <Route path="/products" element={<Products />} />
             <Route path="/orders/:orderid" element={<OrderDetails />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/stock" element={<Stock />} />
