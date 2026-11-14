@@ -84,7 +84,7 @@ export default function ProductEdit(props) {
 
   function handleVariantChange(e, id, field) {
     const updatedVariants = variants.map((variant) =>
-      variant.id === id ? { ...variant, [field]: e.target.value } : variant
+      variant.id === id ? { ...variant, [field]: e.target.value } : variant,
     );
     setVariants(updatedVariants);
   }
@@ -348,7 +348,7 @@ export default function ProductEdit(props) {
                 <img
                   className="thumbnail zoom"
                   style={{ display: "inline-block", maxWidth: 50 }}
-                  src={process.env.REACT_APP_PROD_IMG_URL + item.image}
+                  src={import.meta.env.VITE_PROD_IMG_URL + item.image}
                   alt={item.color}
                   onClick={() => handleMakeDefaultImage(index)}
                 />

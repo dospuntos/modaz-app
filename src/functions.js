@@ -1,12 +1,12 @@
 // Return default image from image JSON
 /* export function getDefaultImage(imgJSON) {
   let images = validateJSON(imgJSON);
-  return process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+  return import.meta.env.VITE_PROD_IMG_URL + images["0"]["image"];
 } */
 
 export function getDefaultImage(imgJSON) {
   let images = validateJSON(imgJSON);
-  return process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+  return import.meta.env.VITE_PROD_IMG_URL + images["0"]["image"];
 }
 
 // Return all images from JSON as array
@@ -23,11 +23,11 @@ export function getImagesByColor(imgJSON, color) {
   if (color === null || color === "") color = "multi";
 
   const retval = images.find(
-    (image) => image.color.toLowerCase() === color.toLowerCase()
+    (image) => image.color.toLowerCase() === color.toLowerCase(),
   );
   return retval
-    ? process.env.REACT_APP_PROD_IMG_URL + retval.image
-    : process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+    ? import.meta.env.VITE_PROD_IMG_URL + retval.image
+    : import.meta.env.VITE_PROD_IMG_URL + images["0"]["image"];
 }
 
 // Run some internal checks for possible errors in JSON encoded images
@@ -42,7 +42,7 @@ function validateJSON(imgJSON) {
     // Return default JSON
     console.warn(
       "There was an error decoding image JSON - default value used. - " +
-        imgJSON
+        imgJSON,
     );
     return JSON.parse('[{"image":"default.png","color":"multi"}]');
   } else {

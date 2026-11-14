@@ -19,12 +19,12 @@ export default function Tools() {
   function handleStockReset() {
     if (
       window.confirm(
-        "¿Seguro que quieres reducir el stock de TODOS los productos a 0?\n\n¡ESTE ACCIÓN NO SE PUEDE REVERTIR!"
+        "¿Seguro que quieres reducir el stock de TODOS los productos a 0?\n\n¡ESTE ACCIÓN NO SE PUEDE REVERTIR!",
       )
     ) {
       if (
         window.confirm(
-          "Última oportunidad, ¿SEGURO QUE QUIERES RESETEAR EL STOCK?"
+          "Última oportunidad, ¿SEGURO QUE QUIERES RESETEAR EL STOCK?",
         )
       ) {
         resetStock();
@@ -127,7 +127,7 @@ export default function Tools() {
                       variant="contained"
                       color="primary"
                       href={
-                        process.env.REACT_APP_API_URL +
+                        import.meta.env.VITE_API_URL +
                         "getbyorderdate.php?orderdate=" +
                         date
                       }

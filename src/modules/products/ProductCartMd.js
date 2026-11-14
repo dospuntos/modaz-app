@@ -61,7 +61,7 @@ export default function ProductCardMd({ product, prodDispatch }) {
   };
 
   const images = getAllImages(product.images);
-  const bgimg = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+  const bgimg = import.meta.env.VITE_PROD_IMG_URL + images["0"]["image"];
 
   return (
     <Card /* className={classes.root} */>

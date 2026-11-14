@@ -1,13 +1,13 @@
 import { handleResponse, handleError } from "./apiUtils";
 
 export function getUsers() {
-  return fetch(process.env.REACT_APP_API_URL + "getusers.php")
+  return fetch(import.meta.env.VITE_API_URL + "getusers.php")
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function loginUser(credentials) {
-  return fetch(process.env.REACT_APP_API2_URL + "sessions", {
+  return fetch(import.meta.env.VITE_API2_URL + "sessions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export function logOut() {
   if (token?.session_id) {
     // Todo - check token expiry and refresh if needed.
     return fetch(
-      process.env.REACT_APP_API2_URL + "sessions/" + token.session_id,
+      import.meta.env.VITE_API2_URL + "sessions/" + token.session_id,
       {
         method: "DELETE",
         headers: {
@@ -32,7 +32,7 @@ export function logOut() {
           Authorization: token.access_token,
         },
         body: JSON.stringify({ refresh_token: token.refresh_token }),
-      }
+      },
     );
   }
 }

@@ -83,11 +83,9 @@ export default function ProductDetails({ product }) {
                 },
               }}
               key={index}
-              src={process.env.REACT_APP_PROD_IMG_URL + image.image}
+              src={import.meta.env.VITE_PROD_IMG_URL + image.image}
               onClick={() =>
-                setDisplayImage(
-                  process.env.REACT_APP_PROD_IMG_URL + image.image
-                )
+                setDisplayImage(import.meta.env.VITE_PROD_IMG_URL + image.image)
               }
             />
           ))}

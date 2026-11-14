@@ -45,7 +45,7 @@ export default function ImageEdit({
             <Grid item xs={6} md={1}>
               <img
                 style={{ cursor: "pointer" }}
-                src={process.env.REACT_APP_PROD_IMG_URL + item.image}
+                src={import.meta.env.VITE_PROD_IMG_URL + item.image}
                 alt={item.color}
                 onClick={() => handleMakeDefaultImage(index)}
               />
@@ -53,7 +53,7 @@ export default function ImageEdit({
             <Grid item xs={12} md={7}>
               <FormControl fullWidth variant="filled">
                 <InputLabel htmlFor={"image-" + index}>
-                  {process.env.REACT_APP_PROD_IMG_URL}
+                  {import.meta.env.VITE_PROD_IMG_URL}
                 </InputLabel>
                 <FilledInput
                   id={"image-" + index}

@@ -110,7 +110,7 @@ export default function App() {
           open={open}
           sx={{
             backgroundColor:
-              process.env.NODE_ENV === "development" ? "darkred" : "#E44F9A",
+              import.meta.env.PROD === "development" ? "darkred" : "#E44F9A",
           }}
         >
           <Toolbar
@@ -143,7 +143,7 @@ export default function App() {
 
             <div>
               Version: {pkg.version}{" "}
-              <strong>{process.env.NODE_ENV.substring(0, 3)}</strong>
+              <strong>{import.meta.env.PROD.substring(0, 3)}</strong>
               <br />
               <a href="#/" onClick={(e) => handleLogout(e)}>
                 Salir {token.full_name && <span>({token.full_name})</span>}

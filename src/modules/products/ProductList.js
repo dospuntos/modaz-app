@@ -8,7 +8,7 @@ import { useCart } from "modules/cart/cartContext";
 export default function ProductList({ product, prodDispatch }) {
   const { dispatch } = useCart();
   const images = getAllImages(product.images);
-  const img = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+  const img = import.meta.env.VITE_PROD_IMG_URL + images["0"]["image"];
 
   return (
     <div className="pure-g list-item-wrap">

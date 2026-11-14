@@ -8,7 +8,7 @@ function ProductCardSm({ product }) {
   const { dispatch } = useCart();
 
   const images = getAllImages(product.images);
-  const bgimg = process.env.REACT_APP_PROD_IMG_URL + images["0"]["image"];
+  const bgimg = import.meta.env.VITE_PROD_IMG_URL + images["0"]["image"];
 
   return (
     <div className="wrapper-sml">
